@@ -9,6 +9,7 @@ packages = [{include = "stock_clue"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 pytest-playwright = "^0.4.3"
+requests = "^2.31.0"
 
 
 [build-system]
