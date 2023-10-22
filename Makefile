@@ -12,3 +12,5 @@ pylint:
 
 checklist: black isort mypy pylint
 
+export_requirement:
+	poetry export -f requirements.txt --output requirements.txt
