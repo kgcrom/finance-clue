@@ -1,8 +1,10 @@
 """공시정보 관련된 API 연동을 제공하는 Module"""
-from typing import TYPE_CHECKING, Any, List
 import logging
+from typing import TYPE_CHECKING, Any, List, Optional
 
 from stock_clue.error import HttpError
+from stock_clue.opendart.disclosure_dto import CompanyOverviewInputDto
+from stock_clue.opendart.disclosure_dto import CompanyOverviewOutputDto
 from stock_clue.opendart.disclosure_dto import ListInputDto
 from stock_clue.opendart.disclosure_dto import ListOutputDto
 
@@ -42,8 +44,48 @@ class Disclosure(object):
 
         # TODO status error message와 응답 정보 로깅
         # TODO open dart 오류는 별도 class가 관리
-        if data["status"] != '000':
-            logging.error(f"status: {data['status']}, message: {data['message']}")
+        if data["status"] != "000":
+            logging.error(
+                f"status: {data['status']}, message: {data['message']}"
+            )
             return []
 
         return list(map(_mapping_list, data["list"]))
+
+    def get_company_overview(
+        self, params: CompanyOverviewInputDto
+    ) -> Optional[CompanyOverviewOutputDto]:
+        path = "/api/company.json"
+        response = self.open_dart.get(path, params.dict())
+
+        if response.status_code != 200:
+            raise HttpError()
+
+        data = response.json()
+
+        if data["status"] != "000":
+            logging.error(
+                f"status: {data['status']}, message: {data['message']}"
+            )
+            return None
+
+        return CompanyOverviewOutputDto(
+            status=data["status"],
+            message=data["message"],
+            corp_name=data["corp_name"],
+            corp_name_eng=data["corp_name_eng"],
+            stock_name=data["stock_name"],
+            stock_code=data["stock_code"],
+            ceo_nm=data["ceo_nm"],
+            corp_cls=data["corp_cls"],
+            jurir_no=data["jurir_no"],
+            bizr_no=data["bizr_no"],
+            adres=data["adres"],
+            hm_url=data["hm_url"],
+            ir_url=data["ir_url"],
+            phn_no=data["phn_no"],
+            fax_no=data["fax_no"],
+            induty_code=data["induty_code"],
+            est_dt=data["est_dt"],
+            acc_mt=data["acc_mt"],
+        )

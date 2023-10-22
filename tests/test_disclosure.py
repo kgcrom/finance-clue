@@ -1,8 +1,8 @@
 """disclosure Module 테스트"""
 import os
-from typing import Callable
-from typing import TypeVar
+from typing import Callable, TypeVar
 
+from stock_clue.opendart.disclosure_dto import CompanyOverviewInputDto
 from stock_clue.opendart.disclosure_dto import ListInputDto
 from stock_clue.opendart.open_dart import OpenDart
 
@@ -11,15 +11,15 @@ R = TypeVar("R")
 
 
 def typehint_map(
-        fn: Callable[[T], R],
-        items: list[T],
+    fn: Callable[[T], R],
+    items: list[T],
 ) -> list[R]:
     return [fn(i) for i in items]
 
 
 def typehint_filter(
-        fn: Callable[[T], T],
-        items: list[T],
+    fn: Callable[[T], T],
+    items: list[T],
 ) -> list[T]:
     return [i for i in items if fn(i)]
 
@@ -38,8 +38,18 @@ class TestDisclosure:
         assert results is not None
         assert len(results) != 0
         assert (
-                len(
-                    list(typehint_filter(lambda x: x.corp_name == "에코마케팅", results))
-                )
-                != 0
+            len(
+                list(typehint_filter(lambda x: x.corp_name == "에코마케팅", results))
+            )
+            != 0
         )
+
+    def test_company_overview(self):
+        open_dart = OpenDart(os.environ["OPENDART_API_KEY"])
+        params = CompanyOverviewInputDto(
+            corp_code="01029394",
+        )
+        result = open_dart.disclosure.get_company_overview(params)
+
+        assert result is not None
+        assert result.corp_name == "(주)에코마케팅"
