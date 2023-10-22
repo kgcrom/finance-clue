@@ -1,6 +1,6 @@
 """disclosure Module 테스트"""
 import os
-from collections.abc import Callable
+from typing import Callable
 from typing import TypeVar
 
 from stock_clue.opendart.disclosure_dto import ListInputDto
@@ -35,10 +35,11 @@ class TestDisclosure:
         )
         results = open_dart.disclosure.list(params)
 
+        assert results is not None
+        assert len(results) != 0
         assert (
                 len(
                     list(typehint_filter(lambda x: x.corp_name == "에코마케팅", results))
                 )
                 != 0
         )
-        assert results is not None

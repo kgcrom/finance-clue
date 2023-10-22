@@ -1,5 +1,6 @@
 """공시정보 관련된 API 연동을 제공하는 Module"""
 from typing import TYPE_CHECKING, Any, List
+import logging
 
 from stock_clue.error import HttpError
 from stock_clue.opendart.disclosure_dto import ListInputDto
@@ -38,4 +39,11 @@ class Disclosure(object):
             raise HttpError()
 
         data = response.json()
+
+        # TODO status error message와 응답 정보 로깅
+        # TODO open dart 오류는 별도 class가 관리
+        if data["status"] != '000':
+            logging.error(f"status: {data['status']}, message: {data['message']}")
+            return []
+
         return list(map(_mapping_list, data["list"]))
