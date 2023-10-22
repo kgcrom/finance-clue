@@ -1,8 +1,10 @@
-from dataclasses import dataclass, asdict
+"""Disclosure Module에서 사용되는 dto(in/out) 정의한 Module"""
+from dataclasses import asdict
+from dataclasses import dataclass
 from typing import Optional
 
-
 # TODO page가 있는 api는 iterator 구현
+
 
 @dataclass
 class ListInputDto:
@@ -22,13 +24,14 @@ class ListInputDto:
     param page_no: 페이지 번호 (1~n, ※ 기본값 1)
     param page_count 페이지 건수 (1~100, ※ 기본값: 10, 최대값: 100)
     """
+
     corp_code: Optional[str] = None
     bgn_de: Optional[str] = None
     end_de: Optional[str] = None
     last_reprt_at: Optional[str] = None
     pblntf_ty: Optional[str] = None
     pblntf_detail_ty: Optional[str] = None
-    corp_cls: Optional[str] = 'Y'
+    corp_cls: Optional[str] = "Y"
     sort: Optional[str] = None
     sort_mth: Optional[str] = None
     page_no: Optional[int] = 1
@@ -53,6 +56,7 @@ class ListOutputDto:
     param rcept_dt:	공시 접수일자 (YYYYMMDD)
     param rm: 비고
     """
+
     corp_cls: str
     corp_name: str
     corp_code: str
