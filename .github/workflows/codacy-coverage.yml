@@ -20,15 +20,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest coverage
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Set Environment variable
-      run: |
-        echo "OPENDART_API_KEY=${{ secrets.OPENDART_API_KEY }}" >> "$GITHUB_ENV"
-        echo "CODACY_PROJECT_TOKEN=${{ secrets.CODACY_PROJECT_TOKEN }}" >> "$GITHUB_ENV"
     - name: Build coverage report
       run: |
         coverage run -m pytest
         coverage report
         coverage xml
+      env:
+        OPENDART_API_KEY: ${{ secrets.OPENDART_API_KEY }}
     - name: Send report to codacy
       run: |
         bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage.xml
+      env:
+        CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
