@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING, Any, List, Optional
 from stock_clue.error import HttpError
 from stock_clue.opendart.disclosure_dto import CompanyOverviewInputDto
 from stock_clue.opendart.disclosure_dto import CompanyOverviewOutputDto
+from stock_clue.opendart.disclosure_dto import DownloadDocumentInputDto
 from stock_clue.opendart.disclosure_dto import ListInputDto
 from stock_clue.opendart.disclosure_dto import ListOutputDto
 
@@ -89,3 +90,27 @@ class Disclosure(object):
             est_dt=data["est_dt"],
             acc_mt=data["acc_mt"],
         )
+
+    def download_document(self, params: DownloadDocumentInputDto):
+        if params.file_path is None:
+            raise KeyError()
+
+        path = "/api/document.xml"
+        file_path = params.file_path
+        response = self.open_dart.get(path, params.dict(), True)
+
+        if response.status_code != 200:
+            raise HttpError()
+
+        content_disposition: str = response.headers["Content-Disposition"]
+        index_filename = content_disposition.find("filename=")
+        if index_filename == -1:
+            raise HttpError(
+                f"Can't find filename in response header. Content-Disposition: {content_disposition}"
+            )
+        file_name = content_disposition[index_filename + 9 :]
+
+        # TODO return값으로 적당한 것 고민하고 수정
+        with open(f"{file_path}/{file_name}", mode="wb") as w:
+            for chunk in response.iter_content(chunk_size=10 * 1024):
+                w.write(response.content)

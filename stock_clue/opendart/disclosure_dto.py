@@ -125,3 +125,19 @@ class CompanyOverviewOutputDto:
     induty_code: str
     est_dt: str
     acc_mt: str
+
+
+@dataclass
+class DownloadDocumentInputDto:
+    """
+    공시서류원본 파일 조회 dto
+
+    param rcept_no: 접수번호
+    param file_path: 파일 다운로드 경로
+    """
+
+    rcept_no: str
+    file_path: Optional[str] = None
+
+    def dict(self):
+        return {k: str(v) for k, v in asdict(self).items()}

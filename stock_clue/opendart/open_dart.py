@@ -1,5 +1,5 @@
 """OpenDart API 연동을 관리하는 Module"""
-from typing import TYPE_CHECKING, Dict
+from typing import TYPE_CHECKING, Dict, Optional
 
 import requests
 
@@ -19,6 +19,10 @@ class OpenDart(object):
 
         return disclosure.Disclosure(self)
 
-    def get(self, path: str, params: Dict) -> requests.Response:
+    def get(
+        self, path: str, params: Dict, is_stream: Optional[bool] = False
+    ) -> requests.Response:
         params["crtfc_key"] = self.api_key
-        return requests.get(f"{self.base_url}{path}", params)
+        return requests.get(
+            f"{self.base_url}{path}", params=params, stream=is_stream
+        )

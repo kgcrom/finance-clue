@@ -3,6 +3,7 @@ import os
 from typing import Callable, TypeVar
 
 from stock_clue.opendart.disclosure_dto import CompanyOverviewInputDto
+from stock_clue.opendart.disclosure_dto import DownloadDocumentInputDto
 from stock_clue.opendart.disclosure_dto import ListInputDto
 from stock_clue.opendart.open_dart import OpenDart
 
@@ -53,3 +54,12 @@ class TestDisclosure:
 
         assert result is not None
         assert result.corp_name == "(주)에코마케팅"
+
+    def test_download_document(self):
+        open_dart = OpenDart(os.environ["OPENDART_API_KEY"])
+        params = DownloadDocumentInputDto(
+            rcept_no="20231024600472",
+            file_path="./",
+        )
+
+        result = open_dart.disclosure.download_document(params)
