@@ -113,4 +113,4 @@ class Disclosure(object):
         # TODO return값으로 적당한 것 고민하고 수정
         with open(f"{file_path}/{file_name}", mode="wb") as w:
             for chunk in response.iter_content(chunk_size=10 * 1024):
-                w.write(response.content)
+                w.write(chunk)
