@@ -25,6 +25,9 @@ class OpenDart(object):
         params: Optional[Dict] = None,
         is_stream: Optional[bool] = False,
     ) -> requests.Response:
+        """
+        OpenDART API를 인증키와 함께 요청
+        """
         if params is None:
             params = {}
         params["crtfc_key"] = self.api_key

@@ -1,8 +1,7 @@
-"""Disclosure Module에서 사용되는 dto(in/out) 정의한 Module"""
+"""Disclosure Module에서 사용되는 DTO(in/out) 정의한 Module"""
 from dataclasses import asdict
 from dataclasses import dataclass
-from datetime import datetime
-from typing import Optional
+from typing import List, Optional
 
 # TODO page가 있는 api는 iterator 구현
 
@@ -17,7 +16,9 @@ class ListInputDto:
     param bgn_de: 시작일 (YYYYMMDD)
     param end_de: 종료일 (YYYYMMDD)
     param last_reprt_at: 최종보고서 검색여부 (Y or N)
-    param pblntf_ty: 공시 유형 (A: 정기공시, B: 주요사항보고, C: 발행공시, D: 지분공시, E: 기타공시, F: 외부감사관련, G: 펀드공시, H: 자산유동화, I: 거래소공시, J: 공정위공시)
+    param pblntf_ty: 공시 유형
+            (A: 정기공시, B: 주요사항보고, C: 발행공시, D: 지분공시, E: 기타공시,
+             F: 외부감사관련, G: 펀드공시, H: 자산유동화, I: 거래소공시, J: 공정위공시)
     param pblntf_detail_ty: 공시상세유형
     param corp_cls: 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
     param sort: 정렬(date: 접수일자, crp: 회사명, rpt: 보고서명 ※ 기본값 date)
@@ -45,7 +46,7 @@ class ListInputDto:
 @dataclass
 class ListOutputDto:
     """
-    disclosure list response DTO
+    공시 정보 결과 DTO
 
     param corp_cls:	법인구분 Y(유가), K(코스닥), N(코넥스), E(기타)
     param corp_name: 종목명(법인명)	공시대상회사의 종목명(상장사) 또는 법인명(기타법인)
@@ -70,9 +71,32 @@ class ListOutputDto:
 
 
 @dataclass
+class DisclosureSearchResultDto:
+    """
+    공시검색 response DTO
+
+    param status: 에러 및 정보 코드
+    param message: 에러 및 정보 메시지
+    param page_no: 페이지 번호
+    param page_count: 페이지 별 건수
+    param total_count: 총 건수
+    param total_page: 총 페이지 수
+    param list: 공시 정보 결과 DTO 리스트
+    """
+
+    status: str
+    message: str
+    page_no: int
+    page_count: int
+    total_count: int
+    total_page: int
+    list: List[ListOutputDto]
+
+
+@dataclass
 class CompanyOverviewInputDto:
     """
-    기업개황 조회 Input dto
+    기업개황 조회 Input DTO
 
     param corp_code: 공시대상회사의 고유번호(8자리)
     """
@@ -86,7 +110,7 @@ class CompanyOverviewInputDto:
 @dataclass
 class CompanyOverviewOutputDto:
     """
-    기업개황 조회 Output dto
+    기업개황 조회 Output DTO
 
     param status: 에러 및 정보 코드
     param message: 에러 및 정보 메시지
@@ -131,7 +155,7 @@ class CompanyOverviewOutputDto:
 @dataclass
 class DownloadDocumentInputDto:
     """
-    공시서류원본 파일 조회 dto
+    공시서류원본 파일 조회 DTO
 
     param rcept_no: 접수번호
     param file_path: 파일 다운로드 경로
@@ -147,7 +171,7 @@ class DownloadDocumentInputDto:
 @dataclass
 class CorpCodeDto:
     """
-    고유번호 조회 dto
+    고유번호 조회 DTO
 
     param corp_code: 고유번호
     param corp_name: 정식명칭

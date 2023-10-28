@@ -1,11 +1,8 @@
 """disclosure Module 테스트"""
-from datetime import datetime
 import os
-from typing import Callable, List, TypeVar
+from typing import Callable, TypeVar
 
-from stock_clue.opendart.disclosure import Disclosure
 from stock_clue.opendart.disclosure_dto import CompanyOverviewInputDto
-from stock_clue.opendart.disclosure_dto import CorpCodeDto
 from stock_clue.opendart.disclosure_dto import DownloadDocumentInputDto
 from stock_clue.opendart.disclosure_dto import ListInputDto
 from stock_clue.opendart.open_dart import OpenDart
@@ -40,10 +37,17 @@ class TestDisclosure:
         results = open_dart.disclosure.list(params)
 
         assert results is not None
-        assert len(results) != 0
+        assert results.page_count == 10
+        assert results.total_count == 7
+        assert results.total_page == 1
+        assert len(results.list) != 0
         assert (
             len(
-                list(typehint_filter(lambda x: x.corp_name == "에코마케팅", results))
+                list(
+                    typehint_filter(
+                        lambda x: x.corp_name == "에코마케팅", results.list
+                    )
+                )
             )
             != 0
         )
@@ -65,7 +69,7 @@ class TestDisclosure:
             file_path="./",
         )
 
-        result = open_dart.disclosure.download_document(params)
+        open_dart.disclosure.download_document(params)
 
     def test_corp_code(self):
         open_dart = OpenDart(os.environ["OPENDART_API_KEY"])

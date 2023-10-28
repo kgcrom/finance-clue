@@ -1,7 +1,7 @@
 """공시정보 관련된 API 연동을 제공하는 Module"""
 import logging
 import tempfile
-from typing import TYPE_CHECKING, Any, List, Optional
+from typing import TYPE_CHECKING, Any, List, Dict, Optional
 import zipfile
 
 import requests
@@ -11,6 +11,7 @@ from stock_clue.error import HttpError
 from stock_clue.opendart.disclosure_dto import CompanyOverviewInputDto
 from stock_clue.opendart.disclosure_dto import CompanyOverviewOutputDto
 from stock_clue.opendart.disclosure_dto import CorpCodeDto
+from stock_clue.opendart.disclosure_dto import DisclosureSearchResultDto
 from stock_clue.opendart.disclosure_dto import DownloadDocumentInputDto
 from stock_clue.opendart.disclosure_dto import ListInputDto
 from stock_clue.opendart.disclosure_dto import ListOutputDto
@@ -34,6 +35,10 @@ def _mapping_list(d: Any) -> ListOutputDto:
 
 
 def extract_file_name(response: requests.Response) -> str:
+    """
+    파일 다운로드 HTTP 응답값에서 파일명 추출
+
+    """
     content_disposition: str = response.headers["Content-Disposition"]
     index_filename = content_disposition.find("filename=")
     if index_filename == -1:
@@ -45,21 +50,27 @@ def extract_file_name(response: requests.Response) -> str:
 
 
 def unzip(tmp_path: str, file_name: str):
+    """
+    다운로드 한 압축 파일을 압축 해제
+    """
     # TODO path 마지막 '/' 있는지 판단하고 변경
     with zipfile.ZipFile(f"{tmp_path}/{file_name}") as z:
         z.extractall(path=tmp_path)
 
 
-class Disclosure(object):
+class Disclosure:
     def __init__(self, open_dart: "OpenDart"):
         super().__init__()
         self.open_dart = open_dart
 
-    def list(self, input_dto: ListInputDto) -> List[ListOutputDto]:
+    def list(
+        self, input_dto: ListInputDto
+    ) -> Optional[DisclosureSearchResultDto]:
         path = "/api/list.json"
         response = self.open_dart.get(path, input_dto.dict())
         # TODO status, message 까지 포함한 클래스 리턴하도록
-        # TODO python generic 이용 가능? https://medium.com/@steveYeah/using-generics-in-python-99010e5056eb
+        # TODO python generic 이용 가능?
+        #   - https://medium.com/@steveYeah/using-generics-in-python-99010e5056eb
 
         if response.status_code != 200:
             raise HttpError()
@@ -70,11 +81,19 @@ class Disclosure(object):
         # TODO open dart 오류는 별도 class가 관리
         if data["status"] != "000":
             logging.error(
-                f"status: {data['status']}, message: {data['message']}"
+                "status: %s , message: %s", data["status"], data["message"]
             )
-            return []
+            return None
 
-        return list(map(_mapping_list, data["list"]))
+        return DisclosureSearchResultDto(
+            status=data["status"],
+            message=data["message"],
+            page_no=data["page_no"],
+            page_count=data["page_count"],
+            total_count=data["total_count"],
+            total_page=data["total_page"],
+            list=list(map(_mapping_list, data["list"])),
+        )
 
     def get_company_overview(
         self, params: CompanyOverviewInputDto
@@ -89,7 +108,7 @@ class Disclosure(object):
 
         if data["status"] != "000":
             logging.error(
-                f"status: {data['status']}, message: {data['message']}"
+                "status: %s, message %s", data["status"], data["message"]
             )
             return None
 
@@ -161,7 +180,7 @@ class Disclosure(object):
                         <xs:sequence>
                           <xs:element name="corp_code" type="xs:string" />
                           <xs:element name="corp_name" type="xs:string" />
-                          <xs:element name="stock_code" type="xs:string"/>
+                          <xs:element name="stock_code" type="xs:string" />
                           <xs:element name="modify_date" type="xs:string" />
                         </xs:sequence>
                       </xs:complexType>
@@ -172,7 +191,7 @@ class Disclosure(object):
             </xs:schema>
              """
             )
-            data = xml_schema.decode(f"{tmp_path}/CORPCODE.xml")
+            data: Dict[str, Any] = xml_schema.decode(f"{tmp_path}/CORPCODE.xml")
 
             return list(
                 map(
