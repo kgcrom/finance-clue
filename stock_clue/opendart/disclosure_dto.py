@@ -1,6 +1,7 @@
 """Disclosure Module에서 사용되는 dto(in/out) 정의한 Module"""
 from dataclasses import asdict
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Optional
 
 # TODO page가 있는 api는 iterator 구현
@@ -141,3 +142,20 @@ class DownloadDocumentInputDto:
 
     def dict(self):
         return {k: str(v) for k, v in asdict(self).items()}
+
+
+@dataclass
+class CorpCodeDto:
+    """
+    고유번호 조회 dto
+
+    param corp_code: 고유번호
+    param corp_name: 정식명칭
+    param stock_code: 종목코드
+    param modify_date: 최종변경일자
+    """
+
+    corp_code: str
+    corp_name: str
+    stock_code: Optional[str]
+    modify_date: str

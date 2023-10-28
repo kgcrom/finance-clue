@@ -20,8 +20,13 @@ class OpenDart(object):
         return disclosure.Disclosure(self)
 
     def get(
-        self, path: str, params: Dict, is_stream: Optional[bool] = False
+        self,
+        path: str,
+        params: Optional[Dict] = None,
+        is_stream: Optional[bool] = False,
     ) -> requests.Response:
+        if params is None:
+            params = {}
         params["crtfc_key"] = self.api_key
         return requests.get(
             f"{self.base_url}{path}", params=params, stream=is_stream

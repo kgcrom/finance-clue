@@ -1,8 +1,11 @@
 """disclosure Module 테스트"""
+from datetime import datetime
 import os
-from typing import Callable, TypeVar
+from typing import Callable, List, TypeVar
 
+from stock_clue.opendart.disclosure import Disclosure
 from stock_clue.opendart.disclosure_dto import CompanyOverviewInputDto
+from stock_clue.opendart.disclosure_dto import CorpCodeDto
 from stock_clue.opendart.disclosure_dto import DownloadDocumentInputDto
 from stock_clue.opendart.disclosure_dto import ListInputDto
 from stock_clue.opendart.open_dart import OpenDart
@@ -63,3 +66,9 @@ class TestDisclosure:
         )
 
         result = open_dart.disclosure.download_document(params)
+
+    def test_corp_code(self):
+        open_dart = OpenDart(os.environ["OPENDART_API_KEY"])
+        result = open_dart.disclosure.get_corp_code_list()
+
+        assert len(result) != 0
