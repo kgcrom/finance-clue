@@ -9,10 +9,11 @@ if TYPE_CHECKING:
 
 
 class OpenDart(object):
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, timeout: Optional[int] = 5):
         super().__init__()
         self.api_key = api_key
         self.base_url = "https://opendart.fss.or.kr"
+        self.timeout = timeout
 
     @property
     def disclosure(self) -> "Disclosure":
@@ -39,5 +40,8 @@ class OpenDart(object):
             params = {}
         params["crtfc_key"] = self.api_key
         return requests.get(
-            f"{self.base_url}{path}", params=params, stream=is_stream
+            url=f"{self.base_url}{path}",
+            params=params,
+            stream=is_stream,
+            timeout=self.timeout,
         )
