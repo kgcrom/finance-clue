@@ -6,6 +6,9 @@ from stock_clue.error import HttpError
 from stock_clue.opendart.base_dto import BaseListDto
 from stock_clue.opendart.base_dto import BaseParamDto
 from stock_clue.opendart.business_report_info_dto import (
+    ChangedLargestShareHoldersOutputDto,
+)
+from stock_clue.opendart.business_report_info_dto import (
     DirectorRemunerationAmountOutputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
@@ -215,6 +218,37 @@ class BusinessReportInfo:
         data = response.json()
 
         return BaseListDto[LargestShareHoldersOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])),
+        )
+
+    def changed_largest_shareholders(
+        self, params: BaseParamDto
+    ) -> BaseListDto[ChangedLargestShareHoldersOutputDto]:
+        path = "/api/hyslrChgSttus.json"
+        response = self.open_dart.get(path, params.dict())
+
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> ChangedLargestShareHoldersOutputDto:
+            return ChangedLargestShareHoldersOutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                change_on=x["change_on"],
+                mxmm_shrholdr_nm=x["mxmm_shrholdr_nm"],
+                posesn_stock_co=str_to_int(x["posesn_stock_co"]),
+                qota_rt=str_to_float(x["qota_rt"]),
+                change_cause=x["qota_rt"],
+                rm=x["rm"],
+            )
+
+        data = response.json()
+
+        return BaseListDto[ChangedLargestShareHoldersOutputDto](
             status=data["status"],
             message=data["message"],
             list=list(map(_mapping, data["list"])),

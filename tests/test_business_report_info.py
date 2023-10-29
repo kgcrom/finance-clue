@@ -96,3 +96,16 @@ class TestBusinessReportInfo:
         result = open_dart.business_report_info.largest_shareholders(params)
 
         assert result is not None
+
+    def test_changed_largest_shareholders(self):
+        open_dart = OpenDart(os.environ["OPENDART_API_KEY"])
+        params = BaseParamDto(
+            corp_code="01029394",
+            bsns_year="2020",
+            reprt_code="11013",
+        )
+        result = open_dart.business_report_info.changed_largest_shareholders(
+            params
+        )
+
+        assert result is not None

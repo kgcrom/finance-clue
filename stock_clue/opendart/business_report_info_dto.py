@@ -173,3 +173,32 @@ class LargestShareHoldersOutputDto:
     trmend_posesn_stock_co: int
     trmend_posesn_stock_qota_rt: float
     rm: str
+
+
+@dataclass
+class ChangedLargestShareHoldersOutputDto:
+    """
+    최대주주 변동현황 조회 response dto
+
+    param rcept_no: 접수번호
+    param corp_cls: 법인구분
+    param corp_code: 고유번호
+    param corp_name: 법인명
+    param change_on: 변동
+    param mxmm_shrholdr_nm: 최대 주주명
+    param posesn_stock_co: 소유 주식 수
+    param qota_rt: 지분 율
+    param change_cause: 변동 원인
+    param rm: 비고
+    """
+
+    rcept_no: str
+    corp_cls: str
+    corp_code: str
+    corp_name: str
+    change_on: str
+    mxmm_shrholdr_nm: str
+    posesn_stock_co: int
+    qota_rt: float
+    change_cause: str
+    rm: str
