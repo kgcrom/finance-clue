@@ -5,24 +5,6 @@ from typing import Optional
 
 
 @dataclass
-class DirectorRemunerationApprovalInputDto:
-    """
-    이사·감사 전체의 보수현황(주주총회 승인금액) 조회 param dto
-
-    param corp_code: 고유번호
-    param bsns_year: 사업연도
-    param reprt_code: 보고서 코드 (1분기보고서: 11013, 반기보고서 : 11012, 3분기보고서 : 11014, 사업보고서 : 11011)
-    """
-
-    corp_code: str
-    bsns_year: str
-    reprt_code: str
-
-    def dict(self):
-        return {k: str(v) for k, v in asdict(self).items()}
-
-
-@dataclass
 class DirectorRemunerationApprovalOutputDto:
     """
     이사·감사 전체의 보수현황(주주총회 승인금액) 조회 response dto
@@ -45,24 +27,6 @@ class DirectorRemunerationApprovalOutputDto:
     nmpr: int
     gmtsck_confm_amount: int
     rm: str
-
-
-@dataclass
-class DirectorRemunerationAmountInputDto:
-    """
-    이사·감사 전체의 보수현황(보수지급금액 - 유형별)) 조회 param dto
-
-    param corp_code: 고유번호
-    param bsns_year: 사업연도
-    param reprt_code: 보고서 코드 (1분기보고서: 11013, 반기보고서 : 11012, 3분기보고서 : 11014, 사업보고서 : 11011)
-    """
-
-    corp_code: str
-    bsns_year: str
-    reprt_code: str
-
-    def dict(self):
-        return {k: str(v) for k, v in asdict(self).items()}
 
 
 @dataclass
@@ -90,24 +54,6 @@ class DirectorRemunerationAmountOutputDto:
     pymnt_totamt: int
     psn1_avrg_pymntamt: int
     rm: str
-
-
-@dataclass
-class TotalStockQuantityInputDto:
-    """
-    주식의 총수 현황 조회 params dto
-
-    param corp_code: 고유번호
-    param bsns_year: 사업연도
-    param reprt_code: 보고서 코드 (1분기보고서: 11013, 반기보고서 : 11012, 3분기보고서 : 11014, 사업보고서 : 11011)
-    """
-
-    corp_code: str
-    bsns_year: str
-    reprt_code: str
-
-    def dict(self):
-        return {k: str(v) for k, v in asdict(self).items()}
 
 
 @dataclass
@@ -194,3 +140,36 @@ class AuditOpinionOutputDto:
     adt_reprt_spcmnt_matter: Optional[str]
     emphs_matter: Optional[str]
     core_adt_matter: Optional[str]
+
+
+@dataclass
+class LargestShareHoldersOutputDto:
+    """
+    최대주주 현황 조회 response dto
+
+    param rcept_no: 접수번호
+    param corp_cls: 법인구분
+    param corp_code: 고유번호
+    param corp_name: 법인명
+    param nm: 성명
+    param relate: 관계
+    param stock_knd: 주식 종류
+    param bsis_posesn_stock_co: 기초 소유 주식 수
+    param bsis_posesn_stock_qota_rt: 기초 소유 주식 지분율
+    param trmend_posesn_stock_co: 기말 소유 주식 수
+    param trmend_posesn_stock_qota_rt: 기말 소유 주식 지분 율
+    param rm: 비고
+    """
+
+    rcept_no: str
+    corp_cls: str
+    corp_code: str
+    corp_name: str
+    nm: str
+    relate: Optional[str]
+    stock_knd: str
+    bsis_posesn_stock_co: int
+    bsis_posesn_stock_qota_rt: float
+    trmend_posesn_stock_co: int
+    trmend_posesn_stock_qota_rt: float
+    rm: str

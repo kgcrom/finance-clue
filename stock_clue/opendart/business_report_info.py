@@ -3,35 +3,30 @@
 from typing import TYPE_CHECKING, Dict
 
 from stock_clue.error import HttpError
-from stock_clue.opendart.base_list_dto import BaseListDto
-from stock_clue.opendart.business_report_info_dto import (
-    DirectorRemunerationAmountInputDto,
-)
+from stock_clue.opendart.base_dto import BaseListDto
+from stock_clue.opendart.base_dto import BaseParamDto
 from stock_clue.opendart.business_report_info_dto import (
     DirectorRemunerationAmountOutputDto,
-)
-from stock_clue.opendart.business_report_info_dto import (
-    DirectorRemunerationApprovalInputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
     DirectorRemunerationApprovalOutputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
-    TotalStockQuantityInputDto,
+    LargestShareHoldersOutputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
     TotalStockQuantityOutputDto,
 )
-from stock_clue.opendart.business_report_info_dto import AuditOpinionInputDto
 from stock_clue.opendart.business_report_info_dto import AuditOpinionOutputDto
 
 if TYPE_CHECKING:
     from stock_clue.opendart.open_dart import OpenDart
 
 
-def str_to_number(v: str) -> int:
+# TODO 타입 변경시 잘못된 값 에러 처리
+def str_to_int(v: str) -> int:
     """
-    OpenDart에서 내려주는 문자열 형태의 숫자를 숫자형으로 변환
+    OpenDart에서 내려주는 문자열 형태의 숫자를 int로 변환
 
     param v: OpenDart에서 내려주는 문자열 형태의 숫자
     """
@@ -40,13 +35,24 @@ def str_to_number(v: str) -> int:
     return int(v.replace(",", ""))
 
 
+def str_to_float(v: str) -> float:
+    """
+    OpenDart에서 내려주는 문자열 형태의 실수를 float으로 변환
+
+        param v: OpenDart에서 내려주는 문자열 형태의 숫자
+    """
+    if v == "-":
+        return 0.0
+    return float(v)
+
+
 class BusinessReportInfo:
     def __init__(self, open_dart: "OpenDart"):
         super().__init__()
         self.open_dart = open_dart
 
     def get_director_remuneration_approval(
-        self, params: DirectorRemunerationApprovalInputDto
+        self, params: BaseParamDto
     ) -> BaseListDto[DirectorRemunerationApprovalOutputDto]:
         path = "/api/drctrAdtAllMendngSttusGmtsckConfmAmount.json"
         response = self.open_dart.get(path, params.dict())
@@ -60,8 +66,8 @@ class BusinessReportInfo:
                 corp_code=x["corp_code"],
                 corp_name=x["corp_name"],
                 se=x["se"],
-                nmpr=str_to_number(x["nmpr"]),
-                gmtsck_confm_amount=str_to_number(x["gmtsck_confm_amount"]),
+                nmpr=str_to_int(x["nmpr"]),
+                gmtsck_confm_amount=str_to_int(x["gmtsck_confm_amount"]),
                 rm=x["rm"],
             )
 
@@ -76,7 +82,7 @@ class BusinessReportInfo:
         )
 
     def get_director_remuneration_amount(
-        self, params: DirectorRemunerationAmountInputDto
+        self, params: BaseParamDto
     ) -> BaseListDto[DirectorRemunerationAmountOutputDto]:
         path = "/api/drctrAdtAllMendngSttusMendngPymntamtTyCl.json"
         resposne = self.open_dart.get(path, params.dict())
@@ -91,9 +97,9 @@ class BusinessReportInfo:
                 corp_code=x["corp_code"],
                 corp_name=x["corp_name"],
                 se=x["se"],
-                nmpr=str_to_number(x["nmpr"]),
-                pymnt_totamt=str_to_number(x["pymnt_totamt"]),
-                psn1_avrg_pymntamt=str_to_number(x["psn1_avrg_pymntamt"]),
+                nmpr=str_to_int(x["nmpr"]),
+                pymnt_totamt=str_to_int(x["pymnt_totamt"]),
+                psn1_avrg_pymntamt=str_to_int(x["psn1_avrg_pymntamt"]),
                 rm=x["rm"],
             )
 
@@ -107,7 +113,7 @@ class BusinessReportInfo:
 
     # TODO 함수명 동사로 시작할건지 아닌지 동일하게 하기
     def total_stock_quantity(
-        self, params: TotalStockQuantityInputDto
+        self, params: BaseParamDto
     ) -> BaseListDto[TotalStockQuantityOutputDto]:
         path = "/api/stockTotqySttus.json"
         response = self.open_dart.get(path, params.dict())
@@ -121,20 +127,18 @@ class BusinessReportInfo:
                 corp_code=x["corp_code"],
                 corp_name=x["corp_name"],
                 se=x["se"],
-                isu_stock_totqy=str_to_number(x["isu_stock_totqy"]),
-                now_to_isu_stock_totqy=str_to_number(
-                    x["now_to_isu_stock_totqy"]
-                ),
-                now_to_dcrs_stock_totqy=str_to_number(
+                isu_stock_totqy=str_to_int(x["isu_stock_totqy"]),
+                now_to_isu_stock_totqy=str_to_int(x["now_to_isu_stock_totqy"]),
+                now_to_dcrs_stock_totqy=str_to_int(
                     x["now_to_dcrs_stock_totqy"]
                 ),
-                redc=str_to_number(x["redc"]),
-                profit_incnr=str_to_number(x["profit_incnr"]),
-                rdmstk_repy=str_to_number(x["rdmstk_repy"]),
-                etc=str_to_number(x["etc"]),
-                istc_totqy=str_to_number(x["istc_totqy"]),
-                tesstk_co=str_to_number(x["tesstk_co"]),
-                distb_stock_co=str_to_number(x["distb_stock_co"]),
+                redc=str_to_int(x["redc"]),
+                profit_incnr=str_to_int(x["profit_incnr"]),
+                rdmstk_repy=str_to_int(x["rdmstk_repy"]),
+                etc=str_to_int(x["etc"]),
+                istc_totqy=str_to_int(x["istc_totqy"]),
+                tesstk_co=str_to_int(x["tesstk_co"]),
+                distb_stock_co=str_to_int(x["distb_stock_co"]),
             )
 
         data = response.json()
@@ -145,7 +149,7 @@ class BusinessReportInfo:
         )
 
     def audit_opinion(
-        self, params: AuditOpinionInputDto
+        self, params: BaseParamDto
     ) -> BaseListDto[AuditOpinionOutputDto]:
         path = "/api/accnutAdtorNmNdAdtOpinion.json"
         response = self.open_dart.get(path, params.dict())
@@ -174,6 +178,43 @@ class BusinessReportInfo:
         data = response.json()
 
         return BaseListDto[AuditOpinionOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])),
+        )
+
+    def largest_shareholders(
+        self, params: BaseParamDto
+    ) -> BaseListDto[LargestShareHoldersOutputDto]:
+        path = "/api/hyslrSttus.json"
+        response = self.open_dart.get(path, params.dict())
+
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> LargestShareHoldersOutputDto:
+            return LargestShareHoldersOutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                nm=x["nm"],
+                relate=x["relate"] if "relate" in x else None,
+                stock_knd=x["stock_knd"],
+                bsis_posesn_stock_co=str_to_int(x["bsis_posesn_stock_co"]),
+                bsis_posesn_stock_qota_rt=str_to_float(
+                    x["bsis_posesn_stock_qota_rt"]
+                ),
+                trmend_posesn_stock_co=str_to_int(x["trmend_posesn_stock_co"]),
+                trmend_posesn_stock_qota_rt=str_to_float(
+                    x["trmend_posesn_stock_qota_rt"]
+                ),
+                rm=x["rm"],
+            )
+
+        data = response.json()
+
+        return BaseListDto[LargestShareHoldersOutputDto](
             status=data["status"],
             message=data["message"],
             list=list(map(_mapping, data["list"])),
