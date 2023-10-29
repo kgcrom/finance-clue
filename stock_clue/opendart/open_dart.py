@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING, Dict, Optional
 import requests
 
 if TYPE_CHECKING:
+    from stock_clue.opendart.business_report_info import BusinessReportInfo
     from stock_clue.opendart.disclosure import Disclosure
 
 
@@ -18,6 +19,12 @@ class OpenDart(object):
         from stock_clue.opendart import disclosure
 
         return disclosure.Disclosure(self)
+
+    @property
+    def business_report_info(self) -> "BusinessReportInfo":
+        from stock_clue.opendart import business_report_info
+
+        return business_report_info.BusinessReportInfo(self)
 
     def get(
         self,
