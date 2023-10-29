@@ -1,11 +1,10 @@
 import os
-from typing import List
 
 from stock_clue.opendart.business_report_info_dto import (
     DirectorRemunerationInputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
-    DirectorRemunerationOutputDto,
+    TotalStockQuantityInputDto,
 )
 from stock_clue.opendart.open_dart import OpenDart
 
@@ -18,9 +17,9 @@ class TestBusinessReportInfo:
             bsns_year="2020",
             reprt_code="11013",
         )
-        results: List[
-            DirectorRemunerationOutputDto
-        ] = open_dart.business_report_info.get_director_remuneration(params)
+        results = open_dart.business_report_info.get_director_remuneration(
+            params
+        )
 
         assert results is not None
         assert len(list(filter(lambda x: x.corp_cls == "K", results))) == 2
@@ -34,3 +33,15 @@ class TestBusinessReportInfo:
             )
             == 2
         )
+
+    def test_total_stock(self):
+        open_dart = OpenDart(os.environ["OPENDART_API_KEY"])
+        params = TotalStockQuantityInputDto(
+            corp_code="01029394",
+            bsns_year="2020",
+            reprt_code="11013",
+        )
+        results = open_dart.business_report_info.total_stock_quantity(params)
+
+        assert results is not None
+        assert len(results) == 4

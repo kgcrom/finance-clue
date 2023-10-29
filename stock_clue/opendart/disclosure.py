@@ -20,20 +20,6 @@ if TYPE_CHECKING:
     from stock_clue.opendart.open_dart import OpenDart
 
 
-def _mapping_list(d: Any) -> ListOutputDto:
-    return ListOutputDto(
-        d["corp_cls"],
-        d["corp_name"],
-        d["corp_code"],
-        d["stock_code"],
-        d["report_nm"],
-        d["rcept_no"],
-        d["flr_nm"],
-        d["rcept_dt"],
-        d["rm"],
-    )
-
-
 def extract_file_name(response: requests.Response) -> str:
     """
     파일 다운로드 HTTP 응답값에서 파일명 추출
@@ -85,6 +71,19 @@ class Disclosure:
             )
             return None
 
+        def _mapping(d: Any) -> ListOutputDto:
+            return ListOutputDto(
+                d["corp_cls"],
+                d["corp_name"],
+                d["corp_code"],
+                d["stock_code"],
+                d["report_nm"],
+                d["rcept_no"],
+                d["flr_nm"],
+                d["rcept_dt"],
+                d["rm"],
+            )
+
         return DisclosureSearchResultDto(
             status=data["status"],
             message=data["message"],
@@ -92,7 +91,7 @@ class Disclosure:
             page_count=data["page_count"],
             total_count=data["total_count"],
             total_page=data["total_page"],
-            list=list(map(_mapping_list, data["list"])),
+            list=list(map(_mapping, data["list"])),
         )
 
     def get_company_overview(
