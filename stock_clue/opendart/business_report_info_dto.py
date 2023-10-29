@@ -1,6 +1,7 @@
 """사업보고서 주요정보 OpenDart 연동 dto Module"""
 from dataclasses import asdict
 from dataclasses import dataclass
+from typing import Optional
 
 
 @dataclass
@@ -146,3 +147,50 @@ class TotalStockQuantityOutputDto:
     istc_totqy: int
     tesstk_co: int
     distb_stock_co: int
+
+
+@dataclass
+class AuditOpinionInputDto:
+    """
+    회계감사인의 명칭 및 감사의견 조회 params dto
+
+    param corp_code: 고유번호
+    param bsns_year: 사업연도
+    param reprt_code: 보고서 코드 (1분기보고서: 11013, 반기보고서 : 11012, 3분기보고서 : 11014, 사업보고서 : 11011)
+    """
+
+    corp_code: str
+    bsns_year: str
+    reprt_code: str
+
+    def dict(self):
+        return {k: str(v) for k, v in asdict(self).items()}
+
+
+@dataclass
+class AuditOpinionOutputDto:
+    """
+    회계감사인의 명칭 및 감사의견 조회 response dto
+
+    param rcept_no:	접수번호
+    param corp_cls: 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+    param corp_code: 고유번호
+    param corp_name: 회사명
+    param bsns_year: 사업연도
+    param adtor: 감사인
+    param adt_opinion: 감사의견
+    param adt_reprt_spcmnt_matter: 감사보고서 특기사항 (2019년 12월 8일까지 사용됨)
+    param emphs_matter:	강조사항 등 (2019년 12월 9일부터 추가됨)
+    param core_adt_matter: 핵심감사사항 (2019년 12월 9일부터 추가됨)
+    """
+
+    rcept_no: str
+    corp_cls: str
+    corp_code: str
+    corp_name: str
+    bsns_year: str
+    adtor: str
+    adt_opinion: Optional[str]
+    adt_reprt_spcmnt_matter: Optional[str]
+    emphs_matter: Optional[str]
+    core_adt_matter: Optional[str]

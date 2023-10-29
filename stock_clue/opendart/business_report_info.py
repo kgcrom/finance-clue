@@ -22,6 +22,8 @@ from stock_clue.opendart.business_report_info_dto import (
 from stock_clue.opendart.business_report_info_dto import (
     TotalStockQuantityOutputDto,
 )
+from stock_clue.opendart.business_report_info_dto import AuditOpinionInputDto
+from stock_clue.opendart.business_report_info_dto import AuditOpinionOutputDto
 
 if TYPE_CHECKING:
     from stock_clue.opendart.open_dart import OpenDart
@@ -103,6 +105,7 @@ class BusinessReportInfo:
             list=list(map(_mapping, data["list"])),
         )
 
+    # TODO 함수명 동사로 시작할건지 아닌지 동일하게 하기
     def total_stock_quantity(
         self, params: TotalStockQuantityInputDto
     ) -> BaseListDto[TotalStockQuantityOutputDto]:
@@ -136,6 +139,41 @@ class BusinessReportInfo:
 
         data = response.json()
         return BaseListDto[TotalStockQuantityOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])),
+        )
+
+    def audit_opinion(
+        self, params: AuditOpinionInputDto
+    ) -> BaseListDto[AuditOpinionOutputDto]:
+        path = "/api/accnutAdtorNmNdAdtOpinion.json"
+        response = self.open_dart.get(path, params.dict())
+
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> AuditOpinionOutputDto:
+            return AuditOpinionOutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                bsns_year=x["bsns_year"],
+                adtor=x["adtor"],
+                adt_opinion=x["adt_opinion"] if "adt_opinion" in x else None,
+                adt_reprt_spcmnt_matter=x["adt_reprt_spcmnt_matter"]
+                if "adt_reprt_spcmnt_matter" in x
+                else None,
+                emphs_matter=x["emphs_matter"] if "emphs_matter" in x else None,
+                core_adt_matter=x["core_adt_matter"]
+                if "core_adt_matter" in x
+                else None,
+            )
+
+        data = response.json()
+
+        return BaseListDto[AuditOpinionOutputDto](
             status=data["status"],
             message=data["message"],
             list=list(map(_mapping, data["list"])),

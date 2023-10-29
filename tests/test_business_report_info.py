@@ -9,6 +9,7 @@ from stock_clue.opendart.business_report_info_dto import (
 from stock_clue.opendart.business_report_info_dto import (
     TotalStockQuantityInputDto,
 )
+from stock_clue.opendart.business_report_info_dto import AuditOpinionInputDto
 from stock_clue.opendart.open_dart import OpenDart
 
 
@@ -75,3 +76,18 @@ class TestBusinessReportInfo:
 
         assert result is not None
         assert len(result.list) == 4
+
+    def test_audit_opinion(self):
+        """
+        회계감사인의 명칭 및 감사의견 조회 테스트
+        """
+        open_dart = OpenDart(os.environ["OPENDART_API_KEY"])
+        params = AuditOpinionInputDto(
+            corp_code="01029394",
+            bsns_year="2020",
+            reprt_code="11013",
+        )
+
+        result = open_dart.business_report_info.audit_opinion(params)
+
+        assert result is not None
