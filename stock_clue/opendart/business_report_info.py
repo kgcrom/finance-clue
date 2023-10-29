@@ -1,13 +1,20 @@
-"""사업보고서 주요사항 관련된 API 연동 기능 제공하는 Module """
+"""사업보고서 주요정보 OpenDart 연동 Module"""
 
-from typing import TYPE_CHECKING, Dict, List
+from typing import TYPE_CHECKING, Dict
 
 from stock_clue.error import HttpError
+from stock_clue.opendart.base_list_dto import BaseListDto
 from stock_clue.opendart.business_report_info_dto import (
-    DirectorRemunerationInputDto,
+    DirectorRemunerationAmountInputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
-    DirectorRemunerationOutputDto,
+    DirectorRemunerationAmountOutputDto,
+)
+from stock_clue.opendart.business_report_info_dto import (
+    DirectorRemunerationApprovalInputDto,
+)
+from stock_clue.opendart.business_report_info_dto import (
+    DirectorRemunerationApprovalOutputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
     TotalStockQuantityInputDto,
@@ -36,14 +43,16 @@ class BusinessReportInfo:
         super().__init__()
         self.open_dart = open_dart
 
-    def get_director_remuneration(
-        self, params: DirectorRemunerationInputDto
-    ) -> List[DirectorRemunerationOutputDto]:
+    def get_director_remuneration_approval(
+        self, params: DirectorRemunerationApprovalInputDto
+    ) -> BaseListDto[DirectorRemunerationApprovalOutputDto]:
         path = "/api/drctrAdtAllMendngSttusGmtsckConfmAmount.json"
         response = self.open_dart.get(path, params.dict())
 
-        def _mapping(x: Dict[str, str]) -> DirectorRemunerationOutputDto:
-            return DirectorRemunerationOutputDto(
+        def _mapping(
+            x: Dict[str, str]
+        ) -> DirectorRemunerationApprovalOutputDto:
+            return DirectorRemunerationApprovalOutputDto(
                 rcept_no=x["rcept_no"],
                 corp_cls=x["corp_cls"],
                 corp_code=x["corp_code"],
@@ -58,11 +67,45 @@ class BusinessReportInfo:
             raise HttpError(path)
 
         data = response.json()
-        return list(map(lambda x: _mapping(x), data["list"]))
+        return BaseListDto[DirectorRemunerationApprovalOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])),
+        )
+
+    def get_director_remuneration_amount(
+        self, params: DirectorRemunerationAmountInputDto
+    ) -> BaseListDto[DirectorRemunerationAmountOutputDto]:
+        path = "/api/drctrAdtAllMendngSttusMendngPymntamtTyCl.json"
+        resposne = self.open_dart.get(path, params.dict())
+
+        if resposne.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> DirectorRemunerationAmountOutputDto:
+            return DirectorRemunerationAmountOutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                se=x["se"],
+                nmpr=str_to_number(x["nmpr"]),
+                pymnt_totamt=str_to_number(x["pymnt_totamt"]),
+                psn1_avrg_pymntamt=str_to_number(x["psn1_avrg_pymntamt"]),
+                rm=x["rm"],
+            )
+
+        data = resposne.json()
+
+        return BaseListDto[DirectorRemunerationAmountOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])),
+        )
 
     def total_stock_quantity(
         self, params: TotalStockQuantityInputDto
-    ) -> List[TotalStockQuantityOutputDto]:
+    ) -> BaseListDto[TotalStockQuantityOutputDto]:
         path = "/api/stockTotqySttus.json"
         response = self.open_dart.get(path, params.dict())
         if response.status_code != 200:
@@ -92,4 +135,8 @@ class BusinessReportInfo:
             )
 
         data = response.json()
-        return list(map(lambda x: _mapping(x), data["list"]))
+        return BaseListDto[TotalStockQuantityOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])),
+        )

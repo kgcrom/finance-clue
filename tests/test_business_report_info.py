@@ -1,7 +1,10 @@
 import os
 
 from stock_clue.opendart.business_report_info_dto import (
-    DirectorRemunerationInputDto,
+    DirectorRemunerationAmountInputDto,
+)
+from stock_clue.opendart.business_report_info_dto import (
+    DirectorRemunerationApprovalInputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
     TotalStockQuantityInputDto,
@@ -10,38 +13,65 @@ from stock_clue.opendart.open_dart import OpenDart
 
 
 class TestBusinessReportInfo:
-    def test_get_director_remuneration(self):
+    def test_get_director_remuneration_approval(self):
+        """
+        이사·감사 전체의 보수현황(주주총회 승인금액) 조회 테스트
+        """
         open_dart = OpenDart(os.environ["OPENDART_API_KEY"])
-        params = DirectorRemunerationInputDto(
+        params = DirectorRemunerationApprovalInputDto(
             corp_code="01029394",
             bsns_year="2020",
             reprt_code="11013",
         )
-        results = open_dart.business_report_info.get_director_remuneration(
-            params
+        result = (
+            open_dart.business_report_info.get_director_remuneration_approval(
+                params
+            )
         )
 
-        assert results is not None
-        assert len(list(filter(lambda x: x.corp_cls == "K", results))) == 2
+        assert result is not None
+        assert result.status == "000"
+        assert len(list(filter(lambda x: x.corp_cls == "K", result.list))) == 2
         assert (
             len(
                 list(
                     filter(
-                        lambda x: x.gmtsck_confm_amount >= 100000000, results
+                        lambda x: x.gmtsck_confm_amount >= 100000000,
+                        result.list,
                     )
                 )
             )
             == 2
         )
 
+    def test_get_director_remuneration_amount(self):
+        open_dart = OpenDart(os.environ["OPENDART_API_KEY"])
+        params = DirectorRemunerationAmountInputDto(
+            corp_code="01029394",
+            bsns_year="2020",
+            reprt_code="11013",
+        )
+        result = (
+            open_dart.business_report_info.get_director_remuneration_amount(
+                params
+            )
+        )
+
+        assert result is not None
+        assert result.status == "000"
+        assert len(result.list) != 0
+
     def test_total_stock(self):
+        """
+        주식의 총수 현황 조회 테스트
+        """
         open_dart = OpenDart(os.environ["OPENDART_API_KEY"])
         params = TotalStockQuantityInputDto(
             corp_code="01029394",
             bsns_year="2020",
             reprt_code="11013",
         )
-        results = open_dart.business_report_info.total_stock_quantity(params)
+        result = open_dart.business_report_info.total_stock_quantity(params)
 
-        assert results is not None
-        assert len(results) == 4
+        assert result is not None
+        assert len(result.list) == 4

@@ -1,4 +1,4 @@
-"""Disclosure Module에서 사용되는 DTO(in/out) 정의한 Module"""
+"""공시정보 OpenDart 연동 dto Module"""
 from dataclasses import asdict
 from dataclasses import dataclass
 from typing import List, Optional
