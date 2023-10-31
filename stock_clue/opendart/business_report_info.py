@@ -55,9 +55,17 @@ class BusinessReportInfo:
         self.open_dart = open_dart
 
     def get_director_remuneration_approval(
-        self, params: BaseParamDto
+        self,
+        corp_code: str,
+        bsns_year: str,
+        reprt_code: str,
     ) -> BaseListDto[DirectorRemunerationApprovalOutputDto]:
         path = "/api/drctrAdtAllMendngSttusGmtsckConfmAmount.json"
+        params = BaseParamDto(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+        )
         response = self.open_dart.get(path, params.dict())
 
         def _mapping(
@@ -85,9 +93,17 @@ class BusinessReportInfo:
         )
 
     def get_director_remuneration_amount(
-        self, params: BaseParamDto
+        self,
+        corp_code: str,
+        bsns_year: str,
+        reprt_code: str,
     ) -> BaseListDto[DirectorRemunerationAmountOutputDto]:
         path = "/api/drctrAdtAllMendngSttusMendngPymntamtTyCl.json"
+        params = BaseParamDto(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+        )
         resposne = self.open_dart.get(path, params.dict())
 
         if resposne.status_code != 200:
@@ -116,9 +132,17 @@ class BusinessReportInfo:
 
     # TODO 함수명 동사로 시작할건지 아닌지 동일하게 하기
     def total_stock_quantity(
-        self, params: BaseParamDto
+        self,
+        corp_code: str,
+        bsns_year: str,
+        reprt_code: str,
     ) -> BaseListDto[TotalStockQuantityOutputDto]:
         path = "/api/stockTotqySttus.json"
+        params = BaseParamDto(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+        )
         response = self.open_dart.get(path, params.dict())
         if response.status_code != 200:
             raise HttpError(path)
@@ -152,9 +176,17 @@ class BusinessReportInfo:
         )
 
     def audit_opinion(
-        self, params: BaseParamDto
+        self,
+        corp_code: str,
+        bsns_year: str,
+        reprt_code: str,
     ) -> BaseListDto[AuditOpinionOutputDto]:
         path = "/api/accnutAdtorNmNdAdtOpinion.json"
+        params = BaseParamDto(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+        )
         response = self.open_dart.get(path, params.dict())
 
         if response.status_code != 200:
@@ -187,9 +219,17 @@ class BusinessReportInfo:
         )
 
     def largest_shareholders(
-        self, params: BaseParamDto
+        self,
+        corp_code: str,
+        bsns_year: str,
+        reprt_code: str,
     ) -> BaseListDto[LargestShareHoldersOutputDto]:
         path = "/api/hyslrSttus.json"
+        params = BaseParamDto(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+        )
         response = self.open_dart.get(path, params.dict())
 
         if response.status_code != 200:
@@ -224,9 +264,17 @@ class BusinessReportInfo:
         )
 
     def changed_largest_shareholders(
-        self, params: BaseParamDto
+        self,
+        corp_code: str,
+        bsns_year: str,
+        reprt_code: str,
     ) -> BaseListDto[ChangedLargestShareHoldersOutputDto]:
         path = "/api/hyslrChgSttus.json"
+        params = BaseParamDto(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+        )
         response = self.open_dart.get(path, params.dict())
 
         if response.status_code != 200:
