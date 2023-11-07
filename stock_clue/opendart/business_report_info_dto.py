@@ -57,6 +57,33 @@ class DirectorRemunerationAmountOutputDto:
 
 
 @dataclass
+class DividendOutputDto:
+    """
+    배당에 관한 사항 조회 response dto
+
+    param rcept_no: 접수번호
+    param corp_cls: 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+    param corp_code: 고유번호
+    param corp_name: 회사명
+    param se: 구분
+    param stock_knd: 주식 종류
+    param thstrm: 당기
+    param frmtrm: 전기
+    param lwfr: 전전기
+    """
+
+    rcept_no: str
+    corp_cls: str
+    corp_code: str
+    corp_name: str
+    se: str
+    stock_knd: Optional[str]
+    thstrm: float
+    frmtrm: float
+    lwfr: float
+
+
+@dataclass
 class TotalStockQuantityOutputDto:
     """
     주식의 총수 현황 조회 response dto
@@ -140,6 +167,99 @@ class AuditOpinionOutputDto:
     adt_reprt_spcmnt_matter: Optional[str]
     emphs_matter: Optional[str]
     core_adt_matter: Optional[str]
+
+
+@dataclass
+class NonExecutiveDirectorOutputDto:
+    """
+    사외이사 및 그 변동현황 조회 response dto
+
+    param rcept_no: 접수번호
+    param corp_cls: 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+    param corp_code: 고유번호
+    param corp_name: 회사명
+    param drctr_co: 이사의 수
+    param otcmp_drctr_co: 사외이사의 수
+    param apnt: 사외이사 변동현황(선임)
+    param rlsofc: 사외이사 변동현황(해임)
+    param mdstrm_resig: 사외이사 변동현황(중도퇴임)
+    """
+
+    rcept_no: str
+    corp_cls: str
+    corp_code: str
+    corp_name: str
+    drctr_co: int
+    otcmp_drctr_co: int
+    apnt: int
+    rlsofc: int
+    mdstrm_resig: int
+
+
+@dataclass
+class AcquisitionAndDisposalOfTreasuryStocksOutputDto:
+    """
+    자기주식 취득 및 처분 현황 조회 response dto
+
+    param rcept_no: 접수번호
+    param corp_cls: 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+    param corp_code: 고유번호
+    param corp_name: 회사명
+    param acqs_mth1: 취득방법 대분류
+    param acqs_mth2: 취득방법 중분류
+    param acqs_mth3: 취득방법 소분류
+    param stock_knd: 주식 종류
+    param bsis_qy: 기초 수량
+    param change_qy_acqs: 변동 수량 취득
+    param change_qy_dsps: 변동 수량 처분
+    param change_qy_incnr: 변동 수량 소각
+    param trmend_qy: 기말 수량
+    param rm: 비고
+    """
+
+    rcept_no: str
+    corp_cls: str
+    corp_code: str
+    corp_name: str
+    acqs_mth1: str
+    acqs_mth2: str
+    acqs_mth3: str
+    stock_knd: str
+    bsis_qy: int
+    change_qy_acqs: int
+    change_qy_dsps: int
+    change_qy_incnr: int
+    trmend_qy: int
+    rm: str
+
+
+@dataclass
+class CapitalIncreaseAndReductionOutputDto:
+    """
+    증자(감자) 현황 조회 response dto
+
+    param rcept_no: 접수번호
+    param corp_cls: 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+    param corp_code: 고유번호
+    param corp_name: 회사명
+    param isu_dcrs_de: 주식발행 감소일자
+    param isu_dcrs_stle: 발행 감소형태
+    param isu_dcrs_stock_knd: 발행 감소 주식 종류
+    param isu_dcrs_qy: 발행 감소 수량
+    param dcrs_mstvdv_fval_amount: 발행 감소 주당 액면가액
+    param isu_dcrs_mstvdv_amount: 발행 감소 주당 가액
+    """
+
+    rcept_no: str
+    corp_cls: str
+    corp_code: str
+    corp_name: str
+    isu_dcrs_de: str
+    isu_dcrs_stle: str
+    isu_dcrs_stock_knd: str
+    isu_dcrs_qy: int
+    isu_dcrs_mstvdv_fval_amount: int
+    isu_dcrs_mstvdv_amount: int
 
 
 @dataclass

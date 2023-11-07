@@ -60,6 +60,20 @@ class TestBusinessReportInfo:
         assert result is not None
         assert len(result.list) == 4
 
+    def test_get_dividend(self):
+        """
+        배당에 관한 사항 조회 테스트
+        """
+        open_dart = OpenDart(os.environ["OPENDART_API_KEY"])
+        result = open_dart.business_report_info.get_dividend(
+            corp_code="01029394",
+            bsns_year="2020",
+            reprt_code="11013",
+        )
+
+        assert result is not None
+        assert len(result.list) != 0
+
     def test_audit_opinion(self):
         """
         회계감사인의 명칭 및 감사의견 조회 테스트
@@ -73,6 +87,51 @@ class TestBusinessReportInfo:
         )
 
         assert result is not None
+
+    def test_get_non_executive_director(self):
+        """
+        사외이사 및 그 변동사항 조회 테스트
+        """
+        open_dart = OpenDart(os.environ["OPENDART_API_KEY"])
+        result = open_dart.business_report_info.get_non_executive_director(
+            corp_code="01029394",
+            bsns_year="2020",
+            reprt_code="11013",
+        )
+
+        assert result is not None
+
+    def test_get_acquisition_and_disposal_of_treasury_stocks(self):
+        """
+        자기주식의 취득 및 처분 현황 조회 테스트
+        """
+        open_dart = OpenDart(os.environ["OPENDART_API_KEY"])
+        result = open_dart.business_report_info.get_acquisition_and_disposal_of_treasury_stocks(
+            corp_code="01029394",
+            bsns_year="2020",
+            reprt_code="11013",
+        )
+
+        assert result is not None
+
+    def test_get_capital_increase_and_reduction(self):
+        """
+        증자(감자) 현황 조회 테스트
+        """
+        open_dart = OpenDart(os.environ["OPENDART_API_KEY"])
+        result = (
+            open_dart.business_report_info.get_capital_increase_and_reduction(
+                corp_code="01029394",
+                bsns_year="2020",
+                reprt_code="11013",
+            )
+        )
+
+        assert result is not None
+        assert (
+            filter(lambda x: x.isu_dcrs_stock_knd == "유상증자(일반공모)", result.list)
+            is not None
+        )
 
     def test_largest_shareholders(self):
         """

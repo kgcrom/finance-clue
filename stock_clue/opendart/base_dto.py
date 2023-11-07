@@ -16,7 +16,7 @@ class BaseListDto(Generic[T]):
 
     status: str
     message: str
-    list: List[T]
+    list: Optional[List[T]]
 
 
 @dataclass

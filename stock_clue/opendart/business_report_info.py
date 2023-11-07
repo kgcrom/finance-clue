@@ -6,6 +6,12 @@ from stock_clue.error import HttpError
 from stock_clue.opendart.base_dto import BaseListDto
 from stock_clue.opendart.base_dto import BaseParamDto
 from stock_clue.opendart.business_report_info_dto import (
+    AcquisitionAndDisposalOfTreasuryStocksOutputDto,
+)
+from stock_clue.opendart.business_report_info_dto import (
+    CapitalIncreaseAndReductionOutputDto,
+)
+from stock_clue.opendart.business_report_info_dto import (
     ChangedLargestShareHoldersOutputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
@@ -18,9 +24,13 @@ from stock_clue.opendart.business_report_info_dto import (
     LargestShareHoldersOutputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
+    NonExecutiveDirectorOutputDto,
+)
+from stock_clue.opendart.business_report_info_dto import (
     TotalStockQuantityOutputDto,
 )
 from stock_clue.opendart.business_report_info_dto import AuditOpinionOutputDto
+from stock_clue.opendart.business_report_info_dto import DividendOutputDto
 
 if TYPE_CHECKING:
     from stock_clue.opendart.open_dart import OpenDart
@@ -29,10 +39,11 @@ if TYPE_CHECKING:
 # TODO 타입 변경시 잘못된 값 에러 처리
 def str_to_int(v: str) -> int:
     """
-    OpenDart에서 내려주는 문자열 형태의 숫자를 int로 변환
+    convert to int from string value
 
-    param v: OpenDart에서 내려주는 문자열 형태의 숫자
+    param v: opendart에서 내려주는 문자열 타입의 숫자
     """
+
     if v == "-":
         return 0
     return int(v.replace(",", ""))
@@ -40,13 +51,13 @@ def str_to_int(v: str) -> int:
 
 def str_to_float(v: str) -> float:
     """
-    OpenDart에서 내려주는 문자열 형태의 실수를 float으로 변환
+    convert to float from string value
 
-        param v: OpenDart에서 내려주는 문자열 형태의 숫자
+    param v: OpenDart에서 내려주는 문자열 타입의 숫자
     """
     if v == "-":
         return 0.0
-    return float(v)
+    return float(v.replace(",", ""))
 
 
 class BusinessReportInfo:
@@ -89,7 +100,7 @@ class BusinessReportInfo:
         return BaseListDto[DirectorRemunerationApprovalOutputDto](
             status=data["status"],
             message=data["message"],
-            list=list(map(_mapping, data["list"])),
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
         )
 
     def get_director_remuneration_amount(
@@ -127,7 +138,43 @@ class BusinessReportInfo:
         return BaseListDto[DirectorRemunerationAmountOutputDto](
             status=data["status"],
             message=data["message"],
-            list=list(map(_mapping, data["list"])),
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
+        )
+
+    def get_dividend(
+        self, corp_code: str, bsns_year: str, reprt_code: str
+    ) -> BaseListDto[DividendOutputDto]:
+        """
+        배당에 관한 사항 조회
+        """
+        path = "/api/alotMatter.json"
+        params = BaseParamDto(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+        )
+        response = self.open_dart.get(path, params.dict())
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> DividendOutputDto:
+            return DividendOutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                se=x["se"],
+                stock_knd=x["stock_knd"] if "stock_knd" in x else None,
+                thstrm=str_to_float(x["thstrm"]),
+                frmtrm=str_to_float(x["frmtrm"]),
+                lwfr=str_to_float(x["lwfr"]),
+            )
+
+        data = response.json()
+        return BaseListDto[DividendOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
         )
 
     # TODO 함수명 동사로 시작할건지 아닌지 동일하게 하기
@@ -172,7 +219,7 @@ class BusinessReportInfo:
         return BaseListDto[TotalStockQuantityOutputDto](
             status=data["status"],
             message=data["message"],
-            list=list(map(_mapping, data["list"])),
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
         )
 
     def audit_opinion(
@@ -215,7 +262,144 @@ class BusinessReportInfo:
         return BaseListDto[AuditOpinionOutputDto](
             status=data["status"],
             message=data["message"],
-            list=list(map(_mapping, data["list"])),
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
+        )
+
+    def get_non_executive_director(
+        self, corp_code: str, bsns_year: str, reprt_code: str
+    ) -> BaseListDto[NonExecutiveDirectorOutputDto]:
+        """
+        사외이사 및 그 변동사항 조회
+
+        param corp_code: 고유번호
+        param bsns_year: 사업연도
+        param reprt_code: 보고서 코드 (11013: 사업보고서, 11012: 반기보고서, 11014: 분기보고서)
+        """
+        path = "/api/outcmpnyDrctrNdChangeSttus.json"
+        params = BaseParamDto(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+        )
+        response = self.open_dart.get(path, params.dict())
+
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> NonExecutiveDirectorOutputDto:
+            return NonExecutiveDirectorOutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                drctr_co=str_to_int(x["drctr_co"]),
+                otcmp_drctr_co=str_to_int(x["otcmp_drctr_co"]),
+                apnt=str_to_int(x["apnt"]),
+                rlsofc=str_to_int(x["rlsofc"]),
+                mdstrm_resig=str_to_int(x["mdstrm_resig"]),
+            )
+
+        data = response.json()
+
+        return BaseListDto[NonExecutiveDirectorOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
+        )
+
+    def get_acquisition_and_disposal_of_treasury_stocks(
+        self, corp_code: str, bsns_year: str, reprt_code: str
+    ):
+        """
+        자기주식 취득 및 처분 현황 조회
+
+        param corp_code: 고유번호
+        param bsns_year: 사업연도
+        param reprt_code: 보고서 코드 (11013: 사업보고서, 11012: 반기보고서, 11014: 분기보고서)
+        """
+        path = "/api/tesstkAcqsDspsSttus.json"
+
+        params = BaseParamDto(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+        )
+        response = self.open_dart.get(path, params.dict())
+
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(
+            x: Dict[str, str]
+        ) -> AcquisitionAndDisposalOfTreasuryStocksOutputDto:
+            return AcquisitionAndDisposalOfTreasuryStocksOutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                acqs_mth1=x["acqs_mth1"],
+                acqs_mth2=x["acqs_mth2"],
+                acqs_mth3=x["acqs_mth3"],
+                stock_knd=x["stock_knd"],
+                bsis_qy=str_to_int(x["bsis_qy"]),
+                change_qy_acqs=str_to_int(x["change_qy_acqs"]),
+                change_qy_dsps=str_to_int(x["change_qy_dsps"]),
+                change_qy_incnr=str_to_int(x["change_qy_incnr"]),
+                trmend_qy=str_to_int(x["trmend_qy"]),
+                rm=x["rm"],
+            )
+
+        data = response.json()
+
+        return BaseListDto[AcquisitionAndDisposalOfTreasuryStocksOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
+        )
+
+    def get_capital_increase_and_reduction(
+        self, corp_code: str, bsns_year: str, reprt_code: str
+    ):
+        """
+        증자(감자) 현황 조회
+
+        param corp_code: 고유번호
+        param bsns_year: 사업연도
+        param reprt_code: 보고서 코드 (11013: 사업보고서, 11012: 반기보고서, 11014: 분기보고서)
+        """
+        path = "/api/irdsSttus.json"
+        params = BaseParamDto(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+        )
+        response = self.open_dart.get(path, params.dict())
+
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> CapitalIncreaseAndReductionOutputDto:
+            return CapitalIncreaseAndReductionOutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                isu_dcrs_de=x["isu_dcrs_de"],
+                isu_dcrs_stle=x["isu_dcrs_stle"],
+                isu_dcrs_stock_knd=x["isu_dcrs_stock_knd"],
+                isu_dcrs_qy=str_to_int(x["isu_dcrs_qy"]),
+                isu_dcrs_mstvdv_fval_amount=str_to_int(
+                    x["isu_dcrs_mstvdv_fval_amount"]
+                ),
+                isu_dcrs_mstvdv_amount=str_to_int(x["isu_dcrs_mstvdv_amount"]),
+            )
+
+        data = response.json()
+
+        return BaseListDto[CapitalIncreaseAndReductionOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
         )
 
     def largest_shareholders(
@@ -260,7 +444,7 @@ class BusinessReportInfo:
         return BaseListDto[LargestShareHoldersOutputDto](
             status=data["status"],
             message=data["message"],
-            list=list(map(_mapping, data["list"])),
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
         )
 
     def changed_largest_shareholders(
@@ -299,5 +483,5 @@ class BusinessReportInfo:
         return BaseListDto[ChangedLargestShareHoldersOutputDto](
             status=data["status"],
             message=data["message"],
-            list=list(map(_mapping, data["list"])),
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
         )
