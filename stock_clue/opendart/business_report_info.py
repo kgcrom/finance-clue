@@ -7,6 +7,11 @@ from stock_clue.opendart.base_dto import BaseListDto
 from stock_clue.opendart.base_dto import BaseParamDto
 from stock_clue.opendart.business_report_info_dto import (
     AcquisitionAndDisposalOfTreasuryStocksOutputDto,
+    ExecutiveInfoOutputDto,
+    EmployeeInfoOutputDto,
+    IndividualDirectorRemunerationOutputDto,
+    TotalDirectorRemunerationOutputDto,
+    IndividualRemunerationOver5OutputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
     CapitalIncreaseAndReductionOutputDto,
@@ -18,7 +23,7 @@ from stock_clue.opendart.business_report_info_dto import (
     DirectorRemunerationAmountOutputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
-    DirectorRemunerationApprovalOutputDto,
+    DirectorTotalRemunerationApprovalOutputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
     LargestShareHoldersOutputDto,
@@ -65,12 +70,12 @@ class BusinessReportInfo:
         super().__init__()
         self.open_dart = open_dart
 
-    def get_director_remuneration_approval(
+    def get_director_total_remuneration_approval(
         self,
         corp_code: str,
         bsns_year: str,
         reprt_code: str,
-    ) -> BaseListDto[DirectorRemunerationApprovalOutputDto]:
+    ) -> BaseListDto[DirectorTotalRemunerationApprovalOutputDto]:
         path = "/api/drctrAdtAllMendngSttusGmtsckConfmAmount.json"
         params = BaseParamDto(
             corp_code=corp_code,
@@ -81,8 +86,8 @@ class BusinessReportInfo:
 
         def _mapping(
             x: Dict[str, str]
-        ) -> DirectorRemunerationApprovalOutputDto:
-            return DirectorRemunerationApprovalOutputDto(
+        ) -> DirectorTotalRemunerationApprovalOutputDto:
+            return DirectorTotalRemunerationApprovalOutputDto(
                 rcept_no=x["rcept_no"],
                 corp_cls=x["corp_cls"],
                 corp_code=x["corp_code"],
@@ -97,7 +102,7 @@ class BusinessReportInfo:
             raise HttpError(path)
 
         data = response.json()
-        return BaseListDto[DirectorRemunerationApprovalOutputDto](
+        return BaseListDto[DirectorTotalRemunerationApprovalOutputDto](
             status=data["status"],
             message=data["message"],
             list=list(map(_mapping, data["list"])) if "list" in data else None,
@@ -481,6 +486,189 @@ class BusinessReportInfo:
         data = response.json()
 
         return BaseListDto[ChangedLargestShareHoldersOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
+        )
+
+    def get_executive_info(
+        self, corp_code: str, bsns_year: str, reprt_code: str
+    ) -> BaseListDto[ExecutiveInfoOutputDto]:
+        path = "/api/exctvSttus.json"
+        params = BaseParamDto(
+            corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
+        )
+        response = self.open_dart.get(path, params.dict())
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> ExecutiveInfoOutputDto:
+            return ExecutiveInfoOutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                nm=x["nm"],
+                sexdstn=x["sexdstn"],
+                birth_ym=x["birth_ym"],
+                ofcps=x["ofcps"],
+                rgit_exctv_at=x["rgit_exctv_at"] if "rgit_exctv_at" in x else None,
+                fte_at=x["fte_at"],
+                chrg_job=x["chrg_job"],
+                main_career=x["main_career"],
+                maxmm_shrholdr_relate=x["maxmm_shrholdr_relate"] if "maxmm_shrholdr_relate" in x else None,
+                hffc_pd=x["hffc_pd"],
+                tenure_end_on=x["tenure_end_on"],
+            )
+
+        data = response.json()
+        return BaseListDto[ExecutiveInfoOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
+        )
+
+    def get_employee_info(
+        self, corp_code: str, bsns_year: str, reprt_code: str
+    ) -> BaseListDto[EmployeeInfoOutputDto]:
+        path = "/api/empSttus.json"
+        param = BaseParamDto(
+            corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
+        )
+        response = self.open_dart.get(path, param.dict())
+
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> EmployeeInfoOutputDto:
+            return EmployeeInfoOutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                fo_bbm=x["fo_bbm"],
+                sexdstn=x["sexdstn"],
+                reform_bfe_emp_co_rgllbr=str_to_int(
+                    x["reform_bfe_emp_co_rgllbr"]
+                ),
+                reform_bfe_emp_co_cnttk=str_to_int(
+                    x["reform_bfe_emp_co_cnttk"]
+                ),
+                reform_bfe_emp_co_etc=str_to_int(x["reform_bfe_emp_co_etc"]),
+                rgllbr_co=str_to_int(x["rgllbr_co"]),
+                rgllbr_abacpt_labrr_co=str_to_int(x["rgllbr_abacpt_labrr_co"]),
+                cnttk_co=str_to_int(x["cnttk_co"]),
+                cnttk_abacpt_labrr_co=str_to_int(x["cnttk_abacpt_labrr_co"]),
+                sm=str_to_int(x["sm"]),
+                avrg_cnwk_sdytrn=x["avrg_cnwk_sdytrn"],
+                fyer_salary_totamt=str_to_int(x["fyer_salary_totamt"]),
+                jan_salary_am=str_to_int(x["jan_salary_am"]),
+                rm=x["rm"],
+            )
+
+        data = response.json()
+        return BaseListDto[EmployeeInfoOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
+        )
+
+    def get_individual_director_remuneration(
+        self, corp_code: str, bsns_year: str, reprt_code: str
+    ) -> BaseListDto[IndividualDirectorRemunerationOutputDto]:
+        path = "/api/hmvAuditIndvdlBySttus.json"
+        param = BaseParamDto(
+            corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
+        )
+
+        response = self.open_dart.get(path, param.dict())
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(
+            x: Dict[str, str]
+        ) -> IndividualDirectorRemunerationOutputDto:
+            return IndividualDirectorRemunerationOutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                nm=x["nm"],
+                ofcps=x["ofcps"],
+                mendng_totamt=str_to_int(x["mendng_totamt"]),
+                mendng_totamt_ct_incls_mendng=str_to_int(
+                    x["mendng_totamt_ct_incls_mendng"]
+                ),
+            )
+
+        data = response.json()
+        return BaseListDto[IndividualDirectorRemunerationOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
+        )
+
+    def get_total_director_remuneration(
+        self, corp_code: str, bsns_year: str, reprt_code: str
+    ) -> BaseListDto[TotalDirectorRemunerationOutputDto]:
+        path = "/api/hmvAuditAllSttus.json"
+        params = BaseParamDto(
+            corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
+        )
+        response = self.open_dart.get(path, params.dict())
+
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> TotalDirectorRemunerationOutputDto:
+            return TotalDirectorRemunerationOutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                nmpr=str_to_int(x["nmpr"]),
+                mendng_totamt=str_to_int(x["mendng_totamt"]),
+                jan_avrg_mendng_am=str_to_int(x["jan_avrg_mendng_am"]),
+                rm=x["rm"],
+            )
+
+        data = response.json()
+
+        return BaseListDto[TotalDirectorRemunerationOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
+        )
+
+    def get_individual_remuneration_over5(
+        self, corp_code: str, bsns_year: str, reprt_code: str
+    ) -> BaseListDto[IndividualRemunerationOver5OutputDto]:
+        path = "/api/indvdlByPay.json"
+        params = BaseParamDto(
+            corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
+        )
+        response = self.open_dart.get(path, params.dict())
+
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> IndividualRemunerationOver5OutputDto:
+            return IndividualRemunerationOver5OutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                nm=x["nm"],
+                ofcps=x["ofcps"],
+                mendng_totamt=str_to_int(x["mendng_totamt"]),
+                mendng_totamt_ct_incls_mendng=str_to_int(
+                    x["mendng_totamt_ct_incls_mendng"]
+                ),
+            )
+
+        data = response.json()
+
+        return BaseListDto[IndividualRemunerationOver5OutputDto](
             status=data["status"],
             message=data["message"],
             list=list(map(_mapping, data["list"])) if "list" in data else None,

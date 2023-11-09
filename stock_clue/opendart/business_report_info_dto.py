@@ -5,7 +5,7 @@ from typing import Optional
 
 
 @dataclass
-class DirectorRemunerationApprovalOutputDto:
+class DirectorTotalRemunerationApprovalOutputDto:
     """
     이사·감사 전체의 보수현황(주주총회 승인금액) 조회 response dto
 
@@ -322,3 +322,162 @@ class ChangedLargestShareHoldersOutputDto:
     qota_rt: float
     change_cause: str
     rm: str
+
+
+@dataclass
+class ExecutiveInfoOutputDto:
+    """
+    임원 현황 조회 response dto
+
+    param rcept_no: 접수번호
+    param corp_cls: 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+    param corp_code: 고유번호
+    param corp_name: 법인명
+    param nm: 성명
+    param sexdstn: 성별
+    param birth_ym: 출생 년월 (YYYY년 MM월)
+    param ofcps: 직위
+    param rgit_exctv_at: 등기 임원 여부 (등기임원, 미등기임원 등)
+    param fte_at: 상근 여부 (상근, 비상근 등)
+    param chrg_job: 담당 업무
+    param main_career: 주요 경력
+    param maxmm_shrholdr_relate: 최대 주주 관계
+    param hffc_pd: 재직 기간
+    param tenure_end_on: 임기 만료일
+    """
+
+    rcept_no: str
+    corp_cls: str
+    corp_code: str
+    corp_name: str
+    nm: str
+    sexdstn: str
+    birth_ym: str
+    ofcps: str
+    rgit_exctv_at: Optional[str]
+    fte_at: str
+    chrg_job: str
+    main_career: str
+    maxmm_shrholdr_relate: Optional[str]
+    hffc_pd: str
+    tenure_end_on: str
+
+
+@dataclass
+class EmployeeInfoOutputDto:
+    """
+    직원 현황 조회 response dto
+
+    param rcept_no: 접수번호
+    param corp_cls: 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+    param corp_code: 고유번호
+    param corp_name: 법인명
+    param fo_bbm: 사업부문
+    param sexdstn: 성별
+    param reform_bfe_emp_co_rgllbr: 개정 전 정규직 수
+    param reform_bfe_emp_co_cnttk: 개정 전 계약직 수
+    param reform_bfe_emp_co_etc: 개정 전 기타직 수
+    param rgllbr_co: 정규직 수
+    param rgllbr_abacpt_labrr_co: 정규직 단시간 근로자 수
+    param cnttk_co: 계약직 수
+    param cnttk_abacpt_labrr_co: 계약직 단시간 근로자 수
+    param sm: 합계
+    param avrg_cnwk_sdytrn: 평균 근속 연수
+    param fyer_salary_totamt: 연간 급여 총액
+    param jan_salary_am: 1월 급여액
+    param rm: 비고
+    """
+
+    rcept_no: str
+    corp_cls: str
+    corp_code: str
+    corp_name: str
+    fo_bbm: str
+    sexdstn: str
+    reform_bfe_emp_co_rgllbr: int
+    reform_bfe_emp_co_cnttk: int
+    reform_bfe_emp_co_etc: int
+    rgllbr_co: int
+    rgllbr_abacpt_labrr_co: int
+    cnttk_co: int
+    cnttk_abacpt_labrr_co: int
+    sm: int
+    avrg_cnwk_sdytrn: str
+    fyer_salary_totamt: int
+    jan_salary_am: int
+    rm: str
+
+
+@dataclass
+class IndividualDirectorRemunerationOutputDto:
+    """
+    이사·감사의 개인별 보수 현황 조회 response dto
+
+    param rcept_no: 접수번호
+    param corp_cls: 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+    param corp_code: 고유번호
+    param corp_name: 법인명
+    param nm: 이름
+    param ofcps: 직위
+    param mendng_totamt: 보수총액
+    param mendng_totamt_ct_incls_mendng: 보수총액 중 비 포함 보수
+    """
+
+    rcept_no: str
+    corp_cls: str
+    corp_code: str
+    corp_name: str
+    nm: str
+    ofcps: str
+    mendng_totamt: int
+    mendng_totamt_ct_incls_mendng: int
+
+
+@dataclass
+class TotalDirectorRemunerationOutputDto:
+    """
+    이사·감사의 전체의 보수 현황 조회 response dto
+
+    param rcept_no: 접수번호
+    param corp_cls: 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+    param corp_code: 고유번호
+    param corp_name: 법인명
+    param nmpr: 인원수
+    param mendng_totamt: 보수총액
+    param jan_avrg_mendng_am: 1인당 평균 보수액
+    param rm: 비고
+    """
+
+    rcept_no: str
+    corp_cls: str
+    corp_code: str
+    corp_name: str
+    nmpr: int
+    mendng_totamt: int
+    jan_avrg_mendng_am: int
+    rm: str
+
+
+@dataclass
+class IndividualRemunerationOver5OutputDto:
+    """
+    개인별 보수지급 금액(5억이상 상위5인) 조회 response dto
+
+    param rcept_no: 접수번호
+    param corp_cls: 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+    param corp_code: 고유번호
+    param corp_name: 법인명
+    param nm: 이름
+    param ofcps: 직위
+    param mendng_totamt: 보수총액
+    param mendng_totamt_ct_incls_mendng: 보수총액 중 비 포함 보수
+    """
+
+    rcept_no: str
+    corp_cls: str
+    corp_code: str
+    corp_name: str
+    nm: str
+    ofcps: str
+    mendng_totamt: int
+    mendng_totamt_ct_incls_mendng: int
