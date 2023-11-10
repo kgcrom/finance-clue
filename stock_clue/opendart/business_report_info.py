@@ -7,11 +7,6 @@ from stock_clue.opendart.base_dto import BaseListDto
 from stock_clue.opendart.base_dto import BaseParamDto
 from stock_clue.opendart.business_report_info_dto import (
     AcquisitionAndDisposalOfTreasuryStocksOutputDto,
-    ExecutiveInfoOutputDto,
-    EmployeeInfoOutputDto,
-    IndividualDirectorRemunerationOutputDto,
-    TotalDirectorRemunerationOutputDto,
-    IndividualRemunerationOver5OutputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
     CapitalIncreaseAndReductionOutputDto,
@@ -26,16 +21,27 @@ from stock_clue.opendart.business_report_info_dto import (
     DirectorTotalRemunerationApprovalOutputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
+    IndividualDirectorRemunerationOutputDto,
+)
+from stock_clue.opendart.business_report_info_dto import (
+    IndividualRemunerationOver5OutputDto,
+)
+from stock_clue.opendart.business_report_info_dto import (
     LargestShareHoldersOutputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
     NonExecutiveDirectorOutputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
+    TotalDirectorRemunerationOutputDto,
+)
+from stock_clue.opendart.business_report_info_dto import (
     TotalStockQuantityOutputDto,
 )
 from stock_clue.opendart.business_report_info_dto import AuditOpinionOutputDto
 from stock_clue.opendart.business_report_info_dto import DividendOutputDto
+from stock_clue.opendart.business_report_info_dto import EmployeeInfoOutputDto
+from stock_clue.opendart.business_report_info_dto import ExecutiveInfoOutputDto
 
 if TYPE_CHECKING:
     from stock_clue.opendart.open_dart import OpenDart
@@ -44,11 +50,14 @@ if TYPE_CHECKING:
 # TODO 타입 변경시 잘못된 값 에러 처리
 def str_to_int(v: str) -> int:
     """
-    convert to int from string value
+    Convert a string to an integer.
 
-    param v: opendart에서 내려주는 문자열 타입의 숫자
+    Args:
+    - v (str): The string to be converted.
+
+    Returns:
+    - int: The integer value of the string. If the string is "-", returns 0.
     """
-
     if v == "-":
         return 0
     return int(v.replace(",", ""))
@@ -56,9 +65,13 @@ def str_to_int(v: str) -> int:
 
 def str_to_float(v: str) -> float:
     """
-    convert to float from string value
+    Convert a string to a float value.
 
-    param v: OpenDart에서 내려주는 문자열 타입의 숫자
+    Args:
+    - v (str): The string to be converted to float.
+
+    Returns:
+    - float: The float value of the input string.
     """
     if v == "-":
         return 0.0
@@ -366,12 +379,17 @@ class BusinessReportInfo:
         self, corp_code: str, bsns_year: str, reprt_code: str
     ):
         """
-        증자(감자) 현황 조회
+        Get capital increase and reduction information for a specific corporation.
 
-        param corp_code: 고유번호
-        param bsns_year: 사업연도
-        param reprt_code: 보고서 코드 (11013: 사업보고서, 11012: 반기보고서, 11014: 분기보고서)
+        Args:
+            corp_code (str): Corporation code
+            bsns_year (str): Business year
+            reprt_code (str): Report code
+
+        Returns:
+            BaseListDto[CapitalIncreaseAndReductionOutputDto]: List of capital increase and reduction information
         """
+
         path = "/api/irdsSttus.json"
         params = BaseParamDto(
             corp_code=corp_code,
@@ -512,11 +530,15 @@ class BusinessReportInfo:
                 sexdstn=x["sexdstn"],
                 birth_ym=x["birth_ym"],
                 ofcps=x["ofcps"],
-                rgit_exctv_at=x["rgit_exctv_at"] if "rgit_exctv_at" in x else None,
+                rgit_exctv_at=x["rgit_exctv_at"]
+                if "rgit_exctv_at" in x
+                else None,
                 fte_at=x["fte_at"],
                 chrg_job=x["chrg_job"],
                 main_career=x["main_career"],
-                maxmm_shrholdr_relate=x["maxmm_shrholdr_relate"] if "maxmm_shrholdr_relate" in x else None,
+                maxmm_shrholdr_relate=x["maxmm_shrholdr_relate"]
+                if "maxmm_shrholdr_relate" in x
+                else None,
                 hffc_pd=x["hffc_pd"],
                 tenure_end_on=x["tenure_end_on"],
             )

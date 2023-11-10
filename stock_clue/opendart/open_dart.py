@@ -6,6 +6,7 @@ import requests
 if TYPE_CHECKING:
     from stock_clue.opendart.business_report_info import BusinessReportInfo
     from stock_clue.opendart.disclosure import Disclosure
+    from stock_clue.opendart.financial_info import FinancialInfo
 
 
 class OpenDart(object):
@@ -26,6 +27,12 @@ class OpenDart(object):
         from stock_clue.opendart import business_report_info
 
         return business_report_info.BusinessReportInfo(self)
+
+    @property
+    def financial_info(self) -> "FinancialInfo":
+        from stock_clue.opendart import financial_info
+
+        return financial_info.FinancialInfo(self)
 
     def get(
         self,

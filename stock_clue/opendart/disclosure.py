@@ -21,9 +21,16 @@ if TYPE_CHECKING:
 
 
 def extract_file_name(response: requests.Response) -> str:
-    """
-    파일 다운로드 HTTP 응답값에서 파일명 추출
+    """Extracts the file name from the response header's Content-Disposition field.
 
+    Args:
+        response (requests.Response): The response object from the request.
+
+    Returns:
+        str: The extracted file name.
+
+    Raises:
+        HttpError: If the filename is not found in the response header's Content-Disposition field.
     """
     content_disposition: str = response.headers["Content-Disposition"]
     index_filename = content_disposition.find("filename=")
@@ -37,9 +44,12 @@ def extract_file_name(response: requests.Response) -> str:
 
 def unzip(tmp_path: str, file_name: str):
     """
-    다운로드 한 압축 파일을 압축 해제
+    Unzips a file located at tmp_path with the given file_name.
+
+    Args:
+    - tmp_path (str): The path where the file is located.
+    - file_name (str): The name of the file to be unzipped.
     """
-    # TODO path 마지막 '/' 있는지 판단하고 변경
     with zipfile.ZipFile(f"{tmp_path}/{file_name}") as z:
         z.extractall(path=tmp_path)
 
