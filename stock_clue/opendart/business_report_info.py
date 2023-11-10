@@ -42,40 +42,11 @@ from stock_clue.opendart.business_report_info_dto import AuditOpinionOutputDto
 from stock_clue.opendart.business_report_info_dto import DividendOutputDto
 from stock_clue.opendart.business_report_info_dto import EmployeeInfoOutputDto
 from stock_clue.opendart.business_report_info_dto import ExecutiveInfoOutputDto
+from stock_clue.opendart.utils import str_to_float
+from stock_clue.opendart.utils import str_to_int
 
 if TYPE_CHECKING:
     from stock_clue.opendart.open_dart import OpenDart
-
-
-# TODO 타입 변경시 잘못된 값 에러 처리
-def str_to_int(v: str) -> int:
-    """
-    Convert a string to an integer.
-
-    Args:
-    - v (str): The string to be converted.
-
-    Returns:
-    - int: The integer value of the string. If the string is "-", returns 0.
-    """
-    if v == "-":
-        return 0
-    return int(v.replace(",", ""))
-
-
-def str_to_float(v: str) -> float:
-    """
-    Convert a string to a float value.
-
-    Args:
-    - v (str): The string to be converted to float.
-
-    Returns:
-    - float: The float value of the input string.
-    """
-    if v == "-":
-        return 0.0
-    return float(v.replace(",", ""))
 
 
 class BusinessReportInfo:

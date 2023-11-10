@@ -60,25 +60,55 @@ class WholeAccountSingleCompanyOutputDto:
     """
     단일회사 전체 재무제표 조회
 
-    param
+    param rcept_no: 접수번호
+    param reprt_code: 보고서코드 (1분기보고서 : 11013, 반기보고서 : 11012, 3분기보고서 : 11014, 사업보고서 : 11011)
+    param bsns_year: 사업연도
+    param corp_code: 고유번호
+    param sj_div: 재무제표구분 (BS:재무상태표, IS:손익계산서, CIS:포괄손익계산서, CF:현금흐름표, SCE:자본변동표)
+    param sj_nm: 재무제표명 (ex:재무상태표)
+    param account_id: 계정ID
+    param account_nm: 계정명
+    param account_detail: 계정상세
+    param thstrm_nm: 당기명
+    param thstrm_amount: 당기금액
+    param thstrm_add_amount: 당기누적금액
+    param frmtrm_nm: 전기명
+    param frmtrm_amount: 전기금액
+    param frmtrm_q_nm: 전기명(분/반기)
+    param frmtrm_q_amount: 전기금액(분/반기)
+    param frmtrm_add_amount: 전기누적금액
+    param bfefrmtrm_nm: 전전기명
+    param bfefrmtrm_amount: 전전기금액
+    param ord: 계정과목 정렬순서
+    param currency: 통화단위
     """
 
+    rcept_no: str
+    reprt_code: str
+    bsns_year: str
+    corp_code: str
+    sj_div: str
+    sj_nm: str
+    account_id: str
+    account_nm: str
+    account_detail: str
+    thstrm_nm: str
+    thstrm_amount: int
+    thstrm_add_amount: Optional[int]
+    frmtrm_nm: str
+    frmtrm_amount: int
+    frmtrm_q_nm: Optional[str]
+    frmtrm_q_amount: Optional[int]
+    frmtrm_add_amount: Optional[int]
+    bfefrmtrm_nm: str
+    bfefrmtrm_amount: int
+    ord: int
+    currency: str
 
-@dataclass
-class MajorAccountMultipleCompanyOutputDto:
-    pass
+
+# TODO: implement 수익성지표 : M210000 안정성지표 : M220000 성장성지표 : M230000 활동성지표 : M240000
 
 
 @dataclass
 class XbrlTaxanomyOutputDto:
-    pass
-
-
-@dataclass
-class MajorIndexSingleCompanyOutputDto:
-    pass
-
-
-@dataclass
-class MajorIndexMultipleCompanyOutputDto:
     pass

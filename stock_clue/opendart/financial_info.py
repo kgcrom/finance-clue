@@ -1,49 +1,18 @@
 """
 This module contains functions for retrieving financial information from Open DART API.
 """
+from typing import Dict
+
 from stock_clue.error import HttpError
 from stock_clue.opendart.base_dto import BaseListDto
 from stock_clue.opendart.base_dto import BaseParamDto
-from stock_clue.opendart.financial_info_dto import (
-    MajorIndexMultipleCompanyOutputDto,
-)
-from stock_clue.opendart.financial_info_dto import (
-    MajorIndexSingleCompanyOutputDto,
-)
 from stock_clue.opendart.financial_info_dto import (
     WholeAccountSingleCompanyOutputDto,
 )
 from stock_clue.opendart.financial_info_dto import MajorAccountCompanyOutputDto
 from stock_clue.opendart.financial_info_dto import XbrlTaxanomyOutputDto
 from stock_clue.opendart.open_dart import OpenDart
-
-
-def str_to_int(v: str) -> int:
-    """Converts a string to an integer.
-
-    Args:
-        v (str): The string to be converted.
-
-    Returns:
-        int: The integer value of the string. If the string is "-", returns 0.
-    """
-    if v == "-":
-        return 0
-    return int(v.replace(",", ""))
-
-
-def str_to_float(v: str) -> float:
-    """Converts a string to a float value.
-
-    Args:
-        v (str): The string to be converted.
-
-    Returns:
-        float: The float value of the input string.
-    """
-    if v == "-":
-        return 0.0
-    return float(v.replace(",", ""))
+from stock_clue.opendart.utils import str_to_int
 
 
 class FinancialInfo:
@@ -104,9 +73,57 @@ class FinancialInfo:
         )
 
     def get_whole_account_single_company(
-        self, corp_code: str, bsns_year: str, reprt_code: str
+        self, corp_code: str, bsns_year: str, reprt_code: str, fs_div: str
     ) -> BaseListDto[WholeAccountSingleCompanyOutputDto]:
-        pass
+        path = "/api/fnlttSinglAcntAll.json"
+        params = BaseParamDto(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            fs_div=fs_div,
+        )
+
+        response = self.open_dart.get(path, params.dict())
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> WholeAccountSingleCompanyOutputDto:
+            return WholeAccountSingleCompanyOutputDto(
+                rcept_no=x["rcept_no"],
+                reprt_code=x["reprt_code"],
+                bsns_year=x["bsns_year"],
+                corp_code=x["corp_code"],
+                sj_div=x["sj_div"],
+                sj_nm=x["sj_nm"],
+                account_id=x["account_id"],
+                account_nm=x["account_nm"],
+                account_detail=x["account_detail"],
+                thstrm_nm=x["thstrm_nm"],
+                thstrm_amount=str_to_int(x["thstrm_amount"]),
+                thstrm_add_amount=str_to_int(x["thstrm_add_amount"])
+                if "thstrm_add_amount" in x
+                else None,
+                frmtrm_nm=x["frmtrm_nm"],
+                frmtrm_amount=str_to_int(x["frmtrm_amount"]),
+                frmtrm_q_nm=x["frmtrm_q_nm"] if "frmtrm_q_nm" in x else None,
+                frmtrm_q_amount=str_to_int(x["frmtrm_q_amount"])
+                if "frmtrm_q_amount" in x
+                else None,
+                frmtrm_add_amount=str_to_int(x["frmtrm_add_amount"])
+                if "frmtrm_add_amount" in x
+                else None,
+                bfefrmtrm_nm=x["bfefrmtrm_nm"],
+                bfefrmtrm_amount=str_to_int(x["bfefrmtrm_amount"]),
+                ord=str_to_int(x["ord"]),
+                currency=x["currency"],
+            )
+
+        data = response.json()
+        return BaseListDto[WholeAccountSingleCompanyOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])),
+        )
 
     def get_major_account_multiple_company(
         self, corp_code: str, bsns_year: str, reprt_code: str
@@ -154,7 +171,7 @@ class FinancialInfo:
 
         data = response.json()
 
-        return BaseListDto(
+        return BaseListDto[MajorAccountCompanyOutputDto](
             status=data["status"],
             message=data["message"],
             list=list(map(_mapping, data["list"])),
@@ -164,14 +181,4 @@ class FinancialInfo:
         pass
 
     def get_xbrl_taxanomy(self, sj_div: str) -> XbrlTaxanomyOutputDto:
-        pass
-
-    def get_major_index_single_company(
-        self, corp_code: str, bsns_year: str, reprt_code: str, idx_cl_code: str
-    ) -> BaseListDto[MajorIndexSingleCompanyOutputDto]:
-        pass
-
-    def get_major_index_multiple_company(
-        self, corp_code: str, bsns_year: str, reprt_code: str, idx_cl_code: str
-    ) -> BaseListDto[MajorIndexMultipleCompanyOutputDto]:
         pass
