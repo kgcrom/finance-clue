@@ -1,6 +1,6 @@
 """disclosure Module 테스트"""
 import os
-from typing import Callable, TypeVar
+from typing import Callable, TypeVar, List
 
 from stock_clue.opendart.disclosure_dto import CompanyOverviewInputDto
 from stock_clue.opendart.disclosure_dto import DownloadDocumentInputDto
@@ -13,15 +13,15 @@ R = TypeVar("R")
 
 def typehint_map(
     fn: Callable[[T], R],
-    items: list[T],
-) -> list[R]:
+    items: List[T],
+) -> List[R]:
     return [fn(i) for i in items]
 
 
 def typehint_filter(
     fn: Callable[[T], T],
-    items: list[T],
-) -> list[T]:
+    items: List[T],
+) -> List[T]:
     return [i for i in items if fn(i)]
 
 
