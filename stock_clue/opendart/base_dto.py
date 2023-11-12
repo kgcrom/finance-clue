@@ -31,6 +31,8 @@ class BaseParamDto:
     param idx_cl_code: 지표구분 (수익성지표 : M210000 안정성지표 : M220000 성장성지표 : M230000 활동성지표 : M240000)
     param fs_div: 개별/연결 구분 (CFS:연결재무제표, OFS:재무제표)
     param sj_div: 재무제표 구분 (BS: 재무상태표, IS: 손익계산서, CIS: 포괄손익계산서, CF: 현금흐름표, SCE: 자본변동표)
+    params bgn_de: 시작일 (YYYYMMDD)
+    params end_de: 종료일 (YYYYMMDD)
     """
 
     corp_code: Optional[str] = None
@@ -40,6 +42,8 @@ class BaseParamDto:
     idx_cl_code: Optional[str] = None
     fs_div: Optional[str] = None
     sj_div: Optional[str] = None
+    bgn_de: Optional[str] = None
+    end_de: Optional[str] = None
 
     def dict(self):
         return {k: str(v) for k, v in asdict(self).items() if v is not None}
