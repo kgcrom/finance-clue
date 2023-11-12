@@ -5,30 +5,31 @@ from typing import Optional
 @dataclass
 class MajorAccountCompanyOutputDto:
     """
-    회사 주요계정 조회
+    DTO class for storing major account company financial information.
 
-    param rcept_no: 접수번호
-    param bsns_year: 사업연도
-    param stock_code: 종목코드
-    param reprt_code: 보고서 코드 (1분기보고서 : 11013, 반기보고서 : 11012, 3분기보고서 : 11014, 사업보고서 : 11011)
-    param account_nm: 계정명
-    param fs_div: 개별/연결구분 (CFS:연결재무제표, OFS:재무제표)
-    param fs_nm: 개별/연결명 (ex:연결재무제표)
-    param sj_div: 재무제표구분 (BS:재무상태표, IS:손익계산서, CIS:포괄손익계산서, CF:현금흐름표, SCE:자본변동표)
-    param sj_nm: 재무제표명 (ex:재무상태표)
-    param thstrm_nm: 당기명 (ex:제 20 기 3분기말)
-    param thstrm_dt: 당기일자 (ex:2018.09.30)
-    param thstrm_amount: 당기금액 (ex:1000)
-    param thstrm_add_amount: 당기누적금액 (ex:1000)
-    param frmtrm_nm: 전기명 (ex:제 19 기말)
-    param frmtrm_dt: 전기일자 (ex:2017.12.31)
-    param frmtrm_amount: 전기금액 (ex:1000)
-    param frmtrm_add_amount: 전기누적금액 (ex:1000)
-    param bfefrmtrm_nm: 전전기명 (ex:제 18 기말)
-    param bfefrmtrm_dt: 전전기일자 (ex:2016.12.31)
-    param bfefrmtrm_amount: 전전기금액 (ex:1000)
-    param ord: 계정과목 정렬순서 (ex: 1)
-    param curr_cd: 통화 단위
+    Attributes:
+        rcept_no (str): 접수번호
+        bsns_year (str): 사업연도
+        stock_code (str): 종목 코드
+        reprt_code (str): 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서)
+        account_nm (str): 계정명
+        fs_div (str): 개별/연결구분 (CFS: 연결재무제표, OFS: 재무제표)
+        fs_nm (str): 개별/연결명 (연결재무제표, 재무제표)
+        sj_div (str): 재무제표 구분 (BS: 재무상태표, IS: 손익계산서, CIS: 포괄손익계산서, CF: 현금흐름표, SCE: 자본변동표)
+        sj_nm (str): 재무제표명
+        thstrm_nm (str): 당기명
+        thstrm_dt (str): 당기일자
+        thstrm_amount (int): 당기금액
+        thstrm_add_amount (Optional[int]): 당기누적금액
+        frmtrm_nm (str): 전기명
+        frmtrm_dt (str): 전기일자
+        frmtrm_amount (int): 전기금액
+        frmtrm_add_amount (Optional[int]): 전기누적금액
+        bfefrmtrm_nm (str): 전전기명
+        bfe_frmtrm_dt (Optional[str]): 전전기일자
+        bfefrmtrm_amount (int): 전전기금액
+        ord (int): 계정과목 정렬순서
+        currency (str): 통화 단위
     """
 
     rcept_no: str
@@ -58,29 +59,30 @@ class MajorAccountCompanyOutputDto:
 @dataclass
 class WholeAccountSingleCompanyOutputDto:
     """
-    단일회사 전체 재무제표 조회
+    DTO class for storing financial information of a single company for a specific account.
 
-    param rcept_no: 접수번호
-    param reprt_code: 보고서코드 (1분기보고서 : 11013, 반기보고서 : 11012, 3분기보고서 : 11014, 사업보고서 : 11011)
-    param bsns_year: 사업연도
-    param corp_code: 고유번호
-    param sj_div: 재무제표구분 (BS:재무상태표, IS:손익계산서, CIS:포괄손익계산서, CF:현금흐름표, SCE:자본변동표)
-    param sj_nm: 재무제표명 (ex:재무상태표)
-    param account_id: 계정ID
-    param account_nm: 계정명
-    param account_detail: 계정상세
-    param thstrm_nm: 당기명
-    param thstrm_amount: 당기금액
-    param thstrm_add_amount: 당기누적금액
-    param frmtrm_nm: 전기명
-    param frmtrm_amount: 전기금액
-    param frmtrm_q_nm: 전기명(분/반기)
-    param frmtrm_q_amount: 전기금액(분/반기)
-    param frmtrm_add_amount: 전기누적금액
-    param bfefrmtrm_nm: 전전기명
-    param bfefrmtrm_amount: 전전기금액
-    param ord: 계정과목 정렬순서
-    param currency: 통화단위
+    Attributes:
+        rcept_no (str): 접수번호
+        reprt_code (str): 보고서 코드
+        bsns_year (str): 사업 연도
+        corp_code (str): 고유번호
+        sj_div (str): 재무제표 구분 (BS: 재무상태표, IS: 손익계산서, CIS: 포괄손익계산서, CF: 현금흐름표, SCE: 자본변동표)
+        sj_nm (str): 재무제표명
+        account_id (str): 계정 ID
+        account_nm (str): 계정명
+        account_detail (str): 계정상세
+        thstrm_nm (str): 당기명
+        thstrm_amount (int): 당기금액
+        thstrm_add_amount (Optional[int]): 당기누적금액
+        frmtrm_nm (str): 전기명
+        frmtrm_amount (int): 전기금액
+        frmtrm_q_nm (Optional[str]): 전기명(분/반기)
+        frmtrm_q_amount (Optional[int]): 전기금액(분/반기)
+        frmtrm_add_amount (Optional[int]): 전기누적금액
+        bfefrmtrm_nm (str): 전전기명
+        bfefrmtrm_amount (int): 전전기금액
+        ord (int): 계정과목 정렬순서
+        currency (str): 통화 단위
     """
 
     rcept_no: str
@@ -111,4 +113,26 @@ class WholeAccountSingleCompanyOutputDto:
 
 @dataclass
 class XbrlTaxanomyOutputDto:
-    pass
+    """
+    DTO class for storing XBRL taxonomy output data.
+    sj_div talbe: https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS003&apiId=2020001
+
+    Attributes:
+        sj_div (str): 재무제표 구분 (BS: 재무상태표, IS: 손익계산서, CIS: 포괄손익계산서, CF: 현금흐름표, SCE: 자본변동표)
+        account_id (str): 계정 ID
+        account_nm (str): 계정명
+        bsns_de (str): 기준일
+        label_kor (str): 한글 출력명
+        label_eng (str): 영문 출력명
+        data_tp (Optional[str]): 데이터 유형
+        ifrs_ref (str): IRS 참조
+    """
+
+    sj_div: str
+    account_id: str
+    account_nm: str
+    bsns_de: str
+    label_kor: str
+    label_eng: str
+    data_tp: Optional[str]
+    ifrs_ref: str

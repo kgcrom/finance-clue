@@ -1,7 +1,8 @@
 """disclosure Module 테스트"""
 import os
-from typing import Callable, TypeVar, List
+from typing import Callable, List, TypeVar
 
+from stock_clue.opendart.disclosure import Disclosure
 from stock_clue.opendart.disclosure_dto import CompanyOverviewInputDto
 from stock_clue.opendart.disclosure_dto import DownloadDocumentInputDto
 from stock_clue.opendart.disclosure_dto import ListInputDto
@@ -27,14 +28,13 @@ def typehint_filter(
 
 class TestDisclosure:
     def test_disclosure_list(self):
-        open_dart = OpenDart(os.environ["OPENDART_API_KEY"])
         params = ListInputDto(
             corp_code="01029394",
             bgn_de="20230717",
             end_de="20231017",
             corp_cls="K",
         )
-        results = open_dart.disclosure.list(params)
+        results = Disclosure(OpenDart(os.environ["OPENDART_API_KEY"])).list(params)
 
         assert results is not None
         assert results.page_count == 10
@@ -53,26 +53,23 @@ class TestDisclosure:
         )
 
     def test_company_overview(self):
-        open_dart = OpenDart(os.environ["OPENDART_API_KEY"])
         params = CompanyOverviewInputDto(
             corp_code="01029394",
         )
-        result = open_dart.disclosure.get_company_overview(params)
+        result = Disclosure(OpenDart(os.environ["OPENDART_API_KEY"])).get_company_overview(params)
 
         assert result is not None
         assert result.corp_name == "(주)에코마케팅"
 
     def test_download_document(self):
-        open_dart = OpenDart(os.environ["OPENDART_API_KEY"])
         params = DownloadDocumentInputDto(
             rcept_no="20231024600472",
             file_path="./",
         )
 
-        open_dart.disclosure.download_document(params)
+        Disclosure(OpenDart(os.environ["OPENDART_API_KEY"])).download_document(params)
 
     def test_corp_code(self):
-        open_dart = OpenDart(os.environ["OPENDART_API_KEY"])
-        result = open_dart.disclosure.get_corp_code_list()
+        result = Disclosure(OpenDart(os.environ["OPENDART_API_KEY"])).get_corp_code_list()
 
         assert len(result) != 0

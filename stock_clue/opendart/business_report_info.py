@@ -262,7 +262,7 @@ class BusinessReportInfo:
 
         param corp_code: 고유번호
         param bsns_year: 사업연도
-        param reprt_code: 보고서 코드 (11013: 사업보고서, 11012: 반기보고서, 11014: 분기보고서)
+        param reprt_code: 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서
         """
         path = "/api/outcmpnyDrctrNdChangeSttus.json"
         params = BaseParamDto(
@@ -304,7 +304,7 @@ class BusinessReportInfo:
 
         param corp_code: 고유번호
         param bsns_year: 사업연도
-        param reprt_code: 보고서 코드 (11013: 사업보고서, 11012: 반기보고서, 11014: 분기보고서)
+        param reprt_code: 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서)
         """
         path = "/api/tesstkAcqsDspsSttus.json"
 

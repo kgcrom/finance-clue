@@ -15,31 +15,10 @@ from stock_clue.opendart.disclosure_dto import DisclosureSearchResultDto
 from stock_clue.opendart.disclosure_dto import DownloadDocumentInputDto
 from stock_clue.opendart.disclosure_dto import ListInputDto
 from stock_clue.opendart.disclosure_dto import ListOutputDto
+from stock_clue.opendart.utils import extract_file_name
 
 if TYPE_CHECKING:
     from stock_clue.opendart.open_dart import OpenDart
-
-
-def extract_file_name(response: requests.Response) -> str:
-    """Extracts the file name from the response header's Content-Disposition field.
-
-    Args:
-        response (requests.Response): The response object from the request.
-
-    Returns:
-        str: The extracted file name.
-
-    Raises:
-        HttpError: If the filename is not found in the response header's Content-Disposition field.
-    """
-    content_disposition: str = response.headers["Content-Disposition"]
-    index_filename = content_disposition.find("filename=")
-    if index_filename == -1:
-        raise HttpError(
-            f"Can't find filename in response header. Content-Disposition: {content_disposition}"
-        )
-    file_name = content_disposition[index_filename + 9 :]
-    return file_name
 
 
 def unzip(tmp_path: str, file_name: str):
