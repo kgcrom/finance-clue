@@ -467,11 +467,104 @@ class MajorReport:
         )
 
     def get_disposal_of_treasury_stocks(
-        self,
+        self, corp_code: str, bgn_de: str, end_de: str
     ) -> BaseListDto[DisposalOfTreasuryStocksOutputDto]:
-        pass
+        path = "/api/tsstkDpDecsn.json"
+        params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
+
+        response = self.open_dart.get(path=path, params=params.dict())
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> DisposalOfTreasuryStocksOutputDto:
+            return DisposalOfTreasuryStocksOutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                dppln_stk_ostk=str_to_int(x["dppln_stk_ostk"]),
+                dppln_stk_estk=str_to_int(x["dppln_stk_estk"]),
+                dpstk_prc_ostk=str_to_int(x["dpstk_prc_ostk"]),
+                dpstk_prc_estk=str_to_int(x["dpstk_prc_estk"]),
+                dppln_prc_ostk=str_to_int(x["dppln_prc_ostk"]),
+                dppln_prc_estk=str_to_int(x["dppln_prc_estk"]),
+                dpprpd_bgd=x["dpprpd_bgd"],
+                dpprpd_edd=x["dpprpd_edd"],
+                dp_pp=x["dp_pp"],
+                dp_m_mkt=x["dp_m_mkt"],
+                dp_m_ovtm=x["dp_m_ovtm"],
+                dp_m_otc=x["dp_m_otc"],
+                dp_m_etc=x["dp_m_etc"],
+                cs_iv_bk=x["cs_iv_bk"],
+                aq_wtn_div_ostk=str_to_int(x["aq_wtn_div_ostk"]),
+                aq_wtn_div_ostk_rt=x["aq_wtn_div_ostk_rt"],
+                aq_wtn_div_estk=str_to_int(x["aq_wtn_div_estk"]),
+                aq_wtn_div_estk_rt=x["aq_wtn_div_estk_rt"],
+                eaq_ostk=str_to_int(x["eaq_ostk"]),
+                eaq_ostk_rt=x["eaq_ostk_rt"],
+                eaq_estk=str_to_int(x["eaq_estk"]),
+                eaq_estk_rt=x["eaq_estk_rt"],
+                dp_dd=x["dp_dd"],
+                od_a_at_t=str_to_int(x["od_a_at_t"]),
+                od_a_at_b=str_to_int(x["od_a_at_b"]),
+                adt_a_atn=x["adt_a_atn"],
+                d1_slodlm_ostk=str_to_int(x["d1_slodlm_ostk"]),
+                d1_slodlm_estk=str_to_int(x["d1_slodlm_estk"]),
+            )
+
+        data = response.json()
+        return BaseListDto[DisposalOfTreasuryStocksOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])),
+        )
 
     def get_acquisition_of_treasury_stocks(
-        self,
+        self, corp_code: str, bgn_de: str, end_de: str
     ) -> BaseListDto[AcquisitionOfTreasuryStocksOutputDto]:
-        pass
+        path = "/api/tsstkAqDecsn.json"
+        params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
+
+        response = self.open_dart.get(path=path, params=params.dict())
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> AcquisitionOfTreasuryStocksOutputDto:
+            return AcquisitionOfTreasuryStocksOutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                aqpln_stk_ostk=str_to_int(x["aqpln_stk_ostk"]),
+                aqpln_stk_estk=str_to_int(x["aqpln_stk_estk"]),
+                aqpln_prc_ostk=str_to_int(x["aqpln_prc_ostk"]),
+                aqpln_prc_estk=str_to_int(x["aqpln_prc_estk"]),
+                aqexpd_bgd=x["aqexpd_bgd"],
+                aqexpd_edd=x["aqexpd_edd"],
+                hdexpd_bgd=x["hdexpd_bgd"],
+                hdexpd_edd=x["hdexpd_edd"],
+                aq_pp=x["aq_pp"],
+                aq_mth=x["aq_mth"],
+                cs_iv_bk=x["cs_iv_bk"],
+                aq_wtn_div_ostk=str_to_int(x["aq_wtn_div_ostk"]),
+                aq_wtn_div_ostk_rt=x["aq_wtn_div_ostk_rt"],
+                aq_wtn_div_estk=str_to_int(x["aq_wtn_div_estk"]),
+                aq_wtn_div_estk_rt=x["aq_wtn_div_estk_rt"],
+                eaq_ostk=str_to_int(x["eaq_ostk"]),
+                eaq_ostk_rt=x["eaq_ostk_rt"],
+                eaq_estk=str_to_int(x["eaq_estk"]),
+                eaq_estk_rt=x["eaq_estk_rt"],
+                aq_dd=x["aq_dd"],
+                od_a_at_t=str_to_int(x["od_a_at_t"]),
+                od_a_at_b=str_to_int(x["od_a_at_b"]),
+                adt_a_atn=x["adt_a_atn"],
+                d1_prodlm_ostk=str_to_int(x["d1_prodlm_ostk"]),
+                d1_prodlm_estk=str_to_int(x["d1_prodlm_estk"]),
+            )
+
+        data = response.json()
+        return BaseListDto[AcquisitionOfTreasuryStocksOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])),
+        )

@@ -565,9 +565,140 @@ class ExchangeableBondOutputDto:
 
 @dataclass
 class DisposalOfTreasuryStocksOutputDto:
-    pass
+    """Data class representing the output DTO for the Disposal of Treasury Stocks report.
+
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분
+        corp_code (str): 고유번호
+        corp_name (str): 회사명
+        dppln_stk_ostk (int): 처분예정주식(주)(보통주식)
+        dppln_stk_estk (int): 처분예정주식(주)(기타주식)
+        dpstk_prc_ostk (int): 처분 대상 주식가격(원)(보통주식)
+        dpstk_prc_estk (int): 처분 대상 주식가격(원)(기타주식)
+        dppln_prc_ostk (int): 처분예정금액(원)(보통주식)
+        dppln_prc_estk (int): 처분예정금액(원)(기타주식)
+        dpprpd_bgd (str): 처분예정기간(시작일)
+        dpprpd_edd (str): 처분예정기간(종료일)
+        dp_pp (str): 처분목적
+        dp_m_mkt (str): 처분방법(시장을 통한 매도(주))
+        dp_m_ovtm (str): 처분방법(시장외대량매매(주))
+        dp_m_otc (str): 처분방법(기타(주))
+        dp_m_etc (str): 처분방법(기타(주))
+        cs_iv_bk (str): 위탁투자중개업자
+        aq_wtn_div_ostk (int): 처분 전 자기주식 보유현황(배당가능이익 범위 내 취득(주)(보통주식))
+        aq_wtn_div_ostk_rt (str): 처분 전 자기주식 보유현황(배당가능이익 범위 내 취득(주)(비율(%)))
+        aq_wtn_div_estk (int): 처분 전 자기주식 보유현황(배당가능이익 범위 내 취득(주)(기타주식))
+        aq_wtn_div_estk_rt (str): 처분 전 자기주식 보유현황(배당가능이익 범위 내 취득(주)(비율(%)))
+        eaq_ostk (int): 처분 전 자기주식 보유현황(기타취득(주)(보통주식))
+        eaq_ostk_rt (str): 처분 전 자기주식 보유현황(기타취득(주)(비율(%)))
+        eaq_estk (int): 처분 전 자기주식 보유현황(기타취득(주)(기타주식))
+        eaq_estk_rt (str): 처분 전 자기주식 보유현황(기타취득(주)(비율(%)))
+        dp_dd (str): 처분결정일
+        od_a_at_t (int): 사외이사 참석여부(참석(명))
+        od_a_at_b (int): 사외이사 참석여부(불참(명))
+        adt_a_atn (str): 감사(사외이사가 아닌 감사위원) 참석여부
+        d1_slodlm_ostk (int): 1일 매도 주문수량 한도(보통주식)
+        d1_slodlm_estk (int): 1일 매도 주문수량 한도(기타주식)
+    """
+
+    rcept_no: str
+    corp_cls: str
+    corp_code: str
+    corp_name: str
+    dppln_stk_ostk: int
+    dppln_stk_estk: int
+    dpstk_prc_ostk: int
+    dpstk_prc_estk: int
+    dppln_prc_ostk: int
+    dppln_prc_estk: int
+    dpprpd_bgd: str
+    dpprpd_edd: str
+    dp_pp: str
+    dp_m_mkt: str
+    dp_m_ovtm: str
+    dp_m_otc: str
+    dp_m_etc: str
+    cs_iv_bk: str
+    aq_wtn_div_ostk: int
+    aq_wtn_div_ostk_rt: str
+    aq_wtn_div_estk: int
+    aq_wtn_div_estk_rt: str
+    eaq_ostk: int
+    eaq_ostk_rt: str
+    eaq_estk: int
+    eaq_estk_rt: str
+    dp_dd: str
+    od_a_at_t: int
+    od_a_at_b: int
+    adt_a_atn: str
+    d1_slodlm_ostk: int
+    d1_slodlm_estk: int
 
 
 @dataclass
 class AcquisitionOfTreasuryStocksOutputDto:
-    pass
+    """
+    DTO class for the acquisition of treasury stocks output from OpenDart API.
+
+    Attributes:
+    - rcept_no (str): 접수번호
+    - corp_cls (str): 법인구분
+    - corp_code (str): 고유번호
+    - corp_name (str): 회사명
+    - aqpln_stk_ostk (int): 취득예정주식(주)(보통주식)
+    - aqpln_stk_estk (int): 취득예정주식(주)(기타주식)
+    - aqpln_prc_ostk (int): 취득예정금액(원)(보통주식)
+    - aqpln_prc_estk (int): 취득예정금액(원)(기타주식)
+    - aqexpd_bgd (str): 취득예상기간(시작일)
+    - aqexpd_edd (str): 취득예상기간(종료일)
+    - hdexpd_bgd (str): 보유예상기간(시작일)
+    - hdexpd_edd (str): 보유예상기간(종료일)
+    - aq_pp (str): 취득목적
+    - aq_mth (str): 취득방법
+    - cs_iv_bk (str): 위탁투자중개업자
+    - aq_wtn_div_ostk (int): 취득 전 자기주식 보유현황(배당가능이익 범위 내 취득(주)(보통주식))
+    - aq_wtn_div_ostk_rt (str): 취득 전 자기주식 보유현황(배당가능이익 범위 내 취득(주)(비율(%)))
+    - aq_wtn_div_estk (int): 취득 전 자기주식 보유현황(배당가능이익 범위 내 취득(주)(기타주식))
+    - aq_wtn_div_estk_rt (str): 취득 전 자기주식 보유현황(배당가능이익 범위 내 취득(주)(비율(%)))
+    - eaq_ostk (int): 취득 전 자기주식 보유현황(기타취득(주)(보통주식))
+    - eaq_ostk_rt (str): 취득 전 자기주식 보유현황(기타취득(주)(비율(%)))
+    - eaq_estk (int): 취득 전 자기주식 보유현황(기타취득(주)(기타주식))
+    - eaq_estk_rt (str): 취득 전 자기주식 보유현황(기타취득(주)(비율(%)))
+    - aq_dd (str): 취득결정일
+    - od_a_at_t (int): 사외이사참석여부(참석(명))
+    - od_a_at_b (int): 사외이사참석여부(불참(명))
+    - adt_a_atn (str): 감사(사외이사가 아닌 감사위원)참석여부
+    - d1_prodlm_ostk (int): 1일 매수 주문수량 한도(보통주식)
+    - d1_prodlm_estk (int): 1일 매수 주문수량 한도(기타주식)
+    """
+
+    rcept_no: str
+    corp_cls: str
+    corp_code: str
+    corp_name: str
+    aqpln_stk_ostk: int
+    aqpln_stk_estk: int
+    aqpln_prc_ostk: int
+    aqpln_prc_estk: int
+    aqexpd_bgd: str
+    aqexpd_edd: str
+    hdexpd_bgd: str
+    hdexpd_edd: str
+    aq_pp: str
+    aq_mth: str
+    cs_iv_bk: str
+    aq_wtn_div_ostk: int
+    aq_wtn_div_ostk_rt: str
+    aq_wtn_div_estk: int
+    aq_wtn_div_estk_rt: str
+    eaq_ostk: int
+    eaq_ostk_rt: str
+    eaq_estk: int
+    eaq_estk_rt: str
+    aq_dd: str
+    od_a_at_t: int
+    od_a_at_b: int
+    adt_a_atn: str
+    d1_prodlm_ostk: int
+    d1_prodlm_estk: int
