@@ -27,7 +27,7 @@ class MajorReport:
     def __init__(self, open_dart: OpenDart):
         super().__init__()
         self.open_dart = open_dart
-    
+
     def get_capital_increase(
         self, corp_code: str, bgn_de: str, end_de: str
     ) -> BaseListDto[CapitalIncreaseOutputDto]:
@@ -44,11 +44,11 @@ class MajorReport:
         """
         path = "/api/piicDecsn.json"
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
-        
+
         response = self.open_dart.get(path=path, params=params.dict())
         if response.status_code != 200:
             raise HttpError(path)
-        
+
         def _mapping(x: Dict[str, str]) -> CapitalIncreaseOutputDto:
             return CapitalIncreaseOutputDto(
                 rcept_no=x["rcept_no"],
@@ -71,25 +71,25 @@ class MajorReport:
                 ssl_bgd=x["ssl_bgd"],
                 ssl_edd=x["ssl_edd"],
             )
-        
+
         data = response.json()
-        
+
         return BaseListDto[CapitalIncreaseOutputDto](
             status=data["status"],
             message=data["message"],
             list=[_mapping(x) for x in data["list"]],
         )
-    
+
     def get_capital_decrease(
         self, corp_code: str, bgn_de: str, end_de: str
     ) -> BaseListDto[CaptitalDecreaseOutputDto]:
         path = "/api/fricDecsn.json"
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
-        
+
         response = self.open_dart.get(path=path, params=params.dict())
         if response.status_code != 200:
             raise HttpError(path)
-        
+
         def _mapping(x: Dict[str, str]) -> CaptitalDecreaseOutputDto:
             return CaptitalDecreaseOutputDto(
                 rcept_no=x["rcept_no"],
@@ -112,25 +112,25 @@ class MajorReport:
                 od_a_at_b=str_to_int(x["od_a_at_b"]),
                 adt_a_atn=x["adt_a_atn"],
             )
-        
+
         data = response.json()
-        
+
         return BaseListDto[CaptitalDecreaseOutputDto](
             status=data["status"],
             message=data["message"],
-            list=[_mapping(x) for x in data["list"]],
+            list=list(map(_mapping, data["list"])),
         )
-    
+
     def get_capital_increase_and_decrease(
         self, corp_code: str, bgn_de: str, end_de: str
     ) -> BaseListDto[CapitalIncreaseAndDecreaseOutputDto]:
         path = "/api/pifricDecsn.json"
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
-        
+
         response = self.open_dart.get(path=path, params=params.dict())
         if response.status_code != 200:
             raise HttpError(path)
-        
+
         def _mapping(x: Dict[str, str]) -> CapitalIncreaseAndDecreaseOutputDto:
             return CapitalIncreaseAndDecreaseOutputDto(
                 rcept_no=x["rcept_no"],
@@ -143,9 +143,13 @@ class MajorReport:
                 piic_bfic_tisstk_ostk=str_to_int(x["piic_bfic_tisstk_ostk"]),
                 piic_bfic_tisstk_estk=str_to_int(x["piic_bfic_tisstk_estk"]),
                 piic_fdpp_fclt=str_to_int(x["piic_fdpp_fclt"]),
-                piic_fdpp_bsninh=str_to_int(x["piic_fdpp_bsninh"]) if x["piic_fdpp_bsninh"] else None,
+                piic_fdpp_bsninh=str_to_int(x["piic_fdpp_bsninh"])
+                if x["piic_fdpp_bsninh"]
+                else None,
                 piic_fdpp_op=str_to_int(x["piic_fdpp_op"]),
-                piic_fdpp_dtrp=str_to_int(x["piic_fdpp_dtrp"]) if x["piic_fdpp_dtrp"] else None,
+                piic_fdpp_dtrp=str_to_int(x["piic_fdpp_dtrp"])
+                if x["piic_fdpp_dtrp"]
+                else None,
                 piic_fdpp_ocsa=str_to_int(x["piic_fdpp_ocsa"]),
                 piic_fdpp_etc=str_to_int(x["piic_fdpp_etc"]),
                 piic_ic_mthn=x["piic_ic_mthn"],
@@ -155,8 +159,12 @@ class MajorReport:
                 fric_bfic_tisstk_ostk=str_to_int(x["fric_bfic_tisstk_ostk"]),
                 fric_bfic_tisstk_estk=str_to_int(x["fric_bfic_tisstk_estk"]),
                 fric_nstk_asstd=x["fric_nstk_asstd"],
-                fric_nstk_ascnt_ps_ostk=str_to_float(x["fric_nstk_ascnt_ps_ostk"]),
-                fric_nstk_ascnt_ps_estk=str_to_float(x["fric_nstk_ascnt_ps_estk"]),
+                fric_nstk_ascnt_ps_ostk=str_to_float(
+                    x["fric_nstk_ascnt_ps_ostk"]
+                ),
+                fric_nstk_ascnt_ps_estk=str_to_float(
+                    x["fric_nstk_ascnt_ps_estk"]
+                ),
                 fric_nstk_dividrk=x["fric_nstk_dividrk"],
                 fric_nstk_dlprd=x["fric_nstk_dlprd"],
                 fric_nstk_lstprd=x["fric_nstk_lstprd"],
@@ -168,28 +176,26 @@ class MajorReport:
                 ssl_bgd=x["ssl_bgd"],
                 ssl_edd=x["ssl_edd"],
             )
-        
+
         data = response.json()
-        
+
         return BaseListDto[CapitalIncreaseAndDecreaseOutputDto](
             status=data["status"],
             message=data["message"],
-            list=[_mapping(x) for x in data["list"]],
+            list=list(map(_mapping, data["list"])),
         )
-    
-    def get_capital_reduction(self, corp_code: str, bgn_de: str, end_de: str) -> BaseListDto[CapitalReductionOutputDto]:
+
+    def get_capital_reduction(
+        self, corp_code: str, bgn_de: str, end_de: str
+    ) -> BaseListDto[CapitalReductionOutputDto]:
         path = "/api/crDecsn.json"
-        
-        params = BaseParamDto(
-            corp_code=corp_code,
-            bgn_de=bgn_de,
-            end_de=end_de
-        )
-        
+
+        params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
+
         response = self.open_dart.get(path=path, params=params.dict())
         if response.status_code != 200:
             raise HttpError(path)
-        
+
         def _mapping(x: Dict[str, str]) -> CapitalReductionOutputDto:
             return CapitalReductionOutputDto(
                 rcept_no=x["rcept_no"],
@@ -229,29 +235,242 @@ class MajorReport:
                 adt_a_atn=x["adt_a_atn"],
                 ftc_stt_atn=x["ftc_stt_atn"],
             )
-        
+
         data = response.json()
-        
+
         return BaseListDto[CapitalReductionOutputDto](
             status=data["status"],
             message=data["message"],
-            list=[_mapping(x) for x in data["list"]],
+            list=list(map(_mapping, data["list"])),
         )
-    
-    def get_convertible_bond(self) -> BaseListDto[ConvertibleBondOutputDto]:
-        pass
-    
-    def get_bond_with_warrants(self) -> BaseListDto[BondWithWarrantsOutputDto]:
-        pass
-    
-    def get_exchangeable_bond(self) -> BaseListDto[ExchangeableBondOutputDto]:
-        pass
-    
+
+    def get_convertible_bond(
+        self, corp_code: str, bgn_de: str, end_de: str
+    ) -> BaseListDto[ConvertibleBondOutputDto]:
+        path = "/api/cvbdIsDecsn.json"
+
+        params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
+        response = self.open_dart.get(path=path, params=params.dict())
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> ConvertibleBondOutputDto:
+            return ConvertibleBondOutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                bd_tm=x["bd_tm"],
+                bd_knd=x["bd_knd"],
+                bd_fta=str_to_int(x["bd_fta"]),
+                atcsc_rmislmt=x["atcsc_rmislmt"]
+                if "atcsc_rmislmt" in x
+                else None,
+                ovis_fta=str_to_int(x["ovis_fta"]),
+                ovis_fta_crn=x["ovis_fta_crn"],
+                ovis_ster=x["ovis_ster"],
+                ovis_isar=x["ovis_isar"],
+                ovis_mktnm=x["ovis_mktnm"],
+                fdpp_fclt=str_to_int(x["fdpp_fclt"]),
+                fdpp_bsninh=str_to_int(x["fdpp_bsninh"]),
+                fdpp_op=str_to_int(x["fdpp_op"]),
+                fdpp_dtrp=str_to_int(x["fdpp_dtrp"]),
+                fdpp_ocsa=str_to_int(x["fdpp_ocsa"]),
+                fdpp_etc=str_to_int(x["fdpp_etc"]),
+                bd_intr_ex=x["bd_intr_ex"],
+                bd_intr_sf=x["bd_intr_sf"],
+                bd_mtd=x["bd_mtd"],
+                bdis_mthn=x["bdis_mthn"],
+                cv_rt=x["cv_rt"],
+                cv_prc=str_to_int(x["cv_prc"]),
+                cvisstk_knd=x["cvisstk_knd"],
+                cvisstk_cnt=str_to_int(x["cvisstk_cnt"]),
+                cvisstk_tisstk_vs=x["cvisstk_tisstk_vs"],
+                cvrqpd_bgd=x["cvrqpd_bgd"],
+                cvrqpd_edd=x["cvrqpd_edd"],
+                act_mktprcfl_cvprc_lwtrsprc=x["act_mktprcfl_cvprc_lwtrsprc"]
+                if "act_mktprcfl_cvprc_lwtrsprc" in x
+                else None,
+                act_mktprcfl_cvprc_lwtrsprc_bs=x[
+                    "act_mktprcfl_cvprc_lwtrsprc_bs"
+                ]
+                if "act_mktprcfl_cvprc_lwtrsprc_bs" in x
+                else None,
+                rmislmt_lt70p=str_to_int(x["rmislmt_lt70p"])
+                if "rmislmt_lt70p" in x
+                else None,
+                abmg=x["abmg"],
+                sbd=x["sbd"],
+                pymd=x["pymd"],
+                rpmcmp=x["rpmcmp"],
+                grint=x["grint"],
+                bddd=x["bddd"],
+                od_a_at_t=str_to_int(x["od_a_at_t"]),
+                od_a_at_b=str_to_int(x["od_a_at_b"]),
+                adt_a_atn=x["adt_a_atn"],
+                rs_sm_atn=x["rs_sm_atn"],
+                ex_sm_r=x["ex_sm_r"],
+                ovis_ltdtl=x["ovis_ltdtl"],
+                ftc_stt_atn=x["ftc_stt_atn"],
+            )
+
+        data = response.json()
+
+        return BaseListDto[ConvertibleBondOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])),
+        )
+
+    def get_bond_with_warrants(
+        self, corp_code: str, bgn_de: str, end_de: str
+    ) -> BaseListDto[BondWithWarrantsOutputDto]:
+        path = "/api/bdwtIsDecsn.json"
+
+        params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
+        response = self.open_dart.get(path=path, params=params.dict())
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> BondWithWarrantsOutputDto:
+            return BondWithWarrantsOutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                bd_tm=x["bd_tm"],
+                bd_knd=x["bd_knd"],
+                bd_fta=str_to_int(x["bd_fta"]),
+                atcsc_rmislmt=x["atcsc_rmislmt"]
+                if "atcsc_rmislmt" in x
+                else None,
+                ovis_fta=str_to_int(x["ovis_fta"]),
+                ovis_fta_crn=x["ovis_fta_crn"],
+                ovis_ster=x["ovis_ster"],
+                ovis_isar=x["ovis_isar"],
+                ovis_mktnm=x["ovis_mktnm"],
+                fdpp_fclt=str_to_int(x["fdpp_fclt"]),
+                fdpp_bsninh=str_to_int(x["fdpp_bsninh"]),
+                fdpp_op=str_to_int(x["fdpp_op"]),
+                fdpp_dtrp=str_to_int(x["fdpp_dtrp"]),
+                fdpp_ocsa=str_to_int(x["fdpp_ocsa"]),
+                fdpp_etc=str_to_int(x["fdpp_etc"]),
+                bd_intr_ex=x["bd_intr_ex"],
+                bd_intr_sf=x["bd_intr_sf"],
+                bd_mtd=x["bd_mtd"],
+                bdis_mthn=x["bdis_mthn"],
+                ex_rt=x["ex_rt"],
+                ex_prc=str_to_int(x["ex_prc"]),
+                ex_prc_dmth=x["ex_prc_dmth"],
+                bdwt_div_atn=x["bdwt_div_atn"],
+                nstk_pym_mth=x["nstk_pym_mth"],
+                nstk_isstk_knd=x["nstk_isstk_knd"],
+                nstk_isstk_cnt=str_to_int(x["nstk_isstk_cnt"]),
+                nstk_isstk_tisstk_vs=x["nstk_isstk_tisstk_vs"],
+                expd_bgd=x["expd_bgd"],
+                expd_edd=x["expd_edd"],
+                act_mktprcfl_cvprc_lwtrsprc=x["act_mktprcfl_cvprc_lwtrsprc"]
+                if "act_mktprcfl_cvprc_lwtrsprc" in x
+                else None,
+                act_mktprcfl_cvprc_lwtrsprc_bs=x[
+                    "act_mktprcfl_cvprc_lwtrsprc_bs"
+                ]
+                if "act_mktprcfl_cvprc_lwtrsprc_bs" in x
+                else None,
+                rmislmt_lt70p=str_to_int(x["rmislmt_lt70p"])
+                if "rmislmt_lt70p" in x
+                else None,
+                abmg=x["abmg"],
+                sbd=x["sbd"],
+                pymd=x["pymd"],
+                rpmcmp=x["rpmcmp"],
+                grint=x["grint"],
+                bddd=x["bddd"],
+                od_a_at_t=str_to_int(x["od_a_at_t"]),
+                od_a_at_b=str_to_int(x["od_a_at_b"]),
+                adt_a_atn=x["adt_a_atn"],
+                rs_sm_atn=x["rs_sm_atn"],
+                ex_sm_r=x["ex_sm_r"],
+                ovis_ltdtl=x["ovis_ltdtl"],
+                ftc_stt_atn=x["ftc_stt_atn"],
+            )
+
+        data = response.json()
+
+        return BaseListDto[BondWithWarrantsOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])),
+        )
+
+    def get_exchangeable_bond(
+        self, corp_code: str, bgn_de: str, end_de: str
+    ) -> BaseListDto[ExchangeableBondOutputDto]:
+        path = "/api/exbdIsDecsn.json"
+
+        params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
+        response = self.open_dart.get(path=path, params=params.dict())
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> ExchangeableBondOutputDto:
+            return ExchangeableBondOutputDto(
+                rcept_no=x["rcept_no"],
+                corp_cls=x["corp_cls"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                bd_tm=x["bd_tm"],
+                bd_knd=x["bd_knd"],
+                bd_fta=x["bd_fta"],
+                ovis_fta=x["ovis_fta"],
+                ovis_fta_crn=x["ovis_fta_crn"],
+                ovis_ster=x["ovis_ster"],
+                ovis_isar=x["ovis_isar"],
+                ovis_mktnm=x["ovis_mktnm"],
+                fdpp_fclt=str_to_int(x["fdpp_fclt"]),
+                fdpp_bsninh=str_to_int(x["fdpp_bsninh"]),
+                fdpp_op=str_to_int(x["fdpp_op"]),
+                fdpp_dtrp=str_to_int(x["fdpp_dtrp"]),
+                fdpp_ocsa=str_to_int(x["fdpp_ocsa"]),
+                fdpp_etc=str_to_int(x["fdpp_etc"]),
+                bd_intr_ex=x["bd_intr_ex"],
+                bd_intr_sf=x["bd_intr_sf"],
+                bd_mtd=x["bd_mtd"],
+                bdis_mthn=x["bdis_mthn"],
+                ex_rt=x["ex_rt"],
+                ex_prc=str_to_int(x["ex_prc"]),
+                ex_prc_dmth=x["ex_prc_dmth"],
+                extg=x["extg"],
+                extg_stkcnt=str_to_int(x["extg_stkcnt"]),
+                extg_tisstk_vs=x["extg_tisstk_vs"],
+                exrqpd_bgd=x["exrqpd_bgd"],
+                exrqpd_edd=x["exrqpd_edd"],
+                sbd=x["sbd"],
+                pymd=x["pymd"],
+                rpmcmp=x["rpmcmp"],
+                grint=x["grint"],
+                bddd=x["bddd"],
+                od_a_at_t=str_to_int(x["od_a_at_t"]),
+                od_a_at_b=str_to_int(x["od_a_at_b"]),
+                adt_a_atn=x["adt_a_atn"],
+                rs_sm_atn=x["rs_sm_atn"],
+                ex_sm_r=x["ex_sm_r"],
+                ovis_ltdtl=x["ovis_ltdtl"],
+                ftc_stt_atn=x["ftc_stt_atn"],
+            )
+
+        data = response.json()
+        return BaseListDto[ExchangeableBondOutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])),
+        )
+
     def get_disposal_of_treasury_stocks(
         self,
     ) -> BaseListDto[DisposalOfTreasuryStocksOutputDto]:
         pass
-    
+
     def get_acquisition_of_treasury_stocks(
         self,
     ) -> BaseListDto[AcquisitionOfTreasuryStocksOutputDto]:

@@ -28,7 +28,7 @@ class CapitalIncreaseOutputDto:
         ssl_bgd (str): 공매도 시작일
         ssl_edd (str): 공매도 종료일
     """
-    
+
     rcept_no: str
     corp_cls: str
     corp_code: str
@@ -76,7 +76,7 @@ class CaptitalDecreaseOutputDto:
         od_a_at_b (int): 사외이사 참석여부(불참(명))
         adt_a_atn (str): 감사(감사위원)참석 여부
     """
-    
+
     rcept_no: str
     corp_cls: str
     corp_code: str
@@ -139,7 +139,7 @@ class CapitalIncreaseAndDecreaseOutputDto:
         ssl_bgd (str): 공매도 시작일
         ssl_edd (str): 공매도 종료일
     """
-    
+
     rcept_no: str
     corp_cls: str
     corp_code: str
@@ -219,6 +219,7 @@ class CapitalReductionOutputDto:
         adt_a_atn (str): 감사(감사위원) 참석여부
         ftc_stt_atn (str): 공정거래위원회 신고대상 여부
     """
+
     rcept_no: str
     corp_cls: str
     corp_code: str
@@ -259,17 +260,307 @@ class CapitalReductionOutputDto:
 
 @dataclass
 class ConvertibleBondOutputDto:
-    pass
+    """
+    Data Transfer Object for Convertible Bond Output
+
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분
+        corp_code (str): 고유번호
+        corp_name (str): 회사명
+        bd_tm (str): 사채의 종류(회차)
+        bd_knd (str): 사채의 종류(종류)
+        bd_fta (int): 사채의 권면(전자등록)총액 (원)
+        atcsc_rmislmt (Optional[int]): 정관상 잔여 발행한도 (원)
+        ovis_fta (int): 해외발행(권면(전자등록)총액)
+        ovis_fta_crn (str): 해외발행(권면(전자등록)총액(통화단위))
+        ovis_ster (str): 해외발행(기준환율등)
+        ovis_isar (str): 해외발행(발행지역)
+        ovis_mktnm (str): 해외발행(해외상장시 시장의 명칭)
+        fdpp_fclt (int): 자금조달의 목적(시설자금 (원))
+        fdpp_bsninh (Optional[int]): 자금조달의 목적(영업양수자금 (원))
+        fdpp_op (int): 자금조달의 목적(운영자금 (원))
+        fdpp_dtrp (Optional[int]): 자금조달의 목적(채무상환자금 (원))
+        fdpp_ocsa (int): 자금조달의 목적(타법인 증권 취득자금 (원))
+        fdpp_etc (int): 자금조달의 목적(기타자금 (원))
+        bd_intr_ex (str): 사채의 이율(표면이자율 (%))
+        bd_intr_sf (str): 사채의 이율(만기이자율 (%))
+        bd_mtd (str): 사채만기일
+        bdis_mthn (str): 사채발행방법
+        cv_rt (str): 전환에 관한 사항(전환비율 (%))
+        cv_prc (int): 전환에 관한 사항(전환가액 (원/주))
+        cvisstk_knd (str): 전환에 관한 사항(전환에 따라 발행할 주식(종류))
+        cvisstk_cnt (int): 전환에 관한 사항(전환에 따라 발행할 주식(주식수))
+        cvisstk_tisstk_vs (str): 전환에 관한 사항(전환에 따라 발행할 주식(주식총수 대비 비율(%)))
+        cvrqpd_bgd (str): 전환에 관한 사항(전환청구기간(시작일))
+        cvrqpd_edd (str): 전환에 관한 사항(전환청구기간(종료일))
+        act_mktprcfl_cvprc_lwtrsprc (Optional[int]): 전환에 관한 사항(시가하락에 따른 전환가액 조정(최저 조정가액 (원)))
+        act_mktprcfl_cvprc_lwtrsprc_bs (Optional[str]): 전환에 관한 사항(시가하락에 따른 전환가액 조정(최저 조정가액 근거))
+        rmislmt_lt70p (Optional[int]): 전환에 관한 사항(시가하락에 따른 전환가액 조정(발행당시 전환가액의 70% 미만으로 조정가능한 잔여 발행한도 (원)))
+        abmg (str): 합병 관련 사항
+        sbd (str): 청약일
+        pymd (str): 납입일
+        rpmcmp (str): 대표주관회사
+        grint (str): 보증기관
+        bddd (str): 이사회결의일(결정일)
+        od_a_at_t (int): 사외이사 참석여부(참석(명))
+        od_a_at_b (int): 사외이사 참석여부(불참(명))
+        adt_a_atn (str): 감사(감사위원)참석 여부
+        rs_sm_atn (str): 증권신고서 제출대상 여부
+        ex_sm_r (str): 제출을 면제받은 경우 그 사유
+        ovis_ltdtl (str): 당해 사채의 해외발행과 연계된 대차거래 내역
+        ftc_stt_atn (str): 공정거래위원회 신고대상 여부
+    """
+
+    rcept_no: str
+    corp_cls: str
+    corp_code: str
+    corp_name: str
+    bd_tm: str
+    bd_knd: str
+    bd_fta: int
+    atcsc_rmislmt: Optional[int]
+    ovis_fta: int
+    ovis_fta_crn: str
+    ovis_ster: str
+    ovis_isar: str
+    ovis_mktnm: str
+    fdpp_fclt: int
+    fdpp_bsninh: Optional[int]
+    fdpp_op: int
+    fdpp_dtrp: Optional[int]
+    fdpp_ocsa: int
+    fdpp_etc: int
+    bd_intr_ex: str
+    bd_intr_sf: str
+    bd_mtd: str
+    bdis_mthn: str
+    cv_rt: str
+    cv_prc: int
+    cvisstk_knd: str
+    cvisstk_cnt: int
+    cvisstk_tisstk_vs: str
+    cvrqpd_bgd: str
+    cvrqpd_edd: str
+    act_mktprcfl_cvprc_lwtrsprc: Optional[int]
+    act_mktprcfl_cvprc_lwtrsprc_bs: Optional[str]
+    rmislmt_lt70p: Optional[int]
+    abmg: str
+    sbd: str
+    pymd: str
+    rpmcmp: str
+    grint: str
+    bddd: str
+    od_a_at_t: int
+    od_a_at_b: int
+    adt_a_atn: str
+    rs_sm_atn: str
+    ex_sm_r: str
+    ovis_ltdtl: str
+    ftc_stt_atn: str
 
 
 @dataclass
 class BondWithWarrantsOutputDto:
-    pass
+    """
+    Data Transfer Object for Bond With Warrants Output
+
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분
+        corp_code (str): 고유번호
+        corp_name (str): 회사명
+        bd_tm (str): 사채의 종류(회차)
+        bd_knd (str): 사채의 종류(종류)
+        bd_fta (int): 사채의 권면(전자등록)총액 (원)
+        atcsc_rmislmt (Optional[int]): 정관상 잔여 발행한도 (원)
+        ovis_fta (int): 해외발행(권면(전자등록)총액)
+        ovis_fta_crn (str): 해외발행(권면(전자등록)총액(통화단위))
+        ovis_ster (str): 해외발행(기준환율등)
+        ovis_isar (str): 해외발행(발행지역)
+        ovis_mktnm (str): 해외발행(해외상장시 시장의 명칭)
+        fdpp_fclt (int): 자금조달의 목적(시설자금 (원))
+        fdpp_bsninh (Optional[int]): 자금조달의 목적(영업양수자금 (원))
+        fdpp_op (int): 자금조달의 목적(운영자금 (원))
+        fdpp_dtrp (Optional[int]): 자금조달의 목적(채무상환자금 (원))
+        fdpp_ocsa (int): 자금조달의 목적(타법인 증권 취득자금 (원))
+        fdpp_etc (int): 자금조달의 목적(기타자금 (원))
+        bd_intr_ex (str): 사채의 이율(표면이자율 (%))
+        bd_intr_sf (str): 사채의 이율(만기이자율 (%))
+        bd_mtd (str): 사채만기일
+        bdis_mthn (str): 사채발행방법
+        ex_rt (str): 신주인수권에 관한 사항(행사비율 (%))
+        ex_prc: (int): 신주인수권에 관한 사항(행사가액 (원/주))
+        ex_prc_dmth (str): 신주인수권에 관한 사항(행사가액 결정방법)
+        bdwt_div_atn (str): 신주인수권에 관한 사항(사채와 인수권의 분리여부)
+        nstk_pym_mth (str): 신주인수권에 관한 사항(신주대금 납입방법)
+        nstk_isstk_knd (str): 신주인수권에 관한 사항(신주인수권 행사에 따라 발행할 주식(종류))
+        nstk_isstk_cnt (int): 신주인수권에 관한 사항(신주인수권 행사에 따라 발행할 주식(주식수))
+        expd_bgd (str): 신주인수권에 관한 사항(권리행사기간(시작일))
+        expd_edd (str): 신주인수권에 관한 사항(권리행사기간(종료일))
+        act_mktprcfl_cvprc_lwtrsprc (Optional[int]): 전환에 관한 사항(시가하락에 따른 전환가액 조정(최저 조정가액 (원)))
+        act_mktprcfl_cvprc_lwtrsprc_bs (Optional[str]): 전환에 관한 사항(시가하락에 따른 전환가액 조정(최저 조정가액 근거))
+        rmislmt_lt70p (Optional[int]): 전환에 관한 사항(시가하락에 따른 전환가액 조정(발행당시 전환가액의 70% 미만으로 조정가능한 잔여 발행한도 (원)))
+        abmg (str): 합병 관련 사항
+        sbd (str): 청약일
+        pymd (str): 납입일
+        rpmcmp (str): 대표주관회사
+        grint (str): 보증기관
+        bddd (str): 이사회결의일(결정일)
+        od_a_at_t (int): 사외이사 참석여부(참석(명))
+        od_a_at_b (int): 사외이사 참석여부(불참(명))
+        adt_a_atn (str): 감사(감사위원)참석 여부
+        rs_sm_atn (str): 증권신고서 제출대상 여부
+        ex_sm_r (str): 제출을 면제받은 경우 그 사유
+        ovis_ltdtl (str): 당해 사채의 해외발행과 연계된 대차거래 내역
+        ftc_stt_atn (str): 공정거래위원회 신고대상 여부
+    """
+
+    rcept_no: str
+    corp_cls: str
+    corp_code: str
+    corp_name: str
+    bd_tm: str
+    bd_knd: str
+    bd_fta: int
+    atcsc_rmislmt: Optional[int]
+    ovis_fta: int
+    ovis_fta_crn: str
+    ovis_ster: str
+    ovis_isar: str
+    ovis_mktnm: str
+    fdpp_fclt: int
+    fdpp_bsninh: Optional[int]
+    fdpp_op: int
+    fdpp_dtrp: Optional[int]
+    fdpp_ocsa: int
+    fdpp_etc: int
+    bd_intr_ex: str
+    bd_intr_sf: str
+    bd_mtd: str
+    bdis_mthn: str
+    ex_rt: str
+    ex_prc: int
+    ex_prc_dmth: str
+    bdwt_div_atn: str
+    nstk_pym_mth: str
+    nstk_isstk_knd: str
+    nstk_isstk_cnt: int
+    nstk_isstk_tisstk_vs: str
+    expd_bgd: str
+    expd_edd: str
+    act_mktprcfl_cvprc_lwtrsprc: Optional[int]
+    act_mktprcfl_cvprc_lwtrsprc_bs: Optional[str]
+    rmislmt_lt70p: Optional[int]
+    abmg: str
+    sbd: str
+    pymd: str
+    rpmcmp: str
+    grint: str
+    bddd: str
+    od_a_at_t: int
+    od_a_at_b: int
+    adt_a_atn: str
+    rs_sm_atn: str
+    ex_sm_r: str
+    ovis_ltdtl: str
+    ftc_stt_atn: str
 
 
 @dataclass
 class ExchangeableBondOutputDto:
-    pass
+    """
+    DTO class for exchangeable bond output data from Open DART API.
+
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분
+        corp_code (str): 고유번호
+        corp_name (str): 회사명
+        bd_tm (str): 사채의 종류(회차)
+        bd_knd (str): 사채의 종류(종류)
+        bd_fta (str): 사채의 권면(전자등록)총액 (원)
+        ovis_fta (str): 해외발행(권면(전자등록)총액)
+        ovis_fta_crn (str): 해외발행(권면(전자등록)총액(통화단위))
+        ovis_ster (str): 해외발행(기준환율등)
+        ovis_isar (str): 해외발행(발행지역)
+        ovis_mktnm (str): 해외발행(해외상장시 시장의 명칭)
+        fdpp_fclt (int): 자금조달의 목적(시설자금 (원))
+        fdpp_bsninh (Optional[int]): 자금조달의 목적(영업양수자금 (원))
+        fdpp_op (int): 자금조달의 목적(운영자금 (원))
+        fdpp_dtrp (Optional[int]): 자금조달의 목적(채무상환자금 (원))
+        fdpp_ocsa (int): 자금조달의 목적(타법인 증권 취득자금 (원))
+        fdpp_etc (int): 자금조달의 목적(기타자금 (원))
+        bd_intr_ex (str): 사채의 이율(표면이자율 (%))
+        bd_intr_sf (str): 사채의 이율(만기이자율 (%))
+        bd_mtd (str): 사채만기일
+        bdis_mthn (str): 사채발행방법
+        ex_rt (str): 교환권에 관한 사항(교환비율 (%))
+        ex_prc (int): 교환권에 관한 사항(교환가액 (원/주))
+        ex_prc_dmth (str): 교환권에 관한 사항(교환가액 결정방법)
+        extg (str): 교환권에 관한 사항(교환대상 (종류))
+        extg_stkcnt (int): 교환권에 관한 사항(교환대상 (주식수))
+        extg_tisstk_vs (str): 교환권에 관한 사항(교환대상 (주식총수 대비 비율(%)))
+        exrqpd_bgd (str): 교환권에 관한 사항(교환청구기간(시작일))
+        exrqpd_edd (str): 교환권에 관한 사항(교환청구기간(종료일))
+        sbd (str): 청약일
+        pymd (str): 납입일
+        rpmcmp (str): 대표주관회사
+        grint (str): 보증기관
+        bddd (str): 이사회결의일(결정일)
+        od_a_at_t (int): 사외이사 참석여부(참석(명))
+        od_a_at_b (int): 사외이사 참석여부(불참(명))
+        adt_a_atn (str): 감사(감사위원)참석 여부
+        rs_sm_atn (str): 증권신고서 제출대상 여부
+        ex_sm_r (str): 제출을 면제받은 경우 그 사유
+        ovis_ltdtl (str): 당해 사채의 해외발행과 연계된 대차거래 내역
+        ftc_stt_atn (str): 공정거래위원회 신고대상 여부
+    """
+
+    rcept_no: str
+    corp_cls: str
+    corp_code: str
+    corp_name: str
+    bd_tm: str
+    bd_knd: str
+    bd_fta: str
+    ovis_fta: str
+    ovis_fta_crn: str
+    ovis_ster: str
+    ovis_isar: str
+    ovis_mktnm: str
+    fdpp_fclt: int
+    fdpp_bsninh: Optional[int]
+    fdpp_op: int
+    fdpp_dtrp: Optional[int]
+    fdpp_ocsa: int
+    fdpp_etc: int
+    bd_intr_ex: str
+    bd_intr_sf: str
+    bd_mtd: str
+    bdis_mthn: str
+    ex_rt: str
+    ex_prc: int
+    ex_prc_dmth: str
+    extg: str
+    extg_stkcnt: int
+    extg_tisstk_vs: str
+    exrqpd_bgd: str
+    exrqpd_edd: str
+    sbd: str
+    pymd: str
+    rpmcmp: str
+    grint: str
+    bddd: str
+    od_a_at_t: int
+    od_a_at_b: int
+    adt_a_atn: str
+    rs_sm_atn: str
+    ex_sm_r: str
+    ovis_ltdtl: str
+    ftc_stt_atn: str
+    ovis_ltdtl: str
+    ftc_stt_atn: str
 
 
 @dataclass

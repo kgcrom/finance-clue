@@ -34,7 +34,9 @@ class TestDisclosure:
             end_de="20231017",
             corp_cls="K",
         )
-        results = Disclosure(OpenDart(os.environ["OPENDART_API_KEY"])).list(params)
+        results = Disclosure(OpenDart(os.environ["OPENDART_API_KEY"])).list(
+            params
+        )
 
         assert results is not None
         assert results.page_count == 10
@@ -56,7 +58,9 @@ class TestDisclosure:
         params = CompanyOverviewInputDto(
             corp_code="01029394",
         )
-        result = Disclosure(OpenDart(os.environ["OPENDART_API_KEY"])).get_company_overview(params)
+        result = Disclosure(
+            OpenDart(os.environ["OPENDART_API_KEY"])
+        ).get_company_overview(params)
 
         assert result is not None
         assert result.corp_name == "(주)에코마케팅"
@@ -67,9 +71,13 @@ class TestDisclosure:
             file_path="./",
         )
 
-        Disclosure(OpenDart(os.environ["OPENDART_API_KEY"])).download_document(params)
+        Disclosure(OpenDart(os.environ["OPENDART_API_KEY"])).download_document(
+            params
+        )
 
     def test_corp_code(self):
-        result = Disclosure(OpenDart(os.environ["OPENDART_API_KEY"])).get_corp_code_list()
+        result = Disclosure(
+            OpenDart(os.environ["OPENDART_API_KEY"])
+        ).get_corp_code_list()
 
         assert len(result) != 0

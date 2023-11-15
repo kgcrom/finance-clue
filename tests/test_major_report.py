@@ -40,7 +40,9 @@ class TestMajorReport:
 
     def test_get_capital_reduction(self):
         major_report = MajorReport(OpenDart(os.environ["OPENDART_API_KEY"]))
-        result = major_report.get_capital_reduction(corp_code="00121932", bgn_de="20190101", end_de="20191231")
+        result = major_report.get_capital_reduction(
+            corp_code="00121932", bgn_de="20190101", end_de="20191231"
+        )
 
         assert result is not None
         assert result.status == "000"
@@ -49,25 +51,31 @@ class TestMajorReport:
 
     def test_get_convertible_bond(self):
         major_report = MajorReport(OpenDart(os.environ["OPENDART_API_KEY"]))
-        result = major_report.get_convertible_bond()
+        result = major_report.get_convertible_bond(
+            corp_code="00155355", bgn_de="20190101", end_de="20191231"
+        )
 
         assert result is not None
         assert result.status == "000"
         assert result.message == "정상"
-        assert len(result.list) == 0
+        assert len(result.list) != 0
 
     def test_get_bond_with_warrants(self):
         major_report = MajorReport(OpenDart(os.environ["OPENDART_API_KEY"]))
-        result = major_report.get_bond_with_warrants()
+        result = major_report.get_bond_with_warrants(
+            corp_code="00140131", bgn_de="20190101", end_de="20191231"
+        )
 
         assert result is not None
         assert result.status == "000"
         assert result.message == "정상"
-        assert len(result.list) == 0
+        assert len(result.list) != 0
 
     def test_get_exchangeable_bond(self):
         major_report = MajorReport(OpenDart(os.environ["OPENDART_API_KEY"]))
-        result = major_report.get_exchangeable_bond()
+        result = major_report.get_exchangeable_bond(
+            corp_code="00273420", bgn_de="20190101", end_de="20191231"
+        )
 
         assert result is not None
         assert result.status == "000"
