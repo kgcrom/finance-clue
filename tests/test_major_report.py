@@ -80,7 +80,7 @@ class TestMajorReport:
         assert result is not None
         assert result.status == "000"
         assert result.message == "정상"
-        assert len(result.list) == 0
+        assert len(result.list) != 0
 
     def test_get_disposal_of_treasury_stocks(self):
         major_report = MajorReport(OpenDart(os.environ["OPENDART_API_KEY"]))

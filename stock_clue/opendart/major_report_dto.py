@@ -1,3 +1,5 @@
+"""공시정보 OpenDart 연동 dto Module"""
+
 from dataclasses import dataclass
 from typing import Optional
 
@@ -642,35 +644,35 @@ class AcquisitionOfTreasuryStocksOutputDto:
     DTO class for the acquisition of treasury stocks output from OpenDart API.
 
     Attributes:
-    - rcept_no (str): 접수번호
-    - corp_cls (str): 법인구분
-    - corp_code (str): 고유번호
-    - corp_name (str): 회사명
-    - aqpln_stk_ostk (int): 취득예정주식(주)(보통주식)
-    - aqpln_stk_estk (int): 취득예정주식(주)(기타주식)
-    - aqpln_prc_ostk (int): 취득예정금액(원)(보통주식)
-    - aqpln_prc_estk (int): 취득예정금액(원)(기타주식)
-    - aqexpd_bgd (str): 취득예상기간(시작일)
-    - aqexpd_edd (str): 취득예상기간(종료일)
-    - hdexpd_bgd (str): 보유예상기간(시작일)
-    - hdexpd_edd (str): 보유예상기간(종료일)
-    - aq_pp (str): 취득목적
-    - aq_mth (str): 취득방법
-    - cs_iv_bk (str): 위탁투자중개업자
-    - aq_wtn_div_ostk (int): 취득 전 자기주식 보유현황(배당가능이익 범위 내 취득(주)(보통주식))
-    - aq_wtn_div_ostk_rt (str): 취득 전 자기주식 보유현황(배당가능이익 범위 내 취득(주)(비율(%)))
-    - aq_wtn_div_estk (int): 취득 전 자기주식 보유현황(배당가능이익 범위 내 취득(주)(기타주식))
-    - aq_wtn_div_estk_rt (str): 취득 전 자기주식 보유현황(배당가능이익 범위 내 취득(주)(비율(%)))
-    - eaq_ostk (int): 취득 전 자기주식 보유현황(기타취득(주)(보통주식))
-    - eaq_ostk_rt (str): 취득 전 자기주식 보유현황(기타취득(주)(비율(%)))
-    - eaq_estk (int): 취득 전 자기주식 보유현황(기타취득(주)(기타주식))
-    - eaq_estk_rt (str): 취득 전 자기주식 보유현황(기타취득(주)(비율(%)))
-    - aq_dd (str): 취득결정일
-    - od_a_at_t (int): 사외이사참석여부(참석(명))
-    - od_a_at_b (int): 사외이사참석여부(불참(명))
-    - adt_a_atn (str): 감사(사외이사가 아닌 감사위원)참석여부
-    - d1_prodlm_ostk (int): 1일 매수 주문수량 한도(보통주식)
-    - d1_prodlm_estk (int): 1일 매수 주문수량 한도(기타주식)
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분
+        corp_code (str): 고유번호
+        corp_name (str): 회사명
+        aqpln_stk_ostk (int): 취득예정주식(주)(보통주식)
+        aqpln_stk_estk (int): 취득예정주식(주)(기타주식)
+        aqpln_prc_ostk (int): 취득예정금액(원)(보통주식)
+        aqpln_prc_estk (int): 취득예정금액(원)(기타주식)
+        aqexpd_bgd (str): 취득예상기간(시작일)
+        aqexpd_edd (str): 취득예상기간(종료일)
+        hdexpd_bgd (str): 보유예상기간(시작일)
+        hdexpd_edd (str): 보유예상기간(종료일)
+        aq_pp (str): 취득목적
+        aq_mth (str): 취득방법
+        cs_iv_bk (str): 위탁투자중개업자
+        aq_wtn_div_ostk (int): 취득 전 자기주식 보유현황(배당가능이익 범위 내 취득(주)(보통주식))
+        aq_wtn_div_ostk_rt (str): 취득 전 자기주식 보유현황(배당가능이익 범위 내 취득(주)(비율(%)))
+        aq_wtn_div_estk (int): 취득 전 자기주식 보유현황(배당가능이익 범위 내 취득(주)(기타주식))
+        aq_wtn_div_estk_rt (str): 취득 전 자기주식 보유현황(배당가능이익 범위 내 취득(주)(비율(%)))
+        eaq_ostk (int): 취득 전 자기주식 보유현황(기타취득(주)(보통주식))
+        eaq_ostk_rt (str): 취득 전 자기주식 보유현황(기타취득(주)(비율(%)))
+        eaq_estk (int): 취득 전 자기주식 보유현황(기타취득(주)(기타주식))
+        eaq_estk_rt (str): 취득 전 자기주식 보유현황(기타취득(주)(비율(%)))
+        aq_dd (str): 취득결정일
+        od_a_at_t (int): 사외이사참석여부(참석(명))
+        od_a_at_b (int): 사외이사참석여부(불참(명))
+        adt_a_atn (str): 감사(사외이사가 아닌 감사위원)참석여부
+        d1_prodlm_ostk (int): 1일 매수 주문수량 한도(보통주식)
+        d1_prodlm_estk (int): 1일 매수 주문수량 한도(기타주식)
     """
 
     rcept_no: str

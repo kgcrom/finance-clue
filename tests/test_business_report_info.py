@@ -230,3 +230,27 @@ class TestBusinessReportInfo:
 
         assert result is not None
         assert len(result.list) != 0
+
+    def test_get_large_scale_holding(self):
+        """
+        대량보유 상황보고서 내역 조회 테스트
+        """
+        result = BusinessReportInfo(
+            OpenDart(os.environ["OPENDART_API_KEY"])
+        ).get_large_scale_holding(corp_code="01029394")
+
+        assert result is not None
+        assert result.status == "000"
+        assert len(result.list) != 0
+
+    def test_get_executives_and_major_shareholders(self):
+        """
+        임원 및 주요주주 현황 조회 테스트
+        """
+        result = BusinessReportInfo(
+            OpenDart(os.environ["OPENDART_API_KEY"])
+        ).get_executives_and_major_shareholders(corp_code="01029394")
+
+        assert result is not None
+        assert result.status == "000"
+        assert len(result.list) != 0

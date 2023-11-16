@@ -21,6 +21,9 @@ from stock_clue.opendart.business_report_info_dto import (
     DirectorTotalRemunerationApprovalOutputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
+    ExecutivesAndMajorShareholders,
+)
+from stock_clue.opendart.business_report_info_dto import (
     IndividualDirectorRemunerationOutputDto,
 )
 from stock_clue.opendart.business_report_info_dto import (
@@ -42,6 +45,7 @@ from stock_clue.opendart.business_report_info_dto import AuditOpinionOutputDto
 from stock_clue.opendart.business_report_info_dto import DividendOutputDto
 from stock_clue.opendart.business_report_info_dto import EmployeeInfoOutputDto
 from stock_clue.opendart.business_report_info_dto import ExecutiveInfoOutputDto
+from stock_clue.opendart.business_report_info_dto import LargeScaleHolding
 from stock_clue.opendart.utils import str_to_float
 from stock_clue.opendart.utils import str_to_int
 
@@ -662,6 +666,74 @@ class BusinessReportInfo:
         data = response.json()
 
         return BaseListDto[IndividualRemunerationOver5OutputDto](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
+        )
+
+    def get_large_scale_holding(
+        self, corp_code: str
+    ) -> BaseListDto[LargeScaleHolding]:
+        path = "/api/majorstock.json"
+        param = BaseParamDto(corp_code=corp_code)
+        response = self.open_dart.get(path, param.dict())
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> LargeScaleHolding:
+            return LargeScaleHolding(
+                rcept_no=x["rcept_no"],
+                rcept_dt=x["rcept_dt"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                report_tp=x["report_tp"],
+                repror=x["repror"],
+                stkqy=str_to_int(x["stkqy"]),
+                stkqy_irds=str_to_int(x["stkqy_irds"]),
+                stkrt=str_to_float(x["stkrt"]),
+                stkrt_irds=str_to_float(x["stkrt_irds"]),
+                ctr_stkqy=str_to_int(x["ctr_stkqy"]),
+                ctr_stkrt=str_to_float(x["ctr_stkrt"]),
+                report_resn=x["report_resn"],
+            )
+
+        data = response.json()
+        return BaseListDto[LargeScaleHolding](
+            status=data["status"],
+            message=data["message"],
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
+        )
+
+    def get_executives_and_major_shareholders(
+        self, corp_code: str
+    ) -> BaseListDto[ExecutivesAndMajorShareholders]:
+        path = "/api/elestock.json"
+        params = BaseParamDto(corp_code=corp_code)
+
+        response = self.open_dart.get(path, params.dict())
+        if response.status_code != 200:
+            raise HttpError(path)
+
+        def _mapping(x: Dict[str, str]) -> ExecutivesAndMajorShareholders:
+            return ExecutivesAndMajorShareholders(
+                rcept_no=x["rcept_no"],
+                rcept_dt=x["rcept_dt"],
+                corp_code=x["corp_code"],
+                corp_name=x["corp_name"],
+                repror=x["repror"],
+                isu_exctv_rgist_at=x["isu_exctv_rgist_at"],
+                isu_exctv_ofcps=x["isu_exctv_ofcps"],
+                isu_main_shrholdr=x["isu_main_shrholdr"],
+                sp_stock_lmp_cnt=str_to_int(x["sp_stock_lmp_cnt"]),
+                sp_stock_lmp_irds_cnt=str_to_int(x["sp_stock_lmp_irds_cnt"]),
+                sp_stock_lmp_rate=str_to_float(x["sp_stock_lmp_rate"]),
+                sp_stock_lmp_irds_rate=str_to_float(
+                    x["sp_stock_lmp_irds_rate"]
+                ),
+            )
+
+        data = response.json()
+        return BaseListDto[ExecutivesAndMajorShareholders](
             status=data["status"],
             message=data["message"],
             list=list(map(_mapping, data["list"])) if "list" in data else None,

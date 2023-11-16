@@ -1,6 +1,8 @@
 """This module provides utility functions for OpenDart API."""
 import requests
 
+from stock_clue.error import HttpError
+
 
 def str_to_int(v: str) -> int:
     """Converts a string to an integer.

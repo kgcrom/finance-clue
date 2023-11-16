@@ -77,7 +77,7 @@ class MajorReport:
         return BaseListDto[CapitalIncreaseOutputDto](
             status=data["status"],
             message=data["message"],
-            list=[_mapping(x) for x in data["list"]],
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
         )
 
     def get_capital_decrease(
@@ -118,7 +118,7 @@ class MajorReport:
         return BaseListDto[CaptitalDecreaseOutputDto](
             status=data["status"],
             message=data["message"],
-            list=list(map(_mapping, data["list"])),
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
         )
 
     def get_capital_increase_and_decrease(
@@ -182,7 +182,7 @@ class MajorReport:
         return BaseListDto[CapitalIncreaseAndDecreaseOutputDto](
             status=data["status"],
             message=data["message"],
-            list=list(map(_mapping, data["list"])),
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
         )
 
     def get_capital_reduction(
@@ -241,7 +241,7 @@ class MajorReport:
         return BaseListDto[CapitalReductionOutputDto](
             status=data["status"],
             message=data["message"],
-            list=list(map(_mapping, data["list"])),
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
         )
 
     def get_convertible_bond(
@@ -263,7 +263,9 @@ class MajorReport:
                 bd_tm=x["bd_tm"],
                 bd_knd=x["bd_knd"],
                 bd_fta=str_to_int(x["bd_fta"]),
-                atcsc_rmislmt=x["atcsc_rmislmt"]
+                atcsc_rmislmt=str_to_int(x["atcsc_rmislmt"])
+                if "atcsc_rmislmt" in x
+                else None
                 if "atcsc_rmislmt" in x
                 else None,
                 ovis_fta=str_to_int(x["ovis_fta"]),
@@ -288,7 +290,11 @@ class MajorReport:
                 cvisstk_tisstk_vs=x["cvisstk_tisstk_vs"],
                 cvrqpd_bgd=x["cvrqpd_bgd"],
                 cvrqpd_edd=x["cvrqpd_edd"],
-                act_mktprcfl_cvprc_lwtrsprc=x["act_mktprcfl_cvprc_lwtrsprc"]
+                act_mktprcfl_cvprc_lwtrsprc=str_to_int(
+                    x["act_mktprcfl_cvprc_lwtrsprc"]
+                )
+                if "act_mktprcfl_cvprc_lwtrsprc" in x
+                else None
                 if "act_mktprcfl_cvprc_lwtrsprc" in x
                 else None,
                 act_mktprcfl_cvprc_lwtrsprc_bs=x[
@@ -319,7 +325,7 @@ class MajorReport:
         return BaseListDto[ConvertibleBondOutputDto](
             status=data["status"],
             message=data["message"],
-            list=list(map(_mapping, data["list"])),
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
         )
 
     def get_bond_with_warrants(
@@ -341,7 +347,9 @@ class MajorReport:
                 bd_tm=x["bd_tm"],
                 bd_knd=x["bd_knd"],
                 bd_fta=str_to_int(x["bd_fta"]),
-                atcsc_rmislmt=x["atcsc_rmislmt"]
+                atcsc_rmislmt=str_to_int(x["atcsc_rmislmt"])
+                if "atcsc_rmislmt" in x
+                else None
                 if "atcsc_rmislmt" in x
                 else None,
                 ovis_fta=str_to_int(x["ovis_fta"]),
@@ -369,7 +377,11 @@ class MajorReport:
                 nstk_isstk_tisstk_vs=x["nstk_isstk_tisstk_vs"],
                 expd_bgd=x["expd_bgd"],
                 expd_edd=x["expd_edd"],
-                act_mktprcfl_cvprc_lwtrsprc=x["act_mktprcfl_cvprc_lwtrsprc"]
+                act_mktprcfl_cvprc_lwtrsprc=str_to_int(
+                    x["act_mktprcfl_cvprc_lwtrsprc"]
+                )
+                if "act_mktprcfl_cvprc_lwtrsprc" in x
+                else None
                 if "act_mktprcfl_cvprc_lwtrsprc" in x
                 else None,
                 act_mktprcfl_cvprc_lwtrsprc_bs=x[
@@ -400,7 +412,7 @@ class MajorReport:
         return BaseListDto[BondWithWarrantsOutputDto](
             status=data["status"],
             message=data["message"],
-            list=list(map(_mapping, data["list"])),
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
         )
 
     def get_exchangeable_bond(
@@ -463,7 +475,7 @@ class MajorReport:
         return BaseListDto[ExchangeableBondOutputDto](
             status=data["status"],
             message=data["message"],
-            list=list(map(_mapping, data["list"])),
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
         )
 
     def get_disposal_of_treasury_stocks(
@@ -516,7 +528,7 @@ class MajorReport:
         return BaseListDto[DisposalOfTreasuryStocksOutputDto](
             status=data["status"],
             message=data["message"],
-            list=list(map(_mapping, data["list"])),
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
         )
 
     def get_acquisition_of_treasury_stocks(
@@ -566,5 +578,5 @@ class MajorReport:
         return BaseListDto[AcquisitionOfTreasuryStocksOutputDto](
             status=data["status"],
             message=data["message"],
-            list=list(map(_mapping, data["list"])),
+            list=list(map(_mapping, data["list"])) if "list" in data else None,
         )
