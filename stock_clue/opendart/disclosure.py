@@ -1,10 +1,9 @@
 """공시정보 OpenDart 연동 Module"""
 import logging
 import tempfile
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
 import zipfile
+from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
-import requests
 from xmlschema import XMLSchema
 
 from stock_clue.error import HttpError
@@ -60,17 +59,17 @@ class Disclosure:
             )
             return None
 
-        def _mapping(d: Any) -> ListOutputDto:
+        def _mapping(x: Dict[str, str]) -> ListOutputDto:
             return ListOutputDto(
-                d["corp_cls"],
-                d["corp_name"],
-                d["corp_code"],
-                d["stock_code"],
-                d["report_nm"],
-                d["rcept_no"],
-                d["flr_nm"],
-                d["rcept_dt"],
-                d["rm"],
+                corp_cls=x["corp_cls"],
+                corp_name=x["corp_name"],
+                corp_code=x["corp_code"],
+                stock_code=x["stock_code"],
+                report_nm=x["report_nm"],
+                rcept_no=x["rcept_no"],
+                flr_nm=x["flr_nm"],
+                rcept_dt=x["rcept_dt"],
+                rm=x["rm"],
             )
 
         return DisclosureSearchResultDto(
@@ -179,7 +178,7 @@ class Disclosure:
             </xs:schema>
              """
             )
-            data: Dict[str, Any] = xml_schema.decode(f"{tmp_path}/CORPCODE.xml")
+            data: Any = xml_schema.decode(f"{tmp_path}/CORPCODE.xml")
 
             return list(
                 map(

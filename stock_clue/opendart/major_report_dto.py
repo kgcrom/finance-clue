@@ -561,8 +561,6 @@ class ExchangeableBondOutputDto:
     ex_sm_r: str
     ovis_ltdtl: str
     ftc_stt_atn: str
-    ovis_ltdtl: str
-    ftc_stt_atn: str
 
 
 @dataclass

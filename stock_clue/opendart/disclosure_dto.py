@@ -3,8 +3,6 @@ from dataclasses import asdict
 from dataclasses import dataclass
 from typing import List, Optional
 
-# TODO page가 있는 api는 iterator 구현
-
 
 @dataclass
 class ListInputDto:
