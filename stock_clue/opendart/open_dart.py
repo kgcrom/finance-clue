@@ -1,12 +1,7 @@
 """OpenDart API 연동을 관리하는 Module"""
-from typing import TYPE_CHECKING, Dict, Optional
+from typing import Dict, Optional
 
 import requests
-
-if TYPE_CHECKING:
-    from stock_clue.opendart.business_report_info import BusinessReportInfo
-    from stock_clue.opendart.disclosure import Disclosure
-    from stock_clue.opendart.financial_info import FinancialInfo
 
 
 class OpenDart(object):
@@ -15,24 +10,6 @@ class OpenDart(object):
         self.api_key = api_key
         self.base_url = "https://opendart.fss.or.kr"
         self.timeout = timeout
-
-    @property
-    def disclosure(self) -> "Disclosure":
-        from stock_clue.opendart import disclosure
-
-        return disclosure.Disclosure(self)
-
-    @property
-    def business_report_info(self) -> "BusinessReportInfo":
-        from stock_clue.opendart import business_report_info
-
-        return business_report_info.BusinessReportInfo(self)
-
-    @property
-    def financial_info(self) -> "FinancialInfo":
-        from stock_clue.opendart import financial_info
-
-        return financial_info.FinancialInfo(self)
 
     def get(
         self,
