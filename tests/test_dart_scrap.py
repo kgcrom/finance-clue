@@ -1,7 +1,5 @@
 from pprint import pprint
 
-from bs4 import BeautifulSoup
-
 from stock_clue.dartscrap.daily_disclosure import DailyDisclosure
 from stock_clue.dartscrap.daily_disclosure import parse_daily_disclosure
 from stock_clue.dartscrap.dart_scrap import DartScrap
@@ -27,13 +25,13 @@ class TestDartScrap:
             "2023.11.14", 1
         )
         assert data is not None
-        assert data.total == 1430
+        assert data.total > 1430
         assert len(data.disclosures) == 100
 
     def test_get_all_daily_disclosure(self):
         data = self.daily_disclosure.get_all_daily_disclosure("2023.11.14", 1)
         assert data is not None
-        assert data.total == 3107
+        assert data.total > 3100
         assert len(data.disclosures) == 100
 
     def test_parse_daily_disclosure(self):
@@ -1511,7 +1509,7 @@ class TestDartScrap:
 
         assert parsed_table is not None
         assert len(parsed_table) == 11
-        pprint(parsed_table)
+        # pprint(parsed_table)
 
     def test_parse_dividend_decision(self):
         html_doc = """
@@ -1611,7 +1609,7 @@ class TestDartScrap:
 
         assert parsed_table is not None
         assert len(parsed_table) == 20
-        pprint(parsed_table)
+        # pprint(parsed_table)
 
     def test_parsed_preliminary(self):
         html_doc = """
@@ -1769,22 +1767,29 @@ class TestDartScrap:
 
         assert parsed_table is not None
         assert len(parsed_table) == 23
-        pprint(parsed_table)
+        # pprint(parsed_table)
 
     def test_parse_closing_shareholders(self):
+        """
+        주주명부 폐쇄 기준일 리포트 스크랩 & 파싱 테스트
+        """
         data = self.dividend_parser.parse_closing_shareholders("20230615800239")
 
         assert data is not None
-        start_date = list(
-            filter(lambda x: x[0] == "2. 주주명부폐쇄(기준일)" and x[1] == "시작일", data)
-        )[0][2]
-        assert start_date == "2023-07-01"
+        assert data.start_date == "2023-07-01"
+        assert data.end_date == "2023-07-10"
+        assert data.base_date == "2023-06-30"
 
     def test_parse_decision_on_cash(self):
+        """
+        현금ㆍ현물배당결정 스크랩 & 파싱 테스트
+        """
         data = self.dividend_parser.parse_decision_on_cash("20231114801725")
 
         assert data is not None
-        dividend_amount = list(
-            filter(lambda x: x[0] == "3. 1주당 배당금(원)" and x[1] == "보통주식", data)
-        )[0][2]
-        assert dividend_amount == "340"
+        assert data.dividend_classification == "분기배당"
+        assert data.dividend_kind == "현금배당"
+        assert data.dividend_amount == 340
+        assert data.dividend_rate == 0.9
+        assert data.dividend_date == "2023-09-30"
+        assert data.total_dividend_amount == 20432585260

@@ -21,7 +21,6 @@ class TdInfo(object):
 
 def parse_html_table(html_doc: str, col_count: int):
     from bs4 import BeautifulSoup
-    from bs4.element import ResultSet
 
     soup = BeautifulSoup(html_doc, "html.parser")
     table = soup.find_all("table")[-1]
@@ -72,14 +71,20 @@ def parse_html_table(html_doc: str, col_count: int):
 
 
 class DartScrap:
-    def __init__(self) -> None:
-        with sync_playwright() as p:
-            browser = p.chromium.launch()
-            page = browser.new_page()
-            page.goto("https://dart.fss.or.kr/main.do")
-            self.cookies = page.context.cookies()
-            browser.close()
-        """공시 통합검색"""
+    def __init__(self, headless: bool = True) -> None:
+        self.playwright_context = sync_playwright().start()
+        self.browser = self.playwright_context.chromium.launch(
+            headless=headless
+        )
+
+        page = self.browser.new_page()
+        page.goto("https://dart.fss.or.kr/main.do")
+        self.cookies = page.context.cookies()
+        page.close()
+
+    def __del__(self):
+        self.browser.close()
+        self.playwright_context.stop()
 
     @property
     def headers_for_request(self) -> Dict[str, str]:
@@ -99,3 +104,17 @@ class DartScrap:
             "Cookie": f"{wmonid['name']}={wmonid['value']}; {jsession['name']}={jsession['value']}",
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
         }
+
+    def get_html_content_no_side_menu(self, url: str) -> str:
+        """dart.fss.or.kr의 사이드 메뉴가 없는 페이지의 html을 가져온다."""
+        context = self.browser.new_context()
+        page = context.new_page()
+        page.goto(url)
+
+        page.locator("iframe").wait_for(state="attached")
+        mf = page.frame("ifrm")
+        contents = mf.content()
+
+        page.close()
+        context.close()
+        return contents
