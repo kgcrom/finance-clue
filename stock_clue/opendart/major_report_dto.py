@@ -1,5 +1,3 @@
-"""공시정보 OpenDart 연동 dto Module"""
-
 from dataclasses import dataclass
 from typing import Optional
 
@@ -7,7 +5,7 @@ from typing import Optional
 @dataclass
 class CapitalIncreaseOutputDto:
     """
-    유상증자 결정 공시
+    유상증자 결정 공시 조회 결과를 담는 DTO 클래스
 
     Attributes:
         rcept_no (str): 접수번호
@@ -55,7 +53,7 @@ class CapitalIncreaseOutputDto:
 @dataclass
 class CaptitalDecreaseOutputDto:
     """
-    무사증자 결정 공시
+    무사증자 결정 공시 조회 결과를 담는 DTO 클래스
 
     Attributes:
         rcept_no (str): 접수번호
@@ -103,7 +101,7 @@ class CaptitalDecreaseOutputDto:
 @dataclass
 class CapitalIncreaseAndDecreaseOutputDto:
     """
-    DTO class for Capital Increase and Decrease information from OpenDART API.
+    유무상증자 결정 공시 조회 결과를 담는 dto 클래스
 
     Attributes:
         rcept_no (str): 접수번호
@@ -181,7 +179,7 @@ class CapitalIncreaseAndDecreaseOutputDto:
 @dataclass
 class CapitalReductionOutputDto:
     """
-    Data class for holding the output of the Capital Reduction API.
+    감자 결정 공시 조회 결과를 담는 dto 클래스
 
     Attributes:
         rcept_no (str): 접수번호
@@ -263,7 +261,7 @@ class CapitalReductionOutputDto:
 @dataclass
 class ConvertibleBondOutputDto:
     """
-    Data Transfer Object for Convertible Bond Output
+    전환사채권 발행결정 공시 조회 결과를 담는 dto 클래스
 
     Attributes:
         rcept_no (str): 접수번호
@@ -365,7 +363,7 @@ class ConvertibleBondOutputDto:
 @dataclass
 class BondWithWarrantsOutputDto:
     """
-    Data Transfer Object for Bond With Warrants Output
+    신주인수권부사채권 발행결정 공시 조회 결과를 담는 dto 클래스
 
     Attributes:
         rcept_no (str): 접수번호
@@ -472,7 +470,7 @@ class BondWithWarrantsOutputDto:
 @dataclass
 class ExchangeableBondOutputDto:
     """
-    DTO class for exchangeable bond output data from Open DART API.
+    교환사채권 발행결정 공시 조회 결과를 담는 dto 클래스
 
     Attributes:
         rcept_no (str): 접수번호
@@ -565,7 +563,8 @@ class ExchangeableBondOutputDto:
 
 @dataclass
 class DisposalOfTreasuryStocksOutputDto:
-    """Data class representing the output DTO for the Disposal of Treasury Stocks report.
+    """
+    자기주식 처분 결정 공시 조회 결과를 담는 dto 클래스
 
     Attributes:
         rcept_no (str): 접수번호
@@ -639,7 +638,7 @@ class DisposalOfTreasuryStocksOutputDto:
 @dataclass
 class AcquisitionOfTreasuryStocksOutputDto:
     """
-    DTO class for the acquisition of treasury stocks output from OpenDart API.
+    자기주식 취득 결정 공시 조회 결과를 담는 dto 클래스
 
     Attributes:
         rcept_no (str): 접수번호

@@ -1,4 +1,4 @@
-"""OpenDart API 연동을 관리하는 Module"""
+"""OpenDart API 연동 관리 Module"""
 from typing import Dict, Optional
 
 import requests

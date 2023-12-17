@@ -1,5 +1,3 @@
-from pprint import pprint
-
 from stock_clue.dartscrap.daily_disclosure import DailyDisclosure
 from stock_clue.dartscrap.daily_disclosure import parse_daily_disclosure
 from stock_clue.dartscrap.dart_scrap import DartScrap

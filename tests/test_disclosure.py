@@ -1,4 +1,3 @@
-"""disclosure Module 테스트"""
 import os
 from typing import Callable, List, TypeVar
 

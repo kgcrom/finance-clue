@@ -1,3 +1,4 @@
+"""주요사항보고서 주요정보 OpenDart 연동 Module"""
 from typing import Dict
 
 from stock_clue.error import HttpError
@@ -35,12 +36,12 @@ class MajorReport:
         유상증자 결정 공시 조회
 
         Args:
-            corp_code (str): The corporation code to retrieve capital increase information for.
-            bgn_de (str): The start date of the period to retrieve capital increase information for in the format of YYYYMMDD.
-            end_de (str): The end date of the period to retrieve capital increase information for in the format of YYYYMMDD.
+            corp_code (str): 고유번호
+            bgn_de (str): 시작일(최초접수일)
+            end_de (str): 종료일(최초접수일)
 
         Returns:
-            BaseListDto[CapitalIncrease]: A list of CapitalIncrease objects containing the retrieved information.
+            BaseListDto[CapitalIncrease]: 유상증자 결정 조회 결과
         """
         path = "/api/piicDecsn.json"
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
@@ -83,6 +84,17 @@ class MajorReport:
     def get_capital_decrease(
         self, corp_code: str, bgn_de: str, end_de: str
     ) -> BaseListDto[CaptitalDecreaseOutputDto]:
+        """
+        무상증자 결정 공시 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bgn_de (str): 시작일(최초접수일)
+            end_de (str): 종료일(최초접수일)
+
+        Returns:
+            BaseListDto[CaptitalDecreaseOutputDto]: 무상증자 결정 DTO
+        """
         path = "/api/fricDecsn.json"
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
 
@@ -124,6 +136,17 @@ class MajorReport:
     def get_capital_increase_and_decrease(
         self, corp_code: str, bgn_de: str, end_de: str
     ) -> BaseListDto[CapitalIncreaseAndDecreaseOutputDto]:
+        """
+        유무상증자 결정 공시 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bgn_de (str): 시작일(최초접수일)
+            end_de (str): 종료일(최초접수일)
+
+        Returns:
+            BaseListDto[CapitalIncreaseAndDecreaseOutputDto]: 유무상증자 결정 조회 결과
+        """
         path = "/api/pifricDecsn.json"
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
 
@@ -188,6 +211,17 @@ class MajorReport:
     def get_capital_reduction(
         self, corp_code: str, bgn_de: str, end_de: str
     ) -> BaseListDto[CapitalReductionOutputDto]:
+        """
+        감자 결정 공시 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bgn_de (str): 시작일(최초접수일)
+            end_de (str): 종료일(최초접수일)
+
+        Returns:
+            BaseListDto[CapitalReductionOutputDto]: 감자 결정 조회 결과
+        """
         path = "/api/crDecsn.json"
 
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
@@ -247,6 +281,17 @@ class MajorReport:
     def get_convertible_bond(
         self, corp_code: str, bgn_de: str, end_de: str
     ) -> BaseListDto[ConvertibleBondOutputDto]:
+        """
+        전환사채 결정 공시 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bgn_de (str): 시작일(최초접수일)
+            end_de (str): 종료일(최초접수일)
+
+        Returns:
+            BaseListDto[ConvertibleBondOutputDto]: 전환사채 결정 조회 결과
+        """
         path = "/api/cvbdIsDecsn.json"
 
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
@@ -331,6 +376,17 @@ class MajorReport:
     def get_bond_with_warrants(
         self, corp_code: str, bgn_de: str, end_de: str
     ) -> BaseListDto[BondWithWarrantsOutputDto]:
+        """
+        신주인수권부사채권 발행결정 공시 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bgn_de (str): 시작일(최초접수일)
+            end_de (str): 종료일(최초접수일)
+
+        Returns:
+            BaseListDto[BondWithWarrantsOutputDto]: 신주인수권부사채권 발행결정 조회 결과
+        """
         path = "/api/bdwtIsDecsn.json"
 
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
@@ -418,6 +474,17 @@ class MajorReport:
     def get_exchangeable_bond(
         self, corp_code: str, bgn_de: str, end_de: str
     ) -> BaseListDto[ExchangeableBondOutputDto]:
+        """
+        교환사채권 발행결정 공시 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bgn_de (str): 시작일(최초접수일)
+            end_de (str): 종료일(최초접수일)
+
+        Returns:
+            BaseListDto[ExchangeableBondOutputDto]: 교환사채권 발행결정 조회 결과
+        """
         path = "/api/exbdIsDecsn.json"
 
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
@@ -481,6 +548,17 @@ class MajorReport:
     def get_disposal_of_treasury_stocks(
         self, corp_code: str, bgn_de: str, end_de: str
     ) -> BaseListDto[DisposalOfTreasuryStocksOutputDto]:
+        """
+        자기주식 처분 결정 공시 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bgn_de (str): 시작일(최초접수일)
+            end_de (str): 종료일(최초접수일)
+
+        Returns:
+            BaseListDto[DisposalOfTreasuryStocksOutputDto]: 자기주식 처분 결정 조회 결과
+        """
         path = "/api/tsstkDpDecsn.json"
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
 
@@ -534,6 +612,17 @@ class MajorReport:
     def get_acquisition_of_treasury_stocks(
         self, corp_code: str, bgn_de: str, end_de: str
     ) -> BaseListDto[AcquisitionOfTreasuryStocksOutputDto]:
+        """
+        자기주식 취득 결정 공시 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bgn_de (str): 시작일(최초접수일)
+            end_de (str): 종료일(최초접수일)
+
+        Returns:
+            BaseListDto[AcquisitionOfTreasuryStocksOutputDto]: 자기주식 취득 결정 조회 결과
+        """
         path = "/api/tsstkAqDecsn.json"
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
 

@@ -40,6 +40,15 @@ class Disclosure:
     def list(
         self, input_dto: ListInputDto
     ) -> Optional[DisclosureSearchResultDto]:
+        """
+        공시검색 조회
+
+        Args:
+            input_dto (ListInputDto): 공시검색 조회를 위한 Input dto 클래스
+
+        Returns:
+            Optional[DisclosureSearchResultDto]: 공시검색 정보 조회 결과를 담는 dto 클래스
+        """
         path = "/api/list.json"
         response = self.open_dart.get(path, input_dto.dict())
         # TODO status, message 까지 포함한 클래스 리턴하도록
@@ -85,6 +94,15 @@ class Disclosure:
     def get_company_overview(
         self, params: CompanyOverviewInputDto
     ) -> Optional[CompanyOverviewOutputDto]:
+        """
+        기업개황 조회
+
+        Args:
+            params (CompanyOverviewInputDto): 기업개황 조회를 위한 Input dto 클래스
+
+        Returns:
+            Optional[CompanyOverviewOutputDto]: 기업개황 조회 결과를 담는 dto 클래스
+        """
         path = "/api/company.json"
         response = self.open_dart.get(path, params.dict())
 
@@ -121,6 +139,15 @@ class Disclosure:
         )
 
     def download_document(self, params: DownloadDocumentInputDto):
+        """
+        공시서류원본 파일 조회
+
+        Args:
+            params (DownloadDocumentInputDto): 공시서류원본 파일 조회를 위한 Input dto 클래스
+
+        Returns:
+            None
+        """
         if params.file_path is None:
             raise KeyError()
 
@@ -139,6 +166,12 @@ class Disclosure:
                 w.write(chunk)
 
     def get_corp_code_list(self) -> List[CorpCodeDto]:
+        """
+        고유번호 조회
+
+        Returns:
+            List[CorpCodeDto]: 고유번호 조회 결과를 담는 dto 클래스
+        """
         path = "/api/corpCode.xml"
 
         response = self.open_dart.get(path, is_stream=True)

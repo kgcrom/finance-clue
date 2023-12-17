@@ -17,7 +17,16 @@ if TYPE_CHECKING:
 
 
 def parse_daily_disclosure(html_doc: str) -> DailyDisclosureListDto:
-    """1일치 공시보고서 html 파싱"""
+    """
+    1일치 공시보고서 html 파싱
+
+    Args:
+        html_doc (str): 공시 html 텍스트
+
+    Returns:
+        DailyDisclosureListDto: 공시 리스트 정보 파싱 결과
+
+    """
     soup = BeautifulSoup(html_doc, "html.parser")
 
     total_values = soup.find("input", {"name": "totalCnt"})
@@ -70,7 +79,16 @@ class DailyDisclosure:
     def get_kospi_daily_disclosure(
         self, selected_date: str, page: int
     ) -> DailyDisclosureListDto:
-        """유가증권시장 1일치 공시보고서"""
+        """
+        유가증권시장 1일치 공시보고서
+
+        Args:
+            selected_date (str): 조회 일자
+            page (int): 페이지 번호
+
+        Returns:
+            DailyDisclosureListDto: 공시 리스트 정보 파싱 결과
+        """
         url = "https://dart.fss.or.kr/dsac001/search.ax"
 
         form_data = DartScrapParamDto(
@@ -94,8 +112,19 @@ class DailyDisclosure:
 
         return parse_daily_disclosure(response.text)
 
-    def get_kosdaq_daily_disclosure(self, selected_date: str, page: int):
-        """코스닥 1일치 공시보고서"""
+    def get_kosdaq_daily_disclosure(
+        self, selected_date: str, page: int
+    ) -> DailyDisclosureListDto:
+        """
+        코스닥 1일치 공시보고서
+
+        Args:
+            selected_date (str): 조회 일자
+            page (int): 페이지 번호
+
+        Returns:
+            DailyDisclosureListDto: 공시 리스트 정보 파싱 결과
+        """
         url = "https://dart.fss.or.kr/dsac001/search.ax"
         form_data = DartScrapParamDto(
             current_page=page,
@@ -118,8 +147,19 @@ class DailyDisclosure:
 
         return parse_daily_disclosure(response.text)
 
-    def get_all_daily_disclosure(self, selected_date: str, page: int):
-        """1일치 전제 공시 정보 조회"""
+    def get_all_daily_disclosure(
+        self, selected_date: str, page: int
+    ) -> DailyDisclosureListDto:
+        """
+        1일치 전제 공시 정보 조회
+
+        Args:
+            selected_date (str): 조회 일자
+            page (int): 페이지 번호
+
+        Returns:
+            DailyDisclosureListDto: 공시 리스트 정보 파싱 결과
+        """
         url = "https://dart.fss.or.kr/dsac001/search.ax"
         form_data = DartScrapParamDto(
             current_page=page,

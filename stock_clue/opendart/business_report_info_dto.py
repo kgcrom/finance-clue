@@ -7,16 +7,17 @@ from typing import Optional
 @dataclass
 class DirectorTotalRemunerationApprovalOutputDto:
     """
-    이사·감사 전체의 보수현황(주주총회 승인금액) 조회 response dto
+    이사·감사 전체의 보수현황(주주총회 승인금액) 조회 결과를 담는 dto 클래스
 
-    param rcept_no (str): 접수번호
-    param corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
-    param corp_code (str): 고유번호
-    param corp_name (str): 회사명
-    param se (str): 구분
-    param nmpr (str): 인원수
-    param gmtsck_confm_amount (str): 주주총회 승인금액
-    param rm (str): 비고
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+        corp_code (str): 고유번호
+        corp_name (str): 회사명
+        se (str): 구분
+        nmpr (str): 인원수
+        gmtsck_confm_amount (str): 주주총회 승인금액
+        rm (str): 비고
     """
 
     rcept_no: str
@@ -32,17 +33,18 @@ class DirectorTotalRemunerationApprovalOutputDto:
 @dataclass
 class DirectorRemunerationAmountOutputDto:
     """
-    이사·감사 전체의 보수현황(보수지급금액 - 유형별)) 조회 response dto
+    이사·감사 전체의 보수현황(보수지급금액 - 유형별) 조회 결과를 담는 dto 클래스
 
-    param rcept_no (str): 접수번호
-    param corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
-    param corp_code (str): 고유번호
-    param corp_name (str): 회사명
-    param se (str): 구분
-    param nmpr (int): 인원수
-    param pymnt_totamt (int): 보수총액
-    param psn1_avrg_pymntamt (int): 1인당 평균보수액
-    param rm (str): 비고
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+        corp_code (str): 고유번호
+        corp_name (str): 회사명
+        se (str): 구분
+        nmpr (int): 인원수
+        pymnt_totamt (int): 보수총액
+        psn1_avrg_pymntamt (int): 1인당 평균보수액
+        rm (str): 비고
     """
 
     rcept_no: str
@@ -59,17 +61,18 @@ class DirectorRemunerationAmountOutputDto:
 @dataclass
 class DividendOutputDto:
     """
-    배당에 관한 사항 조회 response dto
+    배당에 관한 사항 조회 결과를 담는 dto 클래스
 
-    param rcept_no (str): 접수번호
-    param corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
-    param corp_code (str): 고유번호
-    param corp_name (str): 회사명
-    param se (str): 구분
-    param stock_knd (str): 주식 종류
-    param thstrm (float): 당기
-    param frmtrm (float): 전기
-    param lwfr (float): 전전기
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+        corp_code (str): 고유번호
+        corp_name (str): 회사명
+        se (str): 구분
+        stock_knd (str): 주식 종류
+        thstrm (float): 당기
+        frmtrm (float): 전기
+        lwfr (float): 전전기
     """
 
     rcept_no: str
@@ -86,23 +89,24 @@ class DividendOutputDto:
 @dataclass
 class TotalStockQuantityOutputDto:
     """
-    주식의 총수 현황 조회 response dto
+    주식의 총수 현황 조회 결과를 담는 dto 클래스
 
-    param rcept_no (str): 접수번호
-    param corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
-    param corp_code (str): 고유번호
-    param corp_name (str): 회사명
-    param se (str): 구분
-    param isu_stock_totqy (int): 발행한 주식의 총수
-    param now_to_isu_stock_totqy (int): 현재까지 발행한 주식의 총수
-    param now_to_dcrs_stock_totqy (int): 현재까지 감소한 주식의 총수
-    param redc (int): 감자
-    param profit_incnr (int): 이익소각
-    param rdmstk_repy (int): 상환주식의 상환
-    param etc (int): 기타
-    param istc_totqy (int): 발행주식의 총수
-    param tesstk_co (int): 자기주식수
-    param distb_stock_co (int): 유통주식수
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+        corp_code (str): 고유번호
+        corp_name (str): 회사명
+        se (str): 구분
+        isu_stock_totqy (int): 발행한 주식의 총수
+        now_to_isu_stock_totqy (int): 현재까지 발행한 주식의 총수
+        now_to_dcrs_stock_totqy (int): 현재까지 감소한 주식의 총수
+        redc (int): 감자
+        profit_incnr (int): 이익소각
+        rdmstk_repy (int): 상환주식의 상환
+        etc (int): 기타
+        istc_totqy (int): 발행주식의 총수
+        tesstk_co (int): 자기주식수
+        distb_stock_co (int): 유통주식수
     """
 
     rcept_no: str
@@ -123,38 +127,21 @@ class TotalStockQuantityOutputDto:
 
 
 @dataclass
-class AuditOpinionInputDto:
-    """
-    회계감사인의 명칭 및 감사의견 조회 params dto
-
-    param corp_code (str): 고유번호
-    param bsns_year (str): 사업연도
-    param reprt_code (str): 보고서 코드 (1분기보고서: 11013, 반기보고서 : 11012, 3분기보고서 : 11014, 사업보고서 : 11011)
-    """
-
-    corp_code: str
-    bsns_year: str
-    reprt_code: str
-
-    def dict(self):
-        return {k: str(v) for k, v in asdict(self).items()}
-
-
-@dataclass
 class AuditOpinionOutputDto:
     """
-    회계감사인의 명칭 및 감사의견 조회 response dto
+    회계감사인의 명칭 및 감사의견 조회 결과를 담는 dto 클래스
 
-    param rcept_no (str):	접수번호
-    param corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
-    param corp_code (str): 고유번호
-    param corp_name (str): 회사명
-    param bsns_year (str): 사업연도
-    param adtor (str): 감사인
-    param adt_opinion  (Optional[str]): 감사의견
-    param adt_reprt_spcmnt_matter  (str|None): 감사보고서 특기사항 (2019년 12월 8일까지 사용됨)
-    param emphs_matter (Optional[str]):	강조사항 등 (2019년 12월 9일부터 추가됨)
-    param core_adt_matter (Optional[str]): 핵심감사사항 (2019년 12월 9일부터 추가됨)
+    Attributes:
+        rcept_no (str):	접수번호
+        corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+        corp_code (str): 고유번호
+        corp_name (str): 회사명
+        bsns_year (str): 사업연도
+        adtor (str): 감사인
+        adt_opinion  (Optional[str]): 감사의견
+        adt_reprt_spcmnt_matter  (str|None): 감사보고서 특기사항 (2019년 12월 8일까지 사용됨)
+        emphs_matter (Optional[str]):	강조사항 등 (2019년 12월 9일부터 추가됨)
+        core_adt_matter (Optional[str]): 핵심감사사항 (2019년 12월 9일부터 추가됨)
     """
 
     rcept_no: str
@@ -172,17 +159,18 @@ class AuditOpinionOutputDto:
 @dataclass
 class NonExecutiveDirectorOutputDto:
     """
-    사외이사 및 그 변동현황 조회 response dto
+    사외이사 및 그 변동현황 조회 결과를 담는 dto 클래스
 
-    param rcept_no (str): 접수번호
-    param corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
-    param corp_code (str): 고유번호
-    param corp_name (str): 회사명
-    param drctr_co (int): 이사의 수
-    param otcmp_drctr_co (int): 사외이사의 수
-    param apnt (int): 사외이사 변동현황(선임)
-    param rlsofc (int): 사외이사 변동현황(해임)
-    param mdstrm_resig (int): 사외이사 변동현황(중도퇴임)
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+        corp_code (str): 고유번호
+        corp_name (str): 회사명
+        drctr_co (int): 이사의 수
+        otcmp_drctr_co (int): 사외이사의 수
+        apnt (int): 사외이사 변동현황(선임)
+        rlsofc (int): 사외이사 변동현황(해임)
+        mdstrm_resig (int): 사외이사 변동현황(중도퇴임)
     """
 
     rcept_no: str
@@ -199,22 +187,23 @@ class NonExecutiveDirectorOutputDto:
 @dataclass
 class AcquisitionAndDisposalOfTreasuryStocksOutputDto:
     """
-    자기주식 취득 및 처분 현황 조회 response dto
+    자기주식 취득 및 처분 현황 조회 결과를 담는 dto 클래스
 
-    param rcept_no (str): 접수번호
-    param corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
-    param corp_code (str): 고유번호
-    param corp_name (str): 회사명
-    param acqs_mth1 (str): 취득방법 대분류
-    param acqs_mth2 (str): 취득방법 중분류
-    param acqs_mth3 (str): 취득방법 소분류
-    param stock_knd (str): 주식 종류
-    param bsis_qy (int): 기초 수량
-    param change_qy_acqs (int): 변동 수량 취득
-    param change_qy_dsps (int): 변동 수량 처분
-    param change_qy_incnr (int): 변동 수량 소각
-    param trmend_qy (int): 기말 수량
-    param rm (str): 비고
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+        corp_code (str): 고유번호
+        corp_name (str): 회사명
+        acqs_mth1 (str): 취득방법 대분류
+        acqs_mth2 (str): 취득방법 중분류
+        acqs_mth3 (str): 취득방법 소분류
+        stock_knd (str): 주식 종류
+        bsis_qy (int): 기초 수량
+        change_qy_acqs (int): 변동 수량 취득
+        change_qy_dsps (int): 변동 수량 처분
+        change_qy_incnr (int): 변동 수량 소각
+        trmend_qy (int): 기말 수량
+        rm (str): 비고
     """
 
     rcept_no: str
@@ -236,18 +225,19 @@ class AcquisitionAndDisposalOfTreasuryStocksOutputDto:
 @dataclass
 class CapitalIncreaseAndReductionOutputDto:
     """
-    증자(감자) 현황 조회 response dto
+    증자(감자) 현황 조회 결과를 담는 dto 클래스
 
-    param rcept_no (str): 접수번호
-    param corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
-    param corp_code (str): 고유번호
-    param corp_name (str): 회사명
-    param isu_dcrs_de (str): 주식발행 감소일자
-    param isu_dcrs_stle (str): 발행 감소형태
-    param isu_dcrs_stock_knd (str): 발행 감소 주식 종류
-    param isu_dcrs_qy (int): 발행 감소 수량
-    param dcrs_mstvdv_fval_amount (int): 발행 감소 주당 액면가액
-    param isu_dcrs_mstvdv_amount (int): 발행 감소 주당 가액
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+        corp_code (str): 고유번호
+        corp_name (str): 회사명
+        isu_dcrs_de (str): 주식발행 감소일자
+        isu_dcrs_stle (str): 발행 감소형태
+        isu_dcrs_stock_knd (str): 발행 감소 주식 종류
+        isu_dcrs_qy (int): 발행 감소 수량
+        dcrs_mstvdv_fval_amount (int): 발행 감소 주당 액면가액
+        isu_dcrs_mstvdv_amount (int): 발행 감소 주당 가액
     """
 
     rcept_no: str
@@ -265,20 +255,21 @@ class CapitalIncreaseAndReductionOutputDto:
 @dataclass
 class LargestShareHoldersOutputDto:
     """
-    최대주주 현황 조회 response dto
+    최대주주 현황 조회 결과를 담는 dto 클래스
 
-    param rcept_no (str): 접수번호
-    param corp_cls (str): 법인구분
-    param corp_code (str): 고유번호
-    param corp_name (str): 법인명
-    param nm (str): 성명
-    param relate (str): 관계
-    param stock_knd (str): 주식 종류
-    param bsis_posesn_stock_co (int): 기초 소유 주식 수
-    param bsis_posesn_stock_qota_rt (int): 기초 소유 주식 지분율
-    param trmend_posesn_stock_co (int): 기말 소유 주식 수
-    param trmend_posesn_stock_qota_rt (int): 기말 소유 주식 지분 율
-    param rm (str): 비고
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분
+        corp_code (str): 고유번호
+        corp_name (str): 법인명
+        nm (str): 성명
+        relate (str): 관계
+        stock_knd (str): 주식 종류
+        bsis_posesn_stock_co (int): 기초 소유 주식 수
+        bsis_posesn_stock_qota_rt (int): 기초 소유 주식 지분율
+        trmend_posesn_stock_co (int): 기말 소유 주식 수
+        trmend_posesn_stock_qota_rt (int): 기말 소유 주식 지분 율
+        rm (str): 비고
     """
 
     rcept_no: str
@@ -298,18 +289,19 @@ class LargestShareHoldersOutputDto:
 @dataclass
 class ChangedLargestShareHoldersOutputDto:
     """
-    최대주주 변동현황 조회 response dto
+    최대주주 변동현황 조회 결과를 담는 dto 클래스
 
-    param rcept_no (str): 접수번호
-    param corp_cls (str): 법인구분
-    param corp_code (str): 고유번호
-    param corp_name (str): 법인명
-    param change_on (str): 변동
-    param mxmm_shrholdr_nm (str): 최대 주주명
-    param posesn_stock_co (int): 소유 주식 수
-    param qota_rt (float): 지분 율
-    param change_cause (str): 변동 원인
-    param rm (str): 비고
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분
+        corp_code (str): 고유번호
+        corp_name (str): 법인명
+        change_on (str): 변동
+        mxmm_shrholdr_nm (str): 최대 주주명
+        posesn_stock_co (int): 소유 주식 수
+        qota_rt (float): 지분 율
+        change_cause (str): 변동 원인
+        rm (str): 비고
     """
 
     rcept_no: str
@@ -327,23 +319,24 @@ class ChangedLargestShareHoldersOutputDto:
 @dataclass
 class ExecutiveInfoOutputDto:
     """
-    임원 현황 조회 response dto
+    임원 현황 조회 결과를 담는 dto 클래스
 
-    param rcept_no (str): 접수번호
-    param corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
-    param corp_code (str): 고유번호
-    param corp_name (str): 법인명
-    param nm (str): 성명
-    param sexdstn (str): 성별
-    param birth_ym (str): 출생 년월 (YYYY년 MM월)
-    param ofcps (str): 직위
-    param rgit_exctv_at (Optional[str]): 등기 임원 여부 (등기임원, 미등기임원 등)
-    param fte_at (str): 상근 여부 (상근, 비상근 등)
-    param chrg_job (str): 담당 업무
-    param main_career (str): 주요 경력
-    param maxmm_shrholdr_relate (Optional[str]): 최대 주주 관계
-    param hffc_pd (str): 재직 기간
-    param tenure_end_on (str): 임기 만료일
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+        corp_code (str): 고유번호
+        corp_name (str): 법인명
+        nm (str): 성명
+        sexdstn (str): 성별
+        birth_ym (str): 출생 년월 (YYYY년 MM월)
+        ofcps (str): 직위
+        rgit_exctv_at (Optional[str]): 등기 임원 여부 (등기임원, 미등기임원 등)
+        fte_at (str): 상근 여부 (상근, 비상근 등)
+        chrg_job (str): 담당 업무
+        main_career (str): 주요 경력
+        maxmm_shrholdr_relate (Optional[str]): 최대 주주 관계
+        hffc_pd (str): 재직 기간
+        tenure_end_on (str): 임기 만료일
     """
 
     rcept_no: str
@@ -366,26 +359,27 @@ class ExecutiveInfoOutputDto:
 @dataclass
 class EmployeeInfoOutputDto:
     """
-    직원 현황 조회 response dto
+    직원 현황 조회 결과를 담는 dto 클래스
 
-    param rcept_no (str): 접수번호
-    param corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
-    param corp_code (str): 고유번호
-    param corp_name (str): 법인명
-    param fo_bbm (str): 사업부문
-    param sexdstn (str): 성별
-    param reform_bfe_emp_co_rgllbr (int): 개정 전 정규직 수
-    param reform_bfe_emp_co_cnttk (int): 개정 전 계약직 수
-    param reform_bfe_emp_co_etc (int): 개정 전 기타직 수
-    param rgllbr_co (int): 정규직 수
-    param rgllbr_abacpt_labrr_co (int): 정규직 단시간 근로자 수
-    param cnttk_co (int): 계약직 수
-    param cnttk_abacpt_labrr_co (int): 계약직 단시간 근로자 수
-    param sm (int): 합계
-    param avrg_cnwk_sdytrn (int): 평균 근속 연수
-    param fyer_salary_totamt (int): 연간 급여 총액
-    param jan_salary_am (int): 1월 급여액
-    param rm (str): 비고
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+        corp_code (str): 고유번호
+        corp_name (str): 법인명
+        fo_bbm (str): 사업부문
+        sexdstn (str): 성별
+        reform_bfe_emp_co_rgllbr (int): 개정 전 정규직 수
+        reform_bfe_emp_co_cnttk (int): 개정 전 계약직 수
+        reform_bfe_emp_co_etc (int): 개정 전 기타직 수
+        rgllbr_co (int): 정규직 수
+        rgllbr_abacpt_labrr_co (int): 정규직 단시간 근로자 수
+        cnttk_co (int): 계약직 수
+        cnttk_abacpt_labrr_co (int): 계약직 단시간 근로자 수
+        sm (int): 합계
+        avrg_cnwk_sdytrn (int): 평균 근속 연수
+        fyer_salary_totamt (int): 연간 급여 총액
+        jan_salary_am (int): 1월 급여액
+        rm (str): 비고
     """
 
     rcept_no: str
@@ -411,16 +405,17 @@ class EmployeeInfoOutputDto:
 @dataclass
 class IndividualDirectorRemunerationOutputDto:
     """
-    이사·감사의 개인별 보수 현황 조회 response dto
+    이사·감사의 개인별 보수 현황 조회 결과를 담는 dto 클래스
 
-    param rcept_no (str): 접수번호
-    param corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
-    param corp_code (str): 고유번호
-    param corp_name (str): 법인명
-    param nm (str): 이름
-    param ofcps (str): 직위
-    param mendng_totamt (int): 보수총액
-    param mendng_totamt_ct_incls_mendng (int): 보수총액 중 비 포함 보수
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+        corp_code (str): 고유번호
+        corp_name (str): 법인명
+        nm (str): 이름
+        ofcps (str): 직위
+        mendng_totamt (int): 보수총액
+        mendng_totamt_ct_incls_mendng (int): 보수총액 중 비 포함 보수
     """
 
     rcept_no: str
@@ -436,16 +431,17 @@ class IndividualDirectorRemunerationOutputDto:
 @dataclass
 class TotalDirectorRemunerationOutputDto:
     """
-    이사·감사의 전체의 보수 현황 조회 response dto
+    이사·감사의 전체의 보수 현황 조회 결과를 담는 dto 클래스
 
-    param rcept_no (str): 접수번호
-    param corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
-    param corp_code (str): 고유번호
-    param corp_name (str): 법인명
-    param nmpr (int): 인원수
-    param mendng_totamt (int): 보수총액
-    param jan_avrg_mendng_am (int): 1인당 평균 보수액
-    param rm (str): 비고
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+        corp_code (str): 고유번호
+        corp_name (str): 법인명
+        nmpr (int): 인원수
+        mendng_totamt (int): 보수총액
+        jan_avrg_mendng_am (int): 1인당 평균 보수액
+        rm (str): 비고
     """
 
     rcept_no: str
@@ -461,16 +457,17 @@ class TotalDirectorRemunerationOutputDto:
 @dataclass
 class IndividualRemunerationOver5OutputDto:
     """
-    개인별 보수지급 금액(5억이상 상위5인) 조회 response dto
+    개인별 보수지급 금액(5억이상 상위5인) 조회 결과를 담는 dto 클래스
 
-    param rcept_no (str): 접수번호
-    param corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
-    param corp_code (str): 고유번호
-    param corp_name (str): 법인명
-    param nm (str): 이름
-    param ofcps (str): 직위
-    param mendng_totamt (int): 보수총액
-    param mendng_totamt_ct_incls_mendng (int): 보수총액 중 비 포함 보수
+    Attributes:
+        rcept_no (str): 접수번호
+        corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+        corp_code (str): 고유번호
+        corp_name (str): 법인명
+        nm (str): 이름
+        ofcps (str): 직위
+        mendng_totamt (int): 보수총액
+        mendng_totamt_ct_incls_mendng (int): 보수총액 중 비 포함 보수
     """
 
     rcept_no: str
@@ -485,7 +482,8 @@ class IndividualRemunerationOver5OutputDto:
 
 @dataclass
 class LargeScaleHolding:
-    """Class representing large scale holding information for a corporation.
+    """
+    지분공시 종합정보 - 대량보유상황 보고 조회 결과를 담는 dto 클래스
 
     Attributes:
         rcept_no (str): 접수번호
@@ -521,7 +519,7 @@ class LargeScaleHolding:
 @dataclass
 class ExecutivesAndMajorShareholders:
     """
-    Data class representing executives and major shareholders information.
+    지분공시 종합정보 - 임원 . 주요주주 소유보고 조회 결과를 담는 dto 클래스
 
     Attributes:
         rcept_no (str): 접수번호

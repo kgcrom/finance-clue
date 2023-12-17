@@ -1,6 +1,4 @@
-"""
-This module contains functions for retrieving financial information from Open DART API.
-"""
+"""상장기업 재무정보 조회 모듈"""
 from typing import Dict
 
 from stock_clue.error import HttpError
@@ -24,6 +22,17 @@ class FinancialInfo:
     def get_major_account_single_company(
         self, corp_code: str, bsns_year: str, reprt_code: str
     ) -> BaseListDto[MajorAccountCompanyOutputDto]:
+        """
+        단일회사 주요계정 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bsns_year (str): 사업 연도
+            reprt_code (str): 보고서 코드
+
+        Returns:
+            BaseListDto[MajorAccountCompanyOutputDto]: 단일 회사 주요계정 조회 결과
+        """
         path = "/api/fnlttSinglAcnt.json"
         params = BaseParamDto(
             corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
@@ -76,6 +85,17 @@ class FinancialInfo:
     def get_major_account_multiple_company(
         self, corp_code: str, bsns_year: str, reprt_code: str
     ) -> BaseListDto[MajorAccountCompanyOutputDto]:
+        """
+        다중회사 주요계정 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bsns_year (str): 사업 연도
+            reprt_code (str): 보고서 코드
+
+        Returns:
+            BaseListDto[MajorAccountCompanyOutputDto]: 다중 회사 주요계정 조회 결과
+        """
         path = "/api/fnlttMultiAcnt.json"
         params = BaseParamDto(
             corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
@@ -128,6 +148,18 @@ class FinancialInfo:
     def get_whole_account_single_company(
         self, corp_code: str, bsns_year: str, reprt_code: str, fs_div: str
     ) -> BaseListDto[WholeAccountSingleCompanyOutputDto]:
+        """
+        단일회사 전체 재무제표 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bsns_year (str): 사업 연도
+            reprt_code (str): 보고서 코드
+            fs_div (str): 개별/연결구분 (CFS: 연결재무제표, OFS: 재무제표)
+
+        Returns:
+            BaseListDto[WholeAccountSingleCompanyOutputDto]: 단일회사 전체 재무제표 조회 결과
+        """
         path = "/api/fnlttSinglAcntAll.json"
         params = BaseParamDto(
             corp_code=corp_code,
@@ -180,11 +212,11 @@ class FinancialInfo:
 
     def download_xbrl(self, rcept_no: str, reprt_code: str, file_path: str):
         """
-        Downloads the XBRL file for the given report number and report code.
+        재무제표 원본파일(XBRL) 다운로드
 
         Args:
-            rcept_no (str): The report number.
-            reprt_code (str): The report code.
+            rcept_no (str): 접수번호
+            reprt_code (str): 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서)
 
         Returns:
             None
@@ -207,13 +239,13 @@ class FinancialInfo:
         self, sj_div: str
     ) -> BaseListDto[XbrlTaxanomyOutputDto]:
         """
-        Downloads the XBRL taxonomy for the given sj_div and returns an XbrlTaxanomyOutputDto object.
+        XBRL 텍사노미 재무제표양식 조회
 
         Args:
             sj_div (str): 재무제표 구분 (BS: 재무상태표, IS: 손익계산서, CIS: 포괄손익계산서, CF: 현금흐름표, SCE: 자본변동표
 
         Returns:
-            XbrlTaxanomyOutputDto: An object containing the downloaded XBRL taxonomy.
+            XbrlTaxanomyOutputDto: XBRL 텍사노미 재무제표양식 결과
         """
         path = "/api/xbrlTaxonomy.json"
         params = BaseParamDto(sj_div=sj_div)

@@ -5,7 +5,7 @@ from typing import Optional
 @dataclass
 class MajorAccountCompanyOutputDto:
     """
-    DTO class for storing major account company financial information.
+    단일회사 주요계정 재무정보 조회 결과를 담는 DTO 클래스
 
     Attributes:
         rcept_no (str): 접수번호
@@ -59,7 +59,7 @@ class MajorAccountCompanyOutputDto:
 @dataclass
 class WholeAccountSingleCompanyOutputDto:
     """
-    DTO class for storing financial information of a single company for a specific account.
+    단일회사 전체 재무제표 조회 결과를 담는 DTO 클래스
 
     Attributes:
         rcept_no (str): 접수번호
@@ -108,13 +108,10 @@ class WholeAccountSingleCompanyOutputDto:
     currency: str
 
 
-# TODO: implement 수익성지표 : M210000 안정성지표 : M220000 성장성지표 : M230000 활동성지표 : M240000
-
-
 @dataclass
 class XbrlTaxanomyOutputDto:
     """
-    DTO class for storing XBRL taxonomy output data.
+    XBRL taxanomy 재무제표 양식 조회 결과를 담는 dto 클래스
     sj_div talbe: https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS003&apiId=2020001
 
     Attributes:
@@ -136,3 +133,6 @@ class XbrlTaxanomyOutputDto:
     label_eng: str
     data_tp: Optional[str]
     ifrs_ref: str
+
+
+# TODO: implement 단일회사 주요 재무지표 API

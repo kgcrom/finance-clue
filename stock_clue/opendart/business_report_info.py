@@ -64,6 +64,17 @@ class BusinessReportInfo:
         bsns_year: str,
         reprt_code: str,
     ) -> BaseListDto[DirectorTotalRemunerationApprovalOutputDto]:
+        """
+        이사·감사 전체의 보수현황(주주총회 승인금액) 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bsns_year (str): 사업연도
+            reprt_code (str): 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서)
+
+        Returns:
+            BaseListDto[DirectorTotalRemunerationApprovalOutputDto]: 이사·감사 전체의 보수현황(주주총회 승인금액) 정보
+        """
         path = "/api/drctrAdtAllMendngSttusGmtsckConfmAmount.json"
         params = BaseParamDto(
             corp_code=corp_code,
@@ -102,6 +113,17 @@ class BusinessReportInfo:
         bsns_year: str,
         reprt_code: str,
     ) -> BaseListDto[DirectorRemunerationAmountOutputDto]:
+        """
+        이사·감사 전체의 보수현황(보수지급금액) 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bsns_year (str): 사업연도
+            reprt_code (str): 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서)
+
+        Returns:
+            BaseListDto[DirectorRemunerationAmountOutputDto]: 이사·감사 전체의 보수현황(보수지급금액) 정보
+        """
         path = "/api/drctrAdtAllMendngSttusMendngPymntamtTyCl.json"
         params = BaseParamDto(
             corp_code=corp_code,
@@ -139,6 +161,14 @@ class BusinessReportInfo:
     ) -> BaseListDto[DividendOutputDto]:
         """
         배당에 관한 사항 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bsns_year (str): 사업연도
+            reprt_code (str): 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서)
+
+        Returns:
+            BaseListDto[DividendOutputDto]: 배당에 관한 사항 정보
         """
         path = "/api/alotMatter.json"
         params = BaseParamDto(
@@ -177,6 +207,17 @@ class BusinessReportInfo:
         bsns_year: str,
         reprt_code: str,
     ) -> BaseListDto[TotalStockQuantityOutputDto]:
+        """
+        주식의 총수 현황 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bsns_year (str): 사업연도
+            reprt_code (str): 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서)
+
+        Returns:
+            BaseListDto[TotalStockQuantityOutputDto]: 주식의 총수 현황 정보
+        """
         path = "/api/stockTotqySttus.json"
         params = BaseParamDto(
             corp_code=corp_code,
@@ -221,6 +262,17 @@ class BusinessReportInfo:
         bsns_year: str,
         reprt_code: str,
     ) -> BaseListDto[AuditOpinionOutputDto]:
+        """
+        회계감사인의 명칭 및 감사의견 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bsns_year (str): 사업연도
+            reprt_code (str): 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서)
+
+        Returns:
+            BaseListDto[AuditOpinionOutputDto]: 회계감사인의 명칭 및 감사의견 정보
+        """
         path = "/api/accnutAdtorNmNdAdtOpinion.json"
         params = BaseParamDto(
             corp_code=corp_code,
@@ -264,9 +316,14 @@ class BusinessReportInfo:
         """
         사외이사 및 그 변동사항 조회
 
-        param corp_code: 고유번호
-        param bsns_year: 사업연도
-        param reprt_code: 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서
+        Args:
+            corp_code (str): 고유번호
+            bsns_year (str): 사업연도
+            reprt_code (str): 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서
+
+        Returns:
+            BaseListDto[NonExecutiveDirectorOutputDto]: 사외이사 및 그 변동사항 정보
+
         """
         path = "/api/outcmpnyDrctrNdChangeSttus.json"
         params = BaseParamDto(
@@ -306,9 +363,13 @@ class BusinessReportInfo:
         """
         자기주식 취득 및 처분 현황 조회
 
-        param corp_code: 고유번호
-        param bsns_year: 사업연도
-        param reprt_code: 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서)
+        Args:
+            corp_code (str): 고유번호
+            bsns_year (str): 사업연도
+            reprt_code (str): 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서)
+
+        Returns:
+            BaseListDto[AcquisitionAndDisposalOfTreasuryStocksOutputDto]: 자기주식 취득 및 처분 현황 정보
         """
         path = "/api/tesstkAcqsDspsSttus.json"
 
@@ -354,7 +415,7 @@ class BusinessReportInfo:
         self, corp_code: str, bsns_year: str, reprt_code: str
     ):
         """
-        Get capital increase and reduction information for a specific corporation.
+        증자(감자) 현황 조회
 
         Args:
             corp_code (str): Corporation code
@@ -362,7 +423,7 @@ class BusinessReportInfo:
             reprt_code (str): Report code
 
         Returns:
-            BaseListDto[CapitalIncreaseAndReductionOutputDto]: List of capital increase and reduction information
+            BaseListDto[CapitalIncreaseAndReductionOutputDto]: 증자(감자) 현황 조회 정보
         """
 
         path = "/api/irdsSttus.json"
@@ -406,6 +467,17 @@ class BusinessReportInfo:
         bsns_year: str,
         reprt_code: str,
     ) -> BaseListDto[LargestShareHoldersOutputDto]:
+        """
+        최대주주 현황 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bsns_year (str): 사업연도
+            reprt_code (str): 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서)
+
+        Returns:
+            BaseListDto[LargestShareHoldersOutputDto]: 최대주주 현황 정보
+        """
         path = "/api/hyslrSttus.json"
         params = BaseParamDto(
             corp_code=corp_code,
@@ -451,6 +523,17 @@ class BusinessReportInfo:
         bsns_year: str,
         reprt_code: str,
     ) -> BaseListDto[ChangedLargestShareHoldersOutputDto]:
+        """
+        최대주주 변동 현황 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bsns_year (str): 사업연도
+            reprt_code (str): 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서)
+
+        Returns:
+            BaseListDto[ChangedLargestShareHoldersOutputDto]: 최대주주 변동 현황 정보
+        """
         path = "/api/hyslrChgSttus.json"
         params = BaseParamDto(
             corp_code=corp_code,
@@ -487,6 +570,17 @@ class BusinessReportInfo:
     def get_executive_info(
         self, corp_code: str, bsns_year: str, reprt_code: str
     ) -> BaseListDto[ExecutiveInfoOutputDto]:
+        """
+        임원 현황 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bsns_year (str): 사업연도
+            reprt_code (str): 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서)
+
+        Returns:
+            BaseListDto[ExecutiveInfoOutputDto]: 임원 현황 정보
+        """
         path = "/api/exctvSttus.json"
         params = BaseParamDto(
             corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
@@ -528,6 +622,17 @@ class BusinessReportInfo:
     def get_employee_info(
         self, corp_code: str, bsns_year: str, reprt_code: str
     ) -> BaseListDto[EmployeeInfoOutputDto]:
+        """
+        직원 현황 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bsns_year (str): 사업연도
+            reprt_code (str): 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서
+
+        Returns:
+            BaseListDto[EmployeeInfoOutputDto]: 직원 현황 정보
+        """
         path = "/api/empSttus.json"
         param = BaseParamDto(
             corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
@@ -573,6 +678,17 @@ class BusinessReportInfo:
     def get_individual_director_remuneration(
         self, corp_code: str, bsns_year: str, reprt_code: str
     ) -> BaseListDto[IndividualDirectorRemunerationOutputDto]:
+        """
+        이사·감사의 개인별 보수 현황 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bsns_year (str): 사업연도
+            reprt_code (str): 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서
+
+        Returns:
+            BaseListDto[IndividualDirectorRemunerationOutputDto]: 이사·감사의 개인별 보수 현황 정보
+        """
         path = "/api/hmvAuditIndvdlBySttus.json"
         param = BaseParamDto(
             corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
@@ -608,6 +724,17 @@ class BusinessReportInfo:
     def get_total_director_remuneration(
         self, corp_code: str, bsns_year: str, reprt_code: str
     ) -> BaseListDto[TotalDirectorRemunerationOutputDto]:
+        """
+        이사·감사의 전체의 보수 현황 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bsns_year (str): 사업연도
+            reprt_code (str): 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서, 11014: 3분기보고서
+
+        Returns:
+            BaseListDto[TotalDirectorRemunerationOutputDto]: 이사·감사의 전체의 보수 현황 정보
+        """
         path = "/api/hmvAuditAllSttus.json"
         params = BaseParamDto(
             corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
@@ -640,6 +767,17 @@ class BusinessReportInfo:
     def get_individual_remuneration_over5(
         self, corp_code: str, bsns_year: str, reprt_code: str
     ) -> BaseListDto[IndividualRemunerationOver5OutputDto]:
+        """
+        개인별 보수지급 금액(5억이상 상위5인) 조회
+
+        Args:
+            corp_code (str): 고유번호
+            bsns_year (str): 사업년도
+            reprt_code (str): 보고서 코드 (11011: 사업보고서, 11012: 반기보고서, 11013: 1분기보고서
+
+        Returns:
+            BaseListDto[IndividualRemunerationOver5OutputDto]: 개인별 보수지급 금액(5억이상 상위5인) 정보
+        """
         path = "/api/indvdlByPay.json"
         params = BaseParamDto(
             corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
@@ -674,6 +812,15 @@ class BusinessReportInfo:
     def get_large_scale_holding(
         self, corp_code: str
     ) -> BaseListDto[LargeScaleHolding]:
+        """
+        지분공시 종합정보 - 대량보유상황 보고 조회
+
+        Args:
+            corp_code (str): 고유번호
+
+        Returns:
+            BaseListDto[LargeScaleHolding]: 지분공시 종합정보 - 대량보유상황 보고 정보
+        """
         path = "/api/majorstock.json"
         param = BaseParamDto(corp_code=corp_code)
         response = self.open_dart.get(path, param.dict())
@@ -707,6 +854,15 @@ class BusinessReportInfo:
     def get_executives_and_major_shareholders(
         self, corp_code: str
     ) -> BaseListDto[ExecutivesAndMajorShareholders]:
+        """
+        지분공시 종합정보 - 임원 . 주요주주 소유보고 조회
+
+        Args:
+            corp_code (str): 고유번호
+
+        Returns:
+            BaseListDto[ExecutivesAndMajorShareholders]: 지분공시 종합정보 - 임원 . 주요주주 소유보고 정보
+        """
         path = "/api/elestock.json"
         params = BaseParamDto(corp_code=corp_code)
 

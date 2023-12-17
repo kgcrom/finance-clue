@@ -1,5 +1,7 @@
 """stock-clue에서 발생하는 에러를 정의하는 Module"""
 
+# TODO error 좀 더 명확하게 정의
+
 
 class StockClueError(Exception):
     """

@@ -39,19 +39,20 @@ def parse_html_table(html_doc: str, col_count: int):
             if len(results[tr_idx]) > col_idx:
                 continue
 
-            if span_info[col_idx] is not None:
-                span = span_info[col_idx]
-                value = [span.text.strip()]
+            span = span_info[col_idx]
+            if span is not None:
+                value: List[Optional[str]] = []
+                value.insert(0, span.text.strip())
                 value.extend([None] * (span.colspan - 1))
                 results[tr_idx].extend(value)
                 if span.mark_used():
                     span_info[col_idx] = None
             else:
                 td = td_list[td_idx]
-                row_span = (
+                row_span: int = (
                     int(td.attrs["rowspan"]) if td.has_attr("rowspan") else 1
                 )
-                col_span = (
+                col_span: int = (
                     int(td.attrs["colspan"]) if td.has_attr("colspan") else 1
                 )
 
@@ -59,13 +60,16 @@ def parse_html_table(html_doc: str, col_count: int):
                     col_idx, row_span, col_span, td.text.strip()
                 )
 
-                span = span_info[col_idx]
-                value = [span.text.strip()]
-                value.extend([None] * (span.colspan - 1))
-                results[tr_idx].extend(value)
-                td_idx += 1
-                if span.mark_used():
-                    span_info[col_idx] = None
+                new_span: Optional[TdInfo] = span_info[col_idx]
+                if new_span is not None:
+                    new_value: List[Optional[str]] = [new_span.text.strip()]
+                    new_value.extend([None] * (new_span.colspan - 1))
+                    results[tr_idx].extend(new_value)
+                    td_idx += 1
+                    if new_span.mark_used():
+                        span_info[col_idx] = None
+                else:
+                    raise Exception("span is None")
 
     return results
 
@@ -105,7 +109,7 @@ class DartScrap:
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
         }
 
-    def get_html_content_no_side_menu(self, url: str) -> str:
+    def get_html_content_no_side_menu(self, url: str) -> str | None:
         """dart.fss.or.kr의 사이드 메뉴가 없는 페이지의 html을 가져온다."""
         context = self.browser.new_context()
         page = context.new_page()
@@ -113,7 +117,8 @@ class DartScrap:
 
         page.locator("iframe").wait_for(state="attached")
         mf = page.frame("ifrm")
-        contents = mf.content()
+        
+        contents: Optional[str] = mf.content() if mf is not None else None
 
         page.close()
         context.close()

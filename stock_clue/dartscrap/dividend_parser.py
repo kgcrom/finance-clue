@@ -21,10 +21,17 @@ class DividendParser:
     def parse_closing_shareholders(
         self, report_no: str
     ) -> DividendClosingShareholders:
-        """현금.현물배당을 위한 최종주주명부 폐쇄(기준일)결정 공시 페이지 파싱"""
+        """
+        현금.현물배당을 위한 최종주주명부 폐쇄(기준일)결정 공시 페이지 파싱
+
+        Args:
+            report_no (str): 공시 고유번호
+        """
         url = f"https://dart.fss.or.kr/dsaf001/main.do?rcpNo={report_no}"
 
         contents = self.dart_scrap.get_html_content_no_side_menu(url)
+        if contents is None:
+            raise Exception("contents is None")
         table_info = parse_html_table(contents, 4)
 
         # 칼럼이 자유인 경우 문자열 필터
@@ -36,10 +43,17 @@ class DividendParser:
         )
 
     def parse_decision_on_cash(self, report_no: str) -> DividendDecisionOnCash:
-        """현금.현물배당 결정 공시 페이지 파싱"""
+        """
+        현금.현물배당 결정 공시 페이지 파싱
+
+        Args:
+            report_no (str): 공시 고유번호
+        """
         url = f"https://dart.fss.or.kr/dsaf001/main.do?rcpNo={report_no}"
 
         contents = self.dart_scrap.get_html_content_no_side_menu(url)
+        if contents is None:
+            raise Exception("contents is None")
         table_info = parse_html_table(contents, 4)
 
         return DividendDecisionOnCash(

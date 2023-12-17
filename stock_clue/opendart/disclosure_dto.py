@@ -1,4 +1,3 @@
-"""공시정보 OpenDart 연동 dto Module"""
 from dataclasses import asdict
 from dataclasses import dataclass
 from typing import List, Optional
@@ -7,22 +6,23 @@ from typing import List, Optional
 @dataclass
 class ListInputDto:
     """
-    disclosure list request DTO
+    공시 검색 조회를 위한 Input DTO
 
-    param crtfc_key: API 인증키
-    param corp_code: 고유번호 (8자리)
-    param bgn_de: 시작일 (YYYYMMDD)
-    param end_de: 종료일 (YYYYMMDD)
-    param last_reprt_at: 최종보고서 검색여부 (Y or N)
-    param pblntf_ty: 공시 유형
-            (A: 정기공시, B: 주요사항보고, C: 발행공시, D: 지분공시, E: 기타공시,
-             F: 외부감사관련, G: 펀드공시, H: 자산유동화, I: 거래소공시, J: 공정위공시)
-    param pblntf_detail_ty: 공시상세유형
-    param corp_cls: 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
-    param sort: 정렬(date: 접수일자, crp: 회사명, rpt: 보고서명 ※ 기본값 date)
-    param sort_mth: 정렬방법 (asc: 오름차순, desc: 내림차순)
-    param page_no: 페이지 번호 (1~n, ※ 기본값 1)
-    param page_count 페이지 건수 (1~100, ※ 기본값: 10, 최대값: 100)
+    Attributes:
+        crtfc_key: API 인증키
+        corp_code: 고유번호 (8자리)
+        bgn_de: 시작일 (YYYYMMDD)
+        end_de: 종료일 (YYYYMMDD)
+        last_reprt_at: 최종보고서 검색여부 (Y or N)
+        pblntf_ty: 공시 유형
+                (A: 정기공시, B: 주요사항보고, C: 발행공시, D: 지분공시, E: 기타공시,
+                 F: 외부감사관련, G: 펀드공시, H: 자산유동화, I: 거래소공시, J: 공정위공시)
+        pblntf_detail_ty: 공시상세유형
+        corp_cls: 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+        sort: 정렬(date: 접수일자, crp: 회사명, rpt: 보고서명 ※ 기본값 date)
+        sort_mth: 정렬방법 (asc: 오름차순, desc: 내림차순)
+        page_no: 페이지 번호 (1~n, ※ 기본값 1)
+        page_count 페이지 건수 (1~100, ※ 기본값: 10, 최대값: 100)
     """
 
     corp_code: Optional[str] = None
@@ -44,17 +44,18 @@ class ListInputDto:
 @dataclass
 class ListOutputDto:
     """
-    공시 정보 결과 DTO
+    공시 정보 조회 결과를 담는 dto 클래스
 
-    param corp_cls:	법인구분 Y(유가), K(코스닥), N(코넥스), E(기타)
-    param corp_name: 종목명(법인명)	공시대상회사의 종목명(상장사) 또는 법인명(기타법인)
-    param corp_code: 고유번호(8자리)
-    param stock_code: 종목코드(6자리)
-    param report_nm: 보고서명 (공시구분+보고서명+기타정보)
-    param rcept_no: 접수번호(14자리)
-    param flr_nm: 공시 제출인명
-    param rcept_dt:	공시 접수일자 (YYYYMMDD)
-    param rm: 비고
+    Attributes:
+        corp_cls (str):	법인구분 Y(유가), K(코스닥), N(코넥스), E(기타)
+        corp_name (str): 종목명(법인명)	공시대상회사의 종목명(상장사) 또는 법인명(기타법인)
+        corp_code (str): 고유번호(8자리)
+        stock_code (str): 종목코드(6자리)
+        report_nm (str): 보고서명 (공시구분+보고서명+기타정보)
+        rcept_no (str): 접수번호(14자리)
+        flr_nm (str): 공시 제출인명
+        rcept_dt (str):	공시 접수일자 (YYYYMMDD)
+        rm (str): 비고
     """
 
     corp_cls: str
@@ -71,15 +72,16 @@ class ListOutputDto:
 @dataclass
 class DisclosureSearchResultDto:
     """
-    공시검색 response DTO
+    공시검색 정보 조회 메타 정보를 담는 dto 클래스
 
-    param status: 에러 및 정보 코드
-    param message: 에러 및 정보 메시지
-    param page_no: 페이지 번호
-    param page_count: 페이지 별 건수
-    param total_count: 총 건수
-    param total_page: 총 페이지 수
-    param list: 공시 정보 결과 DTO 리스트
+    Attributes:
+        status (str): 에러 및 정보 코드
+        message (str): 에러 및 정보 메시지
+        page_no (int): 페이지 번호
+        page_count (int): 페이지 별 건수
+        total_count (int): 총 건수
+        total_page (int): 총 페이지 수
+        list (List[ListOutputDto]): 공시 정보 결과 DTO 리스트
     """
 
     status: str
@@ -94,9 +96,10 @@ class DisclosureSearchResultDto:
 @dataclass
 class CompanyOverviewInputDto:
     """
-    기업개황 조회 Input DTO
+    기업개황 조회를 위한 Input dto 클래스
 
-    param corp_code: 공시대상회사의 고유번호(8자리)
+    Attributes:
+        corp_code (str): 공시대상회사의 고유번호(8자리)
     """
 
     corp_code: str
@@ -108,26 +111,27 @@ class CompanyOverviewInputDto:
 @dataclass
 class CompanyOverviewOutputDto:
     """
-    기업개황 조회 Output DTO
+    기업개황 조회 결과를 담는 dto 클래스
 
-    param status: 에러 및 정보 코드
-    param message: 에러 및 정보 메시지
-    param corp_name: 정식명칭
-    param corp_name_env: 영문명칭
-    param stock_name: 종목명(상장사) 또는 약식명칭(기타법인)
-    param stock_code: 상장회사의 종목코드(6자리)
-    param ceo_nm: 대표자명
-    param corp_cls: 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E:기타)
-    param jurir_no: 법인등록번호
-    param bizr_no: 사업자등록번호
-    param adres: 주소
-    param hmurl: 홈페이지
-    param ir_url: IR홈페이지
-    param phn_no: 전화번호
-    param fax_no: 팩스번호
-    param induty_code: 업종코드
-    param est_dt: 설립일 (YYYYMMDD)
-    param acc_mt: 결산월 (MM)
+    Attributes:
+        status (str): 에러 및 정보 코드
+        message (str): 에러 및 정보 메시지
+        corp_name (str): 정식명칭
+        corp_name_eng (str): 영문명칭
+        stock_name (str): 종목명(상장사) 또는 약식명칭(기타법인)
+        stock_code (str): 상장회사의 종목코드(6자리)
+        ceo_nm (str): 대표자명
+        corp_cls (str): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E:기타)
+        jurir_no (str): 법인등록번호
+        bizr_no (str): 사업자등록번호
+        adres (str): 주소
+        hmurl (str): 홈페이지
+        ir_url (str): IR홈페이지
+        phn_no (str): 전화번호
+        fax_no (str): 팩스번호
+        induty_code (str): 업종코드
+        est_dt (str): 설립일 (YYYYMMDD)
+        acc_mt (str): 결산월 (MM)
     """
 
     status: str
@@ -153,10 +157,11 @@ class CompanyOverviewOutputDto:
 @dataclass
 class DownloadDocumentInputDto:
     """
-    공시서류원본 파일 조회 DTO
+    공시서류원본 파일 조회를 위한 input dto 클래스
 
-    param rcept_no: 접수번호
-    param file_path: 파일 다운로드 경로
+    Attributes:
+        rcept_no (str): 접수번호
+        file_path (Optional[str]): 파일 다운로드 경로
     """
 
     rcept_no: str
@@ -169,12 +174,13 @@ class DownloadDocumentInputDto:
 @dataclass
 class CorpCodeDto:
     """
-    고유번호 조회 DTO
+    고유번호 조회 결과를 담는 dto 클래스
 
-    param corp_code: 고유번호
-    param corp_name: 정식명칭
-    param stock_code: 종목코드
-    param modify_date: 최종변경일자
+    Attributes:
+        corp_code (str): 고유번호
+        corp_name (str): 정식명칭
+        stock_code (Optional[str]): 종목코드
+        modify_date (str): 최종변경일자
     """
 
     corp_code: str
