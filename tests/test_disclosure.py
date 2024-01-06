@@ -1,11 +1,9 @@
 import os
 from typing import Callable, List, TypeVar
 
+from stock_clue.opendart import OpenDart
 from stock_clue.opendart.disclosure import Disclosure
-from stock_clue.opendart.disclosure_dto import CompanyOverviewInputDto
-from stock_clue.opendart.disclosure_dto import DownloadDocumentInputDto
 from stock_clue.opendart.disclosure_dto import ListInputDto
-from stock_clue.opendart.open_dart import OpenDart
 
 T = TypeVar("T")
 R = TypeVar("R")
@@ -26,6 +24,9 @@ def typehint_filter(
 
 
 class TestDisclosure:
+    def setup_class(self):
+        self.disclosure = Disclosure(OpenDart(os.environ["OPENDART_API_KEY"]))
+
     def test_disclosure_list(self):
         params = ListInputDto(
             corp_code="01029394",
@@ -33,9 +34,7 @@ class TestDisclosure:
             end_de="20231017",
             corp_cls="K",
         )
-        results = Disclosure(OpenDart(os.environ["OPENDART_API_KEY"])).list(
-            params
-        )
+        results = self.disclosure.list(params)
 
         assert results is not None
         assert results.page_count == 10
@@ -54,24 +53,15 @@ class TestDisclosure:
         )
 
     def test_company_overview(self):
-        params = CompanyOverviewInputDto(
-            corp_code="01029394",
-        )
-        result = Disclosure(
-            OpenDart(os.environ["OPENDART_API_KEY"])
-        ).get_company_overview(params)
+        result = self.disclosure.get_company_overview(corp_code="01029394")
 
         assert result is not None
         assert result.corp_name == "(주)에코마케팅"
 
     def test_download_document(self):
-        params = DownloadDocumentInputDto(
+        self.disclosure.download_document(
             rcept_no="20231024600472",
             file_path="./",
-        )
-
-        Disclosure(OpenDart(os.environ["OPENDART_API_KEY"])).download_document(
-            params
         )
 
     def test_corp_code(self):

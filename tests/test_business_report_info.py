@@ -1,7 +1,7 @@
 import os
 
+from stock_clue.opendart import OpenDart
 from stock_clue.opendart.business_report_info import BusinessReportInfo
-from stock_clue.opendart.open_dart import OpenDart
 
 
 class TestBusinessReportInfo:

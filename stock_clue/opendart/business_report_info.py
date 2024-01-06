@@ -46,17 +46,17 @@ from stock_clue.opendart.business_report_info_dto import DividendOutputDto
 from stock_clue.opendart.business_report_info_dto import EmployeeInfoOutputDto
 from stock_clue.opendart.business_report_info_dto import ExecutiveInfoOutputDto
 from stock_clue.opendart.business_report_info_dto import LargeScaleHolding
+from stock_clue.opendart.request import Request
 from stock_clue.opendart.utils import str_to_float
 from stock_clue.opendart.utils import str_to_int
 
 if TYPE_CHECKING:
-    from stock_clue.opendart.open_dart import OpenDart
+    from stock_clue.opendart import OpenDart
 
 
 class BusinessReportInfo:
     def __init__(self, open_dart: "OpenDart"):
-        super().__init__()
-        self.open_dart = open_dart
+        self.request = Request(open_dart.api_key, open_dart.timeout)
 
     def get_director_total_remuneration_approval(
         self,
@@ -81,7 +81,7 @@ class BusinessReportInfo:
             bsns_year=bsns_year,
             reprt_code=reprt_code,
         )
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, params.dict())
 
         def _mapping(
             x: Dict[str, str]
@@ -130,7 +130,7 @@ class BusinessReportInfo:
             bsns_year=bsns_year,
             reprt_code=reprt_code,
         )
-        resposne = self.open_dart.get(path, params.dict())
+        resposne = self.request.get(path, params.dict())
 
         if resposne.status_code != 200:
             raise HttpError(path)
@@ -176,7 +176,7 @@ class BusinessReportInfo:
             bsns_year=bsns_year,
             reprt_code=reprt_code,
         )
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, params.dict())
         if response.status_code != 200:
             raise HttpError(path)
 
@@ -224,7 +224,7 @@ class BusinessReportInfo:
             bsns_year=bsns_year,
             reprt_code=reprt_code,
         )
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, params.dict())
         if response.status_code != 200:
             raise HttpError(path)
 
@@ -279,7 +279,7 @@ class BusinessReportInfo:
             bsns_year=bsns_year,
             reprt_code=reprt_code,
         )
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, params.dict())
 
         if response.status_code != 200:
             raise HttpError(path)
@@ -331,7 +331,7 @@ class BusinessReportInfo:
             bsns_year=bsns_year,
             reprt_code=reprt_code,
         )
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, params.dict())
 
         if response.status_code != 200:
             raise HttpError(path)
@@ -378,7 +378,7 @@ class BusinessReportInfo:
             bsns_year=bsns_year,
             reprt_code=reprt_code,
         )
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, params.dict())
 
         if response.status_code != 200:
             raise HttpError(path)
@@ -432,7 +432,7 @@ class BusinessReportInfo:
             bsns_year=bsns_year,
             reprt_code=reprt_code,
         )
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, params.dict())
 
         if response.status_code != 200:
             raise HttpError(path)
@@ -484,7 +484,7 @@ class BusinessReportInfo:
             bsns_year=bsns_year,
             reprt_code=reprt_code,
         )
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, params.dict())
 
         if response.status_code != 200:
             raise HttpError(path)
@@ -540,7 +540,7 @@ class BusinessReportInfo:
             bsns_year=bsns_year,
             reprt_code=reprt_code,
         )
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, params.dict())
 
         if response.status_code != 200:
             raise HttpError(path)
@@ -585,7 +585,7 @@ class BusinessReportInfo:
         params = BaseParamDto(
             corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
         )
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, params.dict())
         if response.status_code != 200:
             raise HttpError(path)
 
@@ -637,7 +637,7 @@ class BusinessReportInfo:
         param = BaseParamDto(
             corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
         )
-        response = self.open_dart.get(path, param.dict())
+        response = self.request.get(path, param.dict())
 
         if response.status_code != 200:
             raise HttpError(path)
@@ -694,7 +694,7 @@ class BusinessReportInfo:
             corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
         )
 
-        response = self.open_dart.get(path, param.dict())
+        response = self.request.get(path, param.dict())
         if response.status_code != 200:
             raise HttpError(path)
 
@@ -739,7 +739,7 @@ class BusinessReportInfo:
         params = BaseParamDto(
             corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
         )
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, params.dict())
 
         if response.status_code != 200:
             raise HttpError(path)
@@ -782,7 +782,7 @@ class BusinessReportInfo:
         params = BaseParamDto(
             corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
         )
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, params.dict())
 
         if response.status_code != 200:
             raise HttpError(path)
@@ -823,7 +823,7 @@ class BusinessReportInfo:
         """
         path = "/api/majorstock.json"
         param = BaseParamDto(corp_code=corp_code)
-        response = self.open_dart.get(path, param.dict())
+        response = self.request.get(path, param.dict())
         if response.status_code != 200:
             raise HttpError(path)
 
@@ -866,7 +866,7 @@ class BusinessReportInfo:
         path = "/api/elestock.json"
         params = BaseParamDto(corp_code=corp_code)
 
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, params.dict())
         if response.status_code != 200:
             raise HttpError(path)
 

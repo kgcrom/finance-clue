@@ -1,10 +1,10 @@
 import os
 
+from stock_clue.opendart import OpenDart
 from stock_clue.opendart.base_dto import BaseListDto
 from stock_clue.opendart.financial_info import FinancialInfo
 from stock_clue.opendart.financial_info_dto import MajorAccountCompanyOutputDto
 from stock_clue.opendart.financial_info_dto import XbrlTaxanomyOutputDto
-from stock_clue.opendart.open_dart import OpenDart
 
 
 class TestFinancialInfo:

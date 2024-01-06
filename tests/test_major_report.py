@@ -1,7 +1,7 @@
 import os
 
+from stock_clue.opendart import OpenDart
 from stock_clue.opendart.major_report import MajorReport
-from stock_clue.opendart.open_dart import OpenDart
 
 
 class TestMajorReport:

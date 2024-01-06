@@ -9,7 +9,6 @@ class ListInputDto:
     공시 검색 조회를 위한 Input DTO
 
     Attributes:
-        crtfc_key: API 인증키
         corp_code: 고유번호 (8자리)
         bgn_de: 시작일 (YYYYMMDD)
         end_de: 종료일 (YYYYMMDD)
@@ -94,21 +93,6 @@ class DisclosureSearchResultDto:
 
 
 @dataclass
-class CompanyOverviewInputDto:
-    """
-    기업개황 조회를 위한 Input dto 클래스
-
-    Attributes:
-        corp_code (str): 공시대상회사의 고유번호(8자리)
-    """
-
-    corp_code: str
-
-    def dict(self):
-        return {k: str(v) for k, v in asdict(self).items()}
-
-
-@dataclass
 class CompanyOverviewOutputDto:
     """
     기업개황 조회 결과를 담는 dto 클래스
@@ -152,23 +136,6 @@ class CompanyOverviewOutputDto:
     induty_code: str
     est_dt: str
     acc_mt: str
-
-
-@dataclass
-class DownloadDocumentInputDto:
-    """
-    공시서류원본 파일 조회를 위한 input dto 클래스
-
-    Attributes:
-        rcept_no (str): 접수번호
-        file_path (Optional[str]): 파일 다운로드 경로
-    """
-
-    rcept_no: str
-    file_path: Optional[str] = None
-
-    def dict(self):
-        return {k: str(v) for k, v in asdict(self).items()}
 
 
 @dataclass

@@ -2,6 +2,7 @@
 from typing import Dict
 
 from stock_clue.error import HttpError
+from stock_clue.opendart import OpenDart
 from stock_clue.opendart.base_dto import BaseListDto
 from stock_clue.opendart.base_dto import BaseParamDto
 from stock_clue.opendart.major_report_dto import (
@@ -19,15 +20,14 @@ from stock_clue.opendart.major_report_dto import CapitalReductionOutputDto
 from stock_clue.opendart.major_report_dto import CaptitalDecreaseOutputDto
 from stock_clue.opendart.major_report_dto import ConvertibleBondOutputDto
 from stock_clue.opendart.major_report_dto import ExchangeableBondOutputDto
-from stock_clue.opendart.open_dart import OpenDart
+from stock_clue.opendart.request import Request
 from stock_clue.opendart.utils import str_to_float
 from stock_clue.opendart.utils import str_to_int
 
 
 class MajorReport:
     def __init__(self, open_dart: OpenDart):
-        super().__init__()
-        self.open_dart = open_dart
+        self.request = Request(open_dart.api_key, open_dart.timeout)
 
     def get_capital_increase(
         self, corp_code: str, bgn_de: str, end_de: str
@@ -46,7 +46,7 @@ class MajorReport:
         path = "/api/piicDecsn.json"
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
 
-        response = self.open_dart.get(path=path, params=params.dict())
+        response = self.request.get(path=path, params=params.dict())
         if response.status_code != 200:
             raise HttpError(path)
 
@@ -98,7 +98,7 @@ class MajorReport:
         path = "/api/fricDecsn.json"
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
 
-        response = self.open_dart.get(path=path, params=params.dict())
+        response = self.request.get(path=path, params=params.dict())
         if response.status_code != 200:
             raise HttpError(path)
 
@@ -150,7 +150,7 @@ class MajorReport:
         path = "/api/pifricDecsn.json"
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
 
-        response = self.open_dart.get(path=path, params=params.dict())
+        response = self.request.get(path=path, params=params.dict())
         if response.status_code != 200:
             raise HttpError(path)
 
@@ -226,7 +226,7 @@ class MajorReport:
 
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
 
-        response = self.open_dart.get(path=path, params=params.dict())
+        response = self.request.get(path=path, params=params.dict())
         if response.status_code != 200:
             raise HttpError(path)
 
@@ -295,7 +295,7 @@ class MajorReport:
         path = "/api/cvbdIsDecsn.json"
 
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
-        response = self.open_dart.get(path=path, params=params.dict())
+        response = self.request.get(path=path, params=params.dict())
         if response.status_code != 200:
             raise HttpError(path)
 
@@ -390,7 +390,7 @@ class MajorReport:
         path = "/api/bdwtIsDecsn.json"
 
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
-        response = self.open_dart.get(path=path, params=params.dict())
+        response = self.request.get(path=path, params=params.dict())
         if response.status_code != 200:
             raise HttpError(path)
 
@@ -488,7 +488,7 @@ class MajorReport:
         path = "/api/exbdIsDecsn.json"
 
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
-        response = self.open_dart.get(path=path, params=params.dict())
+        response = self.request.get(path=path, params=params.dict())
         if response.status_code != 200:
             raise HttpError(path)
 
@@ -562,7 +562,7 @@ class MajorReport:
         path = "/api/tsstkDpDecsn.json"
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
 
-        response = self.open_dart.get(path=path, params=params.dict())
+        response = self.request.get(path=path, params=params.dict())
         if response.status_code != 200:
             raise HttpError(path)
 
@@ -626,7 +626,7 @@ class MajorReport:
         path = "/api/tsstkAqDecsn.json"
         params = BaseParamDto(corp_code=corp_code, bgn_de=bgn_de, end_de=end_de)
 
-        response = self.open_dart.get(path=path, params=params.dict())
+        response = self.request.get(path=path, params=params.dict())
         if response.status_code != 200:
             raise HttpError(path)
 

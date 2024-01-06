@@ -2,6 +2,7 @@
 from typing import Dict
 
 from stock_clue.error import HttpError
+from stock_clue.opendart import OpenDart
 from stock_clue.opendart.base_dto import BaseListDto
 from stock_clue.opendart.base_dto import BaseParamDto
 from stock_clue.opendart.financial_info_dto import (
@@ -9,15 +10,14 @@ from stock_clue.opendart.financial_info_dto import (
 )
 from stock_clue.opendart.financial_info_dto import MajorAccountCompanyOutputDto
 from stock_clue.opendart.financial_info_dto import XbrlTaxanomyOutputDto
-from stock_clue.opendart.open_dart import OpenDart
+from stock_clue.opendart.request import Request
 from stock_clue.opendart.utils import extract_file_name
 from stock_clue.opendart.utils import str_to_int
 
 
 class FinancialInfo:
     def __init__(self, open_dart: OpenDart):
-        super().__init__()
-        self.open_dart = open_dart
+        self.request = Request(open_dart.api_key, open_dart.timeout)
 
     def get_major_account_single_company(
         self, corp_code: str, bsns_year: str, reprt_code: str
@@ -37,7 +37,7 @@ class FinancialInfo:
         params = BaseParamDto(
             corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
         )
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, params.dict())
 
         if response.status_code != 200:
             raise HttpError(path)
@@ -101,7 +101,7 @@ class FinancialInfo:
             corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
         )
 
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, params.dict())
         if response.status_code != 200:
             raise HttpError(path)
 
@@ -168,7 +168,7 @@ class FinancialInfo:
             fs_div=fs_div,
         )
 
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, params.dict())
         if response.status_code != 200:
             raise HttpError(path)
 
@@ -224,7 +224,7 @@ class FinancialInfo:
         path = "/api/fnlttXbrl.xml"
 
         params = BaseParamDto(rcept_no=rcept_no, reprt_code=reprt_code)
-        response = self.open_dart.get(path, params.dict(), True)
+        response = self.request.get(path, params.dict(), True)
 
         if response.status_code != 200:
             raise HttpError()
@@ -250,7 +250,7 @@ class FinancialInfo:
         path = "/api/xbrlTaxonomy.json"
         params = BaseParamDto(sj_div=sj_div)
 
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, params.dict())
         if response.status_code != 200:
             raise HttpError(path)
 

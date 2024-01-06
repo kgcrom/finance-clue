@@ -3,6 +3,11 @@ from dataclasses import dataclass
 from typing import Dict, List, Union
 
 
+def _snake_to_camel(snake_str: str) -> str:
+    components = snake_str.split("_")
+    return components[0] + "".join(x.title() for x in components[1:])
+
+
 @dataclass
 class DartScrapParamDto:
     """
@@ -30,13 +35,9 @@ class DartScrapParamDto:
     select_date: str
     text_crp_cik: str | None
 
-    def _snake_to_camel(self, snake_str: str) -> str:
-        components = snake_str.split("_")
-        return components[0] + "".join(x.title() for x in components[1:])
-
     def dict(self) -> Dict[str, Union[str, int]]:
         return {
-            self._snake_to_camel(k): str(v) if v is not None else ""
+            _snake_to_camel(k): str(v) if v is not None else ""
             for k, v in asdict(self).items()
         }
 

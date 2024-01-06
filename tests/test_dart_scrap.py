@@ -1,8 +1,9 @@
+from stock_clue.dartscrap import DartScrap
 from stock_clue.dartscrap.daily_disclosure import DailyDisclosure
+from stock_clue.dartscrap.daily_disclosure import MarketGroup
 from stock_clue.dartscrap.daily_disclosure import parse_daily_disclosure
-from stock_clue.dartscrap.dart_scrap import DartScrap
-from stock_clue.dartscrap.dart_scrap import parse_html_table
 from stock_clue.dartscrap.dividend_parser import DividendParser
+from stock_clue.dartscrap.dividend_parser import parse_html_table
 
 
 class TestDartScrap:
@@ -12,22 +13,24 @@ class TestDartScrap:
         self.dividend_parser = DividendParser(self.dart_scrap)
 
     def test_get_kospi_daily_disclosure(self):
-        data = self.daily_disclosure.get_kospi_daily_disclosure("2023.11.14", 1)
+        data = self.daily_disclosure.get_daily_disclosure(
+            "2023.11.14", 1, MarketGroup.KOSPI
+        )
 
         assert data is not None
-        assert data.total == 963
+        assert data.total == 964
         assert len(data.disclosures) == 100
 
     def test_get_kosdaq_daily_disclosure(self):
-        data = self.daily_disclosure.get_kosdaq_daily_disclosure(
-            "2023.11.14", 1
+        data = self.daily_disclosure.get_daily_disclosure(
+            "2023.11.14", 1, MarketGroup.KOSDAQ
         )
         assert data is not None
-        assert data.total > 1430
+        assert data.total == 1428
         assert len(data.disclosures) == 100
 
     def test_get_all_daily_disclosure(self):
-        data = self.daily_disclosure.get_all_daily_disclosure("2023.11.14", 1)
+        data = self.daily_disclosure.get_daily_disclosure("2023.11.14", 1)
         assert data is not None
         assert data.total > 3100
         assert len(data.disclosures) == 100

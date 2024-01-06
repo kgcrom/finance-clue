@@ -2,14 +2,14 @@
 
 from typing import TYPE_CHECKING
 
-from stock_clue.dartscrap.dart_scrap import parse_html_table
 from stock_clue.dartscrap.dart_scrap_dto import DividendClosingShareholders
 from stock_clue.dartscrap.dart_scrap_dto import DividendDecisionOnCash
+from stock_clue.dartscrap.table_parser import parse_html_table
 from stock_clue.opendart.utils import str_to_float
 from stock_clue.opendart.utils import str_to_int
 
 if TYPE_CHECKING:
-    from stock_clue.dartscrap.dart_scrap import DartScrap
+    from stock_clue.dartscrap import DartScrap
 
 
 class DividendParser:
@@ -54,7 +54,7 @@ class DividendParser:
         contents = self.dart_scrap.get_html_content_no_side_menu(url)
         if contents is None:
             raise Exception("contents is None")
-        table_info = parse_html_table(contents, 4)
+        table_info = parse_html_table(contents, 3)
 
         return DividendDecisionOnCash(
             dividend_classification=table_info[0][2],

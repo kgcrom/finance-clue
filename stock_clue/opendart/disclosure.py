@@ -7,17 +7,16 @@ import zipfile
 from xmlschema import XMLSchema
 
 from stock_clue.error import HttpError
-from stock_clue.opendart.disclosure_dto import CompanyOverviewInputDto
 from stock_clue.opendart.disclosure_dto import CompanyOverviewOutputDto
 from stock_clue.opendart.disclosure_dto import CorpCodeDto
 from stock_clue.opendart.disclosure_dto import DisclosureSearchResultDto
-from stock_clue.opendart.disclosure_dto import DownloadDocumentInputDto
 from stock_clue.opendart.disclosure_dto import ListInputDto
 from stock_clue.opendart.disclosure_dto import ListOutputDto
+from stock_clue.opendart.request import Request
 from stock_clue.opendart.utils import extract_file_name
 
 if TYPE_CHECKING:
-    from stock_clue.opendart.open_dart import OpenDart
+    from stock_clue.opendart import OpenDart
 
 
 def unzip(tmp_path: str, file_name: str):
@@ -34,8 +33,7 @@ def unzip(tmp_path: str, file_name: str):
 
 class Disclosure:
     def __init__(self, open_dart: "OpenDart"):
-        super().__init__()
-        self.open_dart = open_dart
+        self.request = Request(open_dart.api_key, open_dart.timeout)
 
     def list(
         self, input_dto: ListInputDto
@@ -50,7 +48,7 @@ class Disclosure:
             Optional[DisclosureSearchResultDto]: 공시검색 정보 조회 결과를 담는 dto 클래스
         """
         path = "/api/list.json"
-        response = self.open_dart.get(path, input_dto.dict())
+        response = self.request.get(path, input_dto.dict())
         # TODO status, message 까지 포함한 클래스 리턴하도록
         # TODO python generic 이용 가능?
         #   - https://medium.com/@steveYeah/using-generics-in-python-99010e5056eb
@@ -92,19 +90,19 @@ class Disclosure:
         )
 
     def get_company_overview(
-        self, params: CompanyOverviewInputDto
+        self, corp_code: str
     ) -> Optional[CompanyOverviewOutputDto]:
         """
         기업개황 조회
 
         Args:
-            params (CompanyOverviewInputDto): 기업개황 조회를 위한 Input dto 클래스
+            corp_code (str): 기업개황 조회 할 corp code
 
         Returns:
             Optional[CompanyOverviewOutputDto]: 기업개황 조회 결과를 담는 dto 클래스
         """
         path = "/api/company.json"
-        response = self.open_dart.get(path, params.dict())
+        response = self.request.get(path, {"corp_code": corp_code})
 
         if response.status_code != 200:
             raise HttpError()
@@ -138,22 +136,23 @@ class Disclosure:
             acc_mt=data["acc_mt"],
         )
 
-    def download_document(self, params: DownloadDocumentInputDto):
+    def download_document(self, rcept_no: str, file_path: str):
         """
         공시서류원본 파일 조회
 
         Args:
-            params (DownloadDocumentInputDto): 공시서류원본 파일 조회를 위한 Input dto 클래스
+            rcept_no (str): 공시 서류 접수번호
+            file_path (str): 공시서류원본 파일 저장 경로
 
         Returns:
             None
         """
-        if params.file_path is None:
+        if file_path is None:
             raise KeyError()
 
         path = "/api/document.xml"
-        file_path = params.file_path
-        response = self.open_dart.get(path, params.dict(), True)
+        file_path = file_path
+        response = self.request.get(path, {"rcept_no": rcept_no}, True)
 
         if response.status_code != 200:
             raise HttpError()
@@ -174,7 +173,7 @@ class Disclosure:
         """
         path = "/api/corpCode.xml"
 
-        response = self.open_dart.get(path, is_stream=True)
+        response = self.request.get(path, is_stream=True)
 
         if response.status_code != 200:
             raise HttpError()
