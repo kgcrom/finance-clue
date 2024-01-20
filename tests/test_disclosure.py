@@ -4,6 +4,7 @@ from typing import Callable, List, TypeVar
 from stock_clue.opendart import OpenDart
 from stock_clue.opendart.disclosure import Disclosure
 from stock_clue.opendart.disclosure_dto import ListInputDto
+from stock_clue.opendart.disclosure_type import DisclosureType
 
 T = TypeVar("T")
 R = TypeVar("R")
@@ -32,6 +33,7 @@ class TestDisclosure:
             corp_code="01029394",
             bgn_de="20230717",
             end_de="20231017",
+            pblntf_ty=DisclosureType.A,
             corp_cls="K",
         )
         results = self.disclosure.list(params)
@@ -65,8 +67,6 @@ class TestDisclosure:
         )
 
     def test_corp_code(self):
-        result = Disclosure(
-            OpenDart(os.environ["OPENDART_API_KEY"])
-        ).get_corp_code_list()
+        result = self.disclosure.get_corp_code_list()
 
         assert len(result) != 0

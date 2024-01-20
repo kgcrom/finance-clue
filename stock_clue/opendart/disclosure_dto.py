@@ -1,6 +1,15 @@
 from dataclasses import asdict
 from dataclasses import dataclass
+from enum import Enum
 from typing import List, Optional
+
+from stock_clue.opendart.disclosure_type import DisclosureType
+
+
+def __to_str(value: any) -> str:
+    if isinstance(value, Enum):
+        return value.name
+    return str(value)
 
 
 @dataclass
@@ -9,26 +18,24 @@ class ListInputDto:
     공시 검색 조회를 위한 Input DTO
 
     Attributes:
-        corp_code: 고유번호 (8자리)
-        bgn_de: 시작일 (YYYYMMDD)
-        end_de: 종료일 (YYYYMMDD)
-        last_reprt_at: 최종보고서 검색여부 (Y or N)
-        pblntf_ty: 공시 유형
-                (A: 정기공시, B: 주요사항보고, C: 발행공시, D: 지분공시, E: 기타공시,
-                 F: 외부감사관련, G: 펀드공시, H: 자산유동화, I: 거래소공시, J: 공정위공시)
-        pblntf_detail_ty: 공시상세유형
-        corp_cls: 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
-        sort: 정렬(date: 접수일자, crp: 회사명, rpt: 보고서명 ※ 기본값 date)
-        sort_mth: 정렬방법 (asc: 오름차순, desc: 내림차순)
-        page_no: 페이지 번호 (1~n, ※ 기본값 1)
-        page_count 페이지 건수 (1~100, ※ 기본값: 10, 최대값: 100)
+        corp_code (Optional[str]): 고유번호 (8자리)
+        bgn_de (Optional[str]): 시작일 (YYYYMMDD)
+        end_de (Optional[str]): 종료일 (YYYYMMDD)
+        last_reprt_at (Optional[str]): 최종보고서 검색여부 (Y or N)
+        pblntf_ty (Optional[DisclosureType]): 공시 유형
+        pblntf_detail_ty ((Optional[str])): 공시상세유형
+        corp_cls (Optional[str]): 법인구분 (Y: 유가, K: 코스닥, N: 코넥스, E: 기타)
+        sort (Optional[str]): 정렬(date: 접수일자, crp: 회사명, rpt: 보고서명 ※ 기본값 date)
+        sort_mth (Optional[str]): 정렬방법 (asc: 오름차순, desc: 내림차순)
+        page_no (Optional[int]): 페이지 번호 (1~n, ※ 기본값 1)
+        page_count (Optional[int]): 페이지 건수 (1~100, ※ 기본값: 10, 최대값: 100)
     """
 
     corp_code: Optional[str] = None
     bgn_de: Optional[str] = None
     end_de: Optional[str] = None
     last_reprt_at: Optional[str] = None
-    pblntf_ty: Optional[str] = None
+    pblntf_ty: Optional[DisclosureType] = None
     pblntf_detail_ty: Optional[str] = None
     corp_cls: Optional[str] = "Y"
     sort: Optional[str] = None
@@ -37,7 +44,9 @@ class ListInputDto:
     page_count: Optional[int] = 10
 
     def dict(self):
-        return {k: str(v) for k, v in asdict(self).items() if v is not None}
+        return {
+            k: __to_str(v) for k, v in asdict(self).items() if v is not None
+        }
 
 
 @dataclass

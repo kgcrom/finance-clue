@@ -583,7 +583,9 @@ class BusinessReportInfo:
         """
         path = "/api/exctvSttus.json"
         params = BaseParamDto(
-            corp_code=corp_code, bsns_year=bsns_year, reprt_code=reprt_code
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
         )
         response = self.request.get(path, params.dict())
         if response.status_code != 200:

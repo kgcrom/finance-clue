@@ -15,7 +15,10 @@ def str_to_int(v: str) -> int:
     """
     if not v or v == "-":
         return 0
-    return int(v.replace(",", ""))
+    try:
+        return int(v.replace(",", ""))
+    except ValueError:
+        raise ValueError(f"Can't convert {v} to int.")
 
 
 def str_to_float(v: str) -> float:
@@ -30,7 +33,10 @@ def str_to_float(v: str) -> float:
     if not v or v == "-":
         return 0.0
 
-    return float(v.replace(",", ""))
+    try:
+        return float(v.replace(",", ""))
+    except ValueError:
+        raise ValueError(f"Can't convert {v} to float.")
 
 
 def extract_file_name(response: requests.Response) -> str:
