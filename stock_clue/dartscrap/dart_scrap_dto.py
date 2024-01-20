@@ -1,6 +1,7 @@
 from dataclasses import asdict
 from dataclasses import dataclass
-from typing import Dict, List
+from enum import Enum
+from typing import Dict, List, Optional
 
 
 def _snake_to_camel(snake_str: str) -> str:
@@ -16,24 +17,24 @@ class DartScrapParamDto:
     Attributes:
         current_page (int): 현재 페이지
         max_results (int): 페이지당 최대 건수
-        max_links (str | None): 최대 링크 수
+        max_links (Optional[str]): 최대 링크 수
         sort (str): 정렬 기준    # time: 시간, crp: 회사명, rpt: 보고서명
         series (str): 정렬 순서  # desc asc
-        page_grouping (str | None): 페이지 그룹
+        page_grouping (Optional[str]): 페이지 그룹
         mday_cnt (int): 조회 기준일자 이전 몇일치 공시 조회
         select_date (str): 조회 기준일자
-        text_crp_cik (str | None): 회사명 또는 종목코드
+        text_crp_cik (Optional[str]): 회사명 또는 종목코드
     """
 
     current_page: int
     max_results: int
-    max_links: str | None
+    max_links: Optional[str]
     sort: str
     series: str
-    page_grouping: str | None
+    page_grouping: Optional[str]
     mday_cnt: int
     select_date: str
-    text_crp_cik: str | None
+    text_crp_cik: Optional[str]
 
     def dict(self) -> Dict[str, str | int]:
         return {
@@ -68,10 +69,14 @@ class DisclosureInfoDto:
 class DailyDisclosureListDto:
     """
     최근공시 보고서 목록 조회 결과를 담는 dto 클래스
+
+    Attributes:
+        total (int): 총 건수
+        disclosures (List[Optional[DisclosureInfoDto]]): 최근 공시 리스트 정보
     """
 
     total: int
-    disclosures: List[DisclosureInfoDto | None]
+    disclosures: List[Optional[DisclosureInfoDto]]
 
 
 @dataclass
@@ -126,25 +131,25 @@ class DartScrapSearchParamDto:
     series: str
     start_date: str
     end_date: str
-    max_links: str | None = None
-    text_crp_cik: str | None = None
-    late_keyword: str | None = None
-    keyword: str | None = None
-    report_name_pop_yn: str | None = None
-    textkeyword: str | None = None
-    business_code: str | None = None
-    auto_search: str | None = None
-    option: str | None = None
-    report_name: str | None = None
-    text_crp_nm: str | None = None
-    text_crp_nm2: str | None = None
-    text_presenter_nm: str | None = None
-    final_report: str | None = None
-    business_nm: str | None = None
-    corporation_type: str | None = None
-    closing_accounts_month: str | None = None
-    toc_srch: str | None = None
-    toc_srch2: str | None = None
+    max_links: Optional[str] = None
+    text_crp_cik: Optional[str] = None
+    late_keyword: Optional[str] = None
+    keyword: Optional[str] = None
+    report_name_pop_yn: Optional[str] = None
+    textkeyword: Optional[str] = None
+    business_code: Optional[str] = None
+    auto_search: Optional[str] = None
+    option: Optional[str] = None
+    report_name: Optional[str] = None
+    text_crp_nm: Optional[str] = None
+    text_crp_nm2: Optional[str] = None
+    text_presenter_nm: Optional[str] = None
+    final_report: Optional[str] = None
+    business_nm: Optional[str] = None
+    corporation_type: Optional[str] = None
+    closing_accounts_month: Optional[str] = None
+    toc_srch: Optional[str] = None
+    toc_srch2: Optional[str] = None
 
     def dict(self) -> Dict[str, str | int]:
         return {
@@ -160,6 +165,15 @@ class PreliminaryEstimateDto:
     누적은 저장하지 않는다.
 
     Attributes:
+        unit (str): 단위
+        name (str): 항목명
+        table_headers (List[str]): 테이블 헤더
+        header_date (List[str]): 헤더에 표시된 날짜
+        current_q_earnings (Optional[int]): 당기실적
+        previous_q_earnings (Optional[int]): 전기실적
+        qoq (str): 전기대비증감율
+        previous_y_earnings (Optional[int]): 전년동기실적
+        yoy (str): 전년동기대비증감율
     """
 
     unit: str
@@ -167,10 +181,10 @@ class PreliminaryEstimateDto:
     table_headers: List[str]
     header_date: List[str]
 
-    current_q_earnings: int | None
-    previous_q_earnings: int | None
+    current_q_earnings: Optional[int]
+    previous_q_earnings: Optional[int]
     qoq: str
-    previous_y_earnings: int | None
+    previous_y_earnings: Optional[int]
     yoy: str
 
 
@@ -181,3 +195,21 @@ class DartScrapSearchResultDto:
     """
 
     pass
+
+
+class SearchOption(Enum):
+    """
+    통합 검색 옵션
+    """
+
+    REPORT = "report"
+    CORP = "corp"
+
+
+class SearchKeyword(Enum):
+    """
+    통합 검색 키워드
+    """
+
+    DIVIDEND_DECISION_ON_CASH = "현금ㆍ현물배당결정//현금배당결정"
+    PRELIMINARY_ESTIMATE = "연결재무제표기준영업(잠정)실적(공정공시)//영업(잠정)실적(공정공시)"

@@ -1,5 +1,5 @@
 """배당 관련 공시 페이지 파싱 모듈"""
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, List, Optional
 
 from bs4 import element
 
@@ -32,7 +32,7 @@ class PreliminaryParser:
 
         soup = BeautifulSoup(contents, "html.parser")
         title = soup.find("div", {"class", "xforms_title"})
-        table: element.Tag | element.NavigableString | None = None
+        table: Optional[element.Tag | element.NavigableString] = None
         if title is not None:
             table = title.find_next_sibling("table")
 
@@ -42,7 +42,7 @@ class PreliminaryParser:
 
         results: List[PreliminaryEstimateDto] = []
         unit = ""
-        for sub_list in table_info[0:3]:
+        for sub_list in table_info[0:13]:
             for item in sub_list:
                 if item is not None and item.find("단위") != -1:
                     if item.startswith("구분"):
@@ -73,6 +73,10 @@ class PreliminaryParser:
             for i in range(12, len(table_info)):
                 if "정보제공" in table_info[i][0]:
                     break
+                if "구분" in table_info[i][0].replace("\xa0", "").replace(
+                    " ", ""
+                ):
+                    continue
 
                 results.append(
                     PreliminaryEstimateDto(

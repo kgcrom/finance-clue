@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 
 from stock_clue.dartscrap import DartScrap
+from stock_clue.dartscrap.dart_scrap_dto import SearchKeyword
+from stock_clue.dartscrap.dart_scrap_dto import SearchOption
 from stock_clue.dartscrap.dividend_parser import DividendParser
 from stock_clue.dartscrap.dividend_parser import parse_html_table
 from stock_clue.dartscrap.list_disclosure import ListDisclosure
@@ -1856,7 +1858,10 @@ class TestDartScrap:
 
         dividend_parser = self.dart_scrap.dividend_parser
         search_results = self.list_disclosure.search(
-            search_option="report", page=1, size=10
+            search_option=SearchOption.REPORT,
+            keyword=SearchKeyword.DIVIDEND_DECISION_ON_CASH,
+            page=1,
+            size=15,
         )
         for i, s in enumerate(search_results.disclosures):
             query_string = urlparse(s.report_url).query
@@ -1889,7 +1894,7 @@ class TestDartScrap:
         영업(잠정)실적(공정공시), 매출액은 없고 수주 정보만 있는 페이지 파싱 테스트
         """
         preliminary_parser = self.dart_scrap.preliminary_parser
-        data = preliminary_parser.parse_preliminary_estimate("20240118800214")
+        data = preliminary_parser.parse_preliminary_estimate("20231219800189")
 
         assert data is not None
         assert len(data) == 4
@@ -1915,3 +1920,28 @@ class TestDartScrap:
         assert data[2].previous_q_earnings == 2514
         assert data[3].name == "(전 문 점)"
         assert data[4].name == "(기   타)"
+
+    def test_parse_list_preliminary_estimate(self):
+        """
+        영엄(잠정) 실적 리스트 조회 및 파싱 테스트
+        """
+        from urllib.parse import parse_qs
+        from urllib.parse import urlparse
+
+        preliminary_parser = self.dart_scrap.preliminary_parser
+        search_results = self.list_disclosure.search(
+            search_option=SearchOption.REPORT,
+            keyword=SearchKeyword.PRELIMINARY_ESTIMATE,
+            page=1,
+            size=15,
+        )
+        for i, s in enumerate(search_results.disclosures):
+            query_string = urlparse(s.report_url).query
+            query_params = parse_qs(query_string)
+
+            rcp_no = query_params["rcpNo"][0]
+            preliminary_estimate_info = (
+                preliminary_parser.parse_preliminary_estimate(rcp_no)
+            )
+            assert preliminary_estimate_info is not None
+            assert len(preliminary_estimate_info) > 0

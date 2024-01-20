@@ -1,7 +1,7 @@
 from dataclasses import asdict
 from dataclasses import dataclass
 from enum import Enum
-from typing import List, Optional, Any
+from typing import Any, List, Optional
 
 from stock_clue.opendart.disclosure_type import DisclosureType
 

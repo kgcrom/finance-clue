@@ -1,6 +1,6 @@
 """DART 공시정보 스크래핑"""
 import threading
-from typing import Dict
+from typing import Dict, Optional
 
 from playwright.sync_api import sync_playwright
 
@@ -50,14 +50,14 @@ class DartScrap:
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
         }
 
-    def get_html_content_no_side_menu(self, url: str) -> str | None:
+    def get_html_content_no_side_menu(self, url: str) -> Optional[str]:
         """dart.fss.or.kr의 사이드 메뉴가 없는 페이지의 html을 가져온다."""
         with self.browser.new_page() as p:
             p.goto(url)
             mf = p.wait_for_selector("#ifrm").content_frame()
             # mf.wait_for_timeout(1000)
 
-            contents: str | None = mf.content() if mf is not None else None
+            contents: Optional[str] = mf.content() if mf is not None else None
             return contents
 
     @property
