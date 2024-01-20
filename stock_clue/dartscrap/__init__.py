@@ -1,6 +1,6 @@
 """DART 공시정보 스크래핑"""
 import threading
-from typing import Dict, Optional
+from typing import Dict
 
 from playwright.sync_api import sync_playwright
 
@@ -57,8 +57,14 @@ class DartScrap:
             mf = p.wait_for_selector("#ifrm").content_frame()
             # mf.wait_for_timeout(1000)
 
-            contents: Optional[str] = mf.content() if mf is not None else None
+            contents: str | None = mf.content() if mf is not None else None
             return contents
+
+    @property
+    def list_disclosure(self):
+        from stock_clue.dartscrap.list_disclosure import ListDisclosure
+
+        return ListDisclosure(self)
 
     @property
     def dividend_parser(self):
@@ -67,7 +73,7 @@ class DartScrap:
         return DividendParser(self)
 
     @property
-    def list_disclosure(self):
-        from stock_clue.dartscrap.list_disclosure import ListDisclosure
+    def preliminary_parser(self):
+        from stock_clue.dartscrap.preliminary_parser import PreliminaryParser
 
-        return ListDisclosure(self)
+        return PreliminaryParser(self)

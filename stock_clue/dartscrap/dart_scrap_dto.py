@@ -1,6 +1,6 @@
 from dataclasses import asdict
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Union
+from typing import Dict, List
 
 
 def _snake_to_camel(snake_str: str) -> str:
@@ -35,7 +35,7 @@ class DartScrapParamDto:
     select_date: str
     text_crp_cik: str | None
 
-    def dict(self) -> Dict[str, Union[str, int]]:
+    def dict(self) -> Dict[str, str | int]:
         return {
             _snake_to_camel(k): str(v) if v is not None else ""
             for k, v in asdict(self).items()
@@ -71,7 +71,7 @@ class DailyDisclosureListDto:
     """
 
     total: int
-    disclosures: List[Union[DisclosureInfoDto, None]]
+    disclosures: List[DisclosureInfoDto | None]
 
 
 @dataclass
@@ -126,31 +126,52 @@ class DartScrapSearchParamDto:
     series: str
     start_date: str
     end_date: str
-    max_links: Optional[str] = None
-    text_crp_cik: Optional[str] = None
-    late_keyword: Optional[str] = None
-    keyword: Optional[str] = None
-    report_name_pop_yn: Optional[str] = None
-    textkeyword: Optional[str] = None
-    business_code: Optional[str] = None
-    auto_search: Optional[str] = None
-    option: Optional[str] = None
-    report_name: Optional[str] = None
-    text_crp_nm: Optional[str] = None
-    text_crp_nm2: Optional[str] = None
-    text_presenter_nm: Optional[str] = None
-    final_report: Optional[str] = None
-    business_nm: Optional[str] = None
-    corporation_type: Optional[str] = None
-    closing_accounts_month: Optional[str] = None
-    toc_srch: Optional[str] = None
-    toc_srch2: Optional[str] = None
+    max_links: str | None = None
+    text_crp_cik: str | None = None
+    late_keyword: str | None = None
+    keyword: str | None = None
+    report_name_pop_yn: str | None = None
+    textkeyword: str | None = None
+    business_code: str | None = None
+    auto_search: str | None = None
+    option: str | None = None
+    report_name: str | None = None
+    text_crp_nm: str | None = None
+    text_crp_nm2: str | None = None
+    text_presenter_nm: str | None = None
+    final_report: str | None = None
+    business_nm: str | None = None
+    corporation_type: str | None = None
+    closing_accounts_month: str | None = None
+    toc_srch: str | None = None
+    toc_srch2: str | None = None
 
-    def dict(self) -> Dict[str, Union[str, int]]:
+    def dict(self) -> Dict[str, str | int]:
         return {
             _snake_to_camel(k): str(v) if v is not None else ""
             for k, v in asdict(self).items()
         }
+
+
+@dataclass
+class PreliminaryEstimateDto:
+    """
+    영업(잠정)실적(공정공시) 페이지 파싱 결과를 담는 dto 클래스
+    누적은 저장하지 않는다.
+
+    Attributes:
+    """
+
+    unit: str
+    name: str
+    table_headers: List[str]
+    header_date: List[str]
+
+    current_q_earnings: int | None
+    previous_q_earnings: int | None
+    qoq: str
+    previous_y_earnings: int | None
+    yoy: str
 
 
 @dataclass

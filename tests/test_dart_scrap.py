@@ -1867,3 +1867,51 @@ class TestDartScrap:
 
             assert dividend_info is not None
             assert dividend_info.dividend_date is not None
+
+    def test_parse_preliminary_estimate(self):
+        """
+        영업(잠정)실적(공정공시) 페이지 파싱 테스트
+        """
+
+        preliminary_parser = self.dart_scrap.preliminary_parser
+        data = preliminary_parser.parse_preliminary_estimate("20240119900515")
+
+        assert data is not None
+        assert data[0].name == "매출액"
+        assert data[1].name == "영업이익"
+        assert data[2].name == "법인세비용차감전계속사업이익"
+        assert data[3].name == "당기순이익"
+
+        assert data[3].yoy == "흑자전환"
+
+    def test_parse_preliminary_estimate1(self):
+        """
+        영업(잠정)실적(공정공시), 매출액은 없고 수주 정보만 있는 페이지 파싱 테스트
+        """
+        preliminary_parser = self.dart_scrap.preliminary_parser
+        data = preliminary_parser.parse_preliminary_estimate("20240118800214")
+
+        assert data is not None
+        assert len(data) == 4
+        assert data[0].name == "수주(백만불, 누계기준)"
+        assert data[0].previous_q_earnings == 14741
+        assert data[1].name == "조선"
+        assert data[2].name == "해양·플랜트"
+        assert data[2].current_q_earnings == 1285
+        assert data[3].name == "엔진기계"
+
+    def test_parse_preliminary_estimate2(self):
+        """
+        영업(잠정)실적(공정공시), 매출액과 총 매출이 있는 페이지 파싱 테스트
+        """
+        preliminary_parser = self.dart_scrap.preliminary_parser
+        data = preliminary_parser.parse_preliminary_estimate("20240110800127")
+
+        assert data is not None
+        assert data[0].name == "총매출액"
+        assert data[1].name == "(할 인 점)"
+        assert data[2].name == "(트레이더스)"
+        assert data[2].current_q_earnings == 3010
+        assert data[2].previous_q_earnings == 2514
+        assert data[3].name == "(전 문 점)"
+        assert data[4].name == "(기   타)"

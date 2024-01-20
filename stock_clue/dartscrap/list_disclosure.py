@@ -144,7 +144,7 @@ class MarketGroup(Enum):
 
 def get_search_parameter(
     search_option: str, page: int, size: int
-) -> Optional[Dict[str, Union[str, int]]]:
+) -> Optional[Dict[str, str | int]]:
     """
     공시통합검색 공시목록 조회 파라미터 생성
     """
