@@ -1,11 +1,9 @@
 """DART 공시정보 스크래핑"""
-import threading
 from typing import Dict, Optional
 
 from playwright.sync_api import sync_playwright
 
 
-# TODO DartScrap() 한 프로세스에 두번이상 호출하면 오류난다.
 class DartScrap:
     def __init__(self, headless: bool = True) -> None:
         self.playwright_context = sync_playwright().start()
@@ -13,23 +11,14 @@ class DartScrap:
             headless=headless
         )
 
-        with self.browser.new_page() as page:
-            page.goto("https://dart.fss.or.kr/main.do")
-            self.cookies = page.context.cookies()
+        page = self.browser.new_page()
+        page.goto("https://dart.fss.or.kr/main.do")
+        self.cookies = page.context.cookies()
+        page.close()
 
     def __del__(self):
         self.browser.close()
         self.playwright_context.stop()
-
-    # TODO 동시성 처리하기, circular queue 사용하고 모두 사용하면 두배 늘리는것도 괜찮은 듯?
-    def _next_page(self):
-        with self.page_index_lock:
-            self.page_index += 1
-            if self.page_index == len(self.pages):
-                self.page_index = 0
-
-        print(self.page_index)
-        return self.pages[self.page_index]
 
     @property
     def headers_for_request(self) -> Dict[str, str]:
@@ -50,24 +39,24 @@ class DartScrap:
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
         }
 
-    def get_html_content_no_side_menu(self, url: str) -> str | None:
+    async def get_html_content_no_side_menu(self, url: str) -> str | None:
         """dart.fss.or.kr의 사이드 메뉴가 없는 페이지의 html을 가져온다."""
-        with self.browser.new_page() as p:
-            p.goto(url)
-            mf = p.wait_for_selector("#ifrm").content_frame()
-            # mf.wait_for_timeout(1000)
+        context = self.browser.new_context()
+        page = context.new_page()
+        page.goto(url)
 
-            contents: Optional[str] = mf.content() if mf is not None else None
-            return contents
+        page.locator("iframe").wait_for(state="attached")
+        await page.wait_for_load_state(state="domcontentloaded")
+        mf = page.frame("ifrm")
+
+        contents: Optional[str] = mf.content() if mf is not None else None
+
+        page.close()
+        context.close()
+        return contents
 
     @property
     def dividend_parser(self):
         from stock_clue.dartscrap.dividend_parser import DividendParser
 
         return DividendParser(self)
-
-    @property
-    def list_disclosure(self):
-        from stock_clue.dartscrap.list_disclosure import ListDisclosure
-
-        return ListDisclosure(self)

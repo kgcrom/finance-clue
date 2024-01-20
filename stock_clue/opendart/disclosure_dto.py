@@ -1,12 +1,12 @@
 from dataclasses import asdict
 from dataclasses import dataclass
 from enum import Enum
-from typing import List, Optional
+from typing import List, Optional, Any
 
 from stock_clue.opendart.disclosure_type import DisclosureType
 
 
-def __to_str(value: any) -> str:
+def __to_str(value: Any) -> str:
     if isinstance(value, Enum):
         return value.name
     return str(value)

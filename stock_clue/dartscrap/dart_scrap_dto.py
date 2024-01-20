@@ -1,6 +1,6 @@
 from dataclasses import asdict
 from dataclasses import dataclass
-from typing import Dict, List, Union
+from typing import Dict, List, Optional, Union
 
 
 def _snake_to_camel(snake_str: str) -> str:
@@ -66,20 +66,18 @@ class DisclosureInfoDto:
 
 @dataclass
 class DailyDisclosureListDto:
-    def __init__(
-        self, total: int, disclosures: List[Union[DisclosureInfoDto, None]]
-    ):
-        self.total = total
-        self.disclosures = disclosures
+    """
+    최근공시 보고서 목록 조회 결과를 담는 dto 클래스
+    """
 
     total: int
-    list: List[Union[DisclosureInfoDto, None]]
+    disclosures: List[Union[DisclosureInfoDto, None]]
 
 
 @dataclass
 class DividendClosingShareholders:
     """
-    주주명부 폐쇄(기준일)결정 공시 페이지 파싱 결과를 담는 데이터 클래스
+    주주명부 폐쇄(기준일)결정 공시 페이지 파싱 결과를 담는 dto 클래스
 
     Attributes:
         dividend_classification (str): 배당구분
@@ -97,7 +95,7 @@ class DividendClosingShareholders:
 @dataclass
 class DividendDecisionOnCash:
     """
-    현금.현물배당 결정 공시 페이지 파싱 결과를 담는 데이터 클래스
+    현금.현물배당 결정 공시 페이지 파싱 결과를 담는 dto 클래스
 
     Attributes:
         dividend_classification (str): 배당구분
@@ -110,7 +108,55 @@ class DividendDecisionOnCash:
 
     dividend_classification: str
     dividend_kind: str
-    dividend_amount: int
+    dividend_amount: float
     dividend_rate: float
     total_dividend_amount: int
     dividend_date: str
+
+
+@dataclass
+class DartScrapSearchParamDto:
+    """
+    통합 검색할 때 사용되는 parameter dto
+    """
+
+    current_page: int
+    max_results: int
+    sort: str
+    series: str
+    start_date: str
+    end_date: str
+    max_links: Optional[str] = None
+    text_crp_cik: Optional[str] = None
+    late_keyword: Optional[str] = None
+    keyword: Optional[str] = None
+    report_name_pop_yn: Optional[str] = None
+    textkeyword: Optional[str] = None
+    business_code: Optional[str] = None
+    auto_search: Optional[str] = None
+    option: Optional[str] = None
+    report_name: Optional[str] = None
+    text_crp_nm: Optional[str] = None
+    text_crp_nm2: Optional[str] = None
+    text_presenter_nm: Optional[str] = None
+    final_report: Optional[str] = None
+    business_nm: Optional[str] = None
+    corporation_type: Optional[str] = None
+    closing_accounts_month: Optional[str] = None
+    toc_srch: Optional[str] = None
+    toc_srch2: Optional[str] = None
+
+    def dict(self) -> Dict[str, Union[str, int]]:
+        return {
+            _snake_to_camel(k): str(v) if v is not None else ""
+            for k, v in asdict(self).items()
+        }
+
+
+@dataclass
+class DartScrapSearchResultDto:
+    """
+    통합 검색 결과 dto
+    """
+
+    pass

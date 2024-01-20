@@ -1,5 +1,5 @@
 """배당 관련 공시 페이지 파싱 모듈"""
-
+import threading
 from typing import TYPE_CHECKING
 
 from stock_clue.dartscrap.dart_scrap_dto import DividendClosingShareholders
@@ -21,6 +21,8 @@ class DividendParser:
     def parse_closing_shareholders(
         self, report_no: str
     ) -> DividendClosingShareholders:
+        from bs4 import BeautifulSoup
+
         """
         현금.현물배당을 위한 최종주주명부 폐쇄(기준일)결정 공시 페이지 파싱
 
@@ -32,7 +34,13 @@ class DividendParser:
         contents = self.dart_scrap.get_html_content_no_side_menu(url)
         if contents is None:
             raise Exception("contents is None")
-        table_info = parse_html_table(contents, 4)
+
+        soup = BeautifulSoup(contents, "html.parser")
+        table = soup.find("div", {"class", "xforms_title"}).find_next_sibling(
+            "table"
+        )
+
+        table_info = parse_html_table(table, 4)
 
         # 칼럼이 자유인 경우 문자열 필터
         return DividendClosingShareholders(
@@ -42,24 +50,39 @@ class DividendParser:
             base_date=table_info[3][2],
         )
 
-    def parse_decision_on_cash(self, report_no: str) -> DividendDecisionOnCash:
+    def parse_decision_on_cash(self, rcp_no: str) -> DividendDecisionOnCash:
         """
         현금.현물배당 결정 공시 페이지 파싱
 
         Args:
-            report_no (str): 공시 고유번호
+            rcp_no (str): 공시 고유번호
         """
-        url = f"https://dart.fss.or.kr/dsaf001/main.do?rcpNo={report_no}"
+        from bs4 import BeautifulSoup
 
-        contents = self.dart_scrap.get_html_content_no_side_menu(url)
+        url = f"https://dart.fss.or.kr/dsaf001/main.do?rcpNo={rcp_no}"
+
+        try:
+            contents = self.dart_scrap.get_html_content_no_side_menu(url)
+        except Exception as e:
+            raise Exception(f"Can't get html content. report_no: {rcp_no}")
         if contents is None:
             raise Exception("contents is None")
-        table_info = parse_html_table(contents, 3)
+
+        # TODO lxml 적용
+        soup = BeautifulSoup(contents, "html.parser")
+        table = soup.find("div", {"class", "xforms_title"}).find_next_sibling(
+            "table"
+        )
+
+        try:
+            table_info = parse_html_table(table, 3)
+        except IndexError as e:
+            raise IndexError(f"Can't parse html table. report_no: {rcp_no}")
 
         return DividendDecisionOnCash(
             dividend_classification=table_info[0][2],
             dividend_kind=table_info[1][2],
-            dividend_amount=str_to_int(table_info[3][2]),
+            dividend_amount=str_to_float(table_info[3][2]),
             dividend_rate=str_to_float(table_info[6][2]),
             total_dividend_amount=str_to_int(table_info[8][2]),
             dividend_date=table_info[9][2],

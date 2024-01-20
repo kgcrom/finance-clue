@@ -1,19 +1,21 @@
+from bs4 import BeautifulSoup
+
 from stock_clue.dartscrap import DartScrap
-from stock_clue.dartscrap.daily_disclosure import DailyDisclosure
-from stock_clue.dartscrap.daily_disclosure import MarketGroup
-from stock_clue.dartscrap.daily_disclosure import parse_daily_disclosure
 from stock_clue.dartscrap.dividend_parser import DividendParser
 from stock_clue.dartscrap.dividend_parser import parse_html_table
+from stock_clue.dartscrap.list_disclosure import ListDisclosure
+from stock_clue.dartscrap.list_disclosure import MarketGroup
+from stock_clue.dartscrap.list_disclosure import parse_daily_disclosure
 
 
 class TestDartScrap:
     def setup_class(self):
-        self.dart_scrap = DartScrap()
-        self.daily_disclosure = DailyDisclosure(self.dart_scrap)
+        self.dart_scrap = DartScrap(headless=True)
+        self.list_disclosure = ListDisclosure(self.dart_scrap)
         self.dividend_parser = DividendParser(self.dart_scrap)
 
     def test_get_kospi_daily_disclosure(self):
-        data = self.daily_disclosure.get_daily_disclosure(
+        data = self.list_disclosure.get_daily_disclosure(
             "2023.11.14", 1, MarketGroup.KOSPI
         )
 
@@ -22,15 +24,15 @@ class TestDartScrap:
         assert len(data.disclosures) == 100
 
     def test_get_kosdaq_daily_disclosure(self):
-        data = self.daily_disclosure.get_daily_disclosure(
+        data = self.list_disclosure.get_daily_disclosure(
             "2023.11.14", 1, MarketGroup.KOSDAQ
         )
         assert data is not None
-        assert data.total == 1428
+        assert data.total == 1427
         assert len(data.disclosures) == 100
 
     def test_get_all_daily_disclosure(self):
-        data = self.daily_disclosure.get_daily_disclosure("2023.11.14", 1)
+        data = self.list_disclosure.get_daily_disclosure("2023.11.14", 1)
         assert data is not None
         assert data.total > 3100
         assert len(data.disclosures) == 100
@@ -1506,7 +1508,10 @@ class TestDartScrap:
              </tbody>
             </table>
             """
-        parsed_table = parse_html_table(html_doc, 4)
+
+        soup = BeautifulSoup(html_doc, "html.parser")
+        table = soup.find("table")
+        parsed_table = parse_html_table(table, 4)
 
         assert parsed_table is not None
         assert len(parsed_table) == 11
@@ -1514,7 +1519,7 @@ class TestDartScrap:
 
     def test_parse_dividend_decision(self):
         html_doc = """
-    		<table border="1" bordercolordark="white" bordercolorlight="#666666" cellpadding="1" cellspacing="0" id="XFormD1_Form0_Table0" style="margin:0px 0px 20px 0px;width:594px;font-size:10pt;border:1px solid #7f7f7f;">
+    	<table border="1" bordercolordark="white" bordercolorlight="#666666" cellpadding="1" cellspacing="0" id="XFormD1_Form0_Table0" style="margin:0px 0px 20px 0px;width:594px;font-size:10pt;border:1px solid #7f7f7f;">
          <tbody>
           <tr>
            <td colspan="2" width="242" style="text-align: left;"> <span style="width: 242px; font-size: 10pt; display: inline;">1. 배당구분</span> </td>
@@ -1606,7 +1611,10 @@ class TestDartScrap:
          </tbody>
         </table>
     		"""
-        parsed_table = parse_html_table(html_doc, 4)
+
+        soup = BeautifulSoup(html_doc, "html.parser")
+        table = soup.find("table")
+        parsed_table = parse_html_table(table, 4)
 
         assert parsed_table is not None
         assert len(parsed_table) == 20
@@ -1764,7 +1772,10 @@ class TestDartScrap:
         </table>
             """
 
-        parsed_table = parse_html_table(html_doc, 7)
+        soup = BeautifulSoup(html_doc, "html.parser")
+        table = soup.find("table")
+
+        parsed_table = parse_html_table(table, 7)
 
         assert parsed_table is not None
         assert len(parsed_table) == 23
@@ -1781,16 +1792,78 @@ class TestDartScrap:
         assert data.end_date == "2023-07-10"
         assert data.base_date == "2023-06-30"
 
-    def test_parse_decision_on_cash(self):
+    def test_parse_decision_on_cash1(self):
         """
         현금ㆍ현물배당결정 스크랩 & 파싱 테스트
         """
-        data = self.dividend_parser.parse_decision_on_cash("20231114801725")
+
+        # 기재정정 공시
+        data = self.dividend_parser.parse_decision_on_cash("20230802800569")
 
         assert data is not None
         assert data.dividend_classification == "분기배당"
         assert data.dividend_kind == "현금배당"
-        assert data.dividend_amount == 340
-        assert data.dividend_rate == 0.9
-        assert data.dividend_date == "2023-09-30"
-        assert data.total_dividend_amount == 20432585260
+        assert data.dividend_amount == 415
+        assert data.dividend_rate == 0.2
+        assert data.dividend_date == "2023-06-30"
+        assert data.total_dividend_amount == 62397685220
+
+    def test_parse_decision_on_cash2(self):
+        """
+        현금ㆍ현물배당결정 스크랩 & 파싱 테스트
+        """
+
+        # 기재정정 공시
+        data = self.dividend_parser.parse_decision_on_cash("20240119800544")
+
+        assert data is not None
+        assert data.dividend_classification == "결산배당"
+        assert data.dividend_kind == "현금배당"
+        assert data.dividend_amount == 500
+        assert data.dividend_rate == 0.3
+        assert data.dividend_date == "2023-12-31"
+        assert data.total_dividend_amount == 103603075500
+
+    def test_parse_decision_on_cash3(self):
+        """
+        현금ㆍ현물배당결정 스크랩 & 파싱 테스트
+        """
+
+        # 우선주 표시되는 공시
+        data = self.dividend_parser.parse_decision_on_cash("20231219800337")
+
+        assert data is not None
+        assert data.dividend_classification == "결산배당"
+        assert data.dividend_kind == "현금배당"
+        assert data.dividend_amount == 200
+        assert data.dividend_rate == 0.0
+        assert data.dividend_date == "2023-12-31"
+        assert data.total_dividend_amount == 20013639150
+
+    def test_disclosure_search(self):
+        """
+        공시통합검색 스크랩 & 파싱 테스트
+        """
+        # TODO: 아직 구현되지 않았습니다.
+        pass
+
+    def test_dividend_decision_on_cash(self):
+        """
+        주주명부 폐쇄일 스크랩 & 파싱 테스트
+        """
+        from urllib.parse import parse_qs
+        from urllib.parse import urlparse
+
+        dividend_parser = self.dart_scrap.dividend_parser
+        search_results = self.list_disclosure.search(
+            search_option="report", page=1, size=10
+        )
+        for i, s in enumerate(search_results.disclosures):
+            query_string = urlparse(s.report_url).query
+            query_params = parse_qs(query_string)
+
+            rcp_no = query_params["rcpNo"][0]
+            dividend_info = dividend_parser.parse_decision_on_cash(rcp_no)
+
+            assert dividend_info is not None
+            assert dividend_info.dividend_date is not None
