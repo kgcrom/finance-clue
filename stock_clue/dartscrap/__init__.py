@@ -54,10 +54,11 @@ class DartScrap:
         """dart.fss.or.kr의 사이드 메뉴가 없는 페이지의 html을 가져온다."""
         with self.browser.new_page() as p:
             p.goto(url)
-            mf = p.wait_for_selector("#ifrm").content_frame()
-            # mf.wait_for_timeout(1000)
+            mf = p.wait_for_selector("#ifrm", state="visible")
 
-            contents: Optional[str] = mf.content() if mf is not None else None
+            contents: Optional[str] = (
+                mf.content_frame().content() if mf is not None else None
+            )
             return contents
 
     @property
@@ -77,3 +78,11 @@ class DartScrap:
         from stock_clue.dartscrap.preliminary_parser import PreliminaryParser
 
         return PreliminaryParser(self)
+
+    @property
+    def revenue_volatility_parser(self):
+        from stock_clue.dartscrap.revenue_volatility_parser import (
+            RevenueVolatilityParser,
+        )
+
+        return RevenueVolatilityParser(self)

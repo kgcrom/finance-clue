@@ -189,6 +189,55 @@ class PreliminaryEstimateDto:
 
 
 @dataclass
+class RevenueVolatilityDto:
+    """
+    매출액 또는 손익30%(대규모법인은15%)이상 페이지 파싱 결과를 담는 dto 클래스
+    누적은 저장하지 않는다.
+
+    Attribute:
+        fs_kind (str): 재무제표 종류
+        table_headers (List[str]): 테이블 헤더
+
+        current_revenue (int): 매출액 당기실적
+        previous_value (int): 매출액 전기실적
+        diff_revenue_amount (int): 매출액 증감금액
+        diff_revenue_ratio (str): 매출액 증감비율(%)
+
+        current_op (int): 영업이익 당기실적
+        previous_op (int): 영업이익 전기실적
+        diff_op_amount (int): 영업이익 증감금액
+        diff_op_ratio (str): 영업이익 증감비율(%)
+
+        current_net_income (int): 순이익 당기실적
+        previous_net_income (int): 순이익 전기실적
+        diff_net_income_amount (int): 순이익 증감금액
+        diff_net_income_ratio (str): 순이익 증감비율(%)
+
+        cause (str): 사유
+    """
+
+    fs_kind: str
+    table_headers: List[str]
+
+    current_revenue: int
+    previous_revenue: int
+    diff_revenue_amount: int
+    diff_revenue_ratio: str
+
+    current_op: int
+    previous_op: int
+    diff_op_amount: int
+    diff_op_ratio: str
+
+    current_net_income: int
+    previous_net_income: int
+    diff_net_income_amount: int
+    diff_net_income_ratio: str
+
+    cause: str
+
+
+@dataclass
 class DartScrapSearchResultDto:
     """
     통합 검색 결과 dto
@@ -213,3 +262,4 @@ class SearchKeyword(Enum):
 
     DIVIDEND_DECISION_ON_CASH = "현금ㆍ현물배당결정//현금배당결정"
     PRELIMINARY_ESTIMATE = "연결재무제표기준영업(잠정)실적(공정공시)//영업(잠정)실적(공정공시)"
+    REVENUE_VOLATILITY = "매출액또는손익30%(대규모법인은15%)이상변경//매출액또는손익구조30%(대규모법인15%)미만변경(자율공시)//매출액또는손익구조30%(대규모법인은15%)미만변동(자율공시)//매출액또는손익구조30%(대규모법인은15%)이상변경//매출액또는손익구조30%(대규모법인은15%)이상변동"

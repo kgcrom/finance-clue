@@ -1945,3 +1945,55 @@ class TestDartScrap:
             )
             assert preliminary_estimate_info is not None
             assert len(preliminary_estimate_info) > 0
+
+    def test_parse_revenue_volatility(self):
+        """
+        매출액 또는 손익30%(대규모법인은15%)이상 변경 공시 페이지 파싱 테스트
+        """
+        revenue_volatility = self.dart_scrap.revenue_volatility_parser
+        data = revenue_volatility.parse_revenue_volatility("20240126900525")
+
+        assert data is not None
+        assert data.fs_kind == "개별"
+        assert data.current_revenue == 8789087326
+        assert data.previous_revenue == 7644000304
+        assert data.diff_revenue_amount == 1145087022
+        assert data.diff_revenue_ratio == "15.0"
+
+    def test_parse_revenue_volatility1(self):
+        """
+        매출액 또는 손익30%(대규모법인은15%)이상 변경 첫줄에 주석이 있는 공시 페이지 파싱 테스트
+        """
+        revenue_volatility = self.dart_scrap.revenue_volatility_parser
+        data = revenue_volatility.parse_revenue_volatility("20240126800566")
+
+        assert data is not None
+        assert data.fs_kind == "연결"
+        assert data.current_net_income == 85978496
+        assert data.previous_net_income == -50164252
+        assert data.diff_net_income_amount == 136142748
+        assert data.diff_net_income_ratio == "흑자전환"
+
+    def test_parse_list_revenue_volatility(self):
+        """
+        매출액 또는 손익30%(대규모법인은15%)이상 변경 공시 리스트 조회 및 파싱 테스트
+        """
+        from urllib.parse import parse_qs
+        from urllib.parse import urlparse
+
+        revenue_volatility = self.dart_scrap.revenue_volatility_parser
+        search_results = self.list_disclosure.search(
+            search_option=SearchOption.REPORT,
+            keyword=SearchKeyword.REVENUE_VOLATILITY,
+            page=1,
+            size=15,
+        )
+        for i, s in enumerate(search_results.disclosures):
+            query_string = urlparse(s.report_url).query
+            query_params = parse_qs(query_string)
+
+            rcp_no = query_params["rcpNo"][0]
+            revenue_volatility_info = (
+                revenue_volatility.parse_revenue_volatility(rcp_no)
+            )
+            assert revenue_volatility_info is not None
