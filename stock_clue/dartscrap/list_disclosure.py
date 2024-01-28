@@ -90,18 +90,11 @@ def parse_search_disclosure(html_doc: str) -> DailyDisclosureListDto:
     soup = BeautifulSoup(html_doc, "html.parser")
 
     total = 0
-    current_page = 1
-    total_page = 1
     page_info = soup.find("div", {"class": "pageInfo"})
-    if isinstance(page_info, Tag):
-        text = page_info.text
-        # TODO page_info.text 파싱해서 값 할당
-        # TODO page_info.text가 없는 경우 처리
-    else:
+    if not isinstance(page_info, Tag):
         return DailyDisclosureListDto(total=0, disclosures=[])
 
     table = soup.find("table")
-    thead = table.find("thead")
     tbody = table.find("tbody")
     table_rows: ResultSet = tbody.find_all("tr")
 

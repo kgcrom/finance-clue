@@ -6,12 +6,6 @@ from typing import Any, List, Optional
 from stock_clue.opendart.disclosure_type import DisclosureType
 
 
-def __to_str(value: Any) -> str:
-    if isinstance(value, Enum):
-        return value.name
-    return str(value)
-
-
 @dataclass
 class ListInputDto:
     """
@@ -45,7 +39,9 @@ class ListInputDto:
 
     def dict(self):
         return {
-            k: __to_str(v) for k, v in asdict(self).items() if v is not None
+            k: v.name if isinstance(v, Enum) else str(v)
+            for k, v in asdict(self).items()
+            if v is not None
         }
 
 

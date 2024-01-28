@@ -1,5 +1,4 @@
 """배당 관련 공시 페이지 파싱 모듈"""
-import threading
 from typing import TYPE_CHECKING
 
 from stock_clue.dartscrap.dart_scrap_dto import DividendClosingShareholders
@@ -21,14 +20,14 @@ class DividendParser:
     def parse_closing_shareholders(
         self, report_no: str
     ) -> DividendClosingShareholders:
-        from bs4 import BeautifulSoup
-
         """
         현금.현물배당을 위한 최종주주명부 폐쇄(기준일)결정 공시 페이지 파싱
 
         Args:
             report_no (str): 공시 고유번호
         """
+        from bs4 import BeautifulSoup
+
         url = f"https://dart.fss.or.kr/dsaf001/main.do?rcpNo={report_no}"
 
         contents = self.dart_scrap.get_html_content_no_side_menu(url)
@@ -64,7 +63,7 @@ class DividendParser:
         try:
             contents = self.dart_scrap.get_html_content_no_side_menu(url)
         except Exception as e:
-            raise Exception(f"Can't get html content. report_no: {rcp_no}")
+            raise Exception(f"Can't get html content. report_no: {rcp_no}, {e}")
         if contents is None:
             raise Exception("contents is None")
 

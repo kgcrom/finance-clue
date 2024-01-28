@@ -1,5 +1,4 @@
 """DART 공시정보 스크래핑"""
-import threading
 from typing import Dict, Optional
 
 from playwright.sync_api import sync_playwright
@@ -20,16 +19,6 @@ class DartScrap:
     def __del__(self):
         self.browser.close()
         self.playwright_context.stop()
-
-    # TODO 동시성 처리하기, circular queue 사용하고 모두 사용하면 두배 늘리는것도 괜찮은 듯?
-    def _next_page(self):
-        with self.page_index_lock:
-            self.page_index += 1
-            if self.page_index == len(self.pages):
-                self.page_index = 0
-
-        print(self.page_index)
-        return self.pages[self.page_index]
 
     @property
     def headers_for_request(self) -> Dict[str, str]:
@@ -86,3 +75,11 @@ class DartScrap:
         )
 
         return RevenueVolatilityParser(self)
+
+    @property
+    def facility_invest_parser(self):
+        from stock_clue.dartscrap.facility_invest_parser import (
+            FacilityInvestParser,
+        )
+
+        return FacilityInvestParser(self)

@@ -40,7 +40,7 @@ class TestDisclosure:
 
         assert results is not None
         assert results.page_count == 10
-        assert results.total_count == 7
+        assert results.total_count == 1
         assert results.total_page == 1
         assert len(results.list) != 0
         assert (

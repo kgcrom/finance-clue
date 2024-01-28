@@ -1,5 +1,6 @@
 from dataclasses import asdict
 from dataclasses import dataclass
+from datetime import datetime
 from enum import Enum
 from typing import Dict, List, Optional
 
@@ -238,12 +239,55 @@ class RevenueVolatilityDto:
 
 
 @dataclass
+class FacilityInvestDto:
+    """
+    신규투자 공시 페이지 파싱 결과를 담는 dto 클래스
+
+    Attributes:
+        correction_publish_date (Optional[datetime]): 정정일자
+        correction_submit_date (Optional[datetime]): 정정공시서류 제출일
+        correction_cause (Optional[str]): 정정사유
+        correction_cause_detail (Optional[str]): 정정 사유 상세
+        correction_note1 (Optional[str]): 정정사항1
+        correction_note2 (Optional[str]): 정정사항2
+
+        invest_amount (int): 투자금액
+        equity_amount (int): 자기자본
+        equity_ratio (float): 자기자본비율
+        is_large_scale_corporation (bool): 대규모법인 여부
+        investment_purpose (str): 투자목적
+        investment_start_date (str): 투자시작일
+        investment_end_date (str): 투자종료일
+        investment_decision_date (str): 투자결정일
+        investment_note (str): 투자판단 참고사항
+
+    """
+
+    correction_publish_date: Optional[datetime]
+    correction_submit_date: Optional[datetime]
+    correction_cause: Optional[str]
+    correction_cause_detail: Optional[str]
+    correction_note1: Optional[List[str]]
+    correction_note2: Optional[List[str]]
+
+    invest_amount: int
+    equity_amount: int
+    equity_ratio: float
+    is_large_scale_corporation: bool
+
+    investment_purpose: str
+    investment_start_date: datetime
+    investment_end_date: datetime
+    investment_decision_date: datetime
+
+    investment_note: str
+
+
+@dataclass
 class DartScrapSearchResultDto:
     """
     통합 검색 결과 dto
     """
-
-    pass
 
 
 class SearchOption(Enum):
@@ -262,4 +306,11 @@ class SearchKeyword(Enum):
 
     DIVIDEND_DECISION_ON_CASH = "현금ㆍ현물배당결정//현금배당결정"
     PRELIMINARY_ESTIMATE = "연결재무제표기준영업(잠정)실적(공정공시)//영업(잠정)실적(공정공시)"
-    REVENUE_VOLATILITY = "매출액또는손익30%(대규모법인은15%)이상변경//매출액또는손익구조30%(대규모법인15%)미만변경(자율공시)//매출액또는손익구조30%(대규모법인은15%)미만변동(자율공시)//매출액또는손익구조30%(대규모법인은15%)이상변경//매출액또는손익구조30%(대규모법인은15%)이상변동"
+    REVENUE_VOLATILITY = (
+        "매출액또는손익30%(대규모법인은15%)이상변경//"
+        "매출액또는손익구조30%(대규모법인15%)미만변경(자율공시)//"
+        "매출액또는손익구조30%(대규모법인은15%)미만변동(자율공시)//"
+        "매출액또는손익구조30%(대규모법인은15%)이상변경//"
+        "매출액또는손익구조30%(대규모법인은15%)이상변동"
+    )
+    INVEST_NEW_FACILITIES = "신규시설투자등//신규시설투자등(자율공시)"

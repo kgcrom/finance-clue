@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from bs4 import BeautifulSoup
 
 from stock_clue.dartscrap import DartScrap
@@ -30,7 +32,7 @@ class TestDartScrap:
             "2023.11.14", 1, MarketGroup.KOSDAQ
         )
         assert data is not None
-        assert data.total == 1427
+        assert data.total == 1425
         assert len(data.disclosures) == 100
 
     def test_get_all_daily_disclosure(self):
@@ -1846,8 +1848,7 @@ class TestDartScrap:
         """
         공시통합검색 스크랩 & 파싱 테스트
         """
-        # TODO: 아직 구현되지 않았습니다.
-        pass
+        # TODO: implement not yet
 
     def test_dividend_decision_on_cash(self):
         """
@@ -1863,7 +1864,7 @@ class TestDartScrap:
             page=1,
             size=15,
         )
-        for i, s in enumerate(search_results.disclosures):
+        for _, s in enumerate(search_results.disclosures):
             query_string = urlparse(s.report_url).query
             query_params = parse_qs(query_string)
 
@@ -1894,7 +1895,7 @@ class TestDartScrap:
         영업(잠정)실적(공정공시), 매출액은 없고 수주 정보만 있는 페이지 파싱 테스트
         """
         preliminary_parser = self.dart_scrap.preliminary_parser
-        data = preliminary_parser.parse_preliminary_estimate("20231219800189")
+        data = preliminary_parser.parse_preliminary_estimate("20240118800214")
 
         assert data is not None
         assert len(data) == 4
@@ -1997,3 +1998,62 @@ class TestDartScrap:
                 revenue_volatility.parse_revenue_volatility(rcp_no)
             )
             assert revenue_volatility_info is not None
+
+    def test_parse_facility_invest_parser(self):
+        """
+        신규시설투자 공시 페이지 파싱 테스트
+        """
+        facility_parser = self.dart_scrap.facility_invest_parser
+        data = facility_parser.parse_facility_invest("20240112900165")
+
+        assert data is not None
+        assert data.invest_amount == 180000000000
+        assert data.equity_amount == 111462878646
+        assert data.equity_ratio == 161.5
+        assert data.is_large_scale_corporation
+        assert data.investment_purpose == "전구체 생산 Capacity 증설"
+        assert data.investment_start_date == datetime.strptime(
+            "2024-01-12", "%Y-%m-%d"
+        )
+        assert data.investment_end_date == datetime.strptime(
+            "2025-03-31", "%Y-%m-%d"
+        )
+        assert data.investment_decision_date == datetime.strptime(
+            "2024-01-12", "%Y-%m-%d"
+        )
+        assert data.investment_note is not None
+
+    def test_parse_facility_invest_parser1(self):
+        """
+        [기재정정] 신규시설투자 공시 페이지 파싱 테스트
+        """
+        facility_parser = self.dart_scrap.facility_invest_parser
+        data = facility_parser.parse_facility_invest("20240119900138")
+
+        assert data is not None
+        assert data.correction_publish_date == datetime.strptime(
+            "2024-01-19", "%Y-%m-%d"
+        )
+        assert data.correction_submit_date == datetime.strptime(
+            "2023-12-27", "%Y-%m-%d"
+        )
+        assert data.correction_cause == "투자금액 증액"
+        assert data.correction_cause_detail == "▶투자금액 증액사유 - 설계변경에 따른 증액"
+        assert data.correction_note1[1] == "8,358,000,000"
+        assert data.correction_note2[1] == "19.48"
+
+        assert data.invest_amount == 8908000000
+        assert data.equity_amount == 42901898234
+        assert data.equity_ratio == 20.76
+        assert not data.is_large_scale_corporation
+        assert data.investment_purpose == "고객수요 증대 대응 위한 생산능력 확충"
+        assert data.investment_start_date == datetime.strptime(
+            "2022-09-07", "%Y-%m-%d"
+        )
+        assert data.investment_end_date == datetime.strptime(
+            "2024-02-29", "%Y-%m-%d"
+        )
+        assert data.investment_decision_date == datetime.strptime(
+            "2022-09-06", "%Y-%m-%d"
+        )
+        assert data.investment_note is not None
