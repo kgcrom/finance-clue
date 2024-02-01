@@ -32,35 +32,44 @@ class FacilityInvestParser:
             raise Exception("contents is None")
 
         soup = BeautifulSoup(contents, "html.parser")
-        tables = soup.find_all("table")
-        correction_publish_info = (
-            parse_html_table(tables[0], 2) if len(tables) != 1 else None
-        )
-        correction_table_info = (
-            parse_html_table(tables[1], 3) if len(tables) != 1 else None
-        )
-        correction_table_info2 = (
-            parse_html_table(tables[2], 1) if len(tables) >= 4 else None
-        )
 
         title = soup.find("div", {"class", "xforms_title"})
         table: Optional[element.Tag | element.NavigableString] = None
         if title is not None:
             table = title.find_next_sibling("table")
 
+        d = title.find_previous_sibling("div")
+        correction_tables = d.find_all("table") if d is not None else None
+        correction_publish_info = (
+            parse_html_table(correction_tables[0], 2)
+            if correction_tables is not None and len(correction_tables) != 1
+            else None
+        )
+        correction_table_info = (
+            parse_html_table(correction_tables[1], 3)
+            if correction_tables is not None and len(correction_tables) != 1
+            else None
+        )
+        correction_table_info2 = (
+            parse_html_table(correction_tables[2], 1)
+            if correction_tables is not None and len(correction_tables) >= 3
+            else None
+        )
+
         table_info: List[List[str]] = []
         if table is not None:
             table_info = parse_html_table(table, 3)
 
+        # 투자대상을 추가 정보로 적는 보고서 존재
+        begin_idx = 1 if "투자대상" in table_info[1][0] else 0
+        investment_note = next(
+            filter(lambda x: "기타 투자판단" in x[0], table_info[10:])
+        )
         return FacilityInvestDto(
-            correction_publish_date=datetime.strptime(
-                correction_publish_info[0][1], "%Y-%m-%d"
-            )
+            correction_publish_date=correction_publish_info[0][1]
             if correction_publish_info is not None
             else None,
-            correction_submit_date=datetime.strptime(
-                correction_table_info[1][1], "%Y-%m-%d"
-            )
+            correction_submit_date=correction_table_info[1][1]
             if correction_table_info is not None
             else None,
             correction_cause=correction_table_info[2][1]
@@ -78,17 +87,13 @@ class FacilityInvestParser:
             if correction_table_info is not None
             and correction_table_info[6] is not None
             else None,
-            invest_amount=str_to_int(table_info[1][2]),
-            equity_amount=str_to_int(table_info[2][2]),
-            equity_ratio=str_to_float(table_info[3][2]),
-            is_large_scale_corporation=table_info[4][2] == "해당",
-            investment_purpose=table_info[5][2],
-            investment_start_date=datetime.strptime(
-                table_info[6][2], "%Y-%m-%d"
-            ),
-            investment_end_date=datetime.strptime(table_info[7][2], "%Y-%m-%d"),
-            investment_decision_date=datetime.strptime(
-                table_info[8][2], "%Y-%m-%d"
-            ),
-            investment_note=table_info[14][2],
+            invest_amount=str_to_int(table_info[begin_idx + 1][2]),
+            equity_amount=str_to_int(table_info[begin_idx + 2][2]),
+            equity_ratio=str_to_float(table_info[begin_idx + 3][2]),
+            is_large_scale_corporation=table_info[begin_idx + 4][2] == "해당",
+            investment_purpose=table_info[begin_idx + 5][2].replace("\n", " "),
+            investment_start_date=table_info[begin_idx + 6][2],
+            investment_end_date=table_info[begin_idx + 7][2],
+            investment_decision_date=table_info[begin_idx + 8][2],
+            investment_note=investment_note[2],
         )

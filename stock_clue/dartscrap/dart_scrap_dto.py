@@ -1,6 +1,5 @@
 from dataclasses import asdict
 from dataclasses import dataclass
-from datetime import datetime
 from enum import Enum
 from typing import Dict, List, Optional
 
@@ -244,8 +243,8 @@ class FacilityInvestDto:
     신규투자 공시 페이지 파싱 결과를 담는 dto 클래스
 
     Attributes:
-        correction_publish_date (Optional[datetime]): 정정일자
-        correction_submit_date (Optional[datetime]): 정정공시서류 제출일
+        correction_publish_date (Optional[str]): 정정일자
+        correction_submit_date (Optional[str]): 정정공시서류 제출일
         correction_cause (Optional[str]): 정정사유
         correction_cause_detail (Optional[str]): 정정 사유 상세
         correction_note1 (Optional[str]): 정정사항1
@@ -256,15 +255,15 @@ class FacilityInvestDto:
         equity_ratio (float): 자기자본비율
         is_large_scale_corporation (bool): 대규모법인 여부
         investment_purpose (str): 투자목적
-        investment_start_date (str): 투자시작일
-        investment_end_date (str): 투자종료일
-        investment_decision_date (str): 투자결정일
+        investment_start_date (Optional[str]): 투자시작일
+        investment_end_date (Optional[str]): 투자종료일
+        investment_decision_date (Optional[str]): 투자결정일
         investment_note (str): 투자판단 참고사항
 
     """
 
-    correction_publish_date: Optional[datetime]
-    correction_submit_date: Optional[datetime]
+    correction_publish_date: Optional[str]
+    correction_submit_date: Optional[str]
     correction_cause: Optional[str]
     correction_cause_detail: Optional[str]
     correction_note1: Optional[List[str]]
@@ -276,9 +275,9 @@ class FacilityInvestDto:
     is_large_scale_corporation: bool
 
     investment_purpose: str
-    investment_start_date: datetime
-    investment_end_date: datetime
-    investment_decision_date: datetime
+    investment_start_date: Optional[str]
+    investment_end_date: Optional[str]
+    investment_decision_date: Optional[str]
 
     investment_note: str
 

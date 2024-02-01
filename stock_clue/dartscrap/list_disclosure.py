@@ -2,6 +2,7 @@
 from datetime import datetime
 from datetime import timedelta
 from enum import Enum
+import re
 from typing import TYPE_CHECKING, Dict, Optional, Union
 
 from bs4 import BeautifulSoup
@@ -89,10 +90,11 @@ def parse_search_disclosure(html_doc: str) -> DailyDisclosureListDto:
     """
     soup = BeautifulSoup(html_doc, "html.parser")
 
-    total = 0
     page_info = soup.find("div", {"class": "pageInfo"})
     if not isinstance(page_info, Tag):
         return DailyDisclosureListDto(total=0, disclosures=[])
+
+    total = int(re.findall("\d+", page_info.text)[2])
 
     table = soup.find("table")
     tbody = table.find("tbody")

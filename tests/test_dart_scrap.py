@@ -2012,15 +2012,9 @@ class TestDartScrap:
         assert data.equity_ratio == 161.5
         assert data.is_large_scale_corporation
         assert data.investment_purpose == "전구체 생산 Capacity 증설"
-        assert data.investment_start_date == datetime.strptime(
-            "2024-01-12", "%Y-%m-%d"
-        )
-        assert data.investment_end_date == datetime.strptime(
-            "2025-03-31", "%Y-%m-%d"
-        )
-        assert data.investment_decision_date == datetime.strptime(
-            "2024-01-12", "%Y-%m-%d"
-        )
+        assert data.investment_start_date == "2024-01-12"
+        assert data.investment_end_date == "2025-03-31"
+        assert data.investment_decision_date == "2024-01-12"
         assert data.investment_note is not None
 
     def test_parse_facility_invest_parser1(self):
@@ -2031,12 +2025,8 @@ class TestDartScrap:
         data = facility_parser.parse_facility_invest("20240119900138")
 
         assert data is not None
-        assert data.correction_publish_date == datetime.strptime(
-            "2024-01-19", "%Y-%m-%d"
-        )
-        assert data.correction_submit_date == datetime.strptime(
-            "2023-12-27", "%Y-%m-%d"
-        )
+        assert data.correction_publish_date == "2024-01-19"
+        assert data.correction_submit_date == "2023-12-27"
         assert data.correction_cause == "투자금액 증액"
         assert data.correction_cause_detail == "▶투자금액 증액사유 - 설계변경에 따른 증액"
         assert data.correction_note1[1] == "8,358,000,000"
@@ -2047,13 +2037,31 @@ class TestDartScrap:
         assert data.equity_ratio == 20.76
         assert not data.is_large_scale_corporation
         assert data.investment_purpose == "고객수요 증대 대응 위한 생산능력 확충"
-        assert data.investment_start_date == datetime.strptime(
-            "2022-09-07", "%Y-%m-%d"
-        )
-        assert data.investment_end_date == datetime.strptime(
-            "2024-02-29", "%Y-%m-%d"
-        )
-        assert data.investment_decision_date == datetime.strptime(
-            "2022-09-06", "%Y-%m-%d"
-        )
+        assert data.investment_start_date == "2022-09-07"
+        assert data.investment_end_date == "2024-02-29"
+        assert data.investment_decision_date == "2022-09-06"
+        assert data.investment_note is not None
+
+    def test_parse_facility_invest_parser2(self):
+        """
+        자회사 신규시설투자 공시 페이지 파싱 테스트
+        """
+        facility_parser = self.dart_scrap.facility_invest_parser
+        data = facility_parser.parse_facility_invest("20231220800236")
+
+        assert data is not None
+        assert data.correction_publish_date is None
+        assert data.correction_submit_date is None
+        assert data.correction_cause is None
+        assert data.correction_cause_detail is None
+
+        assert data.invest_amount == 1753400000000
+        assert data.equity_amount == 5936038726293
+        assert data.equity_ratio == 29.54
+        assert data.is_large_scale_corporation == True
+        assert data.investment_purpose == "신규 수주 대응을 위한 시설 투자"
+        assert data.investment_start_date == "2023-12-19"
+        assert data.investment_end_date == "2025-12-31"
+        assert data.investment_decision_date == "2023-12-19"
+
         assert data.investment_note is not None
