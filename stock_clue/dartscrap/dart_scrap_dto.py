@@ -177,15 +177,25 @@ class PreliminaryEstimateDto:
     """
 
     unit: str
-    name: str
-    table_headers: List[str]
-    header_date: List[str]
+    revenue_current_quarter: Optional[int] = None
+    revenue_previous_quarter: Optional[int] = None
+    revenue_qoq: Optional[str] = None
+    revenue_previous_year: Optional[int] = None
+    revenue_yoy: Optional[str] = None
 
-    current_q_earnings: Optional[int]
-    previous_q_earnings: Optional[int]
-    qoq: str
-    previous_y_earnings: Optional[int]
-    yoy: str
+    op_current_quarter: Optional[int] = None
+    op_previous_quarter: Optional[int] = None
+    op_qoq: Optional[str] = None
+    op_previous_year: Optional[int] = None
+    op_yoy: Optional[str] = None
+
+    net_income_current_quarter: Optional[int] = None
+    net_income_previous_quarter: Optional[int] = None
+    net_income_qoq: Optional[str] = None
+    net_income_previous_year: Optional[int] = None
+    net_income_yoy: Optional[str] = None
+
+    etc_info: Optional[List[List[str]]] = None
 
 
 @dataclass

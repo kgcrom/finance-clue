@@ -1883,12 +1883,10 @@ class TestDartScrap:
         data = preliminary_parser.parse_preliminary_estimate("20240119900515")
 
         assert data is not None
-        assert data[0].name == "매출액"
-        assert data[1].name == "영업이익"
-        assert data[2].name == "법인세비용차감전계속사업이익"
-        assert data[3].name == "당기순이익"
 
-        assert data[3].yoy == "흑자전환"
+        assert data.revenue_current_quarter == 44046
+        assert data.op_qoq == "+9,249(+240.92)"
+        assert data.net_income_yoy == "흑자전환"
 
     def test_parse_preliminary_estimate1(self):
         """
@@ -1898,13 +1896,11 @@ class TestDartScrap:
         data = preliminary_parser.parse_preliminary_estimate("20240118800214")
 
         assert data is not None
-        assert len(data) == 4
-        assert data[0].name == "수주(백만불, 누계기준)"
-        assert data[0].previous_q_earnings == 14741
-        assert data[1].name == "조선"
-        assert data[2].name == "해양·플랜트"
-        assert data[2].current_q_earnings == 1285
-        assert data[3].name == "엔진기계"
+        assert len(data.etc_info) == 4
+        assert data.etc_info[1][0] == "조선"
+        assert data.etc_info[2][0] == "해양·플랜트"
+        assert data.etc_info[2][2] == "1,285"
+        assert data.etc_info[3][0] == "엔진기계"
 
     def test_parse_preliminary_estimate2(self):
         """
@@ -1914,13 +1910,14 @@ class TestDartScrap:
         data = preliminary_parser.parse_preliminary_estimate("20240110800127")
 
         assert data is not None
-        assert data[0].name == "총매출액"
-        assert data[1].name == "(할 인 점)"
-        assert data[2].name == "(트레이더스)"
-        assert data[2].current_q_earnings == 3010
-        assert data[2].previous_q_earnings == 2514
-        assert data[3].name == "(전 문 점)"
-        assert data[4].name == "(기   타)"
+        assert len(data.etc_info) == 5
+        assert data.etc_info[0][0] == "총매출액"
+        assert data.etc_info[1][0] == "(할 \xa0인 \xa0점)"
+        assert data.etc_info[2][0] == "(트레이더스)"
+        assert data.etc_info[2][2] == "3,010"
+        assert data.etc_info[2][3] == "2,514"
+        assert data.etc_info[3][0] == "(전 \xa0문 \xa0점)"
+        assert data.etc_info[4][0] == "(기 \xa0 \xa0 \xa0타)"
 
     def test_parse_list_preliminary_estimate(self):
         """
@@ -1945,7 +1942,6 @@ class TestDartScrap:
                 preliminary_parser.parse_preliminary_estimate(rcp_no)
             )
             assert preliminary_estimate_info is not None
-            assert len(preliminary_estimate_info) > 0
 
     def test_parse_revenue_volatility(self):
         """

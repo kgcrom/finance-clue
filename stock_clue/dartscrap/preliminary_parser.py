@@ -19,7 +19,7 @@ class PreliminaryParser:
 
     def parse_preliminary_estimate(
         self, report_no: str
-    ) -> List[PreliminaryEstimateDto]:
+    ) -> PreliminaryEstimateDto:
         """
         영업(잠정)실적(공정공시) 페이지 파싱
         """
@@ -41,35 +41,30 @@ class PreliminaryParser:
             table_info = parse_html_table(table, 7)
 
         results: List[PreliminaryEstimateDto] = []
-        unit = ""
-        for sub_list in table_info[0:13]:
-            for item in sub_list:
-                if item is not None and item.find("단위") != -1:
-                    if item.startswith("구분"):
-                        unit = item[3:-1]
-                    else:
-                        unit = item
-                    break
-            if unit is not None:
-                break
+        unit = self.extract_unit_from_preliminary(table_info)
 
         # 영업이익, 당기순이익의 당기실적에 값이 있는 경우
         if table_info[6][2] != "-" and table_info[10][2] != "-":
-            for i in range(4, 12, 2):
-                results.append(
-                    PreliminaryEstimateDto(
-                        unit=unit,
-                        name=table_info[i][0],
-                        table_headers=table_info[2],
-                        header_date=table_info[3],
-                        current_q_earnings=str_to_int(table_info[i][2]),
-                        previous_q_earnings=str_to_int(table_info[i][3]),
-                        qoq=table_info[i][4],
-                        previous_y_earnings=str_to_int(table_info[i][5]),
-                        yoy=table_info[i][6],
-                    )
-                )
+            return PreliminaryEstimateDto(
+                unit=unit,
+                revenue_current_quarter=str_to_int(table_info[4][2]),
+                revenue_previous_quarter=str_to_int(table_info[4][3]),
+                revenue_qoq=table_info[4][4],
+                revenue_previous_year=str_to_int(table_info[4][5]),
+                revenue_yoy=table_info[4][6],
+                op_current_quarter=str_to_int(table_info[6][2]),
+                op_previous_quarter=str_to_int(table_info[6][3]),
+                op_qoq=table_info[6][4],
+                op_previous_year=str_to_int(table_info[6][5]),
+                op_yoy=table_info[6][6],
+                net_income_current_quarter=str_to_int(table_info[10][2]),
+                net_income_previous_quarter=str_to_int(table_info[10][3]),
+                net_income_qoq=table_info[10][4],
+                net_income_previous_year=str_to_int(table_info[10][5]),
+                net_income_yoy=table_info[10][6],
+            )
         else:
+            results: List[List[str]] = []
             for i in range(12, len(table_info)):
                 if "정보제공" in table_info[i][0]:
                     break
@@ -78,18 +73,25 @@ class PreliminaryParser:
                 ):
                     continue
 
-                results.append(
-                    PreliminaryEstimateDto(
-                        unit=unit,
-                        name=table_info[i][0].replace("\xa0", ""),
-                        table_headers=table_info[2],
-                        header_date=table_info[3],
-                        current_q_earnings=str_to_int(table_info[i][2]),
-                        previous_q_earnings=str_to_int(table_info[i][3]),
-                        qoq=table_info[i][4],
-                        previous_y_earnings=str_to_int(table_info[i][5]),
-                        yoy=table_info[i][6],
-                    )
-                )
+                results.append(table_info[i])
 
-        return results
+            return PreliminaryEstimateDto(
+                unit=unit,
+                etc_info=results,
+            )
+
+    def extract_unit_from_preliminary(
+        self, table_info: List[List[Optional[str]]]
+    ) -> str:
+        """
+        잠정실적 페이지에서 단위 추출하는 함수
+        """
+        for sub_list in table_info[0:13]:
+            for item in sub_list:
+                if item is not None and item.find("단위") != -1:
+                    if item.startswith("구분"):
+                        return item[3:-1]
+                    else:
+                        return item
+                    break
+        return ""
