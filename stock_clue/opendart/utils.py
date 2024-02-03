@@ -4,11 +4,12 @@ import requests
 from stock_clue.error import HttpError
 
 
-def str_to_int(v: str) -> int:
+def str_to_int(v: str, force_convert: bool = False) -> int:
     """Converts a string to an integer.
 
     Args:
         v (str): The string to be converted.
+        force_convert (bool, optional): If True, returns 0 if the input string is empty. Defaults to False.
 
     Returns:
         int: The integer value of the string. If the string is "-", returns 0.
@@ -16,8 +17,11 @@ def str_to_int(v: str) -> int:
     if not v or v == "-":
         return 0
     try:
-        return int(v.replace(",", ""))
+        t_v = v.split(".")[0] if force_convert else v
+        return int(t_v.replace(",", ""))
     except ValueError:
+        if force_convert:
+            return 0
         raise ValueError(f"Can't convert {v} to int.")
 
 

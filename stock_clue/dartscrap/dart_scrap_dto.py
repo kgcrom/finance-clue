@@ -166,14 +166,25 @@ class PreliminaryEstimateDto:
 
     Attributes:
         unit (str): 단위
-        name (str): 항목명
-        table_headers (List[str]): 테이블 헤더
-        header_date (List[str]): 헤더에 표시된 날짜
-        current_q_earnings (Optional[int]): 당기실적
-        previous_q_earnings (Optional[int]): 전기실적
-        qoq (str): 전기대비증감율
-        previous_y_earnings (Optional[int]): 전년동기실적
-        yoy (str): 전년동기대비증감율
+        revenue_current_quarter (Optional[int]): 매출액 당기실적
+        revenue_previous_quarter (Optional[int]): 매출액 전기실적
+        revenue_qoq (Optional[str]): 매출액 증감율
+        revenue_previous_year (Optional[int]): 매출액 전년동기실적
+        revenue_yoy (Optional[str]): 매출액 증감율
+
+        op_current_quarter (Optional[int]): 영업이익 당기실적
+        op_previous_quarter (Optional[int]): 영업이익 전기실적
+        op_qoq (Optional[str]): 영업이익 증감율
+        op_previous_year (Optional[int]): 영업이익 전년동기실적
+        op_yoy (Optional[str]): 영업이익 증감율
+
+        net_income_current_quarter (Optional[int]): 순이익 당기실적
+        net_income_previous_quarter (Optional[int]): 순이익 전기실적
+        net_income_qoq (Optional[str]): 순이익 증감율
+        net_income_previous_year (Optional[int]): 순이익 전년동기실적
+        net_income_yoy (Optional[str]): 순이익 증감율
+
+        etc_info (Optional[List[List[str]]]): 기타 정보
     """
 
     unit: str

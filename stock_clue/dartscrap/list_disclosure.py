@@ -245,7 +245,7 @@ class ListDisclosure:
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
         page: int = 1,
-        size: int = 15,
+        size: Union[15, 30, 50, 100] = 15,
     ) -> DailyDisclosureListDto:
         """
         공시통합검색 공시목록 조회

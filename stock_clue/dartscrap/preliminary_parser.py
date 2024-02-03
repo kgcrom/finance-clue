@@ -33,34 +33,33 @@ class PreliminaryParser:
         soup = BeautifulSoup(contents, "html.parser")
         title = soup.find("div", {"class", "xforms_title"})
         table: Optional[element.Tag | element.NavigableString] = None
-        if title is not None:
+        if title is not None and "잠정" in title.text:
             table = title.find_next_sibling("table")
 
-        table_info: List[List[str]] = []
-        if table is not None:
-            table_info = parse_html_table(table, 7)
+        if table is None:
+            raise Exception(f"this content is not preliminary, {url}")
+        table_info = parse_html_table(table, 7)
 
-        results: List[PreliminaryEstimateDto] = []
         unit = self.extract_unit_from_preliminary(table_info)
 
         # 영업이익, 당기순이익의 당기실적에 값이 있는 경우
         if table_info[6][2] != "-" and table_info[10][2] != "-":
             return PreliminaryEstimateDto(
                 unit=unit,
-                revenue_current_quarter=str_to_int(table_info[4][2]),
-                revenue_previous_quarter=str_to_int(table_info[4][3]),
+                revenue_current_quarter=str_to_int(table_info[4][2], True),
+                revenue_previous_quarter=str_to_int(table_info[4][3], True),
                 revenue_qoq=table_info[4][4],
-                revenue_previous_year=str_to_int(table_info[4][5]),
+                revenue_previous_year=str_to_int(table_info[4][5], True),
                 revenue_yoy=table_info[4][6],
-                op_current_quarter=str_to_int(table_info[6][2]),
-                op_previous_quarter=str_to_int(table_info[6][3]),
+                op_current_quarter=str_to_int(table_info[6][2], True),
+                op_previous_quarter=str_to_int(table_info[6][3], True),
                 op_qoq=table_info[6][4],
-                op_previous_year=str_to_int(table_info[6][5]),
+                op_previous_year=str_to_int(table_info[6][5], True),
                 op_yoy=table_info[6][6],
-                net_income_current_quarter=str_to_int(table_info[10][2]),
-                net_income_previous_quarter=str_to_int(table_info[10][3]),
+                net_income_current_quarter=str_to_int(table_info[10][2], True),
+                net_income_previous_quarter=str_to_int(table_info[10][3], True),
                 net_income_qoq=table_info[10][4],
-                net_income_previous_year=str_to_int(table_info[10][5]),
+                net_income_previous_year=str_to_int(table_info[10][5], True),
                 net_income_yoy=table_info[10][6],
             )
         else:

@@ -43,12 +43,12 @@ class DartScrap:
         """dart.fss.or.kr의 사이드 메뉴가 없는 페이지의 html을 가져온다."""
         with self.browser.new_page() as p:
             p.goto(url)
-            mf = p.wait_for_selector("#ifrm", state="visible")
-
-            contents: Optional[str] = (
-                mf.content_frame().content() if mf is not None else None
+            ifrm = next(
+                filter(lambda f: f.name == "ifrm", p.main_frame.child_frames)
             )
-            return contents
+            ifrm.wait_for_timeout(timeout=3000)
+
+            return ifrm.content()
 
     @property
     def list_disclosure(self):
