@@ -22,6 +22,38 @@ if TYPE_CHECKING:
     from stock_clue.dartscrap import DartScrap
 
 
+class MarketGroup(Enum):
+    KOSPI = "Y"
+    KOSDAQ = "K"
+    ALL = None
+
+
+class SortField(Enum):
+    """
+    정렬 필드
+
+    Attributes:
+        DATE: 접수일자
+        CRP: 회사명
+    """
+
+    DATE = "date"
+    CRP = "crp"
+
+
+class SortSeries(Enum):
+    """
+    정렬 순서
+
+    Attributes:
+        ASC: 오름차순
+        DESC: 내림차순
+    """
+
+    ASC = "asc"
+    DESC = "desc"
+
+
 def parse_daily_disclosure(html_doc: str) -> DailyDisclosureListDto:
     """
     최근공시 1일치 공시보고서 html 파싱
@@ -134,19 +166,15 @@ def parse_search_disclosure(html_doc: str) -> DailyDisclosureListDto:
     return DailyDisclosureListDto(total=total, disclosures=disclosures)
 
 
-class MarketGroup(Enum):
-    KOSPI = "Y"
-    KOSDAQ = "K"
-    ALL = None
-
-
 def get_search_parameter(
     search_option: SearchOption,
     keyword: SearchKeyword,
+    sort_field: str,
+    sort_series: str,
+    page: int,
+    size: int,
     start_date: Optional[str],
     end_date: Optional[str],
-    page: int = 1,
-    size: int = 15,
 ) -> Optional[Dict[str, str | int]]:
     """
     공시통합검색 공시목록 조회 파라미터 생성
@@ -154,10 +182,12 @@ def get_search_parameter(
     Args:
         search_option (SearchOption): 검색 옵션
         keyword (SearchKeyword): 검색 키워드
-        start_date (Optional[str]): 검색 시작 일자 (YYYYMMDD)
-        end_date (Optional[str]): 검색 종료 일자 (YYYYMMDD)
+        sort_field (str): 정렬 필드 (접수일자[date], 회사명[crp])
+        sort_series (str): 정렬 순서 (오름차순[asc], 내림차순[desc])
         page (int): 페이지 번호 (1부터 시작)
         size (int): 페이지 사이즈 (기본값: 15)
+        start_date (Optional[str]): 검색 시작 일자 (YYYYMMDD)
+        end_date (Optional[str]): 검색 종료 일자 (YYYYMMDD)
 
     Returns:
         Optional[Dict[str, str | int]]: 검색 파라미터
@@ -173,8 +203,8 @@ def get_search_parameter(
             current_page=page,
             max_results=size,
             max_links=None,
-            sort="date",
-            series="desc",
+            sort=sort_field,
+            series=sort_series,
             report_name_pop_yn="Y",
             business_code="all",
             option=search_option.value,
@@ -244,6 +274,8 @@ class ListDisclosure:
         keyword: SearchKeyword,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
+        sort_field: SortField = SortField.DATE,
+        sort_series: SortSeries = SortSeries.DESC,
         page: int = 1,
         size: Union[15, 30, 50, 100] = 15,
     ) -> DailyDisclosureListDto:
@@ -254,7 +286,14 @@ class ListDisclosure:
         url = "https://dart.fss.or.kr/dsab007/detailSearch.ax"
 
         form_data = get_search_parameter(
-            search_option, keyword, start_date, end_date, page, size
+            search_option,
+            keyword,
+            sort_field.value,
+            sort_series.value,
+            page,
+            size,
+            start_date,
+            end_date,
         )
 
         headers = self._dart_scrap.headers_for_request

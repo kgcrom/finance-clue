@@ -83,6 +83,6 @@ class DividendParser:
             dividend_kind=table_info[1][2],
             dividend_amount=str_to_float(table_info[3][2]),
             dividend_rate=str_to_float(table_info[6][2]),
-            total_dividend_amount=str_to_int(table_info[8][2]),
+            total_dividend_amount=str_to_int(table_info[8][2], True),
             dividend_date=table_info[9][2],
         )

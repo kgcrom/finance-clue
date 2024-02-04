@@ -15,14 +15,14 @@ if TYPE_CHECKING:
 
 
 class FacilityInvestParser:
-    """영업(잠정) 실적 공시 페이지 파싱 클래스"""
+    """신규시설 투자 공시 페이지 파싱 클래스"""
 
     def __init__(self, dart_scrap: "DartScrap"):
         self.dart_scrap = dart_scrap
 
     def parse_facility_invest(self, report_no: str) -> FacilityInvestDto:
         """
-        영업(잠정)실적(공정공시) 페이지 파싱
+        신규시설 투자 공시 페이지 파싱
         """
         from bs4 import BeautifulSoup
 
@@ -82,10 +82,11 @@ class FacilityInvestParser:
             else None,
             correction_note1=correction_table_info[5]
             if correction_table_info is not None
+            and len(correction_table_info) > 5
             else None,
             correction_note2=correction_table_info[6]
             if correction_table_info is not None
-            and correction_table_info[6] is not None
+            and len(correction_table_info) > 6
             else None,
             invest_amount=str_to_int(table_info[begin_idx + 1][2]),
             equity_amount=str_to_int(table_info[begin_idx + 2][2]),

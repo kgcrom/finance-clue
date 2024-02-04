@@ -304,6 +304,57 @@ class FacilityInvestDto:
 
 
 @dataclass
+class SupplyAgreementDto:
+    """
+    단일판매 공급계약 공시 페이지 파싱 결과를 담는 dto 클래스
+
+    Attributes:
+        correction_publish_date (Optional[str]): 정정일자
+        correction_submit_date (Optional[str]): 정정공시서류 제출일
+        correction_cause (Optional[str]): 정정사유
+        correction_cause_detail (Optional[str]): 정정 사유 상세
+        correction_note1 (Optional[str]): 정정항목1
+        correction_note2 (Optional[str]): 정정항목2
+
+        contract_name (str): 계약구분
+        contract_name_detail (Optional[str]): 체결계약명
+        contract_amount (int): 계약금액
+        recent_revenue (int): 최근 매출액
+        revenue_ratio (float): 매출액 대비 계약금액 비율
+        contractual_partner (str): 계약상대
+        supply_area (str): 공급지역
+        contract_start_date (str): 계약시작일
+        contract_end_date (str): 계약종료일
+        contract_condition (str): 계약조건
+        contract_date (str): 계약(수주)일자
+        invest_judgment_note (str): 기타 투자판단과 관련한 중요사항
+    """
+
+    correction_publish_date: Optional[str]
+    correction_submit_date: Optional[str]
+    correction_cause: Optional[str]
+    correction_cause_detail: Optional[str]
+    correction_note1: Optional[List[str]]
+    correction_note2: Optional[List[str]]
+
+    contract_name: str
+    contract_name_detail: Optional[str]
+
+    contract_amount: int
+    recent_revenue: int
+    revenue_ratio: float
+
+    contractual_partner: str
+    supply_area: str
+    contract_start_date: str
+    contract_end_date: str
+    contract_condition: str
+    contract_date: str
+
+    invest_judgment_note: str
+
+
+@dataclass
 class DartScrapSearchResultDto:
     """
     통합 검색 결과 dto
@@ -334,3 +385,5 @@ class SearchKeyword(Enum):
         "매출액또는손익구조30%(대규모법인은15%)이상변동"
     )
     INVEST_NEW_FACILITIES = "신규시설투자등//신규시설투자등(자율공시)"
+    SUPPLY_CONTRACT = "단일판매ㆍ공급계약체결//" "단일판매ㆍ공급계약체결(자율공시)//" "단일판매계약체결//"
+    SUPPLY_CONTRACT_TERMINATE = "단일판매ㆍ공급계약해지//" "단일판매ㆍ공급계약해지(자율공시)//" "단일판매계약해지"

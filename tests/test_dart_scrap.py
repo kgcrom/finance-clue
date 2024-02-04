@@ -1844,15 +1844,9 @@ class TestDartScrap:
         assert data.dividend_date == "2023-12-31"
         assert data.total_dividend_amount == 20013639150
 
-    def test_disclosure_search(self):
+    def test_parse_decision_on_cash6(self):
         """
-        공시통합검색 스크랩 & 파싱 테스트
-        """
-        # TODO: implement not yet
-
-    def test_dividend_decision_on_cash(self):
-        """
-        주주명부 폐쇄일 스크랩 & 파싱 테스트
+        현금ㆍ현물배당결정 리스트 스크랩 & 파싱 테스트
         """
         from urllib.parse import parse_qs
         from urllib.parse import urlparse
@@ -2061,3 +2055,83 @@ class TestDartScrap:
         assert data.investment_decision_date == "2023-12-19"
 
         assert data.investment_note is not None
+
+    def test_parse_supply_agreement(self):
+        """
+        단일판매 공급계약 체결 공시 페이지 파싱 테스트
+        """
+        supply_agreement_parser = self.dart_scrap.supply_agreement_parser
+        data = supply_agreement_parser.parse_supply_agreement("20240202800122")
+
+        assert data is not None
+        assert data.contract_amount == 86042000000
+        assert data.revenue_ratio == 26.26
+        assert data.contractual_partner == "SK하이닉스(SK Hynix Inc.)"
+        assert data.contract_start_date == "2024-02-01"
+
+    def test_parse_supply_agreement1(self):
+        """
+        [기재정정]단일판매 공급계약 체결 공시 페이지 파싱 테스트
+        """
+        supply_agreement_parser = self.dart_scrap.supply_agreement_parser
+        data = supply_agreement_parser.parse_supply_agreement("20240202800919")
+
+        assert data is not None
+        assert data.correction_publish_date == "2024-02-02"
+        assert data.correction_cause == "주요 계약조건에 따른 2년차 연간 유지보수료 계약체결"
+        assert data.contract_name_detail == "차세대 전산 시스템 유지보수 계약"
+        assert data.contract_amount == 23623887320
+        assert data.revenue_ratio == 2.41
+        assert data.contract_start_date == "2023-01-01"
+        assert data.contract_end_date == "2025-12-31"
+
+    def test_parse_supply_agreement2(self):
+        """
+        [기재정정]단일판매 공급계약 체결 공시 페이지 파싱 테스트
+        """
+        supply_agreement_parser = self.dart_scrap.supply_agreement_parser
+        data = supply_agreement_parser.parse_supply_agreement("20240202800919")
+
+        assert data is not None
+        assert data.correction_publish_date == "2024-02-02"
+        assert data.correction_cause == "주요 계약조건에 따른 2년차 연간 유지보수료 계약체결"
+        assert data.contract_name_detail == "차세대 전산 시스템 유지보수 계약"
+        assert data.contract_amount == 23623887320
+        assert data.revenue_ratio == 2.41
+        assert data.contract_start_date == "2023-01-01"
+        assert data.contract_end_date == "2025-12-31"
+
+    def test_parse_supply_agreement3(self):
+        """
+        [기재정정]단일판매 공급계약 체결 공시2 페이지 파싱 테스트
+        """
+        supply_agreement_parser = self.dart_scrap.supply_agreement_parser
+        data = supply_agreement_parser.parse_supply_agreement("20240202900843")
+
+        assert data is not None
+        assert data.correction_publish_date == "2024-02-02"
+        assert data.correction_cause == "계약기간 변경"
+        assert data.contract_name == "부광초교 서측 주택재개발정비사업 건축설계 용역"
+        assert data.contract_name_detail is None
+        assert data.contract_amount == 3431890000
+        assert data.recent_revenue == 155837235737
+        assert data.revenue_ratio == 2.20
+        assert data.contract_start_date == "2010-02-03"
+        assert data.contract_end_date == "2026-02-02"
+        assert data.contract_date == "2010-02-03"
+
+    def test_parse_supply_agreement4(self):
+        """
+        [기재정정]단일판매 공급계약 체결 코넥스는 계약내역이 3개 파싱 테스트
+        """
+        supply_agreement_parser = self.dart_scrap.supply_agreement_parser
+        data = supply_agreement_parser.parse_supply_agreement("20231220600643")
+
+        assert data is not None
+        assert data.correction_publish_date == "2023-12-20"
+        assert data.correction_cause == "계약 금액 변경"
+        assert data.contract_name == "2차전지 활성화장비 공급계약"
+        assert data.contract_amount == 6520121361
+        assert data.revenue_ratio == 210.76
+        assert data.contract_start_date == "2022-08-09"
+        assert data.contract_end_date == "2023-12-20"
