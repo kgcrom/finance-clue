@@ -9,7 +9,7 @@ def str_to_int(v: str, force_convert: bool = False) -> int:
 
     Args:
         v (str): The string to be converted.
-        force_convert (bool, optional): If True, returns 0 if the input string is empty. Defaults to False.
+        force_convert (bool, optional): True인 경우 소숫점도 정수로 변환합니다. 변환시 오류가 발생하면 0을 리턴합니다.
 
     Returns:
         int: The integer value of the string. If the string is "-", returns 0.

@@ -113,7 +113,7 @@ class DividendDecisionOnCash:
 
     dividend_classification: str
     dividend_kind: str
-    dividend_amount: float
+    dividend_amount: int
     dividend_rate: float
     total_dividend_amount: int
     dividend_date: str

@@ -1,12 +1,9 @@
 """배당 관련 공시 페이지 파싱 모듈"""
 from dataclasses import dataclass
-from datetime import datetime
 from typing import TYPE_CHECKING, List, Optional
 
 from bs4 import element
 
-from stock_clue.dartscrap.dart_scrap_dto import FacilityInvestDto
-from stock_clue.dartscrap.dart_scrap_dto import PreliminaryEstimateDto
 from stock_clue.dartscrap.dart_scrap_dto import SupplyAgreementDto
 from stock_clue.dartscrap.table_parser import parse_html_table
 from stock_clue.opendart.utils import str_to_float

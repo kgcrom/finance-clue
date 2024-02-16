@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from bs4 import BeautifulSoup
 
 from stock_clue.dartscrap import DartScrap
@@ -1927,7 +1925,7 @@ class TestDartScrap:
             page=1,
             size=15,
         )
-        for i, s in enumerate(search_results.disclosures):
+        for _, s in enumerate(search_results.disclosures):
             query_string = urlparse(s.report_url).query
             query_params = parse_qs(query_string)
 
