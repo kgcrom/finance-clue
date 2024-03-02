@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "stock-clue"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["kgcrom <kgcrom@hotmail.com>"]
 readme = "README.md"
