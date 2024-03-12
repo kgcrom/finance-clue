@@ -2133,3 +2133,36 @@ class TestDartScrap:
         assert data.revenue_ratio == 210.76
         assert data.contract_start_date == "2022-08-09"
         assert data.contract_end_date == "2023-12-20"
+
+    def test_parse_retirement1(self):
+        """
+        주식소각 결정 파싱 테스트
+        """
+        retirement_parser = self.dart_scrap.retirement_treasury_stock_parser
+        data = retirement_parser.parse_retirement_treasury_stock(
+            "20230920800221"
+        )
+
+        assert data is not None
+        assert data.common_share_count == 1576903
+        assert data.issued_common_share_count == 503859595
+        assert data.retirement_amount == 8206157417
+        assert data.acquisition_method == "기취득 자기주식"
+
+    def test_parse_retirement2(self):
+        """
+        [기재정정]주식소각 결정 파싱 테스트
+        """
+        retirement_parser = self.dart_scrap.retirement_treasury_stock_parser
+        data = retirement_parser.parse_retirement_treasury_stock(
+            "20230831800042"
+        )
+
+        assert data is not None
+        assert data.common_share_count == 2842929
+        assert data.issued_common_share_count == 518347118
+        assert data.retirement_amount == 100000051050
+        assert data.acquisition_start_date_for_retirement == "2023-07-28"
+        assert data.acquisition_end_date_for_retirement == "2023-08-31"
+        assert data.acquisition_method == "장내매수"
+        assert data.acquisition_broker == "신한투자증권"

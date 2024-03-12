@@ -76,7 +76,9 @@ class DividendParser:
         try:
             table_info = parse_html_table(table, 3)
         except Exception as e:
-            raise IndexError(f"Can't parse html table. report_no: {rcp_no}, {e}")
+            raise IndexError(
+                f"Can't parse html table. report_no: {rcp_no}, {e}"
+            )
 
         return DividendDecisionOnCash(
             dividend_classification=table_info[0][2],

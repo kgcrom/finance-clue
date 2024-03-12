@@ -355,6 +355,42 @@ class SupplyAgreementDto:
 
 
 @dataclass
+class RetirementTreasuryStockDto:
+    """
+    자기주식 소각 공시 파싱 결과를 담는 dto 클래스
+
+    Attributes:
+        common_share_count (int): 소각할 보통주식 수
+        preferred_share_count (int): 소각할 우선주식 수
+        issued_common_share_count (int): 발행한 보통주식 수
+        issued_preferred_share_count (int): 발행한 우선주식 수
+        retirement_amount (int): 소각 금액
+
+        acquisition_start_date_for_retirement (str): 소각을 위한 취득 시작일
+        acquisition_end_date_for_retirement (str): 소각을 위한 취득 종료일
+
+        acquisition_method (str): 소각할 주식의 취득방법
+        acquisition_broker (str): 자기주식 취득 위탁 중개업자
+
+        retirement_date (str): 소각 예정일
+    """
+
+    common_share_count: int
+    preferred_share_count: int
+    issued_common_share_count: int
+    issued_preferred_share_count: int
+    retirement_amount: int
+
+    acquisition_start_date_for_retirement: str
+    acquisition_end_date_for_retirement: str
+
+    acquisition_method: str
+    acquisition_broker: str
+
+    retirement_date: str
+
+
+@dataclass
 class DartScrapSearchResultDto:
     """
     통합 검색 결과 dto
@@ -387,3 +423,4 @@ class SearchKeyword(Enum):
     INVEST_NEW_FACILITIES = "신규시설투자등//신규시설투자등(자율공시)"
     SUPPLY_CONTRACT = "단일판매ㆍ공급계약체결//" "단일판매ㆍ공급계약체결(자율공시)//" "단일판매계약체결//"
     SUPPLY_CONTRACT_TERMINATE = "단일판매ㆍ공급계약해지//" "단일판매ㆍ공급계약해지(자율공시)//" "단일판매계약해지"
+    RETIREMENT_REASURY_STOCK = "주식소각결정"
