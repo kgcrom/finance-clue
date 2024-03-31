@@ -1,4 +1,5 @@
 """HTML table 태그 컨텐츠를 파싱하는 모듈"""
+
 from typing import List, Optional
 
 from bs4 import element
@@ -19,7 +20,7 @@ class TdInfo(object):
         return False
 
 
-def parse_html_table(table: element, col_count: int):
+def parse_html_table(table: element.Tag, col_count: int):
     table_rows = table.find_all("tr")
 
     # col_count를 parameter로 받는게 아니라 판단하도록 수정

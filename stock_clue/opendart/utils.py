@@ -1,4 +1,5 @@
 """This module provides utility functions for OpenDart API."""
+
 import requests
 
 from stock_clue.error import HttpError

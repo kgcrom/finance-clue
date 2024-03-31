@@ -293,13 +293,15 @@ class BusinessReportInfo:
                 bsns_year=x["bsns_year"],
                 adtor=x["adtor"],
                 adt_opinion=x["adt_opinion"] if "adt_opinion" in x else None,
-                adt_reprt_spcmnt_matter=x["adt_reprt_spcmnt_matter"]
-                if "adt_reprt_spcmnt_matter" in x
-                else None,
+                adt_reprt_spcmnt_matter=(
+                    x["adt_reprt_spcmnt_matter"]
+                    if "adt_reprt_spcmnt_matter" in x
+                    else None
+                ),
                 emphs_matter=x["emphs_matter"] if "emphs_matter" in x else None,
-                core_adt_matter=x["core_adt_matter"]
-                if "core_adt_matter" in x
-                else None,
+                core_adt_matter=(
+                    x["core_adt_matter"] if "core_adt_matter" in x else None
+                ),
             )
 
         data = response.json()
@@ -601,15 +603,17 @@ class BusinessReportInfo:
                 sexdstn=x["sexdstn"],
                 birth_ym=x["birth_ym"],
                 ofcps=x["ofcps"],
-                rgit_exctv_at=x["rgit_exctv_at"]
-                if "rgit_exctv_at" in x
-                else None,
+                rgit_exctv_at=(
+                    x["rgit_exctv_at"] if "rgit_exctv_at" in x else None
+                ),
                 fte_at=x["fte_at"],
                 chrg_job=x["chrg_job"],
                 main_career=x["main_career"],
-                maxmm_shrholdr_relate=x["maxmm_shrholdr_relate"]
-                if "maxmm_shrholdr_relate" in x
-                else None,
+                maxmm_shrholdr_relate=(
+                    x["maxmm_shrholdr_relate"]
+                    if "maxmm_shrholdr_relate" in x
+                    else None
+                ),
                 hffc_pd=x["hffc_pd"],
                 tenure_end_on=x["tenure_end_on"],
             )

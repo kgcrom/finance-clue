@@ -1,4 +1,5 @@
 """HTTP Request Module"""
+
 from typing import Dict, Optional
 
 import requests

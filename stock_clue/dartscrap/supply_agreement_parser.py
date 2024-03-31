@@ -1,4 +1,5 @@
 """배당 관련 공시 페이지 파싱 모듈"""
+
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, List, Optional
 
@@ -107,7 +108,9 @@ class SupplyAgreementParser:
         )
         # assert len(list(contract_durations)) == 2
         contract_condition = next(
-            filter(lambda x: x[0].startswith("6. 주요 계약조건"), table_info[6:])
+            filter(
+                lambda x: x[0].startswith("6. 주요 계약조건"), table_info[6:]
+            )
         )[2]
         contract_date = next(
             filter(lambda x: "계약(수주)일" in x[0], table_info[6:])
@@ -119,31 +122,43 @@ class SupplyAgreementParser:
                 break
 
         return SupplyAgreementDto(
-            correction_publish_date=correction_publish_info[0][1]
-            if correction_publish_info is not None
-            else None,
-            correction_submit_date=correction_table_info[1][1]
-            if correction_table_info is not None
-            else None,
-            correction_cause=correction_table_info[2][1]
-            if correction_table_info is not None
-            else None,
-            correction_cause_detail=correction_table_info2[0][0].replace(
-                "\xa0", ""
-            )
-            if correction_table_info2 is not None
-            else None,
-            correction_note1=correction_table_info[5]
-            if correction_table_info is not None
-            else None,
-            correction_note2=correction_table_info[6]
-            if correction_table_info is not None
-            and len(correction_table_info) > 6
-            else None,
+            correction_publish_date=(
+                correction_publish_info[0][1]
+                if correction_publish_info is not None
+                else None
+            ),
+            correction_submit_date=(
+                correction_table_info[1][1]
+                if correction_table_info is not None
+                else None
+            ),
+            correction_cause=(
+                correction_table_info[2][1]
+                if correction_table_info is not None
+                else None
+            ),
+            correction_cause_detail=(
+                correction_table_info2[0][0].replace("\xa0", "")
+                if correction_table_info2 is not None
+                else None
+            ),
+            correction_note1=(
+                correction_table_info[5]
+                if correction_table_info is not None
+                else None
+            ),
+            correction_note2=(
+                correction_table_info[6]
+                if correction_table_info is not None
+                and len(correction_table_info) > 6
+                else None
+            ),
             contract_name=table_info[0][2],
-            contract_name_detail=table_info[1][2]
-            if table_info[1][0].startswith("- 세부내용")
-            else None,
+            contract_name_detail=(
+                table_info[1][2]
+                if table_info[1][0].startswith("- 세부내용")
+                else None
+            ),
             contract_amount=contract_details.contract_amount,
             recent_revenue=contract_details.recent_revenue,
             revenue_ratio=contract_details.revenue_ratio,

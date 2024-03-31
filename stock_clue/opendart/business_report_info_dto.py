@@ -1,4 +1,5 @@
 """사업보고서 주요정보 OpenDart 연동 dto Module"""
+
 from dataclasses import dataclass
 from typing import Optional
 

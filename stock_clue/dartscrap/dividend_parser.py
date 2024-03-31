@@ -1,4 +1,5 @@
 """배당 관련 공시 페이지 파싱 모듈"""
+
 from typing import TYPE_CHECKING
 
 from stock_clue.dartscrap.dart_scrap_dto import DividendClosingShareholders

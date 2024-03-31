@@ -1,4 +1,5 @@
 """OpenDart API 연동 관리 Module"""
+
 from typing import Optional
 
 

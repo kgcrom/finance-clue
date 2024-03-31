@@ -129,7 +129,10 @@ class TestBusinessReportInfo:
 
         assert result is not None
         assert (
-            filter(lambda x: x.isu_dcrs_stock_knd == "유상증자(일반공모)", result.list)
+            filter(
+                lambda x: x.isu_dcrs_stock_knd == "유상증자(일반공모)",
+                result.list,
+            )
             is not None
         )
 

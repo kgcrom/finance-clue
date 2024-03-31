@@ -1,4 +1,5 @@
 """상장기업 재무정보 조회 모듈"""
+
 from typing import Dict
 
 from stock_clue.error import HttpError
@@ -58,19 +59,23 @@ class FinancialInfo:
                 thstrm_nm=x["thstrm_nm"],
                 thstrm_dt=x["thstrm_dt"],
                 thstrm_amount=str_to_int(x["thstrm_amount"]),
-                thstrm_add_amount=str_to_int(x["thstrm_add_amount"])
-                if "thstrm_add_amount" in x
-                else None,
+                thstrm_add_amount=(
+                    str_to_int(x["thstrm_add_amount"])
+                    if "thstrm_add_amount" in x
+                    else None
+                ),
                 frmtrm_nm=x["frmtrm_nm"],
                 frmtrm_dt=x["frmtrm_dt"],
                 frmtrm_amount=str_to_int(x["frmtrm_amount"]),
-                frmtrm_add_amount=str_to_int(x["frmtrm_add_amount"])
-                if "frmtrm_add_amount" in x
-                else None,
+                frmtrm_add_amount=(
+                    str_to_int(x["frmtrm_add_amount"])
+                    if "frmtrm_add_amount" in x
+                    else None
+                ),
                 bfefrmtrm_nm=x["bfefrmtrm_nm"],
-                bfe_frmtrm_dt=x["bfe_frmtrm_dt"]
-                if "bfe_frmtrm_dt" in x
-                else None,
+                bfe_frmtrm_dt=(
+                    x["bfe_frmtrm_dt"] if "bfe_frmtrm_dt" in x else None
+                ),
                 bfefrmtrm_amount=str_to_int(x["bfefrmtrm_amount"]),
                 ord=str_to_int(x["ord"]),
                 currency=x["currency"],
@@ -119,19 +124,23 @@ class FinancialInfo:
                 thstrm_nm=x["thstrm_nm"],
                 thstrm_dt=x["thstrm_dt"],
                 thstrm_amount=str_to_int(x["thstrm_amount"]),
-                thstrm_add_amount=str_to_int(x["thstrm_add_amount"])
-                if "thstrm_add_amount" in x
-                else 0,
+                thstrm_add_amount=(
+                    str_to_int(x["thstrm_add_amount"])
+                    if "thstrm_add_amount" in x
+                    else 0
+                ),
                 frmtrm_nm=x["frmtrm_nm"],
                 frmtrm_dt=x["frmtrm_dt"],
                 frmtrm_amount=str_to_int(x["frmtrm_amount"]),
-                frmtrm_add_amount=str_to_int(x["frmtrm_add_amount"])
-                if "frmtrm_add_amount" in x
-                else 0,
+                frmtrm_add_amount=(
+                    str_to_int(x["frmtrm_add_amount"])
+                    if "frmtrm_add_amount" in x
+                    else 0
+                ),
                 bfefrmtrm_nm=x["bfefrmtrm_nm"],
-                bfe_frmtrm_dt=x["bfe_frmtrm_dt"]
-                if "bfe_frmtrm_dt" in x
-                else None,
+                bfe_frmtrm_dt=(
+                    x["bfe_frmtrm_dt"] if "bfe_frmtrm_dt" in x else None
+                ),
                 bfefrmtrm_amount=str_to_int(x["bfefrmtrm_amount"]),
                 ord=str_to_int(x["ord"]),
                 currency=x["currency"],
@@ -185,18 +194,24 @@ class FinancialInfo:
                 account_detail=x["account_detail"],
                 thstrm_nm=x["thstrm_nm"],
                 thstrm_amount=str_to_int(x["thstrm_amount"]),
-                thstrm_add_amount=str_to_int(x["thstrm_add_amount"])
-                if "thstrm_add_amount" in x
-                else None,
+                thstrm_add_amount=(
+                    str_to_int(x["thstrm_add_amount"])
+                    if "thstrm_add_amount" in x
+                    else None
+                ),
                 frmtrm_nm=x["frmtrm_nm"],
                 frmtrm_amount=str_to_int(x["frmtrm_amount"]),
                 frmtrm_q_nm=x["frmtrm_q_nm"] if "frmtrm_q_nm" in x else None,
-                frmtrm_q_amount=str_to_int(x["frmtrm_q_amount"])
-                if "frmtrm_q_amount" in x
-                else None,
-                frmtrm_add_amount=str_to_int(x["frmtrm_add_amount"])
-                if "frmtrm_add_amount" in x
-                else None,
+                frmtrm_q_amount=(
+                    str_to_int(x["frmtrm_q_amount"])
+                    if "frmtrm_q_amount" in x
+                    else None
+                ),
+                frmtrm_add_amount=(
+                    str_to_int(x["frmtrm_add_amount"])
+                    if "frmtrm_add_amount" in x
+                    else None
+                ),
                 bfefrmtrm_nm=x["bfefrmtrm_nm"],
                 bfefrmtrm_amount=str_to_int(x["bfefrmtrm_amount"]),
                 ord=str_to_int(x["ord"]),

@@ -412,7 +412,9 @@ class SearchKeyword(Enum):
     """
 
     DIVIDEND_DECISION_ON_CASH = "현금ㆍ현물배당결정//현금배당결정"
-    PRELIMINARY_ESTIMATE = "연결재무제표기준영업(잠정)실적(공정공시)//영업(잠정)실적(공정공시)"
+    PRELIMINARY_ESTIMATE = (
+        "연결재무제표기준영업(잠정)실적(공정공시)//영업(잠정)실적(공정공시)"
+    )
     REVENUE_VOLATILITY = (
         "매출액또는손익30%(대규모법인은15%)이상변경//"
         "매출액또는손익구조30%(대규모법인15%)미만변경(자율공시)//"
@@ -421,6 +423,14 @@ class SearchKeyword(Enum):
         "매출액또는손익구조30%(대규모법인은15%)이상변동"
     )
     INVEST_NEW_FACILITIES = "신규시설투자등//신규시설투자등(자율공시)"
-    SUPPLY_CONTRACT = "단일판매ㆍ공급계약체결//" "단일판매ㆍ공급계약체결(자율공시)//" "단일판매계약체결//"
-    SUPPLY_CONTRACT_TERMINATE = "단일판매ㆍ공급계약해지//" "단일판매ㆍ공급계약해지(자율공시)//" "단일판매계약해지"
+    SUPPLY_CONTRACT = (
+        "단일판매ㆍ공급계약체결//"
+        "단일판매ㆍ공급계약체결(자율공시)//"
+        "단일판매계약체결//"
+    )
+    SUPPLY_CONTRACT_TERMINATE = (
+        "단일판매ㆍ공급계약해지//"
+        "단일판매ㆍ공급계약해지(자율공시)//"
+        "단일판매계약해지"
+    )
     RETIREMENT_REASURY_STOCK = "주식소각결정"

@@ -1,4 +1,5 @@
 """공시정보 OpenDart 연동 Module"""
+
 import logging
 import tempfile
 from typing import TYPE_CHECKING, Any, Dict, List, Optional
@@ -217,9 +218,11 @@ class Disclosure:
                     lambda x: CorpCodeDto(
                         corp_code=x["corp_code"],
                         corp_name=x["corp_name"],
-                        stock_code=x["stock_code"]
-                        if len(x["stock_code"]) == 6
-                        else None,
+                        stock_code=(
+                            x["stock_code"]
+                            if len(x["stock_code"]) == 6
+                            else None
+                        ),
                         modify_date=x["modify_date"],
                     ),
                     data["list"],

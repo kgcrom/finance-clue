@@ -1,4 +1,5 @@
 """주요사항보고서 주요정보 OpenDart 연동 Module"""
+
 from typing import Dict
 
 from stock_clue.error import HttpError
@@ -166,13 +167,17 @@ class MajorReport:
                 piic_bfic_tisstk_ostk=str_to_int(x["piic_bfic_tisstk_ostk"]),
                 piic_bfic_tisstk_estk=str_to_int(x["piic_bfic_tisstk_estk"]),
                 piic_fdpp_fclt=str_to_int(x["piic_fdpp_fclt"]),
-                piic_fdpp_bsninh=str_to_int(x["piic_fdpp_bsninh"])
-                if x["piic_fdpp_bsninh"]
-                else None,
+                piic_fdpp_bsninh=(
+                    str_to_int(x["piic_fdpp_bsninh"])
+                    if x["piic_fdpp_bsninh"]
+                    else None
+                ),
                 piic_fdpp_op=str_to_int(x["piic_fdpp_op"]),
-                piic_fdpp_dtrp=str_to_int(x["piic_fdpp_dtrp"])
-                if x["piic_fdpp_dtrp"]
-                else None,
+                piic_fdpp_dtrp=(
+                    str_to_int(x["piic_fdpp_dtrp"])
+                    if x["piic_fdpp_dtrp"]
+                    else None
+                ),
                 piic_fdpp_ocsa=str_to_int(x["piic_fdpp_ocsa"]),
                 piic_fdpp_etc=str_to_int(x["piic_fdpp_etc"]),
                 piic_ic_mthn=x["piic_ic_mthn"],
@@ -308,11 +313,11 @@ class MajorReport:
                 bd_tm=x["bd_tm"],
                 bd_knd=x["bd_knd"],
                 bd_fta=str_to_int(x["bd_fta"]),
-                atcsc_rmislmt=str_to_int(x["atcsc_rmislmt"])
-                if "atcsc_rmislmt" in x
-                else None
-                if "atcsc_rmislmt" in x
-                else None,
+                atcsc_rmislmt=(
+                    str_to_int(x["atcsc_rmislmt"])
+                    if "atcsc_rmislmt" in x
+                    else None if "atcsc_rmislmt" in x else None
+                ),
                 ovis_fta=str_to_int(x["ovis_fta"]),
                 ovis_fta_crn=x["ovis_fta_crn"],
                 ovis_ster=x["ovis_ster"],
@@ -335,21 +340,21 @@ class MajorReport:
                 cvisstk_tisstk_vs=x["cvisstk_tisstk_vs"],
                 cvrqpd_bgd=x["cvrqpd_bgd"],
                 cvrqpd_edd=x["cvrqpd_edd"],
-                act_mktprcfl_cvprc_lwtrsprc=str_to_int(
-                    x["act_mktprcfl_cvprc_lwtrsprc"]
-                )
-                if "act_mktprcfl_cvprc_lwtrsprc" in x
-                else None
-                if "act_mktprcfl_cvprc_lwtrsprc" in x
-                else None,
-                act_mktprcfl_cvprc_lwtrsprc_bs=x[
-                    "act_mktprcfl_cvprc_lwtrsprc_bs"
-                ]
-                if "act_mktprcfl_cvprc_lwtrsprc_bs" in x
-                else None,
-                rmislmt_lt70p=str_to_int(x["rmislmt_lt70p"])
-                if "rmislmt_lt70p" in x
-                else None,
+                act_mktprcfl_cvprc_lwtrsprc=(
+                    str_to_int(x["act_mktprcfl_cvprc_lwtrsprc"])
+                    if "act_mktprcfl_cvprc_lwtrsprc" in x
+                    else None if "act_mktprcfl_cvprc_lwtrsprc" in x else None
+                ),
+                act_mktprcfl_cvprc_lwtrsprc_bs=(
+                    x["act_mktprcfl_cvprc_lwtrsprc_bs"]
+                    if "act_mktprcfl_cvprc_lwtrsprc_bs" in x
+                    else None
+                ),
+                rmislmt_lt70p=(
+                    str_to_int(x["rmislmt_lt70p"])
+                    if "rmislmt_lt70p" in x
+                    else None
+                ),
                 abmg=x["abmg"],
                 sbd=x["sbd"],
                 pymd=x["pymd"],
@@ -403,11 +408,11 @@ class MajorReport:
                 bd_tm=x["bd_tm"],
                 bd_knd=x["bd_knd"],
                 bd_fta=str_to_int(x["bd_fta"]),
-                atcsc_rmislmt=str_to_int(x["atcsc_rmislmt"])
-                if "atcsc_rmislmt" in x
-                else None
-                if "atcsc_rmislmt" in x
-                else None,
+                atcsc_rmislmt=(
+                    str_to_int(x["atcsc_rmislmt"])
+                    if "atcsc_rmislmt" in x
+                    else None if "atcsc_rmislmt" in x else None
+                ),
                 ovis_fta=str_to_int(x["ovis_fta"]),
                 ovis_fta_crn=x["ovis_fta_crn"],
                 ovis_ster=x["ovis_ster"],
@@ -433,21 +438,21 @@ class MajorReport:
                 nstk_isstk_tisstk_vs=x["nstk_isstk_tisstk_vs"],
                 expd_bgd=x["expd_bgd"],
                 expd_edd=x["expd_edd"],
-                act_mktprcfl_cvprc_lwtrsprc=str_to_int(
-                    x["act_mktprcfl_cvprc_lwtrsprc"]
-                )
-                if "act_mktprcfl_cvprc_lwtrsprc" in x
-                else None
-                if "act_mktprcfl_cvprc_lwtrsprc" in x
-                else None,
-                act_mktprcfl_cvprc_lwtrsprc_bs=x[
-                    "act_mktprcfl_cvprc_lwtrsprc_bs"
-                ]
-                if "act_mktprcfl_cvprc_lwtrsprc_bs" in x
-                else None,
-                rmislmt_lt70p=str_to_int(x["rmislmt_lt70p"])
-                if "rmislmt_lt70p" in x
-                else None,
+                act_mktprcfl_cvprc_lwtrsprc=(
+                    str_to_int(x["act_mktprcfl_cvprc_lwtrsprc"])
+                    if "act_mktprcfl_cvprc_lwtrsprc" in x
+                    else None if "act_mktprcfl_cvprc_lwtrsprc" in x else None
+                ),
+                act_mktprcfl_cvprc_lwtrsprc_bs=(
+                    x["act_mktprcfl_cvprc_lwtrsprc_bs"]
+                    if "act_mktprcfl_cvprc_lwtrsprc_bs" in x
+                    else None
+                ),
+                rmislmt_lt70p=(
+                    str_to_int(x["rmislmt_lt70p"])
+                    if "rmislmt_lt70p" in x
+                    else None
+                ),
                 abmg=x["abmg"],
                 sbd=x["sbd"],
                 pymd=x["pymd"],

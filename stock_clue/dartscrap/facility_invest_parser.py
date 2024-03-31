@@ -1,4 +1,5 @@
 """배당 관련 공시 페이지 파싱 모듈"""
+
 from typing import TYPE_CHECKING, List, Optional
 
 from bs4 import element
@@ -64,28 +65,38 @@ class FacilityInvestParser:
             filter(lambda x: "기타 투자판단" in x[0], table_info[10:])
         )
         return FacilityInvestDto(
-            correction_publish_date=correction_publish_info[0][1]
-            if correction_publish_info is not None
-            else None,
-            correction_submit_date=correction_table_info[1][1]
-            if correction_table_info is not None
-            else None,
-            correction_cause=correction_table_info[2][1]
-            if correction_table_info is not None
-            else None,
-            correction_cause_detail=correction_table_info2[0][0].replace(
-                "\xa0", ""
-            )
-            if correction_table_info2 is not None
-            else None,
-            correction_note1=correction_table_info[5]
-            if correction_table_info is not None
-            and len(correction_table_info) > 5
-            else None,
-            correction_note2=correction_table_info[6]
-            if correction_table_info is not None
-            and len(correction_table_info) > 6
-            else None,
+            correction_publish_date=(
+                correction_publish_info[0][1]
+                if correction_publish_info is not None
+                else None
+            ),
+            correction_submit_date=(
+                correction_table_info[1][1]
+                if correction_table_info is not None
+                else None
+            ),
+            correction_cause=(
+                correction_table_info[2][1]
+                if correction_table_info is not None
+                else None
+            ),
+            correction_cause_detail=(
+                correction_table_info2[0][0].replace("\xa0", "")
+                if correction_table_info2 is not None
+                else None
+            ),
+            correction_note1=(
+                correction_table_info[5]
+                if correction_table_info is not None
+                and len(correction_table_info) > 5
+                else None
+            ),
+            correction_note2=(
+                correction_table_info[6]
+                if correction_table_info is not None
+                and len(correction_table_info) > 6
+                else None
+            ),
             invest_amount=str_to_int(table_info[begin_idx + 1][2]),
             equity_amount=str_to_int(table_info[begin_idx + 2][2]),
             equity_ratio=str_to_float(table_info[begin_idx + 3][2]),

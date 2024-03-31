@@ -1,4 +1,5 @@
 """DART 공시정보 스크래핑"""
+
 from typing import Dict, Optional
 
 from playwright.sync_api import sync_playwright

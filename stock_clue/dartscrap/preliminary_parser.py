@@ -1,4 +1,5 @@
 """배당 관련 공시 페이지 파싱 모듈"""
+
 from typing import TYPE_CHECKING, List, Optional
 
 from bs4 import element
