@@ -4,7 +4,7 @@ from datetime import datetime
 from datetime import timedelta
 from enum import Enum
 import re
-from typing import TYPE_CHECKING, Dict, Optional, Union
+from typing import TYPE_CHECKING, Dict, Literal, Optional, Union
 
 from bs4 import BeautifulSoup
 from bs4 import ResultSet
@@ -76,7 +76,7 @@ def parse_daily_disclosure(html_doc: str) -> DailyDisclosureListDto:
 
     table_rows: ResultSet = soup.find_all("tr")
 
-    def _mapping(tr: Tag) -> Union[DisclosureInfoDto, None]:
+    def _mapping(tr: Tag) -> Optional[DisclosureInfoDto]:
         td = tr.find_all("td")
         if len(td) == 0:
             return None
@@ -127,13 +127,13 @@ def parse_search_disclosure(html_doc: str) -> DailyDisclosureListDto:
     if not isinstance(page_info, Tag):
         return DailyDisclosureListDto(total=0, disclosures=[])
 
-    total = int(re.findall("\d+", page_info.text)[2])
+    total = int(re.findall(r"\d+", page_info.text)[2])
 
     table = soup.find("table")
     tbody = table.find("tbody")
     table_rows: ResultSet = tbody.find_all("tr")
 
-    def _mapping(tr: Tag) -> Union[DisclosureInfoDto, None]:
+    def _mapping(tr: Tag) -> Optional[DisclosureInfoDto]:
         td = tr.find_all("td")
         if len(td) == 0:
             return None
@@ -176,7 +176,7 @@ def get_search_parameter(
     size: int,
     start_date: Optional[str],
     end_date: Optional[str],
-) -> Optional[Dict[str, str | int]]:
+) -> Optional[Dict[str, Union[str, int]]]:
     """
     공시통합검색 공시목록 조회 파라미터 생성
 
@@ -278,7 +278,7 @@ class ListDisclosure:
         sort_field: SortField = SortField.DATE,
         sort_series: SortSeries = SortSeries.DESC,
         page: int = 1,
-        size: Union[15, 30, 50, 100] = 15,
+        size: Literal[15, 30, 50, 100] = 15,
     ) -> DailyDisclosureListDto:
         """
         공시통합검색 공시목록 조회

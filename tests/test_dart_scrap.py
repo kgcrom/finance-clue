@@ -1,8 +1,6 @@
 from bs4 import BeautifulSoup
 
 from stock_clue.dartscrap import DartScrap
-from stock_clue.dartscrap.dart_scrap_dto import SearchKeyword
-from stock_clue.dartscrap.dart_scrap_dto import SearchOption
 from stock_clue.dartscrap.dividend_parser import DividendParser
 from stock_clue.dartscrap.dividend_parser import parse_html_table
 from stock_clue.dartscrap.list_disclosure import ListDisclosure

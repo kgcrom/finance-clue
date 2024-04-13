@@ -69,8 +69,10 @@ class SupplyAgreementParser:
         table: Optional[element.Tag | element.NavigableString] = None
         if title is not None:
             table = title.find_next_sibling("table")
+            d = title.find_previous_sibling("div")
+        else:
+            d = None
 
-        d = title.find_previous_sibling("div")
         correction_tables = d.find_all("table") if d is not None else None
         correction_publish_info = (
             parse_html_table(correction_tables[0], 2)

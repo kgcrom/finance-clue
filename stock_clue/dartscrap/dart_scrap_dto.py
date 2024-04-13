@@ -1,7 +1,7 @@
 from dataclasses import asdict
 from dataclasses import dataclass
 from enum import Enum
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union
 
 
 def _snake_to_camel(snake_str: str) -> str:
@@ -36,7 +36,7 @@ class DartScrapParamDto:
     select_date: str
     text_crp_cik: Optional[str]
 
-    def dict(self) -> Dict[str, str | int]:
+    def dict(self) -> Dict[str, Union[str, int]]:
         return {
             _snake_to_camel(k): str(v) if v is not None else ""
             for k, v in asdict(self).items()
@@ -151,7 +151,7 @@ class DartScrapSearchParamDto:
     toc_srch: Optional[str] = None
     toc_srch2: Optional[str] = None
 
-    def dict(self) -> Dict[str, str | int]:
+    def dict(self) -> Dict[str, Union[str, int]]:
         return {
             _snake_to_camel(k): str(v) if v is not None else ""
             for k, v in asdict(self).items()
