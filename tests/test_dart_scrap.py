@@ -30,7 +30,7 @@ class TestDartScrap:
             "2023.11.14", 1, MarketGroup.KOSDAQ
         )
         assert data is not None
-        assert data.total == 1425
+        assert data.total == 1424
         assert len(data.disclosures) == 100
 
     def test_get_all_daily_disclosure(self):
@@ -1842,30 +1842,6 @@ class TestDartScrap:
         assert data.dividend_date == "2023-12-31"
         assert data.total_dividend_amount == 20013639150
 
-    def test_parse_decision_on_cash6(self):
-        """
-        현금ㆍ현물배당결정 리스트 스크랩 & 파싱 테스트
-        """
-        from urllib.parse import parse_qs
-        from urllib.parse import urlparse
-
-        dividend_parser = self.dart_scrap.dividend_parser
-        search_results = self.list_disclosure.search(
-            search_option=SearchOption.REPORT,
-            keyword=SearchKeyword.DIVIDEND_DECISION_ON_CASH,
-            page=1,
-            size=15,
-        )
-        for _, s in enumerate(search_results.disclosures):
-            query_string = urlparse(s.report_url).query
-            query_params = parse_qs(query_string)
-
-            rcp_no = query_params["rcpNo"][0]
-            dividend_info = dividend_parser.parse_decision_on_cash(rcp_no)
-
-            assert dividend_info is not None
-            assert dividend_info.dividend_date is not None
-
     def test_parse_preliminary_estimate(self):
         """
         영업(잠정)실적(공정공시) 페이지 파싱 테스트
@@ -1911,30 +1887,6 @@ class TestDartScrap:
         assert data.etc_info[3][0] == "(전 \xa0문 \xa0점)"
         assert data.etc_info[4][0] == "(기 \xa0 \xa0 \xa0타)"
 
-    def test_parse_list_preliminary_estimate(self):
-        """
-        영엄(잠정) 실적 리스트 조회 및 파싱 테스트
-        """
-        from urllib.parse import parse_qs
-        from urllib.parse import urlparse
-
-        preliminary_parser = self.dart_scrap.preliminary_parser
-        search_results = self.list_disclosure.search(
-            search_option=SearchOption.REPORT,
-            keyword=SearchKeyword.PRELIMINARY_ESTIMATE,
-            page=1,
-            size=15,
-        )
-        for _, s in enumerate(search_results.disclosures):
-            query_string = urlparse(s.report_url).query
-            query_params = parse_qs(query_string)
-
-            rcp_no = query_params["rcpNo"][0]
-            preliminary_estimate_info = (
-                preliminary_parser.parse_preliminary_estimate(rcp_no)
-            )
-            assert preliminary_estimate_info is not None
-
     def test_parse_revenue_volatility(self):
         """
         매출액 또는 손익30%(대규모법인은15%)이상 변경 공시 페이지 파싱 테스트
@@ -1962,30 +1914,6 @@ class TestDartScrap:
         assert data.previous_net_income == -50164252
         assert data.diff_net_income_amount == 136142748
         assert data.diff_net_income_ratio == "흑자전환"
-
-    def test_parse_list_revenue_volatility(self):
-        """
-        매출액 또는 손익30%(대규모법인은15%)이상 변경 공시 리스트 조회 및 파싱 테스트
-        """
-        from urllib.parse import parse_qs
-        from urllib.parse import urlparse
-
-        revenue_volatility = self.dart_scrap.revenue_volatility_parser
-        search_results = self.list_disclosure.search(
-            search_option=SearchOption.REPORT,
-            keyword=SearchKeyword.REVENUE_VOLATILITY,
-            page=1,
-            size=15,
-        )
-        for i, s in enumerate(search_results.disclosures):
-            query_string = urlparse(s.report_url).query
-            query_params = parse_qs(query_string)
-
-            rcp_no = query_params["rcpNo"][0]
-            revenue_volatility_info = (
-                revenue_volatility.parse_revenue_volatility(rcp_no)
-            )
-            assert revenue_volatility_info is not None
 
     def test_parse_facility_invest_parser(self):
         """

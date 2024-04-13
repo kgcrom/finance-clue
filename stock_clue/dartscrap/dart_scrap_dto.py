@@ -391,6 +391,15 @@ class RetirementTreasuryStockDto:
 
 
 @dataclass
+class AcquisitionSharesDto:
+    """
+    자기주식 취득 결정 공시 페이지 파싱 결과를 담는 dto 클래스
+
+    Not implemented yet.
+    """
+
+
+@dataclass
 class DartScrapSearchResultDto:
     """
     통합 검색 결과 dto
