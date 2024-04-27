@@ -1,3 +1,4 @@
+import pytest
 from bs4 import BeautifulSoup
 
 from stock_clue.dartscrap import DartScrap
@@ -8,6 +9,7 @@ from stock_clue.dartscrap.list_disclosure import MarketGroup
 from stock_clue.dartscrap.list_disclosure import parse_daily_disclosure
 
 
+@pytest.mark.skip(reason="Scrap takes a long time")
 class TestDartScrap:
     def setup_class(self):
         self.dart_scrap = DartScrap(headless=True)
