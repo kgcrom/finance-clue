@@ -44,7 +44,7 @@ class PreliminaryParser:
         unit = self.extract_unit_from_preliminary(table_info)
 
         # 영업이익, 당기순이익의 당기실적에 값이 있는 경우
-        if table_info[6][2] != "-" and table_info[10][2] != "-":
+        if table_info[6][2] != "-" or table_info[10][2] != "-":
             return PreliminaryEstimateDto(
                 unit=unit,
                 revenue_current_quarter=str_to_int(table_info[4][2], True),
