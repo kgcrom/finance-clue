@@ -1,5 +1,5 @@
-import pytest
 from bs4 import BeautifulSoup
+import pytest
 
 from stock_clue.dartscrap import DartScrap
 from stock_clue.dartscrap.dividend_parser import DividendParser

@@ -5,8 +5,8 @@ from typing import TYPE_CHECKING
 from stock_clue.dartscrap.dart_scrap_dto import DividendClosingShareholders
 from stock_clue.dartscrap.dart_scrap_dto import DividendDecisionOnCash
 from stock_clue.dartscrap.table_parser import parse_html_table
-from stock_clue.opendart.utils import str_to_float
-from stock_clue.opendart.utils import str_to_int
+from stock_clue.dartscrap.utils import str_to_float
+from stock_clue.dartscrap.utils import str_to_int
 
 if TYPE_CHECKING:
     from stock_clue.dartscrap import DartScrap

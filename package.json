@@ -1,0 +1,22 @@
+{
+  "name": "@kgcrom/stock-clue",
+  "description": "Python client generator based on Finance OpenAPI specification.",
+  "devDependencies": {
+    "autorest": "~3.7.1",
+    "@autorest/core": "~3.10.2",
+    "@autorest/modelerfour": "~4.27.0"
+  },
+  "scripts": {
+    "autorest": "autorest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kgcrom/stock-clue.git"
+  },
+  "author": "kgcrom",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/kgcrom/stock-clue/issues"
+  },
+  "homepage": "https://github.com/kgcrom/stock-clue#readme"
+}

@@ -6,7 +6,7 @@ from bs4 import element
 
 from stock_clue.dartscrap.dart_scrap_dto import RevenueVolatilityDto
 from stock_clue.dartscrap.table_parser import parse_html_table
-from stock_clue.opendart.utils import str_to_int
+from stock_clue.dartscrap.utils import str_to_int
 
 if TYPE_CHECKING:
     from stock_clue.dartscrap import DartScrap
