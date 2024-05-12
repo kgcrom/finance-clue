@@ -9,9 +9,7 @@ from playwright.sync_api import sync_playwright
 class DartScrap:
     def __init__(self, headless: bool = True) -> None:
         self.playwright_context = sync_playwright().start()
-        self.browser = self.playwright_context.chromium.launch(
-            headless=headless
-        )
+        self.browser = self.playwright_context.chromium.launch(headless=headless)
 
         with self.browser.new_page() as page:
             page.goto("https://dart.fss.or.kr/main.do")
@@ -26,9 +24,7 @@ class DartScrap:
         jsession = [
             cookie for cookie in self.cookies if cookie["name"] == "JSESSIONID"
         ][0]
-        wmonid = [
-            cookie for cookie in self.cookies if cookie["name"] == "WMONID"
-        ][0]
+        wmonid = [cookie for cookie in self.cookies if cookie["name"] == "WMONID"][0]
         return {
             "Accept": "text/html, */*; q=0.01",
             "Accept-Language": "en-US,en;q=0.9,ko;q=0.8",
@@ -44,9 +40,7 @@ class DartScrap:
         """dart.fss.or.kr의 사이드 메뉴가 없는 페이지의 html을 가져온다."""
         with self.browser.new_page() as p:
             p.goto(url)
-            ifrm = next(
-                filter(lambda f: f.name == "ifrm", p.main_frame.child_frames)
-            )
+            ifrm = next(filter(lambda f: f.name == "ifrm", p.main_frame.child_frames))
             ifrm.wait_for_timeout(timeout=3000)
 
             return ifrm.content()

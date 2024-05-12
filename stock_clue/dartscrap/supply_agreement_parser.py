@@ -110,13 +110,11 @@ class SupplyAgreementParser:
         )
         # assert len(list(contract_durations)) == 2
         contract_condition = next(
-            filter(
-                lambda x: x[0].startswith("6. 주요 계약조건"), table_info[6:]
-            )
+            filter(lambda x: x[0].startswith("6. 주요 계약조건"), table_info[6:])
         )[2]
-        contract_date = next(
-            filter(lambda x: "계약(수주)일" in x[0], table_info[6:])
-        )[2]
+        contract_date = next(filter(lambda x: "계약(수주)일" in x[0], table_info[6:]))[
+            2
+        ]
 
         for i, v in enumerate(table_info[12:]):
             if "투자판단" in v[0]:
@@ -145,21 +143,16 @@ class SupplyAgreementParser:
                 else None
             ),
             correction_note1=(
-                correction_table_info[5]
-                if correction_table_info is not None
-                else None
+                correction_table_info[5] if correction_table_info is not None else None
             ),
             correction_note2=(
                 correction_table_info[6]
-                if correction_table_info is not None
-                and len(correction_table_info) > 6
+                if correction_table_info is not None and len(correction_table_info) > 6
                 else None
             ),
             contract_name=table_info[0][2],
             contract_name_detail=(
-                table_info[1][2]
-                if table_info[1][0].startswith("- 세부내용")
-                else None
+                table_info[1][2] if table_info[1][0].startswith("- 세부내용") else None
             ),
             contract_amount=contract_details.contract_amount,
             recent_revenue=contract_details.recent_revenue,

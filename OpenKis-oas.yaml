@@ -9,8 +9,10 @@ servers:
   - url: 'https://openapivts.koreainvestment.com:29443'
     description: KIS Sandbox server
 tags:
-  - name: Market
-    description: 시장정보
+  - name: DomesticStock
+    description: 국내주식
+  - name: Quatations
+    description: 시세
 
 paths:
   /oauth2/tokenP:
