@@ -38,8 +38,8 @@ def test_list_disclosure(
     resp = mock_opendart_client.list_disclosure_info(
         bgn_de="20210101",
         end_de="20210131",
-        page_no=1,
-        page_count=10,
+        page_no="1",
+        page_count="10",
     )
 
     assert resp == expected

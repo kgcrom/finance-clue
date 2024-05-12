@@ -17,6 +17,7 @@ paths:
       summary: List of Disclosure Information
       description: |
         # 공시검색
+
         공시 유형별, 회사별, 날짜별 등 여러가지 조건으로 공시보고서 검색기능을 제공합니다.
       tags:
         - Disclosure
@@ -31,8 +32,8 @@ paths:
         - name: bgn_de
           in: query
           description: |
-            시작일 
-            
+            # 시작일
+
             검색시작 접수일자(YYYYMMDD)
             1) 기본값 : 종료일(end_de)
             2) 고유번호(corp_code)가 없는 경우 검색기간은 3개월로 제한
@@ -42,7 +43,8 @@ paths:
         - name: end_de
           in: query
           description: |
-            검색종료 접수일자(YYYYMMDD)
+            # 검색종료 접수일자(YYYYMMDD)
+
             1) 기본값 : 당일
           schema:
             type: string
@@ -50,7 +52,8 @@ paths:
         - name: last_reprt_at
           in: query
           description: |
-            최종보고서만 검색여부(Y or N)
+            # 최종보고서만 검색여부(Y or N)
+
             1) 기본값 : N(정정이 있는 경우 최종정정만 검색)
           schema:
             type: string
@@ -58,8 +61,8 @@ paths:
         - name: pblntf_ty
           in: query
           description: |
-            공시유형
-            
+            # 공시유형
+
             A : 정기공시
             B: 주요사항보고
             C: 발행공시
@@ -83,7 +86,8 @@ paths:
         - name: corp_cls
           in: query
           description: |
-            법인구분
+            # 법인구분
+
             Y : 유가증권시장
             K: 코스닥
             N: 코넥스
@@ -94,7 +98,8 @@ paths:
         - name: sort
           in: query
           description: |
-            정렬
+            # 정렬
+
             접수일자: date
             회사명 : crp
             보고서명 : rpt
@@ -105,7 +110,8 @@ paths:
         - name: sort_mth
           in: query
           description: |
-            정렬방식
+            # 정렬방식
+
             오름차순(asc), 내림차순(desc)
             ※ 기본값 : desc
           schema:
@@ -114,7 +120,8 @@ paths:
         - name: page_no
           in: query
           description: |
-            페이지 번호
+            # 페이지 번호
+
             페이지 번호(1~n) 기본값 : 1
           schema:
             type: string
@@ -122,7 +129,8 @@ paths:
         - name: page_count
           in: query
           description: |
-            페이지 별 건수
+            # 페이지 별 건수
+
             페이지당 건수(1~100) 기본값 : 10, 최대값 : 100
           schema:
             type: string
@@ -138,8 +146,8 @@ paths:
                   status:
                     type: string
                     description: |
-                      에러 정보 코드
-                      
+                      # 에러 정보 코드
+
                       - 000 :정상
                       - 010 :등록되지 않은 키입니다.
                       - 011 :사용할 수 없는 키입니다. 오픈API에 등록되었으나, 일시적으로 사용 중지된 키를 통하여 검색하는 경우 발생합니다.
@@ -189,8 +197,8 @@ paths:
                       report_nm:
                         type: string
                         description: |
-                          보고서명
-                          
+                          # 보고서명
+
                           공시구분+보고서명+기타정보
                           [기재정정] : 본 보고서명으로 이미 제출된 보고서의 기재내용이 변경되어 제출된 것임
                           [첨부정정] : 본 보고서명으로 이미 제출된 보고서의 첨부내용이 변경되어 제출된 것임
@@ -214,8 +222,8 @@ paths:
                       rm:
                         type: string
                         description: |
-                          비고
-                          
+                          # 비고
+
                           조합된 문자로 각각은 아래와 같은 의미가 있음
                           유 : 본 공시사항은 한국거래소 유가증권시장본부 소관임
                           코 : 본 공시사항은 한국거래소 코스닥시장본부 소관임

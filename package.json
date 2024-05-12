@@ -4,7 +4,8 @@
   "devDependencies": {
     "autorest": "~3.7.1",
     "@autorest/core": "~3.10.2",
-    "@autorest/modelerfour": "~4.27.0"
+    "@autorest/modelerfour": "~4.27.0",
+    "@autorest/python": "~6.13.15"
   },
   "scripts": {
     "autorest": "autorest"

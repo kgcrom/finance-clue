@@ -73,17 +73,13 @@ class DartScrap:
 
     @property
     def facility_invest_parser(self):
-        from stock_clue.dartscrap.facility_invest_parser import (
-            FacilityInvestParser,
-        )
+        from stock_clue.dartscrap.facility_invest_parser import FacilityInvestParser
 
         return FacilityInvestParser(self)
 
     @property
     def supply_agreement_parser(self):
-        from stock_clue.dartscrap.supply_agreement_parser import (
-            SupplyAgreementParser,
-        )
+        from stock_clue.dartscrap.supply_agreement_parser import SupplyAgreementParser
 
         return SupplyAgreementParser(self)
 

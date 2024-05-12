@@ -5,10 +5,12 @@ title: OpenDartClient
 namespace: opendart
 python: true
 black: true
+input-file: OpenDart-oas.yaml
 output-folder: stock_clue
 verbose: true
 version-tolerant: true
 override-client-name: GenOpenDartClient
+package-version: 0.0.1
 
 add-credential: true
 credential-default-policy-type: BearerTokenCredentialPolicy
