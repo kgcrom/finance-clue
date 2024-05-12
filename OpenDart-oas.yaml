@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
-  title: OpenDart API Service
-  description: OpenDart API Service
+  title: Dart OpenAPI Service
+  description: Dart OpenAPI Service
   version: 1.0.0
 servers:
   - url: 'https://opendart.fss.or.kr/api'
