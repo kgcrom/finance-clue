@@ -42,8 +42,10 @@ class OpenKisClient(GenOpenKisClient):
 
     def __init__(self, app_key: str, app_secret: str, is_sandbox: bool = False, **kwargs):
         credential = CustomCredentials(app_key, app_secret)
-        endpoint = "https://openapivts.koreainvestment.com:29443" if is_sandbox else "https://openapi.koreainvestment.com:9443"
-        kwargs["endpoint"] = endpoint
+        if not kwargs["endpoint"]:
+            endpoint = "https://openapivts.koreainvestment.com:29443" if is_sandbox else "https://openapi.koreainvestment.com:9443"
+            kwargs["endpoint"] = endpoint
+
         super().__init__(credential=credential, **kwargs)
 
 

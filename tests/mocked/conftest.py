@@ -11,7 +11,7 @@ def mock_opendart_client_url() -> str:
 
 
 @pytest.fixture(scope="module")
-def mock_opendart_client(mock_opendart_client_url) -> OpenDartClient:
+def mock_opendart_client(mock_opendart_client_url: str) -> OpenDartClient:
     """Returns a mocked OpenDartClient client"""
     return OpenDartClient("", endpoint=mock_opendart_client_url)
 
@@ -19,10 +19,10 @@ def mock_opendart_client(mock_opendart_client_url) -> OpenDartClient:
 @pytest.fixture(scope="module")
 def mock_openkis_client_url() -> str:
     """Returns a url for the mocked OpenKisClient client"""
-    return "https://mocked.local/api"
+    return "https://mocked.local"
 
 
 @pytest.fixture(scope="module")
-def mock_openkis_client(mock_openkis_client_url) -> OpenKisClient:
+def mock_openkis_client(mock_openkis_client_url: str) -> OpenKisClient:
     """Returns a mocked OpenKisClient client"""
     return OpenKisClient("", "", endpoint=mock_openkis_client_url)

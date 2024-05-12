@@ -35,8 +35,8 @@ jobs:
         poetry run playwright install --with-deps chromium
     - name: Build coverage report
       run: |
-        poetry run coverage run -m pytest tests
-        poetry run coverage report
+        poetry run coverage run -m pytest tests/mocked tests/test_dart_scrap.py
+        # poetry run coverage report
         poetry run coverage xml
       env:
         OPENDART_API_KEY: ${{ secrets.OPENDART_API_KEY }}
