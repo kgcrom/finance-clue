@@ -1,30 +1,24 @@
-name: Build coverage report and Send Codacy
+name: Build coverage report and Send to Codacy
 
 on:
-  workflow_dispatch:
-    inputs:
-      python-version:
-        type: choice
-        description: 'Python version'
-        required: true
-        default: '3.11'
-        options:
-        - '3.9'
-        - '3.10'
-        - '3.11'
+  push:
+    branches:
+      - main
+
 jobs:
   build:
     strategy:
       matrix:
+        python-version: [ "3.9", "3.10", "3.11" ]
         poetry-version: [ "1.8.2" ]
         os: [ ubuntu-latest ]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v4
-      name: Set up Python ${{ inputs.python-version }}
+      name: Set up Python ${{ matrix.python-version }}
       with:
-        python-version: ${{ inputs.python-version }}
+        python-version: ${{ matrix.python-version }}
     - uses: abatilo/actions-poetry@v2
       name: Run image
       with:
