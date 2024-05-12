@@ -1945,8 +1945,7 @@ class TestDartScrap:
         assert data.correction_submit_date == "2023-12-27"
         assert data.correction_cause == "투자금액 증액"
         assert (
-            data.correction_cause_detail
-            == "▶투자금액 증액사유 - 설계변경에 따른 증액"
+            data.correction_cause_detail == "▶투자금액 증액사유 - 설계변경에 따른 증액"
         )
         assert data.correction_note1[1] == "8,358,000,000"
         assert data.correction_note2[1] == "19.48"
@@ -1955,9 +1954,7 @@ class TestDartScrap:
         assert data.equity_amount == 42901898234
         assert data.equity_ratio == 20.76
         assert not data.is_large_scale_corporation
-        assert (
-            data.investment_purpose == "고객수요 증대 대응 위한 생산능력 확충"
-        )
+        assert data.investment_purpose == "고객수요 증대 대응 위한 생산능력 확충"
         assert data.investment_start_date == "2022-09-07"
         assert data.investment_end_date == "2024-02-29"
         assert data.investment_decision_date == "2022-09-06"
@@ -2048,10 +2045,7 @@ class TestDartScrap:
         assert data is not None
         assert data.correction_publish_date == "2024-02-02"
         assert data.correction_cause == "계약기간 변경"
-        assert (
-            data.contract_name
-            == "부광초교 서측 주택재개발정비사업 건축설계 용역"
-        )
+        assert data.contract_name == "부광초교 서측 주택재개발정비사업 건축설계 용역"
         assert data.contract_name_detail is None
         assert data.contract_amount == 3431890000
         assert data.recent_revenue == 155837235737
@@ -2081,9 +2075,7 @@ class TestDartScrap:
         주식소각 결정 파싱 테스트
         """
         retirement_parser = self.dart_scrap.retirement_treasury_stock_parser
-        data = retirement_parser.parse_retirement_treasury_stock(
-            "20230920800221"
-        )
+        data = retirement_parser.parse_retirement_treasury_stock("20230920800221")
 
         assert data is not None
         assert data.common_share_count == 1576903
@@ -2096,9 +2088,7 @@ class TestDartScrap:
         [기재정정]주식소각 결정 파싱 테스트
         """
         retirement_parser = self.dart_scrap.retirement_treasury_stock_parser
-        data = retirement_parser.parse_retirement_treasury_stock(
-            "20230831800042"
-        )
+        data = retirement_parser.parse_retirement_treasury_stock("20230831800042")
 
         assert data is not None
         assert data.common_share_count == 2842929

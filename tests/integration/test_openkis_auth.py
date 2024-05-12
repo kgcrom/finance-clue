@@ -1,4 +1,5 @@
 """Integration tests OpenKIS 권한"""
+
 from os import environ
 
 from stock_clue.openkis import OpenKisClient

@@ -18,9 +18,7 @@ class DividendParser:
     def __init__(self, dart_scrap: "DartScrap"):
         self.dart_scrap = dart_scrap
 
-    def parse_closing_shareholders(
-        self, report_no: str
-    ) -> DividendClosingShareholders:
+    def parse_closing_shareholders(self, report_no: str) -> DividendClosingShareholders:
         """
         현금.현물배당을 위한 최종주주명부 폐쇄(기준일)결정 공시 페이지 파싱
 
@@ -36,9 +34,7 @@ class DividendParser:
             raise Exception("contents is None")
 
         soup = BeautifulSoup(contents, "html.parser")
-        table = soup.find("div", {"class", "xforms_title"}).find_next_sibling(
-            "table"
-        )
+        table = soup.find("div", {"class", "xforms_title"}).find_next_sibling("table")
 
         table_info = parse_html_table(table, 4)
 
@@ -70,16 +66,12 @@ class DividendParser:
 
         # TODO lxml 적용
         soup = BeautifulSoup(contents, "html.parser")
-        table = soup.find("div", {"class", "xforms_title"}).find_next_sibling(
-            "table"
-        )
+        table = soup.find("div", {"class", "xforms_title"}).find_next_sibling("table")
 
         try:
             table_info = parse_html_table(table, 3)
         except Exception as e:
-            raise IndexError(
-                f"Can't parse html table. report_no: {rcp_no}, {e}"
-            )
+            raise IndexError(f"Can't parse html table. report_no: {rcp_no}, {e}")
 
         return DividendDecisionOnCash(
             dividend_classification=table_info[0][2],

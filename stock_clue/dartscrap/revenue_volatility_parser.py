@@ -45,9 +45,7 @@ class RevenueVolatilityParser:
 
         fs_kind = table_info[begin_table_idx + 0][2]
         table_headers = table_info[begin_table_idx + 1][2:]
-        cause = next(
-            filter(lambda x: "변동 주요원인" in x[0], table_info[:15])
-        )[2]
+        cause = next(filter(lambda x: "변동 주요원인" in x[0], table_info[:15]))[2]
 
         revenue = table_info[begin_table_idx + 2]
         op = table_info[begin_table_idx + 3]

@@ -1,4 +1,5 @@
 """Integration tests OpenDartClient 공시정보"""
+
 from stock_clue.opendart import OpenDartClient
 
 

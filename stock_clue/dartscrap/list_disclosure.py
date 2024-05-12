@@ -103,9 +103,7 @@ def parse_daily_disclosure(html_doc: str) -> DailyDisclosureListDto:
             report_url=f"https://dart.fss.or.kr{report_path}",
         )
 
-    disclosures = list(
-        filter(lambda x: x is not None, map(_mapping, table_rows))
-    )
+    disclosures = list(filter(lambda x: x is not None, map(_mapping, table_rows)))
 
     return DailyDisclosureListDto(total=total, disclosures=disclosures)
 
@@ -160,9 +158,7 @@ def parse_search_disclosure(html_doc: str) -> DailyDisclosureListDto:
             report_url=f"https://dart.fss.or.kr{report_path}",
         )
 
-    disclosures = list(
-        filter(lambda x: x is not None, map(_mapping, table_rows))
-    )
+    disclosures = list(filter(lambda x: x is not None, map(_mapping, table_rows)))
 
     return DailyDisclosureListDto(total=total, disclosures=disclosures)
 

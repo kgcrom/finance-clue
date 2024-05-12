@@ -1,4 +1,5 @@
 """This module contains utility functions for the stock_clue package."""
+
 import requests
 
 from stock_clue.error import HttpError
@@ -61,5 +62,5 @@ def extract_file_name(response: requests.Response) -> str:
         raise HttpError(
             f"Can't find filename in response header. Content-Disposition: {content_disposition}"
         )
-    file_name = content_disposition[index_filename + 9:]
+    file_name = content_disposition[index_filename + 9 :]
     return file_name

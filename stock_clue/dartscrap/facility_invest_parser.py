@@ -87,14 +87,12 @@ class FacilityInvestParser:
             ),
             correction_note1=(
                 correction_table_info[5]
-                if correction_table_info is not None
-                and len(correction_table_info) > 5
+                if correction_table_info is not None and len(correction_table_info) > 5
                 else None
             ),
             correction_note2=(
                 correction_table_info[6]
-                if correction_table_info is not None
-                and len(correction_table_info) > 6
+                if correction_table_info is not None and len(correction_table_info) > 6
                 else None
             ),
             invest_amount=str_to_int(table_info[begin_idx + 1][2]),

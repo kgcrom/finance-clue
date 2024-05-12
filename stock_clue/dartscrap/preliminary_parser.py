@@ -18,9 +18,7 @@ class PreliminaryParser:
     def __init__(self, dart_scrap: "DartScrap"):
         self.dart_scrap = dart_scrap
 
-    def parse_preliminary_estimate(
-        self, report_no: str
-    ) -> PreliminaryEstimateDto:
+    def parse_preliminary_estimate(self, report_no: str) -> PreliminaryEstimateDto:
         """
         영업(잠정)실적(공정공시) 페이지 파싱
         """
@@ -68,9 +66,7 @@ class PreliminaryParser:
             for i in range(12, len(table_info)):
                 if "정보제공" in table_info[i][0]:
                     break
-                if "구분" in table_info[i][0].replace("\xa0", "").replace(
-                    " ", ""
-                ):
+                if "구분" in table_info[i][0].replace("\xa0", "").replace(" ", ""):
                     continue
 
                 results.append(table_info[i])
