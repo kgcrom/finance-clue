@@ -1,6 +1,6 @@
 """Integration tests OpenDartClient 공시정보"""
 
-from stock_clue.opendart import OpenDartClient
+from finance_clue.opendart import OpenDartClient
 
 
 def test_list_disclosure(integration_opendart_client: OpenDartClient):

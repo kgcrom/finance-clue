@@ -1,6 +1,6 @@
 import responses
 
-from stock_clue.opendart import OpenDartClient
+from finance_clue.opendart import OpenDartClient
 
 
 @responses.activate

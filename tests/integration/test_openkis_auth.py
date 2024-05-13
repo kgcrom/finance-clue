@@ -2,7 +2,7 @@
 
 from os import environ
 
-from stock_clue.openkis import OpenKisClient
+from finance_clue.openkis import OpenKisClient
 
 
 def test_get_access_token(integration_openkis_client: OpenKisClient):

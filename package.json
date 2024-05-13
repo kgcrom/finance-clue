@@ -1,5 +1,5 @@
 {
-  "name": "@kgcrom/stock-clue",
+  "name": "@kgcrom/finance-clue",
   "description": "Python client generator based on Finance OpenAPI specification.",
   "devDependencies": {
     "autorest": "~3.7.1",
@@ -12,12 +12,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kgcrom/stock-clue.git"
+    "url": "git+https://github.com/kgcrom/finance-clue.git"
   },
   "author": "kgcrom",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/kgcrom/stock-clue/issues"
+    "url": "https://github.com/kgcrom/finance-clue/issues"
   },
-  "homepage": "https://github.com/kgcrom/stock-clue#readme"
+  "homepage": "https://github.com/kgcrom/finance-clue#readme"
 }

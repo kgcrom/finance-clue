@@ -1,12 +1,12 @@
 from bs4 import BeautifulSoup
 import pytest
 
-from stock_clue.dartscrap import DartScrap
-from stock_clue.dartscrap.dividend_parser import DividendParser
-from stock_clue.dartscrap.dividend_parser import parse_html_table
-from stock_clue.dartscrap.list_disclosure import ListDisclosure
-from stock_clue.dartscrap.list_disclosure import MarketGroup
-from stock_clue.dartscrap.list_disclosure import parse_daily_disclosure
+from finance_clue.dartscrap import DartScrap
+from finance_clue.dartscrap.dividend_parser import DividendParser
+from finance_clue.dartscrap.dividend_parser import parse_html_table
+from finance_clue.dartscrap.list_disclosure import ListDisclosure
+from finance_clue.dartscrap.list_disclosure import MarketGroup
+from finance_clue.dartscrap.list_disclosure import parse_daily_disclosure
 
 
 @pytest.mark.skip(reason="Scrap takes a long time")

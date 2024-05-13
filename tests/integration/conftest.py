@@ -4,8 +4,8 @@ from os import environ
 
 import pytest
 
-from stock_clue.opendart import OpenDartClient
-from stock_clue.openkis import OpenKisClient
+from finance_clue.opendart import OpenDartClient
+from finance_clue.openkis import OpenKisClient
 
 
 @pytest.fixture(scope="session")

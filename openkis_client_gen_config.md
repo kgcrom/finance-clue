@@ -6,7 +6,7 @@ namespace: openkis
 python: true
 black: true
 input-file: OpenKis-oas.yaml
-output-folder: stock_clue
+output-folder: finance_clue
 verbose: true
 version-tolerant: true
 override-client-name: GenOpenKisClient

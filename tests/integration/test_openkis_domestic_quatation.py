@@ -1,7 +1,7 @@
 import pytest
 import responses
 
-from stock_clue.openkis import OpenKisClient
+from finance_clue.openkis import OpenKisClient
 
 
 def test_domestic_quotation_inquiry_price(integration_openkis_client: OpenKisClient):

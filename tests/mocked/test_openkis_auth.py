@@ -2,7 +2,7 @@
 
 import responses
 
-from stock_clue.openkis import OpenKisClient
+from finance_clue.openkis import OpenKisClient
 
 
 @responses.activate
