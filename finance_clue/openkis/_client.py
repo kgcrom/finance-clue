@@ -19,6 +19,7 @@ if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from azure.core.credentials import TokenCredential
 
+
 class GenOpenKisClient(GenOpenKisClientOperationsMixin):  # pylint: disable=client-accepts-api-version-keyword
     """OpenKIS API Service.
 
@@ -38,22 +39,30 @@ class GenOpenKisClient(GenOpenKisClientOperationsMixin):  # pylint: disable=clie
         **kwargs: Any
     ) -> None:
         self._config = GenOpenKisClientConfiguration(credential=credential, **kwargs)
-        _policies = kwargs.pop('policies', None)
+        _policies = kwargs.pop("policies", None)
         if _policies is None:
-            _policies = [policies.RequestIdPolicy(**kwargs),self._config.headers_policy,self._config.user_agent_policy,self._config.proxy_policy,policies.ContentDecodePolicy(**kwargs),self._config.redirect_policy,self._config.retry_policy,self._config.authentication_policy,self._config.custom_hook_policy,self._config.logging_policy,policies.DistributedTracingPolicy(**kwargs),policies.SensitiveHeaderCleanupPolicy(**kwargs) if self._config.redirect_policy else None,self._config.http_logging_policy]
+            _policies = [
+                policies.RequestIdPolicy(**kwargs),
+                self._config.headers_policy,
+                self._config.user_agent_policy,
+                self._config.proxy_policy,
+                policies.ContentDecodePolicy(**kwargs),
+                self._config.redirect_policy,
+                self._config.retry_policy,
+                self._config.authentication_policy,
+                self._config.custom_hook_policy,
+                self._config.logging_policy,
+                policies.DistributedTracingPolicy(**kwargs),
+                policies.SensitiveHeaderCleanupPolicy(**kwargs) if self._config.redirect_policy else None,
+                self._config.http_logging_policy,
+            ]
         self._client: PipelineClient = PipelineClient(base_url=endpoint, policies=_policies, **kwargs)
-
 
         self._serialize = Serializer()
         self._deserialize = Deserializer()
         self._serialize.client_side_validation = False
 
-
-    def send_request(
-        self,
-        request: HttpRequest, *, stream: bool = False,
-        **kwargs: Any
-    ) -> HttpResponse:
+    def send_request(self, request: HttpRequest, *, stream: bool = False, **kwargs: Any) -> HttpResponse:
         """Runs the network request through the client's chained policies.
 
         >>> from azure.core.rest import HttpRequest

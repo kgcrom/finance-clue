@@ -9,10 +9,10 @@ servers:
   - url: 'https://openapivts.koreainvestment.com:29443'
     description: KIS Sandbox server
 tags:
-  - name: DomesticStock
-    description: 국내주식
-  - name: Quatations
-    description: 시세
+  - name: Auth
+    description: 인증
+  - name: DomesticStockQuotations
+    description: 국내주식 기본시세
 security:
   - accessToken: [ ]
 
@@ -20,11 +20,15 @@ paths:
   /oauth2/tokenP:
     post:
       operationId: getAccessToken
-      summary: Get Access Token
+      summary: 접근 토큰 발급
       description: |
-        # Access Token 발급
-
         본인 계좌에 필요한 인증 절차로, 인증을 통해 접근 토큰을 부여받아 오픈API 활용이 가능합니다.
+
+        [참고]
+        '23.4.28 이후 지나치게 잦은 토큰 발급 요청건을 제어 하기 위해 신규 접근토큰발급 이후 일정시간 이내에 재호출 시에는 직전 토큰값을 리턴하게 되었습니다. 일정시간 이후 접근토큰발급 API 호출 시에는 신규 토큰값을 리턴합니다. 
+        접근토큰발급 API 호출 및 코드 작성하실 때 해당 사항을 참고하시길 바랍니다.
+      tags:
+        - Auth
       security: [ ]
       requestBody:
         content:
@@ -87,7 +91,14 @@ paths:
   /uapi/domestic-stock/v1/quotations/inquire-price:
     get:
       operationId: getDomesticStockQuotationsPrice
-      description: 국내주식 시세조회
+      summary: 국내주식 시세조회
+      description: |
+        주식 현재가 시세 API입니다. 실시간 시세를 원하신다면 웹소켓 API를 활용하세요.
+
+        ※ 종목코드 마스터파일 파이썬 정제코드는 한국투자증권 Github 참고 부탁드립니다.
+           https://github.com/koreainvestment/open-trading-api/tree/main/stocks_info
+      tags:
+        - DomesticStockQuotations
       parameters:
         - name: tr_id
           in: header
@@ -239,7 +250,199 @@ paths:
                     description: 응답메세지
                   output:
                     $ref: '#/components/schemas/DomesticInquiryPrice'
+  /uapi/domestic-stock/v1/quotations/inquire-daily-price:
+    get:
+      operationId: getDomesticStockQuotationsDailyPrice
+      summary: 국내 주식 현재가 일자별 조회
+      description: |
+        주식현재가 일자별 API입니다.
+        일/주/월별 주가를 확인할 수 있으며 최근 30일(주,별)로 제한되어 있습니다.
+      tags:
+        - DomesticStockQuotations
+      parameters:
+        - name: tr_id
+          in: header
+          description: |
+            # 거래ID
 
+            [실전투자/모의투자]
+            FHKST01010400 : 주식현재가 일자별
+          schema:
+            type: string
+            default: FHKST01010400
+        - name: personalseckey
+          in: header
+          description: |
+            # 고객식별키
+
+            [법인 필수] 제휴사 회원 관리를 위한 고객식별키
+          schema:
+            type: string
+        - name: tr_cont
+          in: header
+          description: |
+            # 연속 거래 여부
+
+            공백 : 초기 조회
+            N : 다음 데이터 조회 (output header의 tr_cont가 M일 경우)
+          schema:
+            type: string
+        - name: custtype
+          in: header
+          description: |
+            # 고객타입
+
+            B : 법인
+            P : 개인
+          schema:
+            type: string
+        - name: seq_no
+          in: header
+          description: |
+            # 일련번호
+
+            [법인 필수] 001
+          schema:
+            type: string
+        - name: mac_address
+          in: header
+          description: |
+            # 맥주소
+
+            법인고객 혹은 개인고객의 Mac address 값
+          schema:
+            type: string
+        - name: phone_number
+          in: header
+          description: |
+            # 핸드폰번호
+
+            [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호
+            ex) 01011112222 (하이픈 등 구분값 제거)
+          schema:
+            type: string
+        - name: ip_addr
+          in: header
+          description: |
+            # 접속 단말 공인 IP
+
+            [법인 필수] 사용자(회원)의 IP Address
+          schema:
+            type: string
+        - name: hashkey
+          in: header
+          description: |
+            # 해쉬키
+
+            [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값
+            * API문서 > hashkey 참조
+          schema:
+            type: string
+        - name: gt_uid
+          in: header
+          description: |
+            [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함
+          schema:
+            type: string
+        - name: fid_cond_mrkt_div_code
+          in: query
+          required: true
+          description: |
+            # FID 조건 시장 분류 코드
+
+            J : 주식, ETF, ETN
+            W: ELW
+          schema:
+            type: string
+            enum: [ J, W ]
+            example: J
+            default: J
+        - name: fid_input_iscd
+          in: query
+          required: true
+          description: |
+            # FID 입력 종목코드
+
+            종목번호 (6자리)
+            ETN의 경우, Q로 시작 (EX. Q500001)
+          schema:
+            type: string
+        - name: fid_org_adj_prc
+          in: query
+          required: true
+          description: |
+            # FID 수정주가 원주가 가격
+
+            0 : 수정주가반영
+            1 : 수정주가미반영
+            * 수정주가는 액면분할/액면병합 등 권리 발생 시 과거 시세를 현재 주가에 맞게 보정한 가격
+          schema:
+            type: string
+            enum: [ 0, 1 ]
+            default: 0
+            example: 0
+        - name: fid_period_div_code
+          in: query
+          required: true
+          description: |
+            # FID 기간 구분 코드
+
+            D : (일)최근 30거래일
+            W : (주)최근 30주
+            M : (월)최근 30개월
+          schema:
+            type: string
+            enum: [ D, W, M ]
+            example: D
+      responses:
+        '200':
+          description: 국내주식 현재가 일자별 조회 성공
+          headers:
+            tr_id:
+              description: |
+                # 거래ID
+
+                요청한 tr_id
+              schema:
+                type: string
+                default: FHKST01010400
+            tr_cont:
+              description: |
+                # 연속 거래 여부
+
+                F or M: 다음 데이터 있음
+                D or E: 마지막 데이터
+              schema:
+                type: string
+            gt_uid:
+              description: |
+                # Global UID
+
+                거래고유번호
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rt_cd:
+                    type: string
+                    description: |
+                      # 성공 실패 여부
+  
+                      0 : 성공, 0 이외의 값 : 실패
+                    example: 0
+                  msg_cd:
+                    type: string
+                    description: 응답코드
+                    example: MCA00000
+                  msg1:
+                    type: string
+                    description: 응답메세지
+                    example: 정상처리 되었습니다!
+                  output:
+                    $ref: '#/components/schemas/DomesticInquireDailyPrice'
 components:
   schemas:
     DomesticInquiryPrice:
@@ -485,6 +688,82 @@ components:
         sltr_yn:
           type: string
           description: 정리매매여부
+    DomesticInquireDailyPrice:
+      type: array
+      items:
+        properties:
+          stck_bsop_date:
+            type: string
+            description: 주식 영업 일자
+            example: 20220111
+          stck_oprc:
+            type: string
+            description: 주식 시가
+            example: 125500
+          stck_hgpr:
+            type: string
+            description: 주식 최고가
+            example: 126000
+          stck_lwpr:
+            type: string
+            description: 주식 최저가
+            example: 125000
+          stck_clpr:
+            type: string
+            description: 주식 종가
+            example: 125500
+          acml_vol:
+            type: string
+            description: 누적 거래량
+            example: 3908418
+          prdy_vrss_vol_rate:
+            type: string
+            description: 전일 대비 거래량 비율
+            example: 13.31
+          prdy_vrss:
+            type: string
+            description: 전일 대비 거래량
+            example: 500
+          prdy_vrss_sign:
+            type: string
+            description: |
+              # 전일 대비 부호
+    
+              1: 상한
+              2: 상승
+              3: 보합
+              4: 하한
+              5: 하락
+            example: 2
+          prdy_ctrt:
+            type: string
+            description: 전일 대비율
+            example: 0.40
+          hts_frgn_ehrt:
+            type: string
+            description: HTS 외국인 소진율
+            example: 49.39
+          frgn_ntby_qty:
+            type: string
+            description: 외국인 순매수 수량
+            example: 293389
+          flng_cls_code:
+            type: string
+            description: |
+              # 락 구분 코드
+  
+              01: 권리락
+              02: 배당락
+              03: 분배락
+              04: 권배락
+              05: 중간(분기)배당락
+              06: 권리중간배당락
+              07: 권리분기배당락
+            example: 01
+          acml_prtt_rate:
+            type: string
+            description: 누적 분할 비율
+            example: 0.00
   securitySchemes:
     accessToken:
       type: apiKey

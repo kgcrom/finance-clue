@@ -107,3 +107,80 @@ def test_domestic_quotation_inquiry_price(
     )
 
     assert resp == expected
+
+
+@responses.activate
+def test_domestic_quotation_inquiry_daily_price(
+    mock_openkis_client: OpenKisClient, mock_openkis_client_url: str
+):
+    expected = {
+        "output": [
+            {
+                "stck_bsop_date": "20220113",
+                "stck_clpr": "129500",
+                "prdy_vrss": "1000",
+                "prdy_vrss_sign": "2",
+                "prsn_ntby_qty": "-287624",
+                "frgn_ntby_qty": "797458",
+                "orgn_ntby_qty": "-503653",
+                "prsn_ntby_tr_pbmn": "-37176",
+                "frgn_ntby_tr_pbmn": "102959",
+                "orgn_ntby_tr_pbmn": "-64984",
+                "prsn_shnu_vol": "467525",
+                "frgn_shnu_vol": "1442791",
+                "orgn_shnu_vol": "2219433",
+                "prsn_shnu_tr_pbmn": "60368",
+                "frgn_shnu_tr_pbmn": "186166",
+                "orgn_shnu_tr_pbmn": "286505",
+                "prsn_seln_vol": "755149",
+                "frgn_seln_vol": "645333",
+                "orgn_seln_vol": "2723086",
+                "prsn_seln_tr_pbmn": "97544",
+                "frgn_seln_tr_pbmn": "83207",
+                "orgn_seln_tr_pbmn": "351489",
+            },
+            {
+                "stck_bsop_date": "20220112",
+                "stck_clpr": "128500",
+                "prdy_vrss": "500",
+                "prdy_vrss_sign": "2",
+                "prsn_ntby_qty": "-74249",
+                "frgn_ntby_qty": "-134600",
+                "orgn_ntby_qty": "206812",
+                "prsn_ntby_tr_pbmn": "-9687",
+                "frgn_ntby_tr_pbmn": "-17094",
+                "orgn_ntby_tr_pbmn": "26530",
+                "prsn_shnu_vol": "608748",
+                "frgn_shnu_vol": "721756",
+                "orgn_shnu_vol": "2201966",
+                "prsn_shnu_tr_pbmn": "77943",
+                "frgn_shnu_tr_pbmn": "92615",
+                "orgn_shnu_tr_pbmn": "281965",
+                "prsn_seln_vol": "682997",
+                "frgn_seln_vol": "856356",
+                "orgn_seln_vol": "1995154",
+                "prsn_seln_tr_pbmn": "87630",
+                "frgn_seln_tr_pbmn": "109708",
+                "orgn_seln_tr_pbmn": "255435",
+            },
+        ],
+        "rt_cd": "0",
+        "msg_cd": "MCA00000",
+        "msg1": "정상처리 되었습니다!",
+    }
+
+    responses.add(
+        responses.GET,
+        f"{mock_openkis_client_url}/uapi/domestic-stock/v1/quotations/inquire-daily-price",
+        json=expected,
+        status=200,
+    )
+
+    resp = mock_openkis_client.get_domestic_stock_quotations_daily_price(
+        fid_cond_mrkt_div_code="J",
+        fid_input_iscd="161390",
+        fid_period_div_code="W",
+        fid_org_adj_prc="0",
+    )
+
+    assert resp == expected

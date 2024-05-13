@@ -14,12 +14,11 @@ if TYPE_CHECKING:
 
     from .._serialization import Deserializer, Serializer
 
-class GenOpenKisClientMixinABC(  
-    ABC
-):
+
+class GenOpenKisClientMixinABC(ABC):
     """DO NOT use this class. It is for internal typing use only."""
+
     _client: "AsyncPipelineClient"
     _config: GenOpenKisClientConfiguration
     _serialize: "Serializer"
     _deserialize: "Deserializer"
-

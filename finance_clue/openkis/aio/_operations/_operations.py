@@ -8,42 +8,50 @@ from io import IOBase
 import sys
 from typing import Any, Callable, Dict, IO, Optional, Type, TypeVar, Union, cast, overload
 
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, ResourceNotModifiedError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    ResourceNotModifiedError,
+    map_error,
+)
 from azure.core.pipeline import PipelineResponse
 from azure.core.rest import AsyncHttpResponse, HttpRequest
 from azure.core.tracing.decorator_async import distributed_trace_async
 from azure.core.utils import case_insensitive_dict
 
-from ..._operations._operations import build_gen_open_kis_get_access_token_request, build_gen_open_kis_get_domestic_stock_quotations_price_request
+from ..._operations._operations import (
+    build_gen_open_kis_get_access_token_request,
+    build_gen_open_kis_get_domestic_stock_quotations_daily_price_request,
+    build_gen_open_kis_get_domestic_stock_quotations_price_request,
+)
 from .._vendor import GenOpenKisClientMixinABC
 
 if sys.version_info >= (3, 9):
     from collections.abc import MutableMapping
 else:
     from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
-JSON = MutableMapping[str, Any] # pylint: disable=unsubscriptable-object
-T = TypeVar('T')
+JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
+T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class GenOpenKisClientOperationsMixin( 
-    GenOpenKisClientMixinABC
-):
+
+class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
 
     @overload
     async def get_access_token(
-        self,
-        body: Optional[JSON] = None,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
+        self, body: Optional[JSON] = None, *, content_type: str = "application/json", **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
-        """Get Access Token.
-
-        Access Token 발급
-        =================
+        """접근 토큰 발급.
 
         본인 계좌에 필요한 인증 절차로, 인증을 통해 접근 토큰을 부여받아 오픈API 활용이 가능합니다.
+
+        [참고]
+        '23.4.28 이후 지나치게 잦은 토큰 발급 요청건을 제어 하기 위해 신규 접근토큰발급 이후 일정시간 이내에 재호출 시에는 직전 토큰값을 리턴하게 되었습니다. 일정시간
+        이후 접근토큰발급 API 호출 시에는 신규 토큰값을 리턴합니다.
+        접근토큰발급 API 호출 및 코드 작성하실 때 해당 사항을 참고하시길 바랍니다.
 
         :param body: Default value is None.
         :type body: JSON
@@ -94,19 +102,17 @@ class GenOpenKisClientOperationsMixin(
 
     @overload
     async def get_access_token(
-        self,
-        body: Optional[IO[bytes]] = None,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
+        self, body: Optional[IO[bytes]] = None, *, content_type: str = "application/json", **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
-        """Get Access Token.
-
-        Access Token 발급
-        =================
+        """접근 토큰 발급.
 
         본인 계좌에 필요한 인증 절차로, 인증을 통해 접근 토큰을 부여받아 오픈API 활용이 가능합니다.
+
+        [참고]
+        '23.4.28 이후 지나치게 잦은 토큰 발급 요청건을 제어 하기 위해 신규 접근토큰발급 이후 일정시간 이내에 재호출 시에는 직전 토큰값을 리턴하게 되었습니다. 일정시간
+        이후 접근토큰발급 API 호출 시에는 신규 토큰값을 리턴합니다.
+        접근토큰발급 API 호출 및 코드 작성하실 때 해당 사항을 참고하시길 바랍니다.
 
         :param body: Default value is None.
         :type body: IO[bytes]
@@ -141,20 +147,17 @@ class GenOpenKisClientOperationsMixin(
                 }
         """
 
-
     @distributed_trace_async
-    async def get_access_token(
-        self,
-        body: Optional[Union[JSON, IO[bytes]]] = None,
-        **kwargs: Any
-    ) -> JSON:
+    async def get_access_token(self, body: Optional[Union[JSON, IO[bytes]]] = None, **kwargs: Any) -> JSON:
         # pylint: disable=line-too-long
-        """Get Access Token.
-
-        Access Token 발급
-        =================
+        """접근 토큰 발급.
 
         본인 계좌에 필요한 인증 절차로, 인증을 통해 접근 토큰을 부여받아 오픈API 활용이 가능합니다.
+
+        [참고]
+        '23.4.28 이후 지나치게 잦은 토큰 발급 요청건을 제어 하기 위해 신규 접근토큰발급 이후 일정시간 이내에 재호출 시에는 직전 토큰값을 리턴하게 되었습니다. 일정시간
+        이후 접근토큰발급 API 호출 시에는 신규 토큰값을 리턴합니다.
+        접근토큰발급 API 호출 및 코드 작성하실 때 해당 사항을 참고하시길 바랍니다.
 
         :param body: Is either a JSON type or a IO[bytes] type. Default value is None.
         :type body: JSON or IO[bytes]
@@ -200,17 +203,18 @@ class GenOpenKisClientOperationsMixin(
                 }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError, 304: ResourceNotModifiedError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = kwargs.pop("params", {}) or {}
 
-        content_type: Optional[str] = kwargs.pop('content_type', _headers.pop('Content-Type', None))
-        cls: ClsType[JSON] = kwargs.pop(
-            'cls', None
-        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -234,16 +238,14 @@ class GenOpenKisClientOperationsMixin(
 
         _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            _request,
-            stream=_stream,
-            **kwargs
+            _request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             if _stream:
-                await  response.read()  # Load the body in memory and close the socket
+                await response.read()  # Load the body in memory and close the socket
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response)
 
@@ -253,11 +255,9 @@ class GenOpenKisClientOperationsMixin(
             deserialized = None
 
         if cls:
-            return cls(pipeline_response, cast(JSON, deserialized), {}) # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
 
         return cast(JSON, deserialized)  # type: ignore
-
-
 
     @distributed_trace_async
     async def get_domestic_stock_quotations_price(
@@ -279,6 +279,11 @@ class GenOpenKisClientOperationsMixin(
     ) -> JSON:
         # pylint: disable=line-too-long
         """국내주식 시세조회.
+
+        주식 현재가 시세 API입니다. 실시간 시세를 원하신다면 웹소켓 API를 활용하세요.
+
+        ※ 종목코드 마스터파일 파이썬 정제코드는 한국투자증권 Github 참고 부탁드립니다.
+           https://github.com/koreainvestment/open-trading-api/tree/main/stocks_info.
 
         :keyword fid_cond_mrkt_div_code: FID 조건 시장 분류 코드
          =======================
@@ -486,18 +491,18 @@ class GenOpenKisClientOperationsMixin(
                 }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError, 304: ResourceNotModifiedError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[JSON] = kwargs.pop(
-            'cls', None
-        )
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        
         _request = build_gen_open_kis_get_domestic_stock_quotations_price_request(
             fid_cond_mrkt_div_code=fid_cond_mrkt_div_code,
             fid_input_iscd=fid_input_iscd,
@@ -518,23 +523,21 @@ class GenOpenKisClientOperationsMixin(
 
         _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            _request,
-            stream=_stream,
-            **kwargs
+            _request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             if _stream:
-                await  response.read()  # Load the body in memory and close the socket
+                await response.read()  # Load the body in memory and close the socket
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response)
 
         response_headers = {}
-        response_headers['tr_id']=self._deserialize('str', response.headers.get('tr_id'))
-        response_headers['tr_cont']=self._deserialize('str', response.headers.get('tr_cont'))
-        response_headers['gt_uid']=self._deserialize('str', response.headers.get('gt_uid'))
+        response_headers["tr_id"] = self._deserialize("str", response.headers.get("tr_id"))
+        response_headers["tr_cont"] = self._deserialize("str", response.headers.get("tr_cont"))
+        response_headers["gt_uid"] = self._deserialize("str", response.headers.get("gt_uid"))
 
         if response.content:
             deserialized = response.json()
@@ -542,8 +545,226 @@ class GenOpenKisClientOperationsMixin(
             deserialized = None
 
         if cls:
-            return cls(pipeline_response, cast(JSON, deserialized), response_headers) # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
 
         return cast(JSON, deserialized)  # type: ignore
 
+    @distributed_trace_async
+    async def get_domestic_stock_quotations_daily_price(  # pylint: disable=name-too-long
+        self,
+        *,
+        fid_input_iscd: str,
+        fid_org_adj_prc: str = "0",
+        fid_period_div_code: str,
+        tr_id: str = "FHKST01010400",
+        personalseckey: Optional[str] = None,
+        tr_cont: Optional[str] = None,
+        custtype: Optional[str] = None,
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_addr: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        fid_cond_mrkt_div_code: str = "J",
+        **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """국내 주식 현재가 일자별 조회.
 
+        주식현재가 일자별 API입니다.
+        일/주/월별 주가를 확인할 수 있으며 최근 30일(주,별)로 제한되어 있습니다.
+
+        :keyword fid_input_iscd: FID 입력 종목코드
+         =================
+
+         종목번호 (6자리)
+         ETN의 경우, Q로 시작 (EX. Q500001). Required.
+        :paramtype fid_input_iscd: str
+        :keyword fid_org_adj_prc: FID 수정주가 원주가 가격
+         ========================
+
+         0 : 수정주가반영
+         1 : 수정주가미반영
+
+
+         * 수정주가는 액면분할/액면병합 등 권리 발생 시 과거 시세를 현재 주가에 맞게 보정한 가격. Known values are: "0" and "1". Required.
+         Default value is "0".
+        :paramtype fid_org_adj_prc: str
+        :keyword fid_period_div_code: FID 기간 구분 코드
+         ==================
+
+         D : (일)최근 30거래일
+         W : (주)최근 30주
+         M : (월)최근 30개월. Known values are: "D", "W", and "M". Required.
+        :paramtype fid_period_div_code: str
+        :keyword tr_id: 거래ID
+         ======
+
+         [실전투자/모의투자]
+         FHKST01010400 : 주식현재가 일자별. Default value is "FHKST01010400".
+        :paramtype tr_id: str
+        :keyword personalseckey: 고객식별키
+         ==========
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+         ==============
+
+         공백 : 초기 조회
+         N : 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is None.
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+         ========
+
+         B : 법인
+         P : 개인. Default value is None.
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+         ========
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+         ======
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+         ==========
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_addr: 접속 단말 공인 IP
+         =================
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_addr: str
+        :keyword hashkey: 해쉬키
+         ======
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword fid_cond_mrkt_div_code: FID 조건 시장 분류 코드
+         =======================
+
+         J : 주식, ETF, ETN
+         W: ELW. Known values are: "J" and "W". Default value is "J".
+        :paramtype fid_cond_mrkt_div_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc138"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output": [
+                        {
+                            "acml_prtt_rate": "str",  # Optional. "ub204"uc801
+                              "ubd84"ud560 "ube44"uc728.
+                            "acml_vol": "str",  # Optional. "ub204"uc801
+                              "uac70"ub798"ub7c9.
+                            "flng_cls_code": "str",  # Optional. "ub77d "uad6c"ubd84
+                              "ucf54"ub4dc ============  01: "uad8c"ub9ac"ub77d 02: "ubc30"ub2f9"ub77d
+                              03: "ubd84"ubc30"ub77d 04: "uad8c"ubc30"ub77d 05:
+                              "uc911"uac04("ubd84"uae30)"ubc30"ub2f9"ub77d 06:
+                              "uad8c"ub9ac"uc911"uac04"ubc30"ub2f9"ub77d 07:
+                              "uad8c"ub9ac"ubd84"uae30"ubc30"ub2f9"ub77d.
+                            "frgn_ntby_qty": "str",  # Optional. "uc678"uad6d"uc778
+                              "uc21c"ub9e4"uc218 "uc218"ub7c9.
+                            "hts_frgn_ehrt": "str",  # Optional. HTS "uc678"uad6d"uc778
+                              "uc18c"uc9c4"uc728.
+                            "prdy_ctrt": "str",  # Optional. "uc804"uc77c
+                              "ub300"ube44"uc728.
+                            "prdy_vrss": "str",  # Optional. "uc804"uc77c "ub300"ube44
+                              "uac70"ub798"ub7c9.
+                            "prdy_vrss_sign": "str",  # Optional. "uc804"uc77c
+                              "ub300"ube44 "ubd80"ud638 ==============  1: "uc0c1"ud55c 2: "uc0c1"uc2b9
+                              3: "ubcf4"ud569 4: "ud558"ud55c 5: "ud558"ub77d.
+                            "prdy_vrss_vol_rate": "str",  # Optional. "uc804"uc77c
+                              "ub300"ube44 "uac70"ub798"ub7c9 "ube44"uc728.
+                            "stck_bsop_date": "str",  # Optional. "uc8fc"uc2dd
+                              "uc601"uc5c5 "uc77c"uc790.
+                            "stck_clpr": "str",  # Optional. "uc8fc"uc2dd "uc885"uac00.
+                            "stck_hgpr": "str",  # Optional. "uc8fc"uc2dd
+                              "ucd5c"uace0"uac00.
+                            "stck_lwpr": "str",  # Optional. "uc8fc"uc2dd
+                              "ucd5c"uc800"uac00.
+                            "stck_oprc": "str"  # Optional. "uc8fc"uc2dd "uc2dc"uac00.
+                        }
+                    ],
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80
+                      ==============  0 : "uc131"uacf5, 0 "uc774"uc678"uc758 "uac12 : "uc2e4"ud328.
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_quotations_daily_price_request(
+            fid_input_iscd=fid_input_iscd,
+            fid_org_adj_prc=fid_org_adj_prc,
+            fid_period_div_code=fid_period_div_code,
+            tr_id=tr_id,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_addr=ip_addr,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            fid_cond_mrkt_div_code=fid_cond_mrkt_div_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response)
+
+        response_headers = {}
+        response_headers["tr_id"] = self._deserialize("str", response.headers.get("tr_id"))
+        response_headers["tr_cont"] = self._deserialize("str", response.headers.get("tr_cont"))
+        response_headers["gt_uid"] = self._deserialize("str", response.headers.get("gt_uid"))
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
