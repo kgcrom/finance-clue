@@ -1,5 +1,6 @@
 """finance-clue에서 발생하는 에러를 정의하는 Module"""
 
+
 class FinanceClueError(Exception):
     """
     finance-clue 에러 base class

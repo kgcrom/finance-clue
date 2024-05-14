@@ -1,0 +1,112 @@
+openapi: 3.0.3
+info:
+  title: KRX
+  description: OpenKrx is a public API for the Korea Exchange (KRX) market data.
+  version: 1.0.0
+  contact:
+    name: Hangoo Kang
+    email: kgcrom@hotmail.com
+servers:
+  - url: https://data-dbg.krx.co.kr
+    description: Korea Exchange (KRX) server
+tags:
+  - name: Index
+    description: 지수 데이터
+  - name: Stock
+    description: 주식 데이터
+  - name: Securities instruments
+    description: 증권 상품 데이터
+  - name: Bond
+    description: 채권 데이터
+security:
+  - authKey: [ ]
+
+paths:
+  /svc/apis/idx/krx_dd_trd:
+    get:
+      operationId: getKrxDailyIndexQuotation
+      summary: KRX 시리즈 일별시세정보
+      description: KRX 시리즈 지수의 시세정보 제공
+      tags:
+        - Index
+      parameters:
+        - name: basDd
+          in: query
+          description: 기준일자
+          required: true
+          schema:
+            type: string
+            pattern: '^\d{8}$'
+            example: 20240514
+      responses:
+        '200':
+          description: KRX 시리즈 지수 조회 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  OutBlock_1:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/KrxDailyIndexQuotation'
+
+components:
+  schemas:
+    KrxDailyIndexQuotation:
+      type: object
+      properties:
+        BAS_DD:
+          type: string
+          description: 기준일자
+          example: 20240514
+        IDX_CLSS:
+          type: string
+          description: 계열구분
+          example: KRX
+        IDX_NM:
+          type: string
+          description: 지수명
+          example: KRX자동차
+        CLSPRC_IDX:
+          type: string
+          description: 종가
+          example: 6250.82
+        CMPPREVDD_IDX:
+          type: string
+          description: 대비
+          example: 15.40
+        FLUC_RT:
+          type: string
+          description: 등락률
+          example: 0.25
+        OPNPRC_IDX:
+          type: string
+          description: 시가
+          example: 6250.82
+        HGPRC_IDX:
+          type: string
+          description: 고가
+          example: 6250.82
+        LWPRC_IDX:
+          type: string
+          description: 저가
+          example: 6250.82
+        ACC_TRDVOL:
+          type: string
+          description: 거래량
+          example: 38188565
+        ACC_TRDVAL:
+          type: string
+          description: 거래대금
+          example: 2722079713896
+        MKTCAP:
+          type: string
+          description: 상장시가총액
+          example: 2722079713896
+  securitySchemes:
+    authKey:
+      type: apiKey
+      in: header
+      name: AUTH_KEY
+      description: KRX 인증키

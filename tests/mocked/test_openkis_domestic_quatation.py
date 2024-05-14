@@ -1,4 +1,3 @@
-import pytest
 import responses
 
 from finance_clue.openkis import OpenKisClient

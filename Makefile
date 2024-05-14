@@ -28,3 +28,9 @@ generate-opendart:
 	npm run autorest -- opendart_client_gen_config.md \
 		--use:@autorest/modelerfour@4.27.0 \
 		--use:@autorest/python@6.13.15
+
+.PHONY: generate-openkrx
+generate-openkrx:
+	npm run autorest -- openkrx_client_gen_config.md \
+		--use:@autorest/modelerfour@4.27.0 \
+		--use:@autorest/python@6.13.15
