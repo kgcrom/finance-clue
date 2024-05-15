@@ -7,16 +7,15 @@
 import sys
 from typing import Any, Callable, Dict, Optional, Type, TypeVar, cast
 
-from azure.core.exceptions import (
-    ClientAuthenticationError,
-    HttpResponseError,
-    ResourceExistsError,
-    ResourceNotFoundError,
-    ResourceNotModifiedError,
-    map_error,
-)
+from azure.core.exceptions import ClientAuthenticationError
+from azure.core.exceptions import HttpResponseError
+from azure.core.exceptions import ResourceExistsError
+from azure.core.exceptions import ResourceNotFoundError
+from azure.core.exceptions import ResourceNotModifiedError
+from azure.core.exceptions import map_error
 from azure.core.pipeline import PipelineResponse
-from azure.core.rest import HttpRequest, HttpResponse
+from azure.core.rest import HttpRequest
+from azure.core.rest import HttpResponse
 from azure.core.tracing.decorator import distributed_trace
 from azure.core.utils import case_insensitive_dict
 
@@ -26,10 +25,14 @@ from .._vendor import GenOpenDartClientMixinABC
 if sys.version_info >= (3, 9):
     from collections.abc import MutableMapping
 else:
-    from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
+    from typing import (
+        MutableMapping,  # type: ignore  # pylint: disable=ungrouped-imports
+    )
 JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[
+    Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]
+]
 
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
@@ -48,7 +51,7 @@ def build_gen_open_dart_list_disclosure_info_request(  # pylint: disable=name-to
     sort_mth: Optional[str] = None,
     page_no: Optional[str] = None,
     page_count: Optional[str] = None,
-    **kwargs: Any
+    **kwargs: Any,
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -60,13 +63,21 @@ def build_gen_open_dart_list_disclosure_info_request(  # pylint: disable=name-to
 
     # Construct parameters
     if corp_code is not None:
-        _params["corp_code"] = _SERIALIZER.query("corp_code", corp_code, "str", max_length=8, min_length=8)
+        _params["corp_code"] = _SERIALIZER.query(
+            "corp_code", corp_code, "str", max_length=8, min_length=8
+        )
     if bgn_de is not None:
-        _params["bgn_de"] = _SERIALIZER.query("bgn_de", bgn_de, "str", pattern=r"^\d{8}$")
+        _params["bgn_de"] = _SERIALIZER.query(
+            "bgn_de", bgn_de, "str", pattern=r"^\d{8}$"
+        )
     if end_de is not None:
-        _params["end_de"] = _SERIALIZER.query("end_de", end_de, "str", pattern=r"^\d{8}$")
+        _params["end_de"] = _SERIALIZER.query(
+            "end_de", end_de, "str", pattern=r"^\d{8}$"
+        )
     if last_reprt_at is not None:
-        _params["last_reprt_at"] = _SERIALIZER.query("last_reprt_at", last_reprt_at, "str")
+        _params["last_reprt_at"] = _SERIALIZER.query(
+            "last_reprt_at", last_reprt_at, "str"
+        )
     if pblntf_ty is not None:
         _params["pblntf_ty"] = _SERIALIZER.query("pblntf_ty", pblntf_ty, "str")
     if pblntf_detail_ty is not None:
@@ -80,14 +91,20 @@ def build_gen_open_dart_list_disclosure_info_request(  # pylint: disable=name-to
     if sort_mth is not None:
         _params["sort_mth"] = _SERIALIZER.query("sort_mth", sort_mth, "str")
     if page_no is not None:
-        _params["page_no"] = _SERIALIZER.query("page_no", page_no, "str", pattern=r"^\d{5}$")
+        _params["page_no"] = _SERIALIZER.query(
+            "page_no", page_no, "str", pattern=r"^\d{5}$"
+        )
     if page_count is not None:
-        _params["page_count"] = _SERIALIZER.query("page_count", page_count, "str", pattern=r"^\d{3}$")
+        _params["page_count"] = _SERIALIZER.query(
+            "page_count", page_count, "str", pattern=r"^\d{3}$"
+        )
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
 class GenOpenDartClientOperationsMixin(GenOpenDartClientMixinABC):
@@ -107,7 +124,7 @@ class GenOpenDartClientOperationsMixin(GenOpenDartClientMixinABC):
         sort_mth: Optional[str] = None,
         page_no: Optional[str] = None,
         page_count: Optional[str] = None,
-        **kwargs: Any
+        **kwargs: Any,
     ) -> JSON:
         # pylint: disable=line-too-long
         """List of Disclosure Information.
@@ -333,8 +350,10 @@ class GenOpenDartClientOperationsMixin(GenOpenDartClientMixinABC):
         _request.url = self._client.format_url(_request.url)
 
         _stream = False
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
         )
 
         response = pipeline_response.http_response
@@ -342,7 +361,9 @@ class GenOpenDartClientOperationsMixin(GenOpenDartClientMixinABC):
         if response.status_code not in [200]:
             if _stream:
                 response.read()  # Load the body in memory and close the socket
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
             raise HttpResponseError(response=response)
 
         if response.content:

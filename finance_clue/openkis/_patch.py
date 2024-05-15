@@ -6,11 +6,11 @@
 
 Follow our quickstart for examples: https://aka.ms/azsdk/python/dpcodegen/python/customize
 """
-import json
-import os
 from dataclasses import dataclass
 from datetime import datetime
-from typing import List, Union, Awaitable
+import json
+import os
+from typing import Awaitable, List, Union
 
 from azure.core.credentials import AccessToken
 from azure.core.pipeline import PipelineRequest
@@ -88,9 +88,13 @@ class CustomAuthenticationPolicy(SansIOHTTPPolicy):
     def __init__(self, credentials: CustomCredentials):
         self._credentials = credentials
 
-    def on_request(self, request: PipelineRequest[HTTPRequestType]) -> Union[None, Awaitable[None]]:
+    def on_request(
+        self, request: PipelineRequest[HTTPRequestType]
+    ) -> Union[None, Awaitable[None]]:
         credential_info = self._credentials.get_credential_info()
-        request.http_request.headers["authorization"] = f"{credential_info.token_type} {credential_info.access_token}"
+        request.http_request.headers["authorization"] = (
+            f"{credential_info.token_type} {credential_info.access_token}"
+        )
         request.http_request.headers["appkey"] = f"{credential_info.app_key}"
         request.http_request.headers["appsecret"] = f"{credential_info.app_secret}"
         return super().on_request(request)
@@ -98,7 +102,9 @@ class CustomAuthenticationPolicy(SansIOHTTPPolicy):
 
 class OpenKisClient(GenOpenKisClient):
 
-    def __init__(self, app_key: str, app_secret: str, is_sandbox: bool = False, **kwargs):
+    def __init__(
+        self, app_key: str, app_secret: str, is_sandbox: bool = False, **kwargs
+    ):
         self._credential = CustomCredentials(app_key, app_secret)
         if "endpoint" not in kwargs:
             endpoint = (
@@ -120,7 +126,9 @@ class OpenKisClient(GenOpenKisClient):
                 # TODO 시간 지났으면 갱신하기
                 self._credential.update_token(
                     access_token=access_token["access_token"],
-                    access_token_token_expired=datetime.fromisoformat(access_token["access_token_token_expired"]),
+                    access_token_token_expired=datetime.fromisoformat(
+                        access_token["access_token_token_expired"]
+                    ),
                     token_type=access_token["token_type"],
                     expires_in=access_token["expires_in"],
                 )
@@ -137,7 +145,9 @@ class OpenKisClient(GenOpenKisClient):
             _write_access_token(resp)
             self._credential.update_token(
                 access_token=resp["access_token"],
-                access_token_token_expired=datetime.fromisoformat(resp["access_token_token_expired"]),
+                access_token_token_expired=datetime.fromisoformat(
+                    resp["access_token_token_expired"]
+                ),
                 token_type=resp["token_type"],
                 expires_in=resp["expires_in"],
             )
@@ -152,4 +162,6 @@ def patch_sdk():
     """
 
 
-__all__: List[str] = ["OpenKisClient"]  # Add all objects you want publicly available to users at this package level
+__all__: List[str] = [
+    "OpenKisClient"
+]  # Add all objects you want publicly available to users at this package level

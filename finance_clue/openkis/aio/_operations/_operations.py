@@ -6,42 +6,62 @@
 # --------------------------------------------------------------------------
 from io import IOBase
 import sys
-from typing import Any, Callable, Dict, IO, Optional, Type, TypeVar, Union, cast, overload
-
-from azure.core.exceptions import (
-    ClientAuthenticationError,
-    HttpResponseError,
-    ResourceExistsError,
-    ResourceNotFoundError,
-    ResourceNotModifiedError,
-    map_error,
+from typing import (
+    IO,
+    Any,
+    Callable,
+    Dict,
+    Optional,
+    Type,
+    TypeVar,
+    Union,
+    cast,
+    overload,
 )
+
+from azure.core.exceptions import ClientAuthenticationError
+from azure.core.exceptions import HttpResponseError
+from azure.core.exceptions import ResourceExistsError
+from azure.core.exceptions import ResourceNotFoundError
+from azure.core.exceptions import ResourceNotModifiedError
+from azure.core.exceptions import map_error
 from azure.core.pipeline import PipelineResponse
-from azure.core.rest import AsyncHttpResponse, HttpRequest
+from azure.core.rest import AsyncHttpResponse
+from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator_async import distributed_trace_async
 from azure.core.utils import case_insensitive_dict
 
 from ..._operations._operations import (
-    build_gen_open_kis_get_access_token_request,
     build_gen_open_kis_get_domestic_stock_quotations_daily_price_request,
+)
+from ..._operations._operations import (
     build_gen_open_kis_get_domestic_stock_quotations_price_request,
 )
+from ..._operations._operations import build_gen_open_kis_get_access_token_request
 from .._vendor import GenOpenKisClientMixinABC
 
 if sys.version_info >= (3, 9):
     from collections.abc import MutableMapping
 else:
-    from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
+    from typing import (
+        MutableMapping,  # type: ignore  # pylint: disable=ungrouped-imports
+    )
 JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[
+    Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]
+]
 
 
 class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
 
     @overload
     async def get_access_token(
-        self, body: Optional[JSON] = None, *, content_type: str = "application/json", **kwargs: Any
+        self,
+        body: Optional[JSON] = None,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any,
     ) -> JSON:
         # pylint: disable=line-too-long
         """접근 토큰 발급.
@@ -102,7 +122,11 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
 
     @overload
     async def get_access_token(
-        self, body: Optional[IO[bytes]] = None, *, content_type: str = "application/json", **kwargs: Any
+        self,
+        body: Optional[IO[bytes]] = None,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any,
     ) -> JSON:
         # pylint: disable=line-too-long
         """접근 토큰 발급.
@@ -148,7 +172,9 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         """
 
     @distributed_trace_async
-    async def get_access_token(self, body: Optional[Union[JSON, IO[bytes]]] = None, **kwargs: Any) -> JSON:
+    async def get_access_token(
+        self, body: Optional[Union[JSON, IO[bytes]]] = None, **kwargs: Any
+    ) -> JSON:
         # pylint: disable=line-too-long
         """접근 토큰 발급.
 
@@ -213,7 +239,9 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = kwargs.pop("params", {}) or {}
 
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        content_type: Optional[str] = kwargs.pop(
+            "content_type", _headers.pop("Content-Type", None)
+        )
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
@@ -246,7 +274,9 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         if response.status_code not in [200]:
             if _stream:
                 await response.read()  # Load the body in memory and close the socket
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
             raise HttpResponseError(response=response)
 
         if response.content:
@@ -275,7 +305,7 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         ip_addr: Optional[str] = None,
         hashkey: Optional[str] = None,
         gt_uid: Optional[str] = None,
-        **kwargs: Any
+        **kwargs: Any,
     ) -> JSON:
         # pylint: disable=line-too-long
         """국내주식 시세조회.
@@ -531,13 +561,21 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         if response.status_code not in [200]:
             if _stream:
                 await response.read()  # Load the body in memory and close the socket
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
             raise HttpResponseError(response=response)
 
         response_headers = {}
-        response_headers["tr_id"] = self._deserialize("str", response.headers.get("tr_id"))
-        response_headers["tr_cont"] = self._deserialize("str", response.headers.get("tr_cont"))
-        response_headers["gt_uid"] = self._deserialize("str", response.headers.get("gt_uid"))
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
 
         if response.content:
             deserialized = response.json()
@@ -567,7 +605,7 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         hashkey: Optional[str] = None,
         gt_uid: Optional[str] = None,
         fid_cond_mrkt_div_code: str = "J",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> JSON:
         # pylint: disable=line-too-long
         """국내 주식 현재가 일자별 조회.
@@ -751,13 +789,21 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         if response.status_code not in [200]:
             if _stream:
                 await response.read()  # Load the body in memory and close the socket
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
             raise HttpResponseError(response=response)
 
         response_headers = {}
-        response_headers["tr_id"] = self._deserialize("str", response.headers.get("tr_id"))
-        response_headers["tr_cont"] = self._deserialize("str", response.headers.get("tr_cont"))
-        response_headers["gt_uid"] = self._deserialize("str", response.headers.get("gt_uid"))
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
 
         if response.content:
             deserialized = response.json()

@@ -7,7 +7,7 @@
 Follow our quickstart for examples: https://aka.ms/azsdk/python/dpcodegen/python/customize
 """
 import os
-from typing import List, Union, Awaitable
+from typing import Awaitable, List, Union
 
 from azure.core.credentials import AccessToken
 from azure.core.pipeline import PipelineRequest
@@ -31,9 +31,13 @@ class CustomAuthenticationPolicy(SansIOHTTPPolicy):
     def __init__(self, credentials: CustomCredentials):
         self._credentials = credentials
 
-    def on_request(self, request: PipelineRequest[HTTPRequestType]) -> Union[None, Awaitable[None]]:
+    def on_request(
+        self, request: PipelineRequest[HTTPRequestType]
+    ) -> Union[None, Awaitable[None]]:
         if "crtfc_key" not in request.http_request.url:
-            request.http_request.url += f"&crtfc_key={self._credentials.get_token().token}"
+            request.http_request.url += (
+                f"&crtfc_key={self._credentials.get_token().token}"
+            )
         return super().on_request(request)
 
 
@@ -54,4 +58,6 @@ def patch_sdk():
     """
 
 
-__all__: List[str] = ["OpenDartClient"]  # Add all objects you want publicly available to users at this package level
+__all__: List[str] = [
+    "OpenDartClient"
+]  # Add all objects you want publicly available to users at this package level

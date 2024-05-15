@@ -6,7 +6,7 @@ namespace: openkrx
 python: true
 black: true
 isort: true
-input-file: specifications/openkrx/OpenKrx-public.v1.yaml
+input-file: OpenKrx-public.v1.yaml
 output-folder: finance_clue
 verbose: true
 version-tolerant: true

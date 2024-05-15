@@ -6,18 +6,28 @@
 # --------------------------------------------------------------------------
 from io import IOBase
 import sys
-from typing import Any, Callable, Dict, IO, Optional, Type, TypeVar, Union, cast, overload
-
-from azure.core.exceptions import (
-    ClientAuthenticationError,
-    HttpResponseError,
-    ResourceExistsError,
-    ResourceNotFoundError,
-    ResourceNotModifiedError,
-    map_error,
+from typing import (
+    IO,
+    Any,
+    Callable,
+    Dict,
+    Optional,
+    Type,
+    TypeVar,
+    Union,
+    cast,
+    overload,
 )
+
+from azure.core.exceptions import ClientAuthenticationError
+from azure.core.exceptions import HttpResponseError
+from azure.core.exceptions import ResourceExistsError
+from azure.core.exceptions import ResourceNotFoundError
+from azure.core.exceptions import ResourceNotModifiedError
+from azure.core.exceptions import map_error
 from azure.core.pipeline import PipelineResponse
-from azure.core.rest import HttpRequest, HttpResponse
+from azure.core.rest import HttpRequest
+from azure.core.rest import HttpResponse
 from azure.core.tracing.decorator import distributed_trace
 from azure.core.utils import case_insensitive_dict
 
@@ -27,19 +37,27 @@ from .._vendor import GenOpenKisClientMixinABC
 if sys.version_info >= (3, 9):
     from collections.abc import MutableMapping
 else:
-    from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
+    from typing import (
+        MutableMapping,  # type: ignore  # pylint: disable=ungrouped-imports
+    )
 JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[
+    Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]
+]
 
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_gen_open_kis_get_access_token_request(**kwargs: Any) -> HttpRequest:  # pylint: disable=name-too-long
+def build_gen_open_kis_get_access_token_request(
+    **kwargs: Any,
+) -> HttpRequest:  # pylint: disable=name-too-long
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
 
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    content_type: Optional[str] = kwargs.pop(
+        "content_type", _headers.pop("Content-Type", None)
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -47,7 +65,9 @@ def build_gen_open_kis_get_access_token_request(**kwargs: Any) -> HttpRequest:  
 
     # Construct headers
     if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+        _headers["Content-Type"] = _SERIALIZER.header(
+            "content_type", content_type, "str"
+        )
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
     return HttpRequest(method="POST", url=_url, headers=_headers, **kwargs)
@@ -67,7 +87,7 @@ def build_gen_open_kis_get_domestic_stock_quotations_price_request(  # pylint: d
     ip_addr: Optional[str] = None,
     hashkey: Optional[str] = None,
     gt_uid: Optional[str] = None,
-    **kwargs: Any
+    **kwargs: Any,
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -78,14 +98,20 @@ def build_gen_open_kis_get_domestic_stock_quotations_price_request(  # pylint: d
     _url = "/uapi/domestic-stock/v1/quotations/inquire-price"
 
     # Construct parameters
-    _params["fid_cond_mrkt_div_code"] = _SERIALIZER.query("fid_cond_mrkt_div_code", fid_cond_mrkt_div_code, "str")
-    _params["fid_input_iscd"] = _SERIALIZER.query("fid_input_iscd", fid_input_iscd, "str")
+    _params["fid_cond_mrkt_div_code"] = _SERIALIZER.query(
+        "fid_cond_mrkt_div_code", fid_cond_mrkt_div_code, "str"
+    )
+    _params["fid_input_iscd"] = _SERIALIZER.query(
+        "fid_input_iscd", fid_input_iscd, "str"
+    )
 
     # Construct headers
     if tr_id is not None:
         _headers["tr_id"] = _SERIALIZER.header("tr_id", tr_id, "str")
     if personalseckey is not None:
-        _headers["personalseckey"] = _SERIALIZER.header("personalseckey", personalseckey, "str")
+        _headers["personalseckey"] = _SERIALIZER.header(
+            "personalseckey", personalseckey, "str"
+        )
     if tr_cont is not None:
         _headers["tr_cont"] = _SERIALIZER.header("tr_cont", tr_cont, "str")
     if custtype is not None:
@@ -95,7 +121,9 @@ def build_gen_open_kis_get_domestic_stock_quotations_price_request(  # pylint: d
     if mac_address is not None:
         _headers["mac_address"] = _SERIALIZER.header("mac_address", mac_address, "str")
     if phone_number is not None:
-        _headers["phone_number"] = _SERIALIZER.header("phone_number", phone_number, "str")
+        _headers["phone_number"] = _SERIALIZER.header(
+            "phone_number", phone_number, "str"
+        )
     if ip_addr is not None:
         _headers["ip_addr"] = _SERIALIZER.header("ip_addr", ip_addr, "str")
     if hashkey is not None:
@@ -104,7 +132,9 @@ def build_gen_open_kis_get_domestic_stock_quotations_price_request(  # pylint: d
         _headers["gt_uid"] = _SERIALIZER.header("gt_uid", gt_uid, "str")
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
 def build_gen_open_kis_get_domestic_stock_quotations_daily_price_request(  # pylint: disable=name-too-long
@@ -123,7 +153,7 @@ def build_gen_open_kis_get_domestic_stock_quotations_daily_price_request(  # pyl
     hashkey: Optional[str] = None,
     gt_uid: Optional[str] = None,
     fid_cond_mrkt_div_code: str = "J",
-    **kwargs: Any
+    **kwargs: Any,
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -134,16 +164,26 @@ def build_gen_open_kis_get_domestic_stock_quotations_daily_price_request(  # pyl
     _url = "/uapi/domestic-stock/v1/quotations/inquire-daily-price"
 
     # Construct parameters
-    _params["fid_cond_mrkt_div_code"] = _SERIALIZER.query("fid_cond_mrkt_div_code", fid_cond_mrkt_div_code, "str")
-    _params["fid_input_iscd"] = _SERIALIZER.query("fid_input_iscd", fid_input_iscd, "str")
-    _params["fid_org_adj_prc"] = _SERIALIZER.query("fid_org_adj_prc", fid_org_adj_prc, "str")
-    _params["fid_period_div_code"] = _SERIALIZER.query("fid_period_div_code", fid_period_div_code, "str")
+    _params["fid_cond_mrkt_div_code"] = _SERIALIZER.query(
+        "fid_cond_mrkt_div_code", fid_cond_mrkt_div_code, "str"
+    )
+    _params["fid_input_iscd"] = _SERIALIZER.query(
+        "fid_input_iscd", fid_input_iscd, "str"
+    )
+    _params["fid_org_adj_prc"] = _SERIALIZER.query(
+        "fid_org_adj_prc", fid_org_adj_prc, "str"
+    )
+    _params["fid_period_div_code"] = _SERIALIZER.query(
+        "fid_period_div_code", fid_period_div_code, "str"
+    )
 
     # Construct headers
     if tr_id is not None:
         _headers["tr_id"] = _SERIALIZER.header("tr_id", tr_id, "str")
     if personalseckey is not None:
-        _headers["personalseckey"] = _SERIALIZER.header("personalseckey", personalseckey, "str")
+        _headers["personalseckey"] = _SERIALIZER.header(
+            "personalseckey", personalseckey, "str"
+        )
     if tr_cont is not None:
         _headers["tr_cont"] = _SERIALIZER.header("tr_cont", tr_cont, "str")
     if custtype is not None:
@@ -153,7 +193,9 @@ def build_gen_open_kis_get_domestic_stock_quotations_daily_price_request(  # pyl
     if mac_address is not None:
         _headers["mac_address"] = _SERIALIZER.header("mac_address", mac_address, "str")
     if phone_number is not None:
-        _headers["phone_number"] = _SERIALIZER.header("phone_number", phone_number, "str")
+        _headers["phone_number"] = _SERIALIZER.header(
+            "phone_number", phone_number, "str"
+        )
     if ip_addr is not None:
         _headers["ip_addr"] = _SERIALIZER.header("ip_addr", ip_addr, "str")
     if hashkey is not None:
@@ -162,14 +204,20 @@ def build_gen_open_kis_get_domestic_stock_quotations_daily_price_request(  # pyl
         _headers["gt_uid"] = _SERIALIZER.header("gt_uid", gt_uid, "str")
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
 class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
 
     @overload
     def get_access_token(
-        self, body: Optional[JSON] = None, *, content_type: str = "application/json", **kwargs: Any
+        self,
+        body: Optional[JSON] = None,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any,
     ) -> JSON:
         # pylint: disable=line-too-long
         """접근 토큰 발급.
@@ -230,7 +278,11 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
 
     @overload
     def get_access_token(
-        self, body: Optional[IO[bytes]] = None, *, content_type: str = "application/json", **kwargs: Any
+        self,
+        body: Optional[IO[bytes]] = None,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any,
     ) -> JSON:
         # pylint: disable=line-too-long
         """접근 토큰 발급.
@@ -276,7 +328,9 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         """
 
     @distributed_trace
-    def get_access_token(self, body: Optional[Union[JSON, IO[bytes]]] = None, **kwargs: Any) -> JSON:
+    def get_access_token(
+        self, body: Optional[Union[JSON, IO[bytes]]] = None, **kwargs: Any
+    ) -> JSON:
         # pylint: disable=line-too-long
         """접근 토큰 발급.
 
@@ -341,7 +395,9 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = kwargs.pop("params", {}) or {}
 
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        content_type: Optional[str] = kwargs.pop(
+            "content_type", _headers.pop("Content-Type", None)
+        )
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
@@ -365,8 +421,10 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         _request.url = self._client.format_url(_request.url)
 
         _stream = False
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
         )
 
         response = pipeline_response.http_response
@@ -374,7 +432,9 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         if response.status_code not in [200]:
             if _stream:
                 response.read()  # Load the body in memory and close the socket
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
             raise HttpResponseError(response=response)
 
         if response.content:
@@ -403,7 +463,7 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         ip_addr: Optional[str] = None,
         hashkey: Optional[str] = None,
         gt_uid: Optional[str] = None,
-        **kwargs: Any
+        **kwargs: Any,
     ) -> JSON:
         # pylint: disable=line-too-long
         """국내주식 시세조회.
@@ -650,8 +710,10 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         _request.url = self._client.format_url(_request.url)
 
         _stream = False
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
         )
 
         response = pipeline_response.http_response
@@ -659,13 +721,21 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         if response.status_code not in [200]:
             if _stream:
                 response.read()  # Load the body in memory and close the socket
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
             raise HttpResponseError(response=response)
 
         response_headers = {}
-        response_headers["tr_id"] = self._deserialize("str", response.headers.get("tr_id"))
-        response_headers["tr_cont"] = self._deserialize("str", response.headers.get("tr_cont"))
-        response_headers["gt_uid"] = self._deserialize("str", response.headers.get("gt_uid"))
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
 
         if response.content:
             deserialized = response.json()
@@ -695,7 +765,7 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         hashkey: Optional[str] = None,
         gt_uid: Optional[str] = None,
         fid_cond_mrkt_div_code: str = "J",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> JSON:
         # pylint: disable=line-too-long
         """국내 주식 현재가 일자별 조회.
@@ -870,8 +940,10 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         _request.url = self._client.format_url(_request.url)
 
         _stream = False
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
         )
 
         response = pipeline_response.http_response
@@ -879,13 +951,21 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         if response.status_code not in [200]:
             if _stream:
                 response.read()  # Load the body in memory and close the socket
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
             raise HttpResponseError(response=response)
 
         response_headers = {}
-        response_headers["tr_id"] = self._deserialize("str", response.headers.get("tr_id"))
-        response_headers["tr_cont"] = self._deserialize("str", response.headers.get("tr_cont"))
-        response_headers["gt_uid"] = self._deserialize("str", response.headers.get("gt_uid"))
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
 
         if response.content:
             deserialized = response.json()

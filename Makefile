@@ -22,15 +22,21 @@ generate-openkis:
 	npm run autorest -- openkis_client_gen_config.md \
 		--use:@autorest/modelerfour@4.27.0 \
 		--use:@autorest/python@6.13.15
+	@poetry run black .
+	@poetry run isort .
 
 .PHONY: generate-opendart
 generate-opendart:
 	npm run autorest -- opendart_client_gen_config.md \
 		--use:@autorest/modelerfour@4.27.0 \
 		--use:@autorest/python@6.13.15
+	@poetry run black .
+	@poetry run isort .
 
 .PHONY: generate-openkrx
 generate-openkrx:
 	npm run autorest -- openkrx_client_gen_config.md \
 		--use:@autorest/modelerfour@4.27.0 \
 		--use:@autorest/python@6.13.15
+	@poetry run black .
+	@poetry run isort .

@@ -5,13 +5,15 @@
 # --------------------------------------------------------------------------
 
 from copy import deepcopy
-from typing import Any, Awaitable, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, Awaitable
 
 from azure.core import AsyncPipelineClient
 from azure.core.pipeline import policies
-from azure.core.rest import AsyncHttpResponse, HttpRequest
+from azure.core.rest import AsyncHttpResponse
+from azure.core.rest import HttpRequest
 
-from .._serialization import Deserializer, Serializer
+from .._serialization import Deserializer
+from .._serialization import Serializer
 from ._configuration import GenOpenKisClientConfiguration
 from ._operations import GenOpenKisClientOperationsMixin
 
@@ -20,7 +22,9 @@ if TYPE_CHECKING:
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class GenOpenKisClient(GenOpenKisClientOperationsMixin):  # pylint: disable=client-accepts-api-version-keyword
+class GenOpenKisClient(
+    GenOpenKisClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
     """OpenKIS API Service.
 
     :param credential: Credential needed for the client to connect to Azure. Required.
@@ -36,7 +40,7 @@ class GenOpenKisClient(GenOpenKisClientOperationsMixin):  # pylint: disable=clie
         credential: "AsyncTokenCredential",
         *,
         endpoint: str = "https://openapi.koreainvestment.com:9443",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> None:
         self._config = GenOpenKisClientConfiguration(credential=credential, **kwargs)
         _policies = kwargs.pop("policies", None)
@@ -53,10 +57,16 @@ class GenOpenKisClient(GenOpenKisClientOperationsMixin):  # pylint: disable=clie
                 self._config.custom_hook_policy,
                 self._config.logging_policy,
                 policies.DistributedTracingPolicy(**kwargs),
-                policies.SensitiveHeaderCleanupPolicy(**kwargs) if self._config.redirect_policy else None,
+                (
+                    policies.SensitiveHeaderCleanupPolicy(**kwargs)
+                    if self._config.redirect_policy
+                    else None
+                ),
                 self._config.http_logging_policy,
             ]
-        self._client: AsyncPipelineClient = AsyncPipelineClient(base_url=endpoint, policies=_policies, **kwargs)
+        self._client: AsyncPipelineClient = AsyncPipelineClient(
+            base_url=endpoint, policies=_policies, **kwargs
+        )
 
         self._serialize = Serializer()
         self._deserialize = Deserializer()

@@ -7,16 +7,15 @@
 import sys
 from typing import Any, Callable, Dict, Optional, Type, TypeVar, cast
 
-from azure.core.exceptions import (
-    ClientAuthenticationError,
-    HttpResponseError,
-    ResourceExistsError,
-    ResourceNotFoundError,
-    ResourceNotModifiedError,
-    map_error,
-)
+from azure.core.exceptions import ClientAuthenticationError
+from azure.core.exceptions import HttpResponseError
+from azure.core.exceptions import ResourceExistsError
+from azure.core.exceptions import ResourceNotFoundError
+from azure.core.exceptions import ResourceNotModifiedError
+from azure.core.exceptions import map_error
 from azure.core.pipeline import PipelineResponse
-from azure.core.rest import AsyncHttpResponse, HttpRequest
+from azure.core.rest import AsyncHttpResponse
+from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator_async import distributed_trace_async
 
 from ..._operations._operations import build_gen_open_dart_list_disclosure_info_request
@@ -25,10 +24,14 @@ from .._vendor import GenOpenDartClientMixinABC
 if sys.version_info >= (3, 9):
     from collections.abc import MutableMapping
 else:
-    from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
+    from typing import (
+        MutableMapping,  # type: ignore  # pylint: disable=ungrouped-imports
+    )
 JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[
+    Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]
+]
 
 
 class GenOpenDartClientOperationsMixin(GenOpenDartClientMixinABC):
@@ -48,7 +51,7 @@ class GenOpenDartClientOperationsMixin(GenOpenDartClientMixinABC):
         sort_mth: Optional[str] = None,
         page_no: Optional[str] = None,
         page_count: Optional[str] = None,
-        **kwargs: Any
+        **kwargs: Any,
     ) -> JSON:
         # pylint: disable=line-too-long
         """List of Disclosure Information.
@@ -283,7 +286,9 @@ class GenOpenDartClientOperationsMixin(GenOpenDartClientMixinABC):
         if response.status_code not in [200]:
             if _stream:
                 await response.read()  # Load the body in memory and close the socket
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
             raise HttpResponseError(response=response)
 
         if response.content:

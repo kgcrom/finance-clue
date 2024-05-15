@@ -5,22 +5,26 @@
 # --------------------------------------------------------------------------
 
 from copy import deepcopy
-from typing import Any, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from azure.core import PipelineClient
 from azure.core.pipeline import policies
-from azure.core.rest import HttpRequest, HttpResponse
+from azure.core.rest import HttpRequest
+from azure.core.rest import HttpResponse
 
 from ._configuration import GenOpenDartClientConfiguration
 from ._operations import GenOpenDartClientOperationsMixin
-from ._serialization import Deserializer, Serializer
+from ._serialization import Deserializer
+from ._serialization import Serializer
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from azure.core.credentials import TokenCredential
 
 
-class GenOpenDartClient(GenOpenDartClientOperationsMixin):  # pylint: disable=client-accepts-api-version-keyword
+class GenOpenDartClient(
+    GenOpenDartClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
     """Dart OpenAPI Service.
 
     :param credential: Credential needed for the client to connect to Azure. Required.
@@ -30,7 +34,11 @@ class GenOpenDartClient(GenOpenDartClientOperationsMixin):  # pylint: disable=cl
     """
 
     def __init__(
-        self, credential: "TokenCredential", *, endpoint: str = "https://opendart.fss.or.kr/api", **kwargs: Any
+        self,
+        credential: "TokenCredential",
+        *,
+        endpoint: str = "https://opendart.fss.or.kr/api",
+        **kwargs: Any,
     ) -> None:
         self._config = GenOpenDartClientConfiguration(credential=credential, **kwargs)
         _policies = kwargs.pop("policies", None)
@@ -47,16 +55,24 @@ class GenOpenDartClient(GenOpenDartClientOperationsMixin):  # pylint: disable=cl
                 self._config.custom_hook_policy,
                 self._config.logging_policy,
                 policies.DistributedTracingPolicy(**kwargs),
-                policies.SensitiveHeaderCleanupPolicy(**kwargs) if self._config.redirect_policy else None,
+                (
+                    policies.SensitiveHeaderCleanupPolicy(**kwargs)
+                    if self._config.redirect_policy
+                    else None
+                ),
                 self._config.http_logging_policy,
             ]
-        self._client: PipelineClient = PipelineClient(base_url=endpoint, policies=_policies, **kwargs)
+        self._client: PipelineClient = PipelineClient(
+            base_url=endpoint, policies=_policies, **kwargs
+        )
 
         self._serialize = Serializer()
         self._deserialize = Deserializer()
         self._serialize.client_side_validation = False
 
-    def send_request(self, request: HttpRequest, *, stream: bool = False, **kwargs: Any) -> HttpResponse:
+    def send_request(
+        self, request: HttpRequest, *, stream: bool = False, **kwargs: Any
+    ) -> HttpResponse:
         """Runs the network request through the client's chained policies.
 
         >>> from azure.core.rest import HttpRequest

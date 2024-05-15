@@ -5,13 +5,15 @@
 # --------------------------------------------------------------------------
 
 from copy import deepcopy
-from typing import Any, Awaitable, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, Awaitable
 
 from azure.core import AsyncPipelineClient
 from azure.core.pipeline import policies
-from azure.core.rest import AsyncHttpResponse, HttpRequest
+from azure.core.rest import AsyncHttpResponse
+from azure.core.rest import HttpRequest
 
-from .._serialization import Deserializer, Serializer
+from .._serialization import Deserializer
+from .._serialization import Serializer
 from ._configuration import GenOpenKrxClientConfiguration
 from ._operations import GenOpenKrxClientOperationsMixin
 
@@ -20,7 +22,9 @@ if TYPE_CHECKING:
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class GenOpenKrxClient(GenOpenKrxClientOperationsMixin):  # pylint: disable=client-accepts-api-version-keyword
+class GenOpenKrxClient(
+    GenOpenKrxClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
     """OpenKrx is a public API for the Korea Exchange (KRX) market data.
 
     :param credential: Credential needed for the client to connect to Azure. Required.
@@ -30,7 +34,11 @@ class GenOpenKrxClient(GenOpenKrxClientOperationsMixin):  # pylint: disable=clie
     """
 
     def __init__(
-        self, credential: "AsyncTokenCredential", *, endpoint: str = "https://data-dbg.krx.co.kr", **kwargs: Any
+        self,
+        credential: "AsyncTokenCredential",
+        *,
+        endpoint: str = "https://data-dbg.krx.co.kr",
+        **kwargs: Any,
     ) -> None:
         self._config = GenOpenKrxClientConfiguration(credential=credential, **kwargs)
         _policies = kwargs.pop("policies", None)
@@ -47,10 +55,16 @@ class GenOpenKrxClient(GenOpenKrxClientOperationsMixin):  # pylint: disable=clie
                 self._config.custom_hook_policy,
                 self._config.logging_policy,
                 policies.DistributedTracingPolicy(**kwargs),
-                policies.SensitiveHeaderCleanupPolicy(**kwargs) if self._config.redirect_policy else None,
+                (
+                    policies.SensitiveHeaderCleanupPolicy(**kwargs)
+                    if self._config.redirect_policy
+                    else None
+                ),
                 self._config.http_logging_policy,
             ]
-        self._client: AsyncPipelineClient = AsyncPipelineClient(base_url=endpoint, policies=_policies, **kwargs)
+        self._client: AsyncPipelineClient = AsyncPipelineClient(
+            base_url=endpoint, policies=_policies, **kwargs
+        )
 
         self._serialize = Serializer()
         self._deserialize = Deserializer()

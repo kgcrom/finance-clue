@@ -7,23 +7,30 @@
 import sys
 from typing import Any, Callable, Dict, Optional, Type, TypeVar, cast
 
-from azure.core.exceptions import (
-    ClientAuthenticationError,
-    HttpResponseError,
-    ResourceExistsError,
-    ResourceNotFoundError,
-    ResourceNotModifiedError,
-    map_error,
-)
+from azure.core.exceptions import ClientAuthenticationError
+from azure.core.exceptions import HttpResponseError
+from azure.core.exceptions import ResourceExistsError
+from azure.core.exceptions import ResourceNotFoundError
+from azure.core.exceptions import ResourceNotModifiedError
+from azure.core.exceptions import map_error
 from azure.core.pipeline import PipelineResponse
-from azure.core.rest import AsyncHttpResponse, HttpRequest
+from azure.core.rest import AsyncHttpResponse
+from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator_async import distributed_trace_async
 
 from ..._operations._operations import (
     build_gen_open_krx_get_bond_daily_index_quotation_request,
+)
+from ..._operations._operations import (
     build_gen_open_krx_get_derivatives_daily_index_quotation_request,
+)
+from ..._operations._operations import (
     build_gen_open_krx_get_kosdaq_daily_index_quotation_request,
+)
+from ..._operations._operations import (
     build_gen_open_krx_get_kospi_daily_index_quotation_request,
+)
+from ..._operations._operations import (
     build_gen_open_krx_get_krx_daily_index_quotation_request,
 )
 from .._vendor import GenOpenKrxClientMixinABC
@@ -31,16 +38,22 @@ from .._vendor import GenOpenKrxClientMixinABC
 if sys.version_info >= (3, 9):
     from collections.abc import MutableMapping
 else:
-    from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
+    from typing import (
+        MutableMapping,  # type: ignore  # pylint: disable=ungrouped-imports
+    )
 JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[
+    Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]
+]
 
 
 class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
 
     @distributed_trace_async
-    async def get_krx_daily_index_quotation(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+    async def get_krx_daily_index_quotation(
+        self, *, bas_dd: str, **kwargs: Any
+    ) -> JSON:
         """KRX 시리즈 일별시세정보.
 
         KRX 시리즈 지수의 시세정보 제공.
@@ -105,7 +118,9 @@ class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
         if response.status_code not in [200]:
             if _stream:
                 await response.read()  # Load the body in memory and close the socket
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
             raise HttpResponseError(response=response)
 
         if response.content:
@@ -119,7 +134,9 @@ class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_kospi_daily_index_quotation(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+    async def get_kospi_daily_index_quotation(
+        self, *, bas_dd: str, **kwargs: Any
+    ) -> JSON:
         """KOSPI 시리즈 일별시세정보.
 
         KOSPI 시리즈 지수의 시세정보 제공.
@@ -184,7 +201,9 @@ class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
         if response.status_code not in [200]:
             if _stream:
                 await response.read()  # Load the body in memory and close the socket
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
             raise HttpResponseError(response=response)
 
         if response.content:
@@ -198,7 +217,9 @@ class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_kosdaq_daily_index_quotation(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+    async def get_kosdaq_daily_index_quotation(
+        self, *, bas_dd: str, **kwargs: Any
+    ) -> JSON:
         """KOSDAQ 시리즈 일별시세정보.
 
         KOSDAQ 시리즈 지수의 시세정보 제공.
@@ -263,7 +284,9 @@ class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
         if response.status_code not in [200]:
             if _stream:
                 await response.read()  # Load the body in memory and close the socket
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
             raise HttpResponseError(response=response)
 
         if response.content:
@@ -277,7 +300,9 @@ class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_bond_daily_index_quotation(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+    async def get_bond_daily_index_quotation(
+        self, *, bas_dd: str, **kwargs: Any
+    ) -> JSON:
         """채권지수 시세정보.
 
         채권지수의 시세정보 제공.
@@ -351,7 +376,9 @@ class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
         if response.status_code not in [200]:
             if _stream:
                 await response.read()  # Load the body in memory and close the socket
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
             raise HttpResponseError(response=response)
 
         if response.content:
@@ -365,7 +392,9 @@ class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_derivatives_daily_index_quotation(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+    async def get_derivatives_daily_index_quotation(
+        self, *, bas_dd: str, **kwargs: Any
+    ) -> JSON:
         """파생상품지수 시세정보.
 
         파생상품지수의 시세정보 제공.
@@ -426,7 +455,9 @@ class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
         if response.status_code not in [200]:
             if _stream:
                 await response.read()  # Load the body in memory and close the socket
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
             raise HttpResponseError(response=response)
 
         if response.content:
