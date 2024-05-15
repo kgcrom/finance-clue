@@ -55,6 +55,46 @@ def build_gen_open_krx_get_krx_daily_index_quotation_request(  # pylint: disable
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
+def build_gen_open_krx_get_kospi_daily_index_quotation_request(  # pylint: disable=name-too-long
+    *, bas_dd: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/svc/apis/idx/kospi_dd_trd"
+
+    # Construct parameters
+    _params["basDd"] = _SERIALIZER.query("bas_dd", bas_dd, "str", pattern=r"^\d{8}$")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_gen_open_krx_get_kosdaq_daily_index_quotation_request(  # pylint: disable=name-too-long
+    *, bas_dd: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/svc/apis/idx/kosdaq_dd_trd"
+
+    # Construct parameters
+    _params["basDd"] = _SERIALIZER.query("bas_dd", bas_dd, "str", pattern=r"^\d{8}$")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
 class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
 
     @distributed_trace
@@ -107,6 +147,164 @@ class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_krx_get_krx_daily_index_quotation_request(
+            bas_dd=bas_dd,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_kospi_daily_index_quotation(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+        """KOSPI 시리즈 일별시세정보.
+
+        KOSPI 시리즈 지수의 시세정보 제공.
+
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "OutBlock_1": [
+                        {
+                            "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                            "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                            "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                            "CLSPRC_IDX": "str",  # Optional. "uc885"uac00.
+                            "CMPPREVDD_IDX": "str",  # Optional. "ub300"ube44.
+                            "FLUC_RT": "str",  # Optional. "ub4f1"ub77d"ub960.
+                            "HGPRC_IDX": "str",  # Optional. "uace0"uac00.
+                            "IDX_CLSS": "str",  # Optional. "uacc4"uc5f4"uad6c"ubd84.
+                            "IDX_NM": "str",  # Optional. "uc9c0"uc218"uba85.
+                            "LWPRC_IDX": "str",  # Optional. "uc800"uac00.
+                            "MKTCAP": "str",  # Optional.
+                              "uc0c1"uc7a5"uc2dc"uac00"ucd1d"uc561.
+                            "OPNPRC_IDX": "str"  # Optional. "uc2dc"uac00.
+                        }
+                    ]
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_krx_get_kospi_daily_index_quotation_request(
+            bas_dd=bas_dd,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_kosdaq_daily_index_quotation(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+        """KOSDAQ 시리즈 일별시세정보.
+
+        KOSDAQ 시리즈 지수의 시세정보 제공.
+
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "OutBlock_1": [
+                        {
+                            "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                            "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                            "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                            "CLSPRC_IDX": "str",  # Optional. "uc885"uac00.
+                            "CMPPREVDD_IDX": "str",  # Optional. "ub300"ube44.
+                            "FLUC_RT": "str",  # Optional. "ub4f1"ub77d"ub960.
+                            "HGPRC_IDX": "str",  # Optional. "uace0"uac00.
+                            "IDX_CLSS": "str",  # Optional. "uacc4"uc5f4"uad6c"ubd84.
+                            "IDX_NM": "str",  # Optional. "uc9c0"uc218"uba85.
+                            "LWPRC_IDX": "str",  # Optional. "uc800"uac00.
+                            "MKTCAP": "str",  # Optional.
+                              "uc0c1"uc7a5"uc2dc"uac00"ucd1d"uc561.
+                            "OPNPRC_IDX": "str"  # Optional. "uc2dc"uac00.
+                        }
+                    ]
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_krx_get_kosdaq_daily_index_quotation_request(
             bas_dd=bas_dd,
             headers=_headers,
             params=_params,

@@ -120,18 +120,25 @@ class GenOpenDartClientOperationsMixin(GenOpenDartClientMixinABC):
         :keyword corp_code: 공시대상회사의 고유번호(8자리). Default value is None.
         :paramtype corp_code: str
         :keyword bgn_de: 시작일
+         ======
+
          검색시작 접수일자(YYYYMMDD)
          1) 기본값 : 종료일(end_de)
          2) 고유번호(corp_code)가 없는 경우 검색기간은 3개월로 제한. Default value is None.
         :paramtype bgn_de: str
         :keyword end_de: 검색종료 접수일자(YYYYMMDD)
+         ===========================
+
          1) 기본값 : 당일. Default value is None.
         :paramtype end_de: str
-        :keyword last_reprt_at: 최종보고서 검색여부
-         최종보고서만 검색여부(Y or N)
+        :keyword last_reprt_at: 최종보고서만 검색여부(Y or N)
+         =============================
+
          1) 기본값 : N(정정이 있는 경우 최종정정만 검색). Known values are: "Y" and "N". Default value is None.
         :paramtype last_reprt_at: str
         :keyword pblntf_ty: 공시유형
+         ========
+
          A : 정기공시
          B: 주요사항보고
          C: 발행공시
@@ -147,25 +154,35 @@ class GenOpenDartClientOperationsMixin(GenOpenDartClientMixinABC):
         :keyword pblntf_detail_ty: 공시상세유형. Default value is None.
         :paramtype pblntf_detail_ty: str
         :keyword corp_cls: 법인구분
+         ========
+
          Y : 유가증권시장
          K: 코스닥
          N: 코넥스
          E: 기타. Known values are: "Y", "K", "N", and "E". Default value is None.
         :paramtype corp_cls: str
         :keyword sort: 정렬
+         ====
+
          접수일자: date
          회사명 : crp
          보고서명 : rpt
          ※ 기본값 : date. Known values are: "date", "crp", and "rpt". Default value is None.
         :paramtype sort: str
         :keyword sort_mth: 정렬방식
+         ========
+
          오름차순(asc), 내림차순(desc)
          ※ 기본값 : desc. Known values are: "asc" and "desc". Default value is None.
         :paramtype sort_mth: str
         :keyword page_no: 페이지 번호
+         ===========
+
          페이지 번호(1~n) 기본값 : 1. Default value is None.
         :paramtype page_no: str
         :keyword page_count: 페이지 별 건수
+         ==============
+
          페이지당 건수(1~100) 기본값 : 10, 최대값 : 100. Default value is None.
         :paramtype page_count: str
         :return: JSON object
@@ -192,7 +209,7 @@ class GenOpenDartClientOperationsMixin(GenOpenDartClientMixinABC):
                         "rcept_dt": "str",  # Optional. "uc811"uc218"uc77c"uc790(YYYYMMDD).
                         "rcept_no": "str",  # Optional.
                           "uc811"uc218"ubc88"ud638(14"uc790"ub9ac).
-                        "report_nm": "str",  # Optional. "ubcf4"uace0"uc11c"uba85
+                        "report_nm": "str",  # Optional. "ubcf4"uace0"uc11c"uba85 ========
                           "uacf5"uc2dc"uad6c"ubd84+"ubcf4"uace0"uc11c"uba85+"uae30"ud0c0"uc815"ubcf4
                           ["uae30"uc7ac"uc815"uc815] : "ubcf8 "ubcf4"uace0"uc11c"uba85"uc73c"ub85c
                           "uc774"ubbf8 "uc81c"ucd9c"ub41c "ubcf4"uace0"uc11c"uc758
@@ -222,7 +239,7 @@ class GenOpenDartClientOperationsMixin(GenOpenDartClientMixinABC):
                           "ubcf8 "ubcf4"uace0"uc11c"uc5d0 "ub300"ud558"uc5ec
                           "uae08"uc735"uac10"ub3c5"uc6d0"uc774
                           "uc815"uc815"uc81c"ucd9c"uc694"uad6c"uc744 "ubd80"uacfc"ud55c "uac83"uc784.
-                        "rm": "str",  # Optional. "ube44"uace0  "uc870"ud569"ub41c
+                        "rm": "str",  # Optional. "ube44"uace0 ====  "uc870"ud569"ub41c
                           "ubb38"uc790"ub85c "uac01"uac01"uc740 "uc544"ub798"uc640 "uac19"uc740
                           "uc758"ubbf8"uac00 "uc788"uc74c "uc720 : "ubcf8
                           "uacf5"uc2dc"uc0ac"ud56d"uc740 "ud55c"uad6d"uac70"ub798"uc18c
@@ -250,8 +267,8 @@ class GenOpenDartClientOperationsMixin(GenOpenDartClientMixinABC):
                     "message": "str",  # Optional. "uc5d0"ub7ec "uc815"ubcf4 "uba54"uc2dc"uc9c0.
                     "page_count": 0,  # Optional. "ud398"uc774"uc9c0 "ubcc4 "uac74"uc218.
                     "page_no": 0,  # Optional. "ud398"uc774"uc9c0 "ubc88"ud638.
-                    "status": "str",  # Optional. "uc5d0"ub7ec "uc815"ubcf4 "ucf54"ub4dc   * 000
-                      :"uc815"uc0c1 * 010 :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740
+                    "status": "str",  # Optional. "uc5d0"ub7ec "uc815"ubcf4 "ucf54"ub4dc
+                      ==============   * 000 :"uc815"uc0c1 * 010 :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740
                       "ud0a4"uc785"ub2c8"ub2e4. * 011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294
                       "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
                       "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9

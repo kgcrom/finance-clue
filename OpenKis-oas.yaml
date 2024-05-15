@@ -3,6 +3,12 @@ info:
   title: 한국투자증권 개발자센터 KIS Developers
   description: OpenKIS API Service
   version: 1.0.0
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+  contact:
+    name: 강한구
+    email: kgcrom@hotmail.com
 servers:
   - url: 'https://openapi.koreainvestment.com:9443'
     description: KIS Production server

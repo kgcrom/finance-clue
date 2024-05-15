@@ -21,7 +21,7 @@ if TYPE_CHECKING:
 
 
 class GenOpenDartClient(GenOpenDartClientOperationsMixin):  # pylint: disable=client-accepts-api-version-keyword
-    """OpenDart API Service.
+    """Dart OpenAPI Service.
 
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential

@@ -3,8 +3,11 @@ info:
   title: KRX
   description: OpenKrx is a public API for the Korea Exchange (KRX) market data.
   version: 1.0.0
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
   contact:
-    name: Hangoo Kang
+    name: 강한구
     email: kgcrom@hotmail.com
 servers:
   - url: https://data-dbg.krx.co.kr
@@ -49,11 +52,67 @@ paths:
                   OutBlock_1:
                     type: array
                     items:
-                      $ref: '#/components/schemas/KrxDailyIndexQuotation'
+                      $ref: '#/components/schemas/DailyIndexQuotation'
+  /svc/apis/idx/kospi_dd_trd:
+    get:
+      operationId: getKospiDailyIndexQuotation
+      summary: KOSPI 시리즈 일별시세정보
+      description: KOSPI 시리즈 지수의 시세정보 제공
+      tags:
+        - Index
+      parameters:
+        - name: basDd
+          in: query
+          description: 기준일자
+          required: true
+          schema:
+            type: string
+            pattern: '^\d{8}$'
+            example: 20240514
+      responses:
+        '200':
+          description: KOSPI 시리즈 지수 조회 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  OutBlock_1:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DailyIndexQuotation'
+  /svc/apis/idx/kosdaq_dd_trd:
+    get:
+      operationId: getKosdaqDailyIndexQuotation
+      summary: KOSDAQ 시리즈 일별시세정보
+      description: KOSDAQ 시리즈 지수의 시세정보 제공
+      tags:
+        - Index
+      parameters:
+        - name: basDd
+          in: query
+          description: 기준일자
+          required: true
+          schema:
+            type: string
+            pattern: '^\d{8}$'
+            example: 20240514
+      responses:
+        '200':
+          description: KOSDAQ 시리즈 지수 조회 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  OutBlock_1:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DailyIndexQuotation'
 
 components:
   schemas:
-    KrxDailyIndexQuotation:
+    DailyIndexQuotation:
       type: object
       properties:
         BAS_DD:

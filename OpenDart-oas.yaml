@@ -3,6 +3,12 @@ info:
   title: Dart OpenAPI Service
   description: Dart OpenAPI Service
   version: 1.0.0
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+  contact:
+    name: 강한구
+    email: kgcrom@hotmail.com
 servers:
   - url: 'https://opendart.fss.or.kr/api'
     description: OpenDart API Service
