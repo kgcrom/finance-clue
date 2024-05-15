@@ -17,7 +17,7 @@ tags:
     description: 지수 데이터
   - name: Stock
     description: 주식 데이터
-  - name: Securities instruments
+  - name: Financial Instruments
     description: 증권 상품 데이터
   - name: Bond
     description: 채권 데이터
@@ -109,6 +109,62 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/DailyIndexQuotation'
+  /svc/apis/idx/bon_dd_trd:
+    get:
+      operationId: getBondDailyIndexQuotation
+      summary: 채권지수 시세정보
+      description: 채권지수의 시세정보 제공
+      tags:
+        - Index
+      parameters:
+        - name: basDd
+          in: query
+          description: 기준일자
+          required: true
+          schema:
+            type: string
+            pattern: '^\d{8}$'
+            example: 20240514
+      responses:
+        '200':
+          description: 채권지수 조회 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  OutBlock_1:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DailyBondIndexQuotation'
+  /svc/apis/idx/drvprod_dd_trd:
+    get:
+      operationId: getDerivativesDailyIndexQuotation
+      summary: 파생상품지수 시세정보
+      description: 파생상품지수의 시세정보 제공
+      tags:
+        - Index
+      parameters:
+        - name: basDd
+          in: query
+          description: 기준일자
+          required: true
+          schema:
+            type: string
+            pattern: '^\d{8}$'
+            example: 20240514
+      responses:
+        '200':
+          description: 파생상품지수 조회 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  OutBlock_1:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DailyDerivationIndexQuotation'
 
 components:
   schemas:
@@ -163,6 +219,100 @@ components:
           type: string
           description: 상장시가총액
           example: 2722079713896
+    DailyDerivationIndexQuotation:
+      type: object
+      properties:
+        BAS_DD:
+          type: string
+          description: 기준일자
+          example: 20240514
+        IDX_CLSS:
+          type: string
+          description: 계열구분
+          example: 선물지수
+        IDX_NM:
+          type: string
+          description: 지수명
+          example: 코스피 200 선물지
+        CLSPRC_IDX:
+          type: string
+          description: 종가
+          example: 6250.82
+        CMPPREVDD_IDX:
+          type: string
+          description: 대비
+          example: 15.40
+        FLUC_RT:
+          type: string
+          description: 등락률
+          example: 0.25
+        OPNPRC_IDX:
+          type: string
+          description: 시가
+          example: 6250.82
+        HGPRC_IDX:
+          type: string
+          description: 고가
+          example: 6250.82
+        LWPRC_IDX:
+          type: string
+          description: 저가
+          example: 6250.82
+    DailyBondIndexQuotation:
+      type: object
+      properties:
+        BAS_DD:
+          type: string
+          description: 기준일자
+          example: 20240514
+        BND_IDX_GRP_NM:
+          type: string
+          description: 지수명
+          example: KTB지수
+        TOT_EARNG_IDX:
+          type: string
+          description: 총수익지수_종가
+          example: 6250.82
+        TOT_EARNG_IDX_CMPPREVDD:
+          type: string
+          description: 총수익지수_대비
+          example: 15.40
+        NETPRC_IDX:
+          type: string
+          description: 순가격지수_종가
+          example: 6250.82
+        NETPRC_IDX_CMPPREVDD:
+          type: string
+          description: 순가격지수_대비
+          example: 15.40
+        ZERO_REINVST_IDX:
+          type: string
+          description: 제로재투자지수_종가
+          example: 6250.82
+        ZERO_REINVST_IDX_CMPPREVDD:
+          type: string
+          description: 제로재투자지수_대비
+          example: 15.40
+        CALL_REINVST_IDX:
+          type: string
+          description: 콜재투자지수_종가
+          example: 6250.82
+        CALL_REINVST_IDX_CMPPREVDD:
+          type: string
+          description: 콜재투자지수_대비
+          example: 15.40
+        AVG_DURATION:
+          type: string
+          description: 듀레이션
+          example: 6250.82
+        AVG_CONVEXITY_PRC:
+          type: string
+          description: 컨벡시티
+          example: 6250.82
+        BND_IDX_AVG_YD:
+          type: string
+          description: YTM
+          example: 6250.82
   securitySchemes:
     authKey:
       type: apiKey
