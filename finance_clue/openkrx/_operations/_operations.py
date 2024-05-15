@@ -214,6 +214,72 @@ def build_gen_open_krx_get_konex_stock_daily_request(  # pylint: disable=name-to
     )
 
 
+def build_gen_open_krx_get_kospi_base_info_request(  # pylint: disable=name-too-long
+    *, bas_dd: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/svc/apis/sto/stk_isu_base_info"
+
+    # Construct parameters
+    _params["basDd"] = _SERIALIZER.query("bas_dd", bas_dd, "str", pattern=r"^\d{8}$")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_krx_get_kosdaq_base_info_request(  # pylint: disable=name-too-long
+    *, bas_dd: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/svc/apis/sto/ksq_isu_base_info"
+
+    # Construct parameters
+    _params["basDd"] = _SERIALIZER.query("bas_dd", bas_dd, "str", pattern=r"^\d{8}$")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_krx_get_konex_base_info_request(  # pylint: disable=name-too-long
+    *, bas_dd: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/svc/apis/sto/knx_isu_base_info"
+
+    # Construct parameters
+    _params["basDd"] = _SERIALIZER.query("bas_dd", bas_dd, "str", pattern=r"^\d{8}$")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
 class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
 
     @distributed_trace
@@ -861,6 +927,264 @@ class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_krx_get_konex_stock_daily_request(
+            bas_dd=bas_dd,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_kospi_base_info(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+        """유가증권 종목 기본정보.
+
+        유가증권 종목 기본정보.
+
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "OutBlock_1": [
+                        {
+                            "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                            "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                            "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                            "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                            "FLUC_RT": "str",  # Optional. "ub4f1"ub77d"ub960.
+                            "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "LIST_SHRS": "str",  # Optional.
+                              "uc0c1"uc7a5"uc8fc"uc2dd"uc218.
+                            "MKTCAP": "str",  # Optional. "uc2dc"uac00"ucd1d"uc561.
+                            "MKT_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
+                            "SECT_TP_NM": "str",  # Optional. "uc18c"uc18d"ubd80.
+                            "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                            "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                            "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                            "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                        }
+                    ]
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_krx_get_kospi_base_info_request(
+            bas_dd=bas_dd,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_kosdaq_base_info(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+        """코스닥 종목 기본정보.
+
+        코스닥 종목 기본정보.
+
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "OutBlock_1": [
+                        {
+                            "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                            "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                            "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                            "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                            "FLUC_RT": "str",  # Optional. "ub4f1"ub77d"ub960.
+                            "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "LIST_SHRS": "str",  # Optional.
+                              "uc0c1"uc7a5"uc8fc"uc2dd"uc218.
+                            "MKTCAP": "str",  # Optional. "uc2dc"uac00"ucd1d"uc561.
+                            "MKT_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
+                            "SECT_TP_NM": "str",  # Optional. "uc18c"uc18d"ubd80.
+                            "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                            "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                            "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                            "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                        }
+                    ]
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_krx_get_kosdaq_base_info_request(
+            bas_dd=bas_dd,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_konex_base_info(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+        """코넥스 기본정보.
+
+        코넥스 종목 기본정보.
+
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "OutBlock_1": [
+                        {
+                            "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                            "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                            "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                            "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                            "FLUC_RT": "str",  # Optional. "ub4f1"ub77d"ub960.
+                            "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "LIST_SHRS": "str",  # Optional.
+                              "uc0c1"uc7a5"uc8fc"uc2dd"uc218.
+                            "MKTCAP": "str",  # Optional. "uc2dc"uac00"ucd1d"uc561.
+                            "MKT_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
+                            "SECT_TP_NM": "str",  # Optional. "uc18c"uc18d"ubd80.
+                            "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                            "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                            "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                            "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                        }
+                    ]
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_krx_get_konex_base_info_request(
             bas_dd=bas_dd,
             headers=_headers,
             params=_params,
