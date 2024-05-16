@@ -346,6 +346,72 @@ def build_gen_open_krx_get_elw_daily_trade_request(  # pylint: disable=name-too-
     )
 
 
+def build_gen_open_krx_get_kts_daily_trade_request(  # pylint: disable=name-too-long
+    *, bas_dd: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/svc/apis/bon/kts_bydd_trd"
+
+    # Construct parameters
+    _params["basDd"] = _SERIALIZER.query("bas_dd", bas_dd, "str", pattern=r"^\d{8}$")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_krx_get_bond_daily_trade_request(  # pylint: disable=name-too-long
+    *, bas_dd: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/svc/apis/bon/bnd_bydd_trd"
+
+    # Construct parameters
+    _params["basDd"] = _SERIALIZER.query("bas_dd", bas_dd, "str", pattern=r"^\d{8}$")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_krx_get_small_bond_daily_trade_request(  # pylint: disable=name-too-long
+    *, bas_dd: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/svc/apis/bon/smb_bydd_trd"
+
+    # Construct parameters
+    _params["basDd"] = _SERIALIZER.query("bas_dd", bas_dd, "str", pattern=r"^\d{8}$")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
 class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
 
     @distributed_trace
@@ -1045,22 +1111,21 @@ class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
                 response == {
                     "OutBlock_1": [
                         {
-                            "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
-                            "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
-                            "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
-                            "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
-                            "FLUC_RT": "str",  # Optional. "ub4f1"ub77d"ub960.
+                            "ISU_ABBRV": "str",  # Optional. "uc885"ubaa9"uc57d"uba85.
                             "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "ISU_ENG_NM": "str",  # Optional. "uc601"ubb38
+                              "uc885"ubaa9"uba85.
                             "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "ISU_SRT_CD": "str",  # Optional. "ub2e8"ucd95"ucf54"ub4dc.
+                            "KIND_STKCERT_TP_NM": "str",  # Optional.
+                              "uc8fc"uc2dd"uc885"ub958.
+                            "LIST_DD": "str",  # Optional. "uc0c1"uc7a5"uc77c.
                             "LIST_SHRS": "str",  # Optional.
                               "uc0c1"uc7a5"uc8fc"uc2dd"uc218.
-                            "MKTCAP": "str",  # Optional. "uc2dc"uac00"ucd1d"uc561.
-                            "MKT_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
+                            "MKT_TP_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
+                            "PARVAL": "str",  # Optional. "uc561"uba74"uac00.
                             "SECT_TP_NM": "str",  # Optional. "uc18c"uc18d"ubd80.
-                            "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
-                            "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
-                            "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
-                            "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                            "SECUGRP_NM": "str"  # Optional. "uc99d"uad8c"uad6c"ubd84.
                         }
                     ]
                 }
@@ -1131,22 +1196,21 @@ class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
                 response == {
                     "OutBlock_1": [
                         {
-                            "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
-                            "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
-                            "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
-                            "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
-                            "FLUC_RT": "str",  # Optional. "ub4f1"ub77d"ub960.
+                            "ISU_ABBRV": "str",  # Optional. "uc885"ubaa9"uc57d"uba85.
                             "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "ISU_ENG_NM": "str",  # Optional. "uc601"ubb38
+                              "uc885"ubaa9"uba85.
                             "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "ISU_SRT_CD": "str",  # Optional. "ub2e8"ucd95"ucf54"ub4dc.
+                            "KIND_STKCERT_TP_NM": "str",  # Optional.
+                              "uc8fc"uc2dd"uc885"ub958.
+                            "LIST_DD": "str",  # Optional. "uc0c1"uc7a5"uc77c.
                             "LIST_SHRS": "str",  # Optional.
                               "uc0c1"uc7a5"uc8fc"uc2dd"uc218.
-                            "MKTCAP": "str",  # Optional. "uc2dc"uac00"ucd1d"uc561.
-                            "MKT_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
+                            "MKT_TP_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
+                            "PARVAL": "str",  # Optional. "uc561"uba74"uac00.
                             "SECT_TP_NM": "str",  # Optional. "uc18c"uc18d"ubd80.
-                            "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
-                            "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
-                            "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
-                            "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                            "SECUGRP_NM": "str"  # Optional. "uc99d"uad8c"uad6c"ubd84.
                         }
                     ]
                 }
@@ -1217,22 +1281,21 @@ class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
                 response == {
                     "OutBlock_1": [
                         {
-                            "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
-                            "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
-                            "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
-                            "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
-                            "FLUC_RT": "str",  # Optional. "ub4f1"ub77d"ub960.
+                            "ISU_ABBRV": "str",  # Optional. "uc885"ubaa9"uc57d"uba85.
                             "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "ISU_ENG_NM": "str",  # Optional. "uc601"ubb38
+                              "uc885"ubaa9"uba85.
                             "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "ISU_SRT_CD": "str",  # Optional. "ub2e8"ucd95"ucf54"ub4dc.
+                            "KIND_STKCERT_TP_NM": "str",  # Optional.
+                              "uc8fc"uc2dd"uc885"ub958.
+                            "LIST_DD": "str",  # Optional. "uc0c1"uc7a5"uc77c.
                             "LIST_SHRS": "str",  # Optional.
                               "uc0c1"uc7a5"uc8fc"uc2dd"uc218.
-                            "MKTCAP": "str",  # Optional. "uc2dc"uac00"ucd1d"uc561.
-                            "MKT_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
+                            "MKT_TP_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
+                            "PARVAL": "str",  # Optional. "uc561"uba74"uac00.
                             "SECT_TP_NM": "str",  # Optional. "uc18c"uc18d"ubd80.
-                            "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
-                            "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
-                            "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
-                            "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                            "SECUGRP_NM": "str"  # Optional. "uc99d"uad8c"uad6c"ubd84.
                         }
                     ]
                 }
@@ -1511,6 +1574,251 @@ class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_krx_get_elw_daily_trade_request(
+            bas_dd=bas_dd,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_kts_daily_trade(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+        """국채전문유통시장 일별매매정보.
+
+        국채전문유통시장에 상장되어있는 채권의 매매정보 제공.
+
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                    "BND_EXP_TP_NM": "str",  # Optional. "ub9cc"uae30"ub144"uc218.
+                    "CLSPRC": "str",  # Optional. "uc885"uac00.
+                    "CLSPRC_YD": "str",  # Optional. "uc885"uac00 "uc218"uc775"ub960.
+                    "CMPPREVDD_PRC": "str",  # Optional. "uc885"uac00 "ub300"ube44.
+                    "GOVBND_ISU_TP_NM": "str",  # Optional. "uc885"ubaa9"uad6c"ubd84.
+                    "HGPRC": "str",  # Optional. "uace0"uac00.
+                    "HGPRC_YD": "str",  # Optional. "uace0"uac00 "uc218"uc775"ub960.
+                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                    "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                    "LWPRC": "str",  # Optional. "uc800"uac00.
+                    "LWPRC_YD": "str",  # Optional. "uc800"uac00 "uc218"uc775"ub960.
+                    "MKT_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
+                    "OPNPRC": "str",  # Optional. "uc2dc"uac00.
+                    "OPNPRC_YD": "str"  # Optional. "uc2dc"uac00 "uc218"uc775"ub960.
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_krx_get_kts_daily_trade_request(
+            bas_dd=bas_dd,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_bond_daily_trade(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+        """일반채권시장 일별매매정보.
+
+        일반채권시장에 상장되어있는 채권의 매매정보 제공.
+
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                    "CLSPRC": "str",  # Optional. "uc885"uac00.
+                    "CLSPRC_YD": "str",  # Optional. "uc885"uac00 "uc218"uc775"ub960.
+                    "CMPPREVDD_PRC": "str",  # Optional. "uc885"uac00 "ub300"ube44.
+                    "HGPRC": "str",  # Optional. "uace0"uac00.
+                    "HGPRC_YD": "str",  # Optional. "uace0"uac00 "uc218"uc775"ub960.
+                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                    "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                    "LWPRC": "str",  # Optional. "uc800"uac00.
+                    "LWPRC_YD": "str",  # Optional. "uc800"uac00 "uc218"uc775"ub960.
+                    "MKT_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
+                    "OPNPRC": "str",  # Optional. "uc2dc"uac00.
+                    "OPNPRC_YD": "str"  # Optional. "uc2dc"uac00 "uc218"uc775"ub960.
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_krx_get_bond_daily_trade_request(
+            bas_dd=bas_dd,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_small_bond_daily_trade(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+        """소액채권시장 일별매매정보.
+
+        소액채권시장에 상장되어있는 채권의 매매정보 제공.
+
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                    "CLSPRC": "str",  # Optional. "uc885"uac00.
+                    "CLSPRC_YD": "str",  # Optional. "uc885"uac00 "uc218"uc775"ub960.
+                    "CMPPREVDD_PRC": "str",  # Optional. "uc885"uac00 "ub300"ube44.
+                    "HGPRC": "str",  # Optional. "uace0"uac00.
+                    "HGPRC_YD": "str",  # Optional. "uace0"uac00 "uc218"uc775"ub960.
+                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                    "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                    "LWPRC": "str",  # Optional. "uc800"uac00.
+                    "LWPRC_YD": "str",  # Optional. "uc800"uac00 "uc218"uc775"ub960.
+                    "MKT_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
+                    "OPNPRC": "str",  # Optional. "uc2dc"uac00.
+                    "OPNPRC_YD": "str"  # Optional. "uc2dc"uac00 "uc218"uc775"ub960.
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_krx_get_small_bond_daily_trade_request(
             bas_dd=bas_dd,
             headers=_headers,
             params=_params,

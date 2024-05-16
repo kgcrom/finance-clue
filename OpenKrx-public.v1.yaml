@@ -22,7 +22,7 @@ tags:
   - name: Bond
     description: 채권 데이터
 security:
-  - authKey: [ ]
+  - authKey: []
 
 paths:
   /svc/apis/idx/krx_dd_trd:
@@ -33,9 +33,9 @@ paths:
       tags:
         - Index
       parameters:
-        - $ref: '#/components/parameters/BaseDate'
+        - $ref: "#/components/parameters/BaseDate"
       responses:
-        '200':
+        "200":
           description: KRX 시리즈 지수 조회 성공
           content:
             application/json:
@@ -45,7 +45,7 @@ paths:
                   OutBlock_1:
                     type: array
                     items:
-                      $ref: '#/components/schemas/DailyIndex'
+                      $ref: "#/components/schemas/DailyIndex"
   /svc/apis/idx/kospi_dd_trd:
     get:
       operationId: getKospiDailyIndex
@@ -63,7 +63,7 @@ paths:
             pattern: '^\d{8}$'
             example: 20240514
       responses:
-        '200':
+        "200":
           description: KOSPI 시리즈 지수 조회 성공
           content:
             application/json:
@@ -73,7 +73,7 @@ paths:
                   OutBlock_1:
                     type: array
                     items:
-                      $ref: '#/components/schemas/DailyIndex'
+                      $ref: "#/components/schemas/DailyIndex"
   /svc/apis/idx/kosdaq_dd_trd:
     get:
       operationId: getKosdaqDailyIndex
@@ -82,9 +82,9 @@ paths:
       tags:
         - Index
       parameters:
-        - $ref: '#/components/parameters/BaseDate'
+        - $ref: "#/components/parameters/BaseDate"
       responses:
-        '200':
+        "200":
           description: KOSDAQ 시리즈 지수 조회 성공
           content:
             application/json:
@@ -94,7 +94,7 @@ paths:
                   OutBlock_1:
                     type: array
                     items:
-                      $ref: '#/components/schemas/DailyIndex'
+                      $ref: "#/components/schemas/DailyIndex"
   /svc/apis/idx/bon_dd_trd:
     get:
       operationId: getBondDailyIndex
@@ -103,9 +103,9 @@ paths:
       tags:
         - Index
       parameters:
-        - $ref: '#/components/parameters/BaseDate'
+        - $ref: "#/components/parameters/BaseDate"
       responses:
-        '200':
+        "200":
           description: 채권지수 조회 성공
           content:
             application/json:
@@ -115,7 +115,7 @@ paths:
                   OutBlock_1:
                     type: array
                     items:
-                      $ref: '#/components/schemas/DailyBondIndex'
+                      $ref: "#/components/schemas/DailyBondIndex"
   /svc/apis/idx/drvprod_dd_trd:
     get:
       operationId: getDerivativesDailyIndex
@@ -124,9 +124,9 @@ paths:
       tags:
         - Index
       parameters:
-        - $ref: '#/components/parameters/BaseDate'
+        - $ref: "#/components/parameters/BaseDate"
       responses:
-        '200':
+        "200":
           description: 파생상품지수 조회 성공
           content:
             application/json:
@@ -136,7 +136,7 @@ paths:
                   OutBlock_1:
                     type: array
                     items:
-                      $ref: '#/components/schemas/DailyDerivationIndex'
+                      $ref: "#/components/schemas/DailyDerivationIndex"
   /svc/apis/sto/stk_bydd_trd:
     get:
       operationId: getKospiStockDaily
@@ -145,9 +145,9 @@ paths:
       tags:
         - Stock
       parameters:
-        - $ref: '#/components/parameters/BaseDate'
+        - $ref: "#/components/parameters/BaseDate"
       responses:
-        '200':
+        "200":
           description: 유가증권 일별매매정보 조회 성공
           content:
             application/json:
@@ -157,7 +157,7 @@ paths:
                   OutBlock_1:
                     type: array
                     items:
-                      $ref: '#/components/schemas/DailyStockPrice'
+                      $ref: "#/components/schemas/DailyStockPrice"
   /svc/apis/sto/ksq_bydd_trd:
     get:
       operationId: getKosdaqStockDaily
@@ -166,9 +166,9 @@ paths:
       tags:
         - Stock
       parameters:
-        - $ref: '#/components/parameters/BaseDate'
+        - $ref: "#/components/parameters/BaseDate"
       responses:
-        '200':
+        "200":
           description: 코스닥시장 일별매매정보 조회 성공
           content:
             application/json:
@@ -178,7 +178,7 @@ paths:
                   OutBlock_1:
                     type: array
                     items:
-                      $ref: '#/components/schemas/DailyStockPrice'
+                      $ref: "#/components/schemas/DailyStockPrice"
   /svc/apis/sto/knx_bydd_trd:
     get:
       operationId: getKonexStockDaily
@@ -187,9 +187,9 @@ paths:
       tags:
         - Stock
       parameters:
-        - $ref: '#/components/parameters/BaseDate'
+        - $ref: "#/components/parameters/BaseDate"
       responses:
-        '200':
+        "200":
           description: 코넥스시장 일별매매정보 조회 성공
           content:
             application/json:
@@ -199,7 +199,7 @@ paths:
                   OutBlock_1:
                     type: array
                     items:
-                      $ref: '#/components/schemas/DailyStockPrice'
+                      $ref: "#/components/schemas/DailyStockPrice"
   /svc/apis/sto/stk_isu_base_info:
     get:
       operationId: getKospiBaseInfo
@@ -208,9 +208,9 @@ paths:
       tags:
         - Stock
       parameters:
-        - $ref: '#/components/parameters/BaseDate'
+        - $ref: "#/components/parameters/BaseDate"
       responses:
-        '200':
+        "200":
           description: 유가증권 종목 기본정보 조회 성공
           content:
             application/json:
@@ -220,7 +220,7 @@ paths:
                   OutBlock_1:
                     type: array
                     items:
-                      $ref: '#/components/schemas/DailyStockPrice'
+                      $ref: "#/components/schemas/DailyStockInfo"
   /svc/apis/sto/ksq_isu_base_info:
     get:
       operationId: getKosdaqBaseInfo
@@ -229,9 +229,9 @@ paths:
       tags:
         - Stock
       parameters:
-        - $ref: '#/components/parameters/BaseDate'
+        - $ref: "#/components/parameters/BaseDate"
       responses:
-        '200':
+        "200":
           description: 코스닥 종목 기본정보 조회 성공
           content:
             application/json:
@@ -241,7 +241,7 @@ paths:
                   OutBlock_1:
                     type: array
                     items:
-                      $ref: '#/components/schemas/DailyStockPrice'
+                      $ref: "#/components/schemas/DailyStockInfo"
   /svc/apis/sto/knx_isu_base_info:
     get:
       operationId: getKonexBaseInfo
@@ -250,9 +250,9 @@ paths:
       tags:
         - Stock
       parameters:
-        - $ref: '#/components/parameters/BaseDate'
+        - $ref: "#/components/parameters/BaseDate"
       responses:
-        '200':
+        "200":
           description: 코넥스 종목 기본정보 조회 성공
           content:
             application/json:
@@ -262,7 +262,7 @@ paths:
                   OutBlock_1:
                     type: array
                     items:
-                      $ref: '#/components/schemas/DailyStockPrice'
+                      $ref: "#/components/schemas/DailyStockInfo"
   /svc/apis/etp/etf_bydd_trd:
     get:
       operationId: getEtfDailyTrade
@@ -270,14 +270,14 @@ paths:
       tags:
         - Financial Instrument
       parameters:
-        - $ref: '#/components/parameters/BaseDate'
+        - $ref: "#/components/parameters/BaseDate"
       responses:
-        '200':
+        "200":
           description: ETF 일별매매정보 조회 성공
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DailyETFAndETN'
+                $ref: "#/components/schemas/DailyETFAndETN"
   /svc/apis/etp/etn_bydd_trd:
     get:
       operationId: getEtnDailyTrade
@@ -285,14 +285,14 @@ paths:
       tags:
         - Financial Instrument
       parameters:
-        - $ref: '#/components/parameters/BaseDate'
+        - $ref: "#/components/parameters/BaseDate"
       responses:
-        '200':
+        "200":
           description: ETN 일별매매정보 조회 성공
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DailyETFAndETN'
+                $ref: "#/components/schemas/DailyETFAndETN"
   /svc/apis/etp/elw_bydd_trd:
     get:
       operationId: getElwDailyTrade
@@ -300,14 +300,62 @@ paths:
       tags:
         - Financial Instrument
       parameters:
-        - $ref: '#/components/parameters/BaseDate'
+        - $ref: "#/components/parameters/BaseDate"
       responses:
-        '200':
+        "200":
           description: ELW 일별매매정보 조회 성공
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DailyELW'
+                $ref: "#/components/schemas/DailyELW"
+  /svc/apis/bon/kts_bydd_trd:
+    get:
+      operationId: getKtsDailyTrade
+      summary: 국채전문유통시장 일별매매정보
+      description: 국채전문유통시장에 상장되어있는 채권의 매매정보 제공
+      tags:
+        - Bond
+      parameters:
+        - $ref: "#/components/parameters/BaseDate"
+      responses:
+        "200":
+          description: 국채전문유통시장 일별매매정보 조회 성공
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DailyBondExtend"
+  /svc/apis/bon/bnd_bydd_trd:
+    get:
+      operationId: getBondDailyTrade
+      summary: 일반채권시장 일별매매정보
+      description: 일반채권시장에 상장되어있는 채권의 매매정보 제공
+      tags:
+        - Bond
+      parameters:
+        - $ref: "#/components/parameters/BaseDate"
+      responses:
+        "200":
+          description: 일반채권시장 일별매매정보 조회 성공
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DailyBond"
+  /svc/apis/bon/smb_bydd_trd:
+    get:
+      operationId: getSmallBondDailyTrade
+      summary: 소액채권시장 일별매매정보
+      description: 소액채권시장에 상장되어있는 채권의 매매정보 제공
+      tags:
+        - Bond
+      parameters:
+        - $ref: "#/components/parameters/BaseDate"
+      responses:
+        "200":
+          description: 소액채권시장 일별매매정보 조회 성공
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DailyBond"
 
 components:
   parameters:
@@ -633,7 +681,7 @@ components:
           example: 112995865656
     DailyELW:
       allOf:
-        - $ref: '#/components/schemas/DailyFinanceInstrument'
+        - $ref: "#/components/schemas/DailyFinanceInstrument"
         - type: object
           properties:
             ULY_NM:
@@ -654,7 +702,7 @@ components:
               example: 0.05
     DailyETFAndETN:
       allOf:
-        - $ref: '#/components/schemas/DailyFinanceInstrument'
+        - $ref: "#/components/schemas/DailyFinanceInstrument"
         - type: object
           properties:
             FLUC_RT:
@@ -685,7 +733,82 @@ components:
               type: string
               description: 기초지수 등락률
               example: 0.02
-
+    DailyBond:
+      type: object
+      properties:
+        BAS_DD:
+          type: string
+          description: 기준일자
+          example: 20240514
+        MKT_NM:
+          type: string
+          description: 시장구분
+          example: 국채전문유통시장
+        ISU_CD:
+          type: string
+          description: 종목코드
+          example: KR103503GE39
+        ISU_NM:
+          type: string
+          description: 종목명
+          example: 국고03250-2603(24-3)
+        CLSPRC:
+          type: string
+          description: 종가
+          example: 10018.5
+        CMPPREVDD_PRC:
+          type: string
+          description: 종가 대비
+          example: 2.5
+        CLSPRC_YD:
+          type: string
+          description: 종가 수익률
+          example: 3.478
+        OPNPRC:
+          type: string
+          description: 시가
+          example: 10017.5
+        OPNPRC_YD:
+          type: string
+          description: 시가 수익률
+          example: 3.484
+        HGPRC:
+          type: string
+          description: 고가
+          example: 10019.5
+        HGPRC_YD:
+          type: string
+          description: 고가 수익률
+          example: 3.473
+        LWPRC:
+          type: string
+          description: 저가
+          example: 10016.5
+        LWPRC_YD:
+          type: string
+          description: 저가 수익률
+          example: 3.490
+        ACC_TRDVOL:
+          type: string
+          description: 거래량
+          example: 95000000000
+        ACC_TRDVAL:
+          type: string
+          description: 거래대금
+          example: 95172500000
+    DailyBondExtend:
+      allOf:
+        - $ref: "#/components/schemas/DailyBond"
+        - type: object
+          properties:
+            BND_EXP_TP_NM:
+              type: string
+              description: 만기년수
+              example: 3
+            GOVBND_ISU_TP_NM:
+              type: string
+              description: 종목구분
+              example: 지표
   securitySchemes:
     authKey:
       type: apiKey
