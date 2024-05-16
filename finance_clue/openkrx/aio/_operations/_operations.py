@@ -22,6 +22,9 @@ from ..._operations._operations import (
     build_gen_open_krx_get_derivatives_daily_index_request,
 )
 from ..._operations._operations import build_gen_open_krx_get_bond_daily_index_request
+from ..._operations._operations import build_gen_open_krx_get_elw_daily_trade_request
+from ..._operations._operations import build_gen_open_krx_get_etf_daily_trade_request
+from ..._operations._operations import build_gen_open_krx_get_etn_daily_trade_request
 from ..._operations._operations import build_gen_open_krx_get_konex_base_info_request
 from ..._operations._operations import build_gen_open_krx_get_konex_stock_daily_request
 from ..._operations._operations import build_gen_open_krx_get_kosdaq_base_info_request
@@ -931,6 +934,260 @@ class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_krx_get_konex_base_info_request(
+            bas_dd=bas_dd,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace_async
+    async def get_etf_daily_trade(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+        """ETF 일별매매정보.
+
+        ETF 일별매매정보.
+
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                    "CMPPREVDD_IDX": "str",  # Optional. "uae30"ucd08"uc9c0"uc218 "ub300"ube44.
+                    "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                    "FLUC_RT": "str",  # Optional. "ub4f1"ub77d"ub960.
+                    "FLUC_RT_IDX": "str",  # Optional. "uae30"ucd08"uc9c0"uc218
+                      "ub4f1"ub77d"ub960.
+                    "IDX_IND_NM": "str",  # Optional. "uae30"ucd08"uc9c0"uc218
+                      "uc9c0"uc218"uba85.
+                    "INVSTASST_NETASST_TOTAMT": "str",  # Optional.
+                      "uc21c"uc790"uc0b0"uac00"uce58 "ucd1d"uc561.
+                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                    "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                    "LIST_SHRS": "str",  # Optional. "uc0c1"uc7a5"uc8fc"uc2dd"uc218.
+                    "MKTCAP": "str",  # Optional. "uc2dc"uac00"ucd1d"uc561.
+                    "NAV": "str",  # Optional. "uc21c"uc790"uc0b0"uac00"uce58.
+                    "OBJ_STKPRC_IDX": "str",  # Optional. "uae30"ucd08"uc9c0"uc218 "uc885"uac00.
+                    "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                    "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                    "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                    "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_krx_get_etf_daily_trade_request(
+            bas_dd=bas_dd,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace_async
+    async def get_etn_daily_trade(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+        """ETN 일별매매정보.
+
+        ETN 일별매매정보.
+
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                    "CMPPREVDD_IDX": "str",  # Optional. "uae30"ucd08"uc9c0"uc218 "ub300"ube44.
+                    "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                    "FLUC_RT": "str",  # Optional. "ub4f1"ub77d"ub960.
+                    "FLUC_RT_IDX": "str",  # Optional. "uae30"ucd08"uc9c0"uc218
+                      "ub4f1"ub77d"ub960.
+                    "IDX_IND_NM": "str",  # Optional. "uae30"ucd08"uc9c0"uc218
+                      "uc9c0"uc218"uba85.
+                    "INVSTASST_NETASST_TOTAMT": "str",  # Optional.
+                      "uc21c"uc790"uc0b0"uac00"uce58 "ucd1d"uc561.
+                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                    "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                    "LIST_SHRS": "str",  # Optional. "uc0c1"uc7a5"uc8fc"uc2dd"uc218.
+                    "MKTCAP": "str",  # Optional. "uc2dc"uac00"ucd1d"uc561.
+                    "NAV": "str",  # Optional. "uc21c"uc790"uc0b0"uac00"uce58.
+                    "OBJ_STKPRC_IDX": "str",  # Optional. "uae30"ucd08"uc9c0"uc218 "uc885"uac00.
+                    "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                    "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                    "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                    "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_krx_get_etn_daily_trade_request(
+            bas_dd=bas_dd,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace_async
+    async def get_elw_daily_trade(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+        """ELW 일별매매정보.
+
+        ELW 일별매매정보.
+
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                    "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                    "CMPPREVDD_PRC_ULY": "str",  # Optional. "uae30"ucd08"uc790"uc0b0
+                      "ub300"ube44.
+                    "FLUC_RT_ULY": "str",  # Optional. "uae30"ucd08"uc790"uc0b0
+                      "ub4f1"ub77d"ub960.
+                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                    "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                    "LIST_SHRS": "str",  # Optional. "uc0c1"uc7a5"uc8fc"uc2dd"uc218.
+                    "MKTCAP": "str",  # Optional. "uc2dc"uac00"ucd1d"uc561.
+                    "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                    "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                    "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                    "TDD_OPNPRC": "str",  # Optional. "uc2dc"uac00.
+                    "ULY_NM": "str",  # Optional. "uae30"ucd08"uc790"uc0b0"uba85.
+                    "ULY_PRC": "str"  # Optional. "uae30"ucd08"uc790"uc0b0 "uc885"uac00.
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_krx_get_elw_daily_trade_request(
             bas_dd=bas_dd,
             headers=_headers,
             params=_params,
