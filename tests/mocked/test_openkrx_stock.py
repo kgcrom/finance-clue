@@ -74,7 +74,7 @@ def test_kosdaq_daily_stock(
         status=200,
     )
 
-    resp = mock_openkrx_client.get_kodaq_stock_daily(bas_dd="20240514")
+    resp = mock_openkrx_client.get_kosdaq_stock_daily(bas_dd="20240514")
 
     assert resp == expected
 

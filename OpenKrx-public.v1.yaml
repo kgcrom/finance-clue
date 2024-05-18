@@ -446,7 +446,8 @@ paths:
       description: 파생상품시장의 주식옵션 중 기초자산이 코스닥시장에 속하는 주식옵션의 거래정보 제공
       tags:
         - Derivatives
-      parameters: []
+      parameters:
+        - $ref: "#/components/parameters/BaseDate"
       responses:
         "200":
           description: 주식옵션(코스닥) 일별매매정보 조회 성공

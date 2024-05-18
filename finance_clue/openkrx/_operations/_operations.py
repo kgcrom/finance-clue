@@ -522,20 +522,26 @@ def build_gen_open_krx_get_kospi_option_request(  # pylint: disable=name-too-lon
     )
 
 
-def build_gen_open_krx_get_kosdaq_option_request(
-    **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
+def build_gen_open_krx_get_kosdaq_option_request(  # pylint: disable=name-too-long
+    *, bas_dd: str, **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = "/svc/apis/drv/eqkop_bydd_trd"
 
+    # Construct parameters
+    _params["basDd"] = _SERIALIZER.query("bas_dd", bas_dd, "str", pattern=r"^\d{8}$")
+
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(method="GET", url=_url, headers=_headers, **kwargs)
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
 class GenOpenKrxClientOperationsMixin(
@@ -2391,11 +2397,13 @@ class GenOpenKrxClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
-    def get_kosdaq_option(self, **kwargs: Any) -> JSON:
+    def get_kosdaq_option(self, *, bas_dd: str, **kwargs: Any) -> JSON:
         """주식옵션(코스닥) 일별매매정보.
 
         파생상품시장의 주식옵션 중 기초자산이 코스닥시장에 속하는 주식옵션의 거래정보 제공.
 
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
         :return: JSON object
         :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -2437,6 +2445,7 @@ class GenOpenKrxClientOperationsMixin(
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_krx_get_kosdaq_option_request(
+            bas_dd=bas_dd,
             headers=_headers,
             params=_params,
         )

@@ -1873,11 +1873,13 @@ class GenOpenKrxClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_kosdaq_option(self, **kwargs: Any) -> JSON:
+    async def get_kosdaq_option(self, *, bas_dd: str, **kwargs: Any) -> JSON:
         """주식옵션(코스닥) 일별매매정보.
 
         파생상품시장의 주식옵션 중 기초자산이 코스닥시장에 속하는 주식옵션의 거래정보 제공.
 
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
         :return: JSON object
         :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -1919,6 +1921,7 @@ class GenOpenKrxClientOperationsMixin(
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_krx_get_kosdaq_option_request(
+            bas_dd=bas_dd,
             headers=_headers,
             params=_params,
         )
