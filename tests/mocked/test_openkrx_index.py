@@ -106,7 +106,7 @@ def test_bond_daily_index(
 
 
 @responses.activate
-def test_derivative_daily_index(
+def test_derivatives_daily_index(
     mock_openkrx_client: OpenKrxClient, mock_openkrx_client_url: str
 ):
     expected = {

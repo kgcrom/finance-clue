@@ -412,7 +412,135 @@ def build_gen_open_krx_get_small_bond_daily_trade_request(  # pylint: disable=na
     )
 
 
-class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
+def build_gen_open_krx_get_exclude_stock_futures_request(  # pylint: disable=name-too-long
+    *, bas_dd: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/svc/apis/drv/fut_bydd_trd"
+
+    # Construct parameters
+    _params["basDd"] = _SERIALIZER.query("bas_dd", bas_dd, "str", pattern=r"^\d{8}$")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_krx_get_kospi_futures_request(  # pylint: disable=name-too-long
+    *, bas_dd: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/svc/apis/drv/eqsfu_stk_bydd_trd"
+
+    # Construct parameters
+    _params["basDd"] = _SERIALIZER.query("bas_dd", bas_dd, "str", pattern=r"^\d{8}$")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_krx_get_kosdaq_futures_request(  # pylint: disable=name-too-long
+    *, bas_dd: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/svc/apis/drv/eqkfu_ksq_bydd_trd"
+
+    # Construct parameters
+    _params["basDd"] = _SERIALIZER.query("bas_dd", bas_dd, "str", pattern=r"^\d{8}$")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_krx_get_exclude_stock_option_request(  # pylint: disable=name-too-long
+    *, bas_dd: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/svc/apis/drv/opt_bydd_trd"
+
+    # Construct parameters
+    _params["basDd"] = _SERIALIZER.query("bas_dd", bas_dd, "str", pattern=r"^\d{8}$")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_krx_get_kospi_option_request(  # pylint: disable=name-too-long
+    *, bas_dd: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/svc/apis/drv/eqsop_bydd_trd"
+
+    # Construct parameters
+    _params["basDd"] = _SERIALIZER.query("bas_dd", bas_dd, "str", pattern=r"^\d{8}$")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_krx_get_kosdaq_option_request(
+    **kwargs: Any,
+) -> HttpRequest:  # pylint: disable=name-too-long
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/svc/apis/drv/eqkop_bydd_trd"
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, headers=_headers, **kwargs)
+
+
+class GenOpenKrxClientOperationsMixin(
+    GenOpenKrxClientMixinABC
+):  # pylint: disable=too-many-public-methods
 
     @distributed_trace
     def get_krx_daily_index(self, *, bas_dd: str, **kwargs: Any) -> JSON:
@@ -1820,6 +1948,495 @@ class GenOpenKrxClientOperationsMixin(GenOpenKrxClientMixinABC):
 
         _request = build_gen_open_krx_get_small_bond_daily_trade_request(
             bas_dd=bas_dd,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_exclude_stock_futures(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+        """선물 일별매매정보 (주식선물外).
+
+        파생상품시장의 선물 중 주식선물을 제외한 선물의 매매정보 제공.
+
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "ACC_OPNINT_QTY": "str",  # Optional. "ubbf8"uacb0"uc81c"uc57d"uc815.
+                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                    "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                    "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                    "MKT_NM": "str",  # Optional.
+                      "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
+                    "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
+                    "SETL_PRC": "str",  # Optional. "uc815"uc0b0"uac00.
+                    "SPOT_PRC": "str",  # Optional. "ud604"ubb3c"uac00.
+                    "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                    "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                    "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                    "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_krx_get_exclude_stock_futures_request(
+            bas_dd=bas_dd,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_kospi_futures(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+        """주식선물(유가) 일별매매정보.
+
+        파생상품시장의 주식선물 중 기초자산이 유가증권시장에 속하는 주식선물의 거래정보 제공.
+
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "ACC_OPNINT_QTY": "str",  # Optional. "ubbf8"uacb0"uc81c"uc57d"uc815.
+                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                    "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                    "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                    "MKT_NM": "str",  # Optional.
+                      "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
+                    "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
+                    "SETL_PRC": "str",  # Optional. "uc815"uc0b0"uac00.
+                    "SPOT_PRC": "str",  # Optional. "ud604"ubb3c"uac00.
+                    "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                    "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                    "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                    "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_krx_get_kospi_futures_request(
+            bas_dd=bas_dd,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_kosdaq_futures(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+        """주식선물(코스닥) 일별매매정보.
+
+        파생상품시장의 주식선물 중 기초자산이 코스닥시장에 속하는 주식선물의 거래정보 제공.
+
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "ACC_OPNINT_QTY": "str",  # Optional. "ubbf8"uacb0"uc81c"uc57d"uc815.
+                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                    "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                    "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                    "MKT_NM": "str",  # Optional.
+                      "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
+                    "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
+                    "SETL_PRC": "str",  # Optional. "uc815"uc0b0"uac00.
+                    "SPOT_PRC": "str",  # Optional. "ud604"ubb3c"uac00.
+                    "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                    "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                    "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                    "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_krx_get_kosdaq_futures_request(
+            bas_dd=bas_dd,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_exclude_stock_option(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+        """옵션 일별매매정보 (주식옵션外).
+
+        파생상품시장의 옵션 중 주식옵션을 제외한 옵션의 매매정보 제공.
+
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "ACC_OPNINT_QTY": "str",  # Optional. "ubbf8"uacb0"uc81c"uc57d"uc815.
+                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                    "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                    "IMP_VOLT": "str",  # Optional. "ub0b4"uc7ac"ubcc0"ub3d9"uc131.
+                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                    "MKT_NM": "str",  # Optional.
+                      "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
+                    "NXTDD_BAS_PRC": "str",  # Optional. "uc775"uc77c"uc815"uc0b0"uac00.
+                    "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
+                    "RGHT_TP_NM": "str",  # Optional. "uad8c"ub9ac"uc720"ud615(CALL/PUT).
+                    "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                    "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                    "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                    "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_krx_get_exclude_stock_option_request(
+            bas_dd=bas_dd,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_kospi_option(self, *, bas_dd: str, **kwargs: Any) -> JSON:
+        """주식옵션(유가) 일별매매정보.
+
+        파생상품시장의 주식옵션 중 기초자산이 유가증권시장에 속하는 주식옵션의 거래정보 제공.
+
+        :keyword bas_dd: 기준일자. Required.
+        :paramtype bas_dd: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "ACC_OPNINT_QTY": "str",  # Optional. "ubbf8"uacb0"uc81c"uc57d"uc815.
+                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                    "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                    "IMP_VOLT": "str",  # Optional. "ub0b4"uc7ac"ubcc0"ub3d9"uc131.
+                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                    "MKT_NM": "str",  # Optional.
+                      "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
+                    "NXTDD_BAS_PRC": "str",  # Optional. "uc775"uc77c"uc815"uc0b0"uac00.
+                    "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
+                    "RGHT_TP_NM": "str",  # Optional. "uad8c"ub9ac"uc720"ud615(CALL/PUT).
+                    "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                    "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                    "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                    "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_krx_get_kospi_option_request(
+            bas_dd=bas_dd,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_kosdaq_option(self, **kwargs: Any) -> JSON:
+        """주식옵션(코스닥) 일별매매정보.
+
+        파생상품시장의 주식옵션 중 기초자산이 코스닥시장에 속하는 주식옵션의 거래정보 제공.
+
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "ACC_OPNINT_QTY": "str",  # Optional. "ubbf8"uacb0"uc81c"uc57d"uc815.
+                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                    "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                    "IMP_VOLT": "str",  # Optional. "ub0b4"uc7ac"ubcc0"ub3d9"uc131.
+                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                    "MKT_NM": "str",  # Optional.
+                      "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
+                    "NXTDD_BAS_PRC": "str",  # Optional. "uc775"uc77c"uc815"uc0b0"uac00.
+                    "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
+                    "RGHT_TP_NM": "str",  # Optional. "uad8c"ub9ac"uc720"ud615(CALL/PUT).
+                    "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                    "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                    "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                    "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_krx_get_kosdaq_option_request(
             headers=_headers,
             params=_params,
         )

@@ -21,6 +21,8 @@ tags:
     description: 증권 상품 데이터
   - name: Bond
     description: 채권 데이터
+  - name: Derivatives
+    description: 파생상품 데이터
 security:
   - authKey: []
 
@@ -136,7 +138,7 @@ paths:
                   OutBlock_1:
                     type: array
                     items:
-                      $ref: "#/components/schemas/DailyDerivationIndex"
+                      $ref: "#/components/schemas/DailyDerivativesIndex"
   /svc/apis/sto/stk_bydd_trd:
     get:
       operationId: getKospiStockDaily
@@ -356,6 +358,102 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DailyBond"
+  /svc/apis/drv/fut_bydd_trd:
+    get:
+      operationId: getExcludeStockFutures
+      summary: 선물 일별매매정보 (주식선물外)
+      description: 파생상품시장의 선물 중 주식선물을 제외한 선물의 매매정보 제공
+      tags:
+        - Derivatives
+      parameters:
+        - $ref: "#/components/parameters/BaseDate"
+      responses:
+        "200":
+          description: 선물 일별매매정보 조회 성공
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DailyFutures"
+
+  /svc/apis/drv/eqsfu_stk_bydd_trd:
+    get:
+      operationId: getKospiFutures
+      summary: 주식선물(유가) 일별매매정보
+      description: 파생상품시장의 주식선물 중 기초자산이 유가증권시장에 속하는 주식선물의 거래정보 제공
+      tags:
+        - Derivatives
+      parameters:
+        - $ref: "#/components/parameters/BaseDate"
+      responses:
+        "200":
+          description: 주식선물(유가) 일별매매정보 조회 성공
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DailyFutures"
+  /svc/apis/drv/eqkfu_ksq_bydd_trd:
+    get:
+      operationId: getKosdaqFutures
+      summary: 주식선물(코스닥) 일별매매정보
+      description: 파생상품시장의 주식선물 중 기초자산이 코스닥시장에 속하는 주식선물의 거래정보 제공
+      tags:
+        - Derivatives
+      parameters:
+        - $ref: "#/components/parameters/BaseDate"
+      responses:
+        "200":
+          description: 주식선물(코스닥) 일별매매정보 조회 성공
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DailyFutures"
+  /svc/apis/drv/opt_bydd_trd:
+    get:
+      operationId: getExcludeStockOption
+      summary: 옵션 일별매매정보 (주식옵션外)
+      description: 파생상품시장의 옵션 중 주식옵션을 제외한 옵션의 매매정보 제공
+      tags:
+        - Derivatives
+      parameters:
+        - $ref: "#/components/parameters/BaseDate"
+      responses:
+        "200":
+          description: 옵션 일별매매정보 조회 성공
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DailyOption"
+  /svc/apis/drv/eqsop_bydd_trd:
+    get:
+      operationId: getKospiOption
+      summary: 주식옵션(유가) 일별매매정보
+      description: 파생상품시장의 주식옵션 중 기초자산이 유가증권시장에 속하는 주식옵션의 거래정보 제공
+      tags:
+        - Derivatives
+      parameters:
+        - $ref: "#/components/parameters/BaseDate"
+      responses:
+        "200":
+          description: 주식옵션(유가) 일별매매정보 조회 성공
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DailyOption"
+  /svc/apis/drv/eqkop_bydd_trd:
+    get:
+      operationId: getKosdaqOption
+      summary: 주식옵션(코스닥) 일별매매정보
+      description: 파생상품시장의 주식옵션 중 기초자산이 코스닥시장에 속하는 주식옵션의 거래정보 제공
+      tags:
+        - Derivatives
+      parameters: []
+      responses:
+        "200":
+          description: 주식옵션(코스닥) 일별매매정보 조회 성공
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DailyOption"
 
 components:
   parameters:
@@ -420,7 +518,7 @@ components:
           type: string
           description: 상장시가총액
           example: 2722079713896
-    DailyDerivationIndex:
+    DailyDerivativesIndex:
       type: object
       properties:
         BAS_DD:
@@ -809,6 +907,92 @@ components:
               type: string
               description: 종목구분
               example: 지표
+    DailyDerivatives:
+      type: object
+      properties:
+        BAS_DD:
+          type: string
+          description: 기준일자
+          example: 20240514
+        PROD_NM:
+          type: string
+          description: 상품구분
+          example: 코스피200옵션
+        MKT_NM:
+          type: string
+          description: 시장구분(정규/야간)
+          example: 정규
+        ISU_CD:
+          type: string
+          description: 종목코드
+          example: 201R2000
+        TDD_CLSPRC:
+          type: string
+          description: 종가
+          example: 6250.82
+        CMPPREVDD_PRC:
+          type: string
+          description: 대비
+          example: 15.40
+        TDD_OPNPRC:
+          type: string
+          description: 시가
+          example: 6250.82
+        TDD_HGPRC:
+          type: string
+          description: 고가
+          example: 6250.82
+        TDD_LWPRC:
+          type: string
+          description: 저가
+          example: 6250.82
+        ACC_TRDVOL:
+          type: string
+          description: 거래량
+          example: 38188565
+        ACC_TRDVAL:
+          type: string
+          description: 거래대금
+          example: 2722079713896
+        ACC_OPNINT_QTY:
+          type: string
+          description: 미결제약정
+          example: 2722079713896
+    DailyFutures:
+      allOf:
+        - $ref: "#/components/schemas/DailyDerivatives"
+        - type: object
+          properties:
+            ISU_NM:
+              type: string
+              description: 종목명
+              example: 코스피200옵션
+            SPOT_PRC:
+              type: string
+              description: 현물가
+              example: 6250.82
+            SETL_PRC:
+              type: string
+              description: 정산가
+              example: 6250.82
+    DailyOption:
+      allOf:
+        - $ref: "#/components/schemas/DailyDerivatives"
+        - type: object
+          properties:
+            RGHT_TP_NM:
+              type: string
+              description: 권리유형(CALL/PUT)
+              example: CALL
+            IMP_VOLT:
+              type: string
+              description: 내재변동성
+              example: 0.25
+            NXTDD_BAS_PRC:
+              type: string
+              description: 익일정산가
+              example: 6250.82
+
   securitySchemes:
     authKey:
       type: apiKey
