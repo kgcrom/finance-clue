@@ -14,7 +14,7 @@
     "url": "git+https://github.com/kgcrom/finance-clue.git"
   },
   "author": "kgcrom",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/kgcrom/finance-clue/issues"
   },

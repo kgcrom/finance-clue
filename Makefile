@@ -1,3 +1,5 @@
+LOCAL_KRX_SPEC_FILE=OpenKrx-public.yml
+
 .PHONY: black
 black:
 	poetry run black .
@@ -17,6 +19,18 @@ pylint:
 .PHONY: lint
 lint: black isort mypy pylint
 
+.PHONY: install
+install:
+ifneq (, $(shell which poetry))
+	poetry install
+else
+	@(echo "poetry is not installed. See https://python-poetry.org/docs/#installation for more info."; exit 1)
+endif
+
+.PHLY: dev-dependencies
+dev-dependencies:
+	npm install -D
+
 .PHONY: generate-openkis
 generate-openkis:
 	npm run autorest -- openkis_client_gen_config.md \
@@ -33,10 +47,21 @@ generate-opendart:
 	@poetry run black .
 	@poetry run isort .
 
+.PHONY: download-krx-spec
+download-krx-spec:
+	@echo Downloading KRX spec; \
+	touch OpenKrx-public.yml && \
+	curl https://raw.githubusercontent.com/kgcrom/finance-openapi/main/docs/OpenKrx-public.yml -o $(LOCAL_KRX_SPEC_FILE)
+
 .PHONY: generate-openkrx
-generate-openkrx:
+ifndef KRX_SPEC_FILE
+generate-openkrx: KRX_SPEC_FILE = $(LOCAL_KRX_SPEC_FILE)
+generate-openkrx: install 
+endif
+generate-openkrx: dev-dependencies download-krx-spec
 	npm run autorest -- openkrx_client_gen_config.md \
 		--use:@autorest/modelerfour@4.27.0 \
-		--use:@autorest/python@6.13.15
+		--use:@autorest/python@6.13.15 \
+		--input-file=$(KRX_SPEC_FILE)
 	@poetry run black .
 	@poetry run isort .

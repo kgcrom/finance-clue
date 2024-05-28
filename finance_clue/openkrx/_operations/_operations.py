@@ -1758,23 +1758,34 @@ class GenOpenKrxClientOperationsMixin(
 
                 # response body for status code(s): 200
                 response == {
-                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
-                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
-                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
-                    "BND_EXP_TP_NM": "str",  # Optional. "ub9cc"uae30"ub144"uc218.
-                    "CLSPRC": "str",  # Optional. "uc885"uac00.
-                    "CLSPRC_YD": "str",  # Optional. "uc885"uac00 "uc218"uc775"ub960.
-                    "CMPPREVDD_PRC": "str",  # Optional. "uc885"uac00 "ub300"ube44.
-                    "GOVBND_ISU_TP_NM": "str",  # Optional. "uc885"ubaa9"uad6c"ubd84.
-                    "HGPRC": "str",  # Optional. "uace0"uac00.
-                    "HGPRC_YD": "str",  # Optional. "uace0"uac00 "uc218"uc775"ub960.
-                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
-                    "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
-                    "LWPRC": "str",  # Optional. "uc800"uac00.
-                    "LWPRC_YD": "str",  # Optional. "uc800"uac00 "uc218"uc775"ub960.
-                    "MKT_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
-                    "OPNPRC": "str",  # Optional. "uc2dc"uac00.
-                    "OPNPRC_YD": "str"  # Optional. "uc2dc"uac00 "uc218"uc775"ub960.
+                    "OutBlock_1": [
+                        {
+                            "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                            "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                            "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                            "BND_EXP_TP_NM": "str",  # Optional.
+                              "ub9cc"uae30"ub144"uc218.
+                            "CLSPRC": "str",  # Optional. "uc885"uac00.
+                            "CLSPRC_YD": "str",  # Optional. "uc885"uac00
+                              "uc218"uc775"ub960.
+                            "CMPPREVDD_PRC": "str",  # Optional. "uc885"uac00
+                              "ub300"ube44.
+                            "GOVBND_ISU_TP_NM": "str",  # Optional.
+                              "uc885"ubaa9"uad6c"ubd84.
+                            "HGPRC": "str",  # Optional. "uace0"uac00.
+                            "HGPRC_YD": "str",  # Optional. "uace0"uac00
+                              "uc218"uc775"ub960.
+                            "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "LWPRC": "str",  # Optional. "uc800"uac00.
+                            "LWPRC_YD": "str",  # Optional. "uc800"uac00
+                              "uc218"uc775"ub960.
+                            "MKT_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
+                            "OPNPRC": "str",  # Optional. "uc2dc"uac00.
+                            "OPNPRC_YD": "str"  # Optional. "uc2dc"uac00
+                              "uc218"uc775"ub960.
+                        }
+                    ]
                 }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
@@ -1841,21 +1852,30 @@ class GenOpenKrxClientOperationsMixin(
 
                 # response body for status code(s): 200
                 response == {
-                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
-                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
-                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
-                    "CLSPRC": "str",  # Optional. "uc885"uac00.
-                    "CLSPRC_YD": "str",  # Optional. "uc885"uac00 "uc218"uc775"ub960.
-                    "CMPPREVDD_PRC": "str",  # Optional. "uc885"uac00 "ub300"ube44.
-                    "HGPRC": "str",  # Optional. "uace0"uac00.
-                    "HGPRC_YD": "str",  # Optional. "uace0"uac00 "uc218"uc775"ub960.
-                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
-                    "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
-                    "LWPRC": "str",  # Optional. "uc800"uac00.
-                    "LWPRC_YD": "str",  # Optional. "uc800"uac00 "uc218"uc775"ub960.
-                    "MKT_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
-                    "OPNPRC": "str",  # Optional. "uc2dc"uac00.
-                    "OPNPRC_YD": "str"  # Optional. "uc2dc"uac00 "uc218"uc775"ub960.
+                    "OutBlock_1": [
+                        {
+                            "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                            "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                            "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                            "CLSPRC": "str",  # Optional. "uc885"uac00.
+                            "CLSPRC_YD": "str",  # Optional. "uc885"uac00
+                              "uc218"uc775"ub960.
+                            "CMPPREVDD_PRC": "str",  # Optional. "uc885"uac00
+                              "ub300"ube44.
+                            "HGPRC": "str",  # Optional. "uace0"uac00.
+                            "HGPRC_YD": "str",  # Optional. "uace0"uac00
+                              "uc218"uc775"ub960.
+                            "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "LWPRC": "str",  # Optional. "uc800"uac00.
+                            "LWPRC_YD": "str",  # Optional. "uc800"uac00
+                              "uc218"uc775"ub960.
+                            "MKT_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
+                            "OPNPRC": "str",  # Optional. "uc2dc"uac00.
+                            "OPNPRC_YD": "str"  # Optional. "uc2dc"uac00
+                              "uc218"uc775"ub960.
+                        }
+                    ]
                 }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
@@ -1922,21 +1942,30 @@ class GenOpenKrxClientOperationsMixin(
 
                 # response body for status code(s): 200
                 response == {
-                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
-                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
-                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
-                    "CLSPRC": "str",  # Optional. "uc885"uac00.
-                    "CLSPRC_YD": "str",  # Optional. "uc885"uac00 "uc218"uc775"ub960.
-                    "CMPPREVDD_PRC": "str",  # Optional. "uc885"uac00 "ub300"ube44.
-                    "HGPRC": "str",  # Optional. "uace0"uac00.
-                    "HGPRC_YD": "str",  # Optional. "uace0"uac00 "uc218"uc775"ub960.
-                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
-                    "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
-                    "LWPRC": "str",  # Optional. "uc800"uac00.
-                    "LWPRC_YD": "str",  # Optional. "uc800"uac00 "uc218"uc775"ub960.
-                    "MKT_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
-                    "OPNPRC": "str",  # Optional. "uc2dc"uac00.
-                    "OPNPRC_YD": "str"  # Optional. "uc2dc"uac00 "uc218"uc775"ub960.
+                    "OutBlock_1": [
+                        {
+                            "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                            "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                            "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                            "CLSPRC": "str",  # Optional. "uc885"uac00.
+                            "CLSPRC_YD": "str",  # Optional. "uc885"uac00
+                              "uc218"uc775"ub960.
+                            "CMPPREVDD_PRC": "str",  # Optional. "uc885"uac00
+                              "ub300"ube44.
+                            "HGPRC": "str",  # Optional. "uace0"uac00.
+                            "HGPRC_YD": "str",  # Optional. "uace0"uac00
+                              "uc218"uc775"ub960.
+                            "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "LWPRC": "str",  # Optional. "uc800"uac00.
+                            "LWPRC_YD": "str",  # Optional. "uc800"uac00
+                              "uc218"uc775"ub960.
+                            "MKT_NM": "str",  # Optional. "uc2dc"uc7a5"uad6c"ubd84.
+                            "OPNPRC": "str",  # Optional. "uc2dc"uac00.
+                            "OPNPRC_YD": "str"  # Optional. "uc2dc"uac00
+                              "uc218"uc775"ub960.
+                        }
+                    ]
                 }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
@@ -2003,22 +2032,27 @@ class GenOpenKrxClientOperationsMixin(
 
                 # response body for status code(s): 200
                 response == {
-                    "ACC_OPNINT_QTY": "str",  # Optional. "ubbf8"uacb0"uc81c"uc57d"uc815.
-                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
-                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
-                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
-                    "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
-                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
-                    "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
-                    "MKT_NM": "str",  # Optional.
-                      "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
-                    "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
-                    "SETL_PRC": "str",  # Optional. "uc815"uc0b0"uac00.
-                    "SPOT_PRC": "str",  # Optional. "ud604"ubb3c"uac00.
-                    "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
-                    "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
-                    "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
-                    "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                    "OutBlock_1": [
+                        {
+                            "ACC_OPNINT_QTY": "str",  # Optional.
+                              "ubbf8"uacb0"uc81c"uc57d"uc815.
+                            "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                            "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                            "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                            "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                            "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "MKT_NM": "str",  # Optional.
+                              "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
+                            "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
+                            "SETL_PRC": "str",  # Optional. "uc815"uc0b0"uac00.
+                            "SPOT_PRC": "str",  # Optional. "ud604"ubb3c"uac00.
+                            "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                            "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                            "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                            "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                        }
+                    ]
                 }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
@@ -2085,22 +2119,27 @@ class GenOpenKrxClientOperationsMixin(
 
                 # response body for status code(s): 200
                 response == {
-                    "ACC_OPNINT_QTY": "str",  # Optional. "ubbf8"uacb0"uc81c"uc57d"uc815.
-                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
-                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
-                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
-                    "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
-                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
-                    "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
-                    "MKT_NM": "str",  # Optional.
-                      "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
-                    "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
-                    "SETL_PRC": "str",  # Optional. "uc815"uc0b0"uac00.
-                    "SPOT_PRC": "str",  # Optional. "ud604"ubb3c"uac00.
-                    "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
-                    "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
-                    "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
-                    "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                    "OutBlock_1": [
+                        {
+                            "ACC_OPNINT_QTY": "str",  # Optional.
+                              "ubbf8"uacb0"uc81c"uc57d"uc815.
+                            "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                            "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                            "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                            "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                            "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "MKT_NM": "str",  # Optional.
+                              "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
+                            "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
+                            "SETL_PRC": "str",  # Optional. "uc815"uc0b0"uac00.
+                            "SPOT_PRC": "str",  # Optional. "ud604"ubb3c"uac00.
+                            "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                            "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                            "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                            "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                        }
+                    ]
                 }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
@@ -2167,22 +2206,27 @@ class GenOpenKrxClientOperationsMixin(
 
                 # response body for status code(s): 200
                 response == {
-                    "ACC_OPNINT_QTY": "str",  # Optional. "ubbf8"uacb0"uc81c"uc57d"uc815.
-                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
-                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
-                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
-                    "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
-                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
-                    "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
-                    "MKT_NM": "str",  # Optional.
-                      "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
-                    "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
-                    "SETL_PRC": "str",  # Optional. "uc815"uc0b0"uac00.
-                    "SPOT_PRC": "str",  # Optional. "ud604"ubb3c"uac00.
-                    "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
-                    "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
-                    "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
-                    "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                    "OutBlock_1": [
+                        {
+                            "ACC_OPNINT_QTY": "str",  # Optional.
+                              "ubbf8"uacb0"uc81c"uc57d"uc815.
+                            "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                            "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                            "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                            "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                            "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "ISU_NM": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "MKT_NM": "str",  # Optional.
+                              "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
+                            "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
+                            "SETL_PRC": "str",  # Optional. "uc815"uc0b0"uac00.
+                            "SPOT_PRC": "str",  # Optional. "ud604"ubb3c"uac00.
+                            "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                            "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                            "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                            "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                        }
+                    ]
                 }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
@@ -2249,22 +2293,30 @@ class GenOpenKrxClientOperationsMixin(
 
                 # response body for status code(s): 200
                 response == {
-                    "ACC_OPNINT_QTY": "str",  # Optional. "ubbf8"uacb0"uc81c"uc57d"uc815.
-                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
-                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
-                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
-                    "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
-                    "IMP_VOLT": "str",  # Optional. "ub0b4"uc7ac"ubcc0"ub3d9"uc131.
-                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
-                    "MKT_NM": "str",  # Optional.
-                      "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
-                    "NXTDD_BAS_PRC": "str",  # Optional. "uc775"uc77c"uc815"uc0b0"uac00.
-                    "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
-                    "RGHT_TP_NM": "str",  # Optional. "uad8c"ub9ac"uc720"ud615(CALL/PUT).
-                    "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
-                    "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
-                    "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
-                    "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                    "OutBlock_1": [
+                        {
+                            "ACC_OPNINT_QTY": "str",  # Optional.
+                              "ubbf8"uacb0"uc81c"uc57d"uc815.
+                            "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                            "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                            "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                            "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                            "IMP_VOLT": "str",  # Optional.
+                              "ub0b4"uc7ac"ubcc0"ub3d9"uc131.
+                            "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "MKT_NM": "str",  # Optional.
+                              "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
+                            "NXTDD_BAS_PRC": "str",  # Optional.
+                              "uc775"uc77c"uc815"uc0b0"uac00.
+                            "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
+                            "RGHT_TP_NM": "str",  # Optional.
+                              "uad8c"ub9ac"uc720"ud615(CALL/PUT).
+                            "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                            "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                            "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                            "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                        }
+                    ]
                 }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
@@ -2331,22 +2383,30 @@ class GenOpenKrxClientOperationsMixin(
 
                 # response body for status code(s): 200
                 response == {
-                    "ACC_OPNINT_QTY": "str",  # Optional. "ubbf8"uacb0"uc81c"uc57d"uc815.
-                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
-                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
-                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
-                    "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
-                    "IMP_VOLT": "str",  # Optional. "ub0b4"uc7ac"ubcc0"ub3d9"uc131.
-                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
-                    "MKT_NM": "str",  # Optional.
-                      "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
-                    "NXTDD_BAS_PRC": "str",  # Optional. "uc775"uc77c"uc815"uc0b0"uac00.
-                    "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
-                    "RGHT_TP_NM": "str",  # Optional. "uad8c"ub9ac"uc720"ud615(CALL/PUT).
-                    "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
-                    "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
-                    "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
-                    "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                    "OutBlock_1": [
+                        {
+                            "ACC_OPNINT_QTY": "str",  # Optional.
+                              "ubbf8"uacb0"uc81c"uc57d"uc815.
+                            "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                            "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                            "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                            "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                            "IMP_VOLT": "str",  # Optional.
+                              "ub0b4"uc7ac"ubcc0"ub3d9"uc131.
+                            "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "MKT_NM": "str",  # Optional.
+                              "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
+                            "NXTDD_BAS_PRC": "str",  # Optional.
+                              "uc775"uc77c"uc815"uc0b0"uac00.
+                            "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
+                            "RGHT_TP_NM": "str",  # Optional.
+                              "uad8c"ub9ac"uc720"ud615(CALL/PUT).
+                            "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                            "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                            "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                            "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                        }
+                    ]
                 }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
@@ -2413,22 +2473,30 @@ class GenOpenKrxClientOperationsMixin(
 
                 # response body for status code(s): 200
                 response == {
-                    "ACC_OPNINT_QTY": "str",  # Optional. "ubbf8"uacb0"uc81c"uc57d"uc815.
-                    "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
-                    "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
-                    "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
-                    "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
-                    "IMP_VOLT": "str",  # Optional. "ub0b4"uc7ac"ubcc0"ub3d9"uc131.
-                    "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
-                    "MKT_NM": "str",  # Optional.
-                      "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
-                    "NXTDD_BAS_PRC": "str",  # Optional. "uc775"uc77c"uc815"uc0b0"uac00.
-                    "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
-                    "RGHT_TP_NM": "str",  # Optional. "uad8c"ub9ac"uc720"ud615(CALL/PUT).
-                    "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
-                    "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
-                    "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
-                    "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                    "OutBlock_1": [
+                        {
+                            "ACC_OPNINT_QTY": "str",  # Optional.
+                              "ubbf8"uacb0"uc81c"uc57d"uc815.
+                            "ACC_TRDVAL": "str",  # Optional. "uac70"ub798"ub300"uae08.
+                            "ACC_TRDVOL": "str",  # Optional. "uac70"ub798"ub7c9.
+                            "BAS_DD": "str",  # Optional. "uae30"uc900"uc77c"uc790.
+                            "CMPPREVDD_PRC": "str",  # Optional. "ub300"ube44.
+                            "IMP_VOLT": "str",  # Optional.
+                              "ub0b4"uc7ac"ubcc0"ub3d9"uc131.
+                            "ISU_CD": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "MKT_NM": "str",  # Optional.
+                              "uc2dc"uc7a5"uad6c"ubd84("uc815"uaddc/"uc57c"uac04).
+                            "NXTDD_BAS_PRC": "str",  # Optional.
+                              "uc775"uc77c"uc815"uc0b0"uac00.
+                            "PROD_NM": "str",  # Optional. "uc0c1"ud488"uad6c"ubd84.
+                            "RGHT_TP_NM": "str",  # Optional.
+                              "uad8c"ub9ac"uc720"ud615(CALL/PUT).
+                            "TDD_CLSPRC": "str",  # Optional. "uc885"uac00.
+                            "TDD_HGPRC": "str",  # Optional. "uace0"uac00.
+                            "TDD_LWPRC": "str",  # Optional. "uc800"uac00.
+                            "TDD_OPNPRC": "str"  # Optional. "uc2dc"uac00.
+                        }
+                    ]
                 }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
