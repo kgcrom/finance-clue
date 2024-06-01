@@ -5,7 +5,6 @@ title: OpenKISClient
 namespace: openkis
 python: true
 black: true
-input-file: OpenKis-oas.yaml
 output-folder: finance_clue
 verbose: true
 version-tolerant: true
@@ -18,7 +17,7 @@ credential-scopes: https://openapi.koreainvestment.com:9443
 
 directive:
   - from: openapi-document
-    where: '$.components.parameters[*]'
+    where: "$.components.parameters[*]"
     transform: >
       $["x-ms-parameter-location"] = "method";
 
@@ -32,7 +31,7 @@ directive:
   - remove-operation: floatingIPsAction_post
 
   - from: openapi-document
-    where: '$.components.responses.unauthorized'
+    where: "$.components.responses.unauthorized"
     transform: >
       $["x-ms-error-response"] = true;
   - from: openapi-document

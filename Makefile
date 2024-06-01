@@ -1,4 +1,5 @@
 LOCAL_KRX_SPEC_FILE=OpenKrx-public.yml
+LOCAL_KIS_SPEC_FILE=OpenKis-public.yml
 
 .PHONY: black
 black:
@@ -31,11 +32,23 @@ endif
 dev-dependencies:
 	npm install -D
 
+
+.PHONY: download-kis-spec
+download-kis-spec:
+	@echo Downloading KIS spec; \
+	touch OpenKis-public.yml && \
+	curl https://raw.githubusercontent.com/kgcrom/finance-openapi/main/docs/OpenKis-public.yml -o $(LOCAL_KIS_SPEC_FILE)
+
 .PHONY: generate-openkis
-generate-openkis:
+ifndef KIS_SPEC_FILE
+generate-openkis: KIS_SPEC_FILE = $(LOCAL_KIS_SPEC_FILE)
+generate-openkis: install 
+endif
+generate-openkis: dev-dependencies download-kis-spec
 	npm run autorest -- openkis_client_gen_config.md \
 		--use:@autorest/modelerfour@4.27.0 \
-		--use:@autorest/python@6.13.15
+		--use:@autorest/python@6.13.15 \
+		--input-file=$(KIS_SPEC_FILE)
 	@poetry run black .
 	@poetry run isort .
 

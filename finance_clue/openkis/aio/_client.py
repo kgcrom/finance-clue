@@ -25,7 +25,7 @@ if TYPE_CHECKING:
 class GenOpenKisClient(
     GenOpenKisClientOperationsMixin
 ):  # pylint: disable=client-accepts-api-version-keyword
-    """OpenKIS API Service.
+    """한국투자증권에서 제공하는 OpenAPI 정의.
 
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential

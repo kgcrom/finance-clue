@@ -32,12 +32,267 @@ from azure.core.tracing.decorator_async import distributed_trace_async
 from azure.core.utils import case_insensitive_dict
 
 from ..._operations._operations import (
-    build_gen_open_kis_get_domestic_stock_quotations_daily_price_request,
+    build_gen_open_kis_find_search_product_info_request,
 )
 from ..._operations._operations import (
-    build_gen_open_kis_get_domestic_stock_quotations_price_request,
+    build_gen_open_kis_get_domestic_stock_closing_exp_request,
 )
+from ..._operations._operations import (
+    build_gen_open_kis_get_domestic_stock_conclusion_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_domestic_stock_daily_over_time_price_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_domestic_stock_daily_price_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_domestic_stock_invest_opinion_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_domestic_stock_investor_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_domestic_stock_member_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_domestic_stock_minute_price_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_domestic_stock_over_time_conclusion_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_domestic_stock_over_time_price_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_domestic_stock_over_time_quote_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_domestic_stock_period_price_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_domestic_stock_price2_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_domestic_stock_price_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_domestic_stock_quote_and_exp_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_domestic_stock_securities_opinion_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_domestic_stock_time_conclusion_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_etf_n_etn_component_stock_price_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_etf_n_etn_nav_daily_trend_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_etf_n_etn_nav_minute_trend_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_etf_n_etn_nav_stock_trend_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_financial_balance_sheet_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_financial_credit_by_company_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_financial_estimate_perform_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_financial_growth_ratio_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_financial_income_statement_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_financial_other_major_ratio_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_financial_profit_ratio_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_financial_stability_ratio_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_index_category_price_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_index_daily_chart_price_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_index_minute_chart_price_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ksd_change_par_value_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ksd_decrease_capital_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ksd_forfeited_stock_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ksd_mandatory_deposit_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ksd_merger_and_split_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ksd_public_offer_subscription_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ksd_shareholder_meeting_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ranking_after_balance_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ranking_bulk_trans_num_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ranking_credit_balance_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ranking_dividend_rate_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ranking_exp_trans_up_down_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ranking_financial_ratio_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ranking_fluctuation_rate_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ranking_market_value_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ranking_near_new_high_low_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ranking_over_time_fluctuation_rate_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ranking_over_time_volume_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ranking_prefer_disparate_ratio_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ranking_profit_asset_index_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ranking_quote_balance_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ranking_top_interest_stock_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_ranking_volume_power_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_capture_up_low_price_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_daily_credit_balance_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_daily_investor_trend_by_market_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_daily_member_trend_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_daily_program_trade_by_stock_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_daily_program_trade_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_daily_short_sale_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_daily_trade_volume_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_estimate_foreign_trade_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_exp_trend_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_foreign_institution_total_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_foreign_purchase_trend_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_hourly_program_trade_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_investor_trend_by_market_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_investor_trend_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_market_fund_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_over_time_exp_fluctuation_rate_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_personal_search_detail_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_personal_search_list_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_program_trade_by_stock_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_today_program_trend_by_investor_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_trade_by_amount_request,
+)
+from ..._operations._operations import (
+    build_gen_open_kis_get_technical_volume_profile_indicator_request,
+)
+from ..._operations._operations import build_gen_open_kis_check_domestic_holiday_request
+from ..._operations._operations import build_gen_open_kis_check_vi_status_request
+from ..._operations._operations import build_gen_open_kis_find_search_stock_info_request
 from ..._operations._operations import build_gen_open_kis_get_access_token_request
+from ..._operations._operations import build_gen_open_kis_get_domestic_interest_request
+from ..._operations._operations import build_gen_open_kis_get_etf_n_etn_price_request
+from ..._operations._operations import build_gen_open_kis_get_financial_ratio_request
+from ..._operations._operations import build_gen_open_kis_get_index_daily_price_request
+from ..._operations._operations import build_gen_open_kis_get_index_minute_price_request
+from ..._operations._operations import build_gen_open_kis_get_index_price_request
+from ..._operations._operations import build_gen_open_kis_get_index_tick_price_request
+from ..._operations._operations import build_gen_open_kis_get_index_total_exp_request
+from ..._operations._operations import build_gen_open_kis_get_index_trend_exp_request
+from ..._operations._operations import build_gen_open_kis_get_ksd_bonus_issue_request
+from ..._operations._operations import build_gen_open_kis_get_ksd_buyback_info_request
+from ..._operations._operations import build_gen_open_kis_get_ksd_dividend_info_request
+from ..._operations._operations import build_gen_open_kis_get_ksd_list_info_request
+from ..._operations._operations import build_gen_open_kis_get_ksd_right_issue_request
+from ..._operations._operations import build_gen_open_kis_get_news_title_request
+from ..._operations._operations import build_gen_open_kis_get_ranking_disparity_request
+from ..._operations._operations import build_gen_open_kis_get_ranking_market_cap_request
+from ..._operations._operations import build_gen_open_kis_get_ranking_short_sale_request
+from ..._operations._operations import build_gen_open_kis_get_ranking_trade_request
+from ..._operations._operations import build_gen_open_kis_get_ranking_volume_request
+from ..._operations._operations import build_gen_open_kis_revoke_access_token_request
 from .._vendor import GenOpenKisClientMixinABC
 
 if sys.version_info >= (3, 9):
@@ -53,7 +308,9 @@ ClsType = Optional[
 ]
 
 
-class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
+class GenOpenKisClientOperationsMixin(
+    GenOpenKisClientMixinABC
+):  # pylint: disable=too-many-public-methods
 
     @overload
     async def get_access_token(
@@ -102,15 +359,16 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
                 # response body for status code(s): 200
                 response == {
                     "access_token": "str",  # Optional. OAuth "ud1a0"ud070"uc774
-                      "ud544"uc694"ud55c API "uacbd"uc6b0 "ubc1c"uae09"ud55c Access token ex)
-                      "eyJ0eXUxMiJ9.eyJz"u2026..................................."   *
-                      "uc77c"ubc18"uac1c"uc778"uace0"uac1d/"uc77c"ubc18"ubc95"uc778"uace0"uac1d   .
-                      Access token "uc720"ud6a8"uae30"uac04 1"uc77c   ..
+                      "ud544"uc694"ud55c API "uacbd"uc6b0 "ubc1c"uae09"ud55c Access token:code:`<br/>`
+                      ex) "eyJ0eXUxMiJ9.eyJz"u2026..................................."   *
+                      "uc77c"ubc18"uac1c"uc778"uace0"uac1d/"uc77c"ubc18"ubc95"uc778"uace0"uac1d:code:`<br/>`
+                      . Access token "uc720"ud6a8"uae30"uac04 1"uc77c:code:`<br/>`   ..
                       "uc77c"uc815"uc2dc"uac04(6"uc2dc"uac04) "uc774"ub0b4"uc5d0 "uc7ac"ud638"ucd9c
-                      "uc2dc"uc5d0"ub294 "uc9c1"uc804 "ud1a0"ud070"uac12"uc744 "ub9ac"ud134   . OAuth
-                      2.0"uc758 Client Credentials Grant "uc808"ucc28"ub97c "uc900"uc6a9  *
-                      "uc81c"ud734"ubc95"uc778   . Access token "uc720"ud6a8"uae30"uac04 3"uac1c"uc6d4
-                      . Refresh token "uc720"ud6a8"uae30"uac04 1"ub144   . OAuth 2.0"uc758
+                      "uc2dc"uc5d0"ub294 "uc9c1"uc804 "ud1a0"ud070"uac12"uc744
+                      "ub9ac"ud134:code:`<br/>`   . OAuth 2.0"uc758 Client Credentials Grant
+                      "uc808"ucc28"ub97c "uc900"uc6a9  *    "uc81c"ud734"ubc95"uc778:code:`<br/>`   .
+                      Access token "uc720"ud6a8"uae30"uac04 3"uac1c"uc6d4:code:`<br/>`   . Refresh
+                      token "uc720"ud6a8"uae30"uac04 1"ub144:code:`<br/>`   . OAuth 2.0"uc758
                       Authorization Code Grant "uc808"ucc28"ub97c "uc900"uc6a9.
                     "access_token_token_expire": "2020-02-20 00:00:00",  # Optional. Access token
                       "ub9cc"ub8cc"uc2dc"uac04 ("ub144:"uc6d4:"uc77c "uc2dc:"ubd84:"ucd08).
@@ -153,15 +411,16 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
                 # response body for status code(s): 200
                 response == {
                     "access_token": "str",  # Optional. OAuth "ud1a0"ud070"uc774
-                      "ud544"uc694"ud55c API "uacbd"uc6b0 "ubc1c"uae09"ud55c Access token ex)
-                      "eyJ0eXUxMiJ9.eyJz"u2026..................................."   *
-                      "uc77c"ubc18"uac1c"uc778"uace0"uac1d/"uc77c"ubc18"ubc95"uc778"uace0"uac1d   .
-                      Access token "uc720"ud6a8"uae30"uac04 1"uc77c   ..
+                      "ud544"uc694"ud55c API "uacbd"uc6b0 "ubc1c"uae09"ud55c Access token:code:`<br/>`
+                      ex) "eyJ0eXUxMiJ9.eyJz"u2026..................................."   *
+                      "uc77c"ubc18"uac1c"uc778"uace0"uac1d/"uc77c"ubc18"ubc95"uc778"uace0"uac1d:code:`<br/>`
+                      . Access token "uc720"ud6a8"uae30"uac04 1"uc77c:code:`<br/>`   ..
                       "uc77c"uc815"uc2dc"uac04(6"uc2dc"uac04) "uc774"ub0b4"uc5d0 "uc7ac"ud638"ucd9c
-                      "uc2dc"uc5d0"ub294 "uc9c1"uc804 "ud1a0"ud070"uac12"uc744 "ub9ac"ud134   . OAuth
-                      2.0"uc758 Client Credentials Grant "uc808"ucc28"ub97c "uc900"uc6a9  *
-                      "uc81c"ud734"ubc95"uc778   . Access token "uc720"ud6a8"uae30"uac04 3"uac1c"uc6d4
-                      . Refresh token "uc720"ud6a8"uae30"uac04 1"ub144   . OAuth 2.0"uc758
+                      "uc2dc"uc5d0"ub294 "uc9c1"uc804 "ud1a0"ud070"uac12"uc744
+                      "ub9ac"ud134:code:`<br/>`   . OAuth 2.0"uc758 Client Credentials Grant
+                      "uc808"ucc28"ub97c "uc900"uc6a9  *    "uc81c"ud734"ubc95"uc778:code:`<br/>`   .
+                      Access token "uc720"ud6a8"uae30"uac04 3"uac1c"uc6d4:code:`<br/>`   . Refresh
+                      token "uc720"ud6a8"uae30"uac04 1"ub144:code:`<br/>`   . OAuth 2.0"uc758
                       Authorization Code Grant "uc808"ucc28"ub97c "uc900"uc6a9.
                     "access_token_token_expire": "2020-02-20 00:00:00",  # Optional. Access token
                       "ub9cc"ub8cc"uc2dc"uac04 ("ub144:"uc6d4:"uc77c "uc2dc:"ubd84:"ucd08).
@@ -211,15 +470,16 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
                 # response body for status code(s): 200
                 response == {
                     "access_token": "str",  # Optional. OAuth "ud1a0"ud070"uc774
-                      "ud544"uc694"ud55c API "uacbd"uc6b0 "ubc1c"uae09"ud55c Access token ex)
-                      "eyJ0eXUxMiJ9.eyJz"u2026..................................."   *
-                      "uc77c"ubc18"uac1c"uc778"uace0"uac1d/"uc77c"ubc18"ubc95"uc778"uace0"uac1d   .
-                      Access token "uc720"ud6a8"uae30"uac04 1"uc77c   ..
+                      "ud544"uc694"ud55c API "uacbd"uc6b0 "ubc1c"uae09"ud55c Access token:code:`<br/>`
+                      ex) "eyJ0eXUxMiJ9.eyJz"u2026..................................."   *
+                      "uc77c"ubc18"uac1c"uc778"uace0"uac1d/"uc77c"ubc18"ubc95"uc778"uace0"uac1d:code:`<br/>`
+                      . Access token "uc720"ud6a8"uae30"uac04 1"uc77c:code:`<br/>`   ..
                       "uc77c"uc815"uc2dc"uac04(6"uc2dc"uac04) "uc774"ub0b4"uc5d0 "uc7ac"ud638"ucd9c
-                      "uc2dc"uc5d0"ub294 "uc9c1"uc804 "ud1a0"ud070"uac12"uc744 "ub9ac"ud134   . OAuth
-                      2.0"uc758 Client Credentials Grant "uc808"ucc28"ub97c "uc900"uc6a9  *
-                      "uc81c"ud734"ubc95"uc778   . Access token "uc720"ud6a8"uae30"uac04 3"uac1c"uc6d4
-                      . Refresh token "uc720"ud6a8"uae30"uac04 1"ub144   . OAuth 2.0"uc758
+                      "uc2dc"uc5d0"ub294 "uc9c1"uc804 "ud1a0"ud070"uac12"uc744
+                      "ub9ac"ud134:code:`<br/>`   . OAuth 2.0"uc758 Client Credentials Grant
+                      "uc808"ucc28"ub97c "uc900"uc6a9  *    "uc81c"ud734"ubc95"uc778:code:`<br/>`   .
+                      Access token "uc720"ud6a8"uae30"uac04 3"uac1c"uc6d4:code:`<br/>`   . Refresh
+                      token "uc720"ud6a8"uae30"uac04 1"ub144:code:`<br/>`   . OAuth 2.0"uc758
                       Authorization Code Grant "uc808"ucc28"ub97c "uc900"uc6a9.
                     "access_token_token_expire": "2020-02-20 00:00:00",  # Optional. Access token
                       "ub9cc"ub8cc"uc2dc"uac04 ("ub144:"uc6d4:"uc77c "uc2dc:"ubd84:"ucd08).
@@ -289,236 +549,206 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
 
         return cast(JSON, deserialized)  # type: ignore
 
-    @distributed_trace_async
-    async def get_domestic_stock_quotations_price(
+    @overload
+    async def revoke_access_token(
         self,
+        body: Optional[JSON] = None,
         *,
-        fid_cond_mrkt_div_code: str,
-        fid_input_iscd: str,
-        tr_id: str = "FHKST01010100",
-        personalseckey: Optional[str] = None,
-        tr_cont: Optional[str] = None,
-        custtype: Optional[str] = None,
-        seq_no: Optional[str] = None,
-        mac_address: Optional[str] = None,
-        phone_number: Optional[str] = None,
-        ip_addr: Optional[str] = None,
-        hashkey: Optional[str] = None,
-        gt_uid: Optional[str] = None,
+        content_type: str = "application/json",
         **kwargs: Any,
     ) -> JSON:
         # pylint: disable=line-too-long
-        """국내주식 시세조회.
+        """접근 토큰 폐기.
+
+        부여받은 접큰토큰을 더 이상 활용하지 않을 때 사용합니다.
+
+        :param body: Default value is None.
+        :type body: JSON
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # JSON input template you can fill out and use as your body input.
+                body = {
+                    "appkey": "str",  # "ud55c"uad6d"ud22c"uc790"uc99d"uad8c
+                      "ud648"ud398"uc774"uc9c0"uc5d0"uc11c "ubc1c"uae09"ubc1b"uc740 appkey
+                      ("uc808"ub300 "ub178"ucd9c"ub418"uc9c0 "uc54a"ub3c4"ub85d
+                      "uc8fc"uc758"ud574"uc8fc"uc138"uc694.). Required.
+                    "appsecret": "str",  # "ud55c"uad6d"ud22c"uc790"uc99d"uad8c
+                      "ud648"ud398"uc774"uc9c0"uc5d0"uc11c "ubc1c"uae09"ubc1b"uc740 appsecret
+                      ("uc808"ub300 "ub178"ucd9c"ub418"uc9c0 "uc54a"ub3c4"ub85d
+                      "uc8fc"uc758"ud574"uc8fc"uc138"uc694.). Required.
+                    "token": "str"  # "uc811"uadfc"ud1a0"ud070  OAuth "ud1a0"ud070"uc774
+                      "ud544"uc694"ud55c API "uacbd"uc6b0 "ubc1c"uae09"ud55c Access token:code:`<br/>`
+                      "uc77c"ubc18"uace0"uac1d(Access token "uc720"ud6a8"uae30"uac04 1"uc77c, OAuth
+                      2.0"uc758 Client Credentials Grant "uc808"ucc28"ub97c "uc900"uc6a9):code:`<br/>`
+                      "ubc95"uc778(Access token "uc720"ud6a8"uae30"uac04 3"uac1c"uc6d4, Refresh token
+                      "uc720"ud6a8"uae30"uac04 1"ub144, OAuth 2.0"uc758 Authorization Code Grant
+                      "uc808"ucc28"ub97c "uc900"uc6a9). Required.
+                }
+
+                # response body for status code(s): 200
+                response == {
+                    "code": "str",  # Optional. HTTP "uc751"ub2f5"ucf54"ub4dc.
+                    "message": "str"  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                }
+        """
+
+    @overload
+    async def revoke_access_token(
+        self,
+        body: Optional[IO[bytes]] = None,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any,
+    ) -> JSON:
+        """접근 토큰 폐기.
+
+        부여받은 접큰토큰을 더 이상 활용하지 않을 때 사용합니다.
+
+        :param body: Default value is None.
+        :type body: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "code": "str",  # Optional. HTTP "uc751"ub2f5"ucf54"ub4dc.
+                    "message": "str"  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                }
+        """
+
+    @distributed_trace_async
+    async def revoke_access_token(
+        self, body: Optional[Union[JSON, IO[bytes]]] = None, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """접근 토큰 폐기.
+
+        부여받은 접큰토큰을 더 이상 활용하지 않을 때 사용합니다.
+
+        :param body: Is either a JSON type or a IO[bytes] type. Default value is None.
+        :type body: JSON or IO[bytes]
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # JSON input template you can fill out and use as your body input.
+                body = {
+                    "appkey": "str",  # "ud55c"uad6d"ud22c"uc790"uc99d"uad8c
+                      "ud648"ud398"uc774"uc9c0"uc5d0"uc11c "ubc1c"uae09"ubc1b"uc740 appkey
+                      ("uc808"ub300 "ub178"ucd9c"ub418"uc9c0 "uc54a"ub3c4"ub85d
+                      "uc8fc"uc758"ud574"uc8fc"uc138"uc694.). Required.
+                    "appsecret": "str",  # "ud55c"uad6d"ud22c"uc790"uc99d"uad8c
+                      "ud648"ud398"uc774"uc9c0"uc5d0"uc11c "ubc1c"uae09"ubc1b"uc740 appsecret
+                      ("uc808"ub300 "ub178"ucd9c"ub418"uc9c0 "uc54a"ub3c4"ub85d
+                      "uc8fc"uc758"ud574"uc8fc"uc138"uc694.). Required.
+                    "token": "str"  # "uc811"uadfc"ud1a0"ud070  OAuth "ud1a0"ud070"uc774
+                      "ud544"uc694"ud55c API "uacbd"uc6b0 "ubc1c"uae09"ud55c Access token:code:`<br/>`
+                      "uc77c"ubc18"uace0"uac1d(Access token "uc720"ud6a8"uae30"uac04 1"uc77c, OAuth
+                      2.0"uc758 Client Credentials Grant "uc808"ucc28"ub97c "uc900"uc6a9):code:`<br/>`
+                      "ubc95"uc778(Access token "uc720"ud6a8"uae30"uac04 3"uac1c"uc6d4, Refresh token
+                      "uc720"ud6a8"uae30"uac04 1"ub144, OAuth 2.0"uc758 Authorization Code Grant
+                      "uc808"ucc28"ub97c "uc900"uc6a9). Required.
+                }
+
+                # response body for status code(s): 200
+                response == {
+                    "code": "str",  # Optional. HTTP "uc751"ub2f5"ucf54"ub4dc.
+                    "message": "str"  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = kwargs.pop("params", {}) or {}
+
+        content_type: Optional[str] = kwargs.pop(
+            "content_type", _headers.pop("Content-Type", None)
+        )
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(body, (IOBase, bytes)):
+            _content = body
+        else:
+            if body is not None:
+                _json = body
+            else:
+                _json = None
+
+        _request = build_gen_open_kis_revoke_access_token_request(
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace_async
+    async def get_domestic_stock_price(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 현재가 기본시세 조회.
 
         주식 현재가 시세 API입니다. 실시간 시세를 원하신다면 웹소켓 API를 활용하세요.
 
-        ※ 종목코드 마스터파일 파이썬 정제코드는 한국투자증권 Github 참고 부탁드립니다.
-           https://github.com/koreainvestment/open-trading-api/tree/main/stocks_info.
+        ※ 종목코드 마스터파일 파이썬 정제코드는 한국투자증권 Github 참고 부탁드립니다.:code:`<br/>`
+          https://github.com/koreainvestment/open-trading-api/tree/main/stocks_info.
 
-        :keyword fid_cond_mrkt_div_code: FID 조건 시장 분류 코드
-         =======================
-
-         J : 주식, ETF, ETN, W: ELW. Required.
-        :paramtype fid_cond_mrkt_div_code: str
-        :keyword fid_input_iscd: FID 입력 종목코드
-         =================
-
-         종목번호 (6자리)
-         ETN의 경우, Q로 시작 (EX. Q500001). Required.
-        :paramtype fid_input_iscd: str
-        :keyword tr_id: 거래ID
-         ======
-
-         [실전투자/모의투자]
-         FHKST01010100 : 주식현재가 시세. Default value is "FHKST01010100".
-        :paramtype tr_id: str
-        :keyword personalseckey: 고객식별키
-         ==========
-
-         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
-        :paramtype personalseckey: str
-        :keyword tr_cont: 연속 거래 여부
-         ==============
-
-         공백 : 초기 조회
-         N : 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is None.
-        :paramtype tr_cont: str
-        :keyword custtype: 고객타입
-         ========
-
-         B : 법인
-         P : 개인. Default value is None.
-        :paramtype custtype: str
-        :keyword seq_no: 일련번호
-         ========
-
-         [법인 필수] 001. Default value is None.
-        :paramtype seq_no: str
-        :keyword mac_address: 맥주소
-         ======
-
-         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
-        :paramtype mac_address: str
-        :keyword phone_number: 핸드폰번호
-         ==========
-
-         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호
-         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
-        :paramtype phone_number: str
-        :keyword ip_addr: 접속 단말 공인 IP
-         =================
-
-         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
-        :paramtype ip_addr: str
-        :keyword hashkey: 해쉬키
-         ======
-
-         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값
-
-
-         * API문서 > hashkey 참조. Default value is None.
-        :paramtype hashkey: str
-        :keyword gt_uid: [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
-        :paramtype gt_uid: str
-        :return: JSON object
-        :rtype: JSON
+        :return: None
+        :rtype: None
         :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # response body for status code(s): 200
-                response == {
-                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc138"uc9c0.
-                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
-                    "output": {
-                        "acml_tr_pbmn": "str",  # Optional. "ub204"uc801 "uac70"ub798
-                          "ub300"uae08.
-                        "acml_vol": "str",  # Optional. "ub204"uc801 "uac70"ub798"ub7c9.
-                        "aspr_unit": "str",  # Optional. "ud638"uac00"ub2e8"uc704.
-                        "bps": "str",  # Optional. BPS.
-                        "bstp_kor_isnm": "str",  # Optional. "uc5c5"uc885 "ud55c"uae00
-                          "uc885"ubaa9"uba85.
-                        "clpr_rang_cont_yn": "str",  # Optional. "uc885"uac00 "ubc94"uc704
-                          "uc5f0"uc7a5 "uc5ec"ubd80.
-                        "cpfn": "str",  # Optional. "uc790"ubcf8"uae08.
-                        "crdt_able_yn": "str",  # Optional. "uc2e0"uc6a9 "uac00"ub2a5
-                          "uc5ec"ubd80.
-                        "d250_hgpr": "str",  # Optional. 250"uc77c "ucd5c"uace0"uac00.
-                        "d250_hgpr_date": "str",  # Optional. 250"uc77c "ucd5c"uace0"uac00
-                          "uc77c"uc790.
-                        "d250_hgpr_vrss_prpr_rate": "str",  # Optional. 250"uc77c
-                          "ucd5c"uace0"uac00 "ub300"ube44 "ud604"uc7ac"uac00 "ube44"uc728.
-                        "d250_lwpr": "str",  # Optional. 250"uc77c "ucd5c"uc800"uac00.
-                        "d250_lwpr_date": "str",  # Optional. 250"uc77c "ucd5c"uc800"uac00
-                          "uc77c"uc790.
-                        "d250_lwpr_vrss_prpr_rate": "str",  # Optional. 250"uc77c
-                          "ucd5c"uc800"uac00 "ub300"ube44 "ud604"uc7ac"uac00 "ube44"uc728.
-                        "dryy_hgpr_date": "str",  # Optional. "uc5f0"uc911 "ucd5c"uace0"uac00
-                          "uc77c"uc790.
-                        "dryy_lwpr_date": "str",  # Optional. "uc5f0"uc911 "ucd5c"uc800"uac00
-                          "uc77c"uc790.
-                        "dryy_lwpr_vrss_prpr_rate": "str",  # Optional. "uc5f0"uc911
-                          "ucd5c"uc800"uac00 "ub300"ube44 "ud604"uc7ac"uac00 "ube44"uc728.
-                        "elw_pblc_yn": "str",  # Optional. ELW "ubc1c"ud589 "uc5ec"ubd80.
-                        "eps": "str",  # Optional. EPS.
-                        "fcam_cnnm": "str",  # Optional. "uc561"uba74"uac00
-                          "ud1b5"ud654"uba85.
-                        "frgn_ntby_qty": "str",  # Optional. "uc678"uad6d"uc778
-                          "uc21c"ub9e4"uc218 "uc218"ub7c9.
-                        "grmn_rate_cls_code": "str",  # Optional. "ubcf4"uc99d"uae08
-                          "ube44"uc728 "uad6c"ubd84 "ucf54"ub4dc =====================
-                          "ud55c"uad6d"ud22c"uc790 "uc99d"uac70"uae08"ube44"uc728 (marg_rate
-                          "ucc38"uace0) 40 : 20%, 30%, 40% 50 : 50% 60 : 60%.
-                        "hts_avls": "str",  # Optional. HTS "uc2dc"uac00"ucd1d"uc561.
-                        "hts_deal_qty_unit_val": "str",  # Optional. HTS "ub9e4"ub9e4
-                          "uc218"ub7c9 "ub2e8"uc704 "uac12.
-                        "hts_frgn_ehrt": "str",  # Optional. HTS "uc678"uad6d"uc778
-                          "uc18c"uc9c4"uc728.
-                        "invt_caful_yn": "str",  # Optional.
-                          "ud22c"uc790"uc720"uc758"uc5ec"ubd80.
-                        "iscd_stat_cls_code": "str",  # Optional. "uc885"ubaa9 "uc0c1"ud0dc
-                          "uad6c"ubd84 "ucf54"ub4dc ===================  00 : "uadf8"uc678 51 :
-                          "uad00"ub9ac"uc885"ubaa9 52 : "ud22c"uc790"uc704"ud5d8 53 :
-                          "ud22c"uc790"uacbd"uace0 54 : "ud22c"uc790"uc8fc"uc758 55 :
-                          "uc2e0"uc6a9"uac00"ub2a5 57 : "uc99d"uac70"uae08 100% 58 :
-                          "uac70"ub798"uc815"uc9c0 59 : "ub2e8"uae30"uacfc"uc5f4.
-                        "last_ssts_cntg_qty": "str",  # Optional. "ucd5c"uc885
-                          "uacf5"ub9e4"ub3c4 "uccb4"uacb0 "uc218"ub7c9.
-                        "lstn_stcn": "str",  # Optional. "uc0c1"uc7a5 "uc8fc"uc218.
-                        "marg_rate": "str",  # Optional. "uc99d"uac70"uae08 "ube44"uc728.
-                        "mrkt_warn_cls_code": "str",  # Optional.
-                          "uc2dc"uc7a5"uacbd"uace0"ucf54"ub4dc.
-                        "new_hgpr_lwpr_cls_code": "str",  # Optional. "uc2e0 "uace0"uac00
-                          "uc800"uac00 "uad6c"ubd84 "ucf54"ub4dc ======================
-                          "uc870"ud68c"ud558"ub294 "uc885"ubaa9"uc774 "uc2e0"uace0/"uc2e0"uc800"uc5d0
-                          "ub3c4"ub2ec"ud588"uc744 "uacbd"uc6b0"uc5d0"ub9cc "uc870"ud68c"ub428.
-                        "oprc_rang_cont_yn": "str",  # Optional. "uc2dc"uac00 "ubc94"uc704
-                          "uc5f0"uc7a5 "uc5ec"ubd80.
-                        "ovtm_vi_cls_code": "str",  # Optional.
-                          "uc2dc"uac04"uc678"ub2e8"uc77c"uac00VI"uc801"uc6a9"uad6c"ubd84"ucf54"ub4dc.
-                        "pbt": "str",  # Optional. PBR.
-                        "per": "str",  # Optional. PER.
-                        "pgtr_ntby_qty": "str",  # Optional.
-                          "ud504"ub85c"uadf8"ub7a8"ub9e4"ub9e4 "uc21c"ub9e4"uc218 "uc218"ub7c9.
-                        "prdy_ctrt": "str",  # Optional. "uc804"uc77c "ub300"ube44"uc728.
-                        "prdy_vrss": "str",  # Optional. "uc804"uc77c "ub300"ube44.
-                        "prdy_vrss_sign": "str",  # Optional. "uc804"uc77c "ub300"ube44
-                          "ubd80"ud638 ==============  1 : "uc0c1"ud55c 2 : "uc0c1"uc2b9 3 :
-                          "ubcf4"ud569 4 : "ud558"ud55c 5 : "ud558"ub77d.
-                        "prdy_vrss_vol_rate": "str",  # Optional. "uc804"uc77c "ub300"ube44
-                          "uac70"ub798"ub7c9 "ube44"uc728 =====================
-                          "uc8fc"uc2dd"ud604"uc7ac"uac00 "uc77c"uc790"ubcc4 API "uc751"ub2f5"uac12
-                          "uc0ac"uc6a9.
-                        "rprs_mrkt_kor_name": "str",  # Optional. "ub300"ud45c "uc2dc"uc7a5
-                          "ud55c"uae00 "uba85.
-                        "rstc_wdth_prc": "str",  # Optional. "uc81c"ud55c "ud3ed
-                          "uac00"uaca9.
-                        "short_over_yn": "str",  # Optional.
-                          "ub2e8"uae30"uacfc"uc5f4"uc5ec"ubd80.
-                        "sltr_yn": "str",  # Optional. "uc815"ub9ac"ub9e4"ub9e4"uc5ec"ubd80.
-                        "ssts_yn": "str",  # Optional.
-                          "uacf5"ub9e4"ub3c4"uac00"ub2a5"uc5ec"ubd80.
-                        "stac_month": "str",  # Optional. "uacb0"uc0b0 "uc6d4.
-                        "stck_dryy_hgpr": "str",  # Optional. "uc8fc"uc2dd "uc5f0"uc911
-                          "ucd5c"uace0"uac00.
-                        "stck_dryy_lwpr": "str",  # Optional. "uc8fc"uc2dd "uc5f0"uc911
-                          "ucd5c"uc800"uac00.
-                        "stck_fcam": "str",  # Optional. "uc8fc"uc2dd "uc561"uba74"uac00.
-                        "stck_hgpr": "str",  # Optional. "uc8fc"uc2dd "ucd5c"uace0"uac00.
-                        "stck_llam": "str",  # Optional. "uc8fc"uc2dd "ud558"ud55c"uac00.
-                        "stck_lwpr": "str",  # Optional. "uc8fc"uc2dd "ucd5c"uc800"uac00.
-                        "stck_mxpr": "str",  # Optional. "uc8fc"uc2dd "uc0c1"ud55c"uac00.
-                        "stck_oprc": "str",  # Optional. "uc8fc"uc2dd "uc2dc"uac00.
-                        "stck_prpr": "str",  # Optional. "uc8fc"uc2dd "ud604"uc7ac"uac00.
-                        "stck_sdpr": "str",  # Optional. "uc8fc"uc2dd "uae30"uc900"uac00.
-                        "stck_shrn_iscd": "str",  # Optional. "uc8fc"uc2dd "ub2e8"ucd95
-                          "uc885"ubaa9"ucf54"ub4dc.
-                        "stck_sspr": "str",  # Optional. "uc8fc"uc2dd "ub300"uc6a9"uac00.
-                        "temp_stop_yn": "str",  # Optional. "uc784"uc2dc "uc815"uc9c0
-                          "uc5ec"ubd80.
-                        "vi_cls_code": "str",  # Optional.
-                          VI"uc801"uc6a9"uad6c"ubd84"ucf54"ub4dc.
-                        "vol_tnrt": "str",  # Optional. "uac70"ub798"ub7c9
-                          "ud68c"uc804"uc728.
-                        "w52_hgpr": "str",  # Optional. 52"uc8fc"uc77c "ucd5c"uace0"uac00.
-                        "w52_hgpr_date": "str",  # Optional. 52"uc8fc"uc77c
-                          "ucd5c"uace0"uac00 "uc77c"uc790.
-                        "w52_hgpr_vrss_prpr_ctrt": "str",  # Optional. 52"uc8fc"uc77c
-                          "ucd5c"uace0"uac00 "ub300"ube44 "ud604"uc7ac"uac00 "ub300"ube44.
-                        "w52_lwpr": "str",  # Optional. 52"uc8fc"uc77c "ucd5c"uc800"uac00.
-                        "w52_lwpr_date": "str",  # Optional. 52"uc8fc"uc77c
-                          "ucd5c"uc800"uac00 "uc77c"uc790.
-                        "w52_lwpr_vrss_prpr_ctrt": "str",  # Optional. 52"uc8fc"uc77c
-                          "ucd5c"uc800"uac00 "ub300"ube44 "ud604"uc7ac"uac00 "ub300"ube44.
-                        "wghn_avrg_stck_prc": "str",  # Optional. "uac00"uc911 "ud3c9"uade0
-                          "uc8fc"uc2dd "uac00"uaca9.
-                        "whol_loan_rmnd_rate": "str"  # Optional. "uc804"uccb4 "uc735"uc790
-                          "uc794"uace0 "ube44"uc728.
-                    },
-                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80
-                      ==============  0 : "uc131"uacf5, 0 "uc774"uc678"uc758 "uac12 : "uc2e4"ud328.
-                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -531,21 +761,9 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[JSON] = kwargs.pop("cls", None)
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_domestic_stock_quotations_price_request(
-            fid_cond_mrkt_div_code=fid_cond_mrkt_div_code,
-            fid_input_iscd=fid_input_iscd,
-            tr_id=tr_id,
-            personalseckey=personalseckey,
-            tr_cont=tr_cont,
-            custtype=custtype,
-            seq_no=seq_no,
-            mac_address=mac_address,
-            phone_number=phone_number,
-            ip_addr=ip_addr,
-            hashkey=hashkey,
-            gt_uid=gt_uid,
+        _request = build_gen_open_kis_get_domestic_stock_price_request(
             headers=_headers,
             params=_params,
         )
@@ -566,185 +784,20 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
             )
             raise HttpResponseError(response=response)
 
-        response_headers = {}
-        response_headers["tr_id"] = self._deserialize(
-            "str", response.headers.get("tr_id")
-        )
-        response_headers["tr_cont"] = self._deserialize(
-            "str", response.headers.get("tr_cont")
-        )
-        response_headers["gt_uid"] = self._deserialize(
-            "str", response.headers.get("gt_uid")
-        )
-
-        if response.content:
-            deserialized = response.json()
-        else:
-            deserialized = None
-
         if cls:
-            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
-
-        return cast(JSON, deserialized)  # type: ignore
+            return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace_async
-    async def get_domestic_stock_quotations_daily_price(  # pylint: disable=name-too-long
-        self,
-        *,
-        fid_input_iscd: str,
-        fid_org_adj_prc: str = "0",
-        fid_period_div_code: str,
-        tr_id: str = "FHKST01010400",
-        personalseckey: Optional[str] = None,
-        tr_cont: Optional[str] = None,
-        custtype: Optional[str] = None,
-        seq_no: Optional[str] = None,
-        mac_address: Optional[str] = None,
-        phone_number: Optional[str] = None,
-        ip_addr: Optional[str] = None,
-        hashkey: Optional[str] = None,
-        gt_uid: Optional[str] = None,
-        fid_cond_mrkt_div_code: str = "J",
-        **kwargs: Any,
-    ) -> JSON:
-        # pylint: disable=line-too-long
-        """국내 주식 현재가 일자별 조회.
+    async def get_domestic_stock_conclusion(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 현재가 체결시세 조회.
 
-        주식현재가 일자별 API입니다.
-        일/주/월별 주가를 확인할 수 있으며 최근 30일(주,별)로 제한되어 있습니다.
+        국내현재가 체결 API 입니다. 종목의 체결 정보를 확인할 수 있습니다.
 
-        :keyword fid_input_iscd: FID 입력 종목코드
-         =================
-
-         종목번호 (6자리)
-         ETN의 경우, Q로 시작 (EX. Q500001). Required.
-        :paramtype fid_input_iscd: str
-        :keyword fid_org_adj_prc: FID 수정주가 원주가 가격
-         ========================
-
-         0 : 수정주가반영
-         1 : 수정주가미반영
-
-
-         * 수정주가는 액면분할/액면병합 등 권리 발생 시 과거 시세를 현재 주가에 맞게 보정한 가격. Known values are: "0" and "1". Required.
-         Default value is "0".
-        :paramtype fid_org_adj_prc: str
-        :keyword fid_period_div_code: FID 기간 구분 코드
-         ==================
-
-         D : (일)최근 30거래일
-         W : (주)최근 30주
-         M : (월)최근 30개월. Known values are: "D", "W", and "M". Required.
-        :paramtype fid_period_div_code: str
-        :keyword tr_id: 거래ID
-         ======
-
-         [실전투자/모의투자]
-         FHKST01010400 : 주식현재가 일자별. Default value is "FHKST01010400".
-        :paramtype tr_id: str
-        :keyword personalseckey: 고객식별키
-         ==========
-
-         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
-        :paramtype personalseckey: str
-        :keyword tr_cont: 연속 거래 여부
-         ==============
-
-         공백 : 초기 조회
-         N : 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is None.
-        :paramtype tr_cont: str
-        :keyword custtype: 고객타입
-         ========
-
-         B : 법인
-         P : 개인. Default value is None.
-        :paramtype custtype: str
-        :keyword seq_no: 일련번호
-         ========
-
-         [법인 필수] 001. Default value is None.
-        :paramtype seq_no: str
-        :keyword mac_address: 맥주소
-         ======
-
-         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
-        :paramtype mac_address: str
-        :keyword phone_number: 핸드폰번호
-         ==========
-
-         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호
-         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
-        :paramtype phone_number: str
-        :keyword ip_addr: 접속 단말 공인 IP
-         =================
-
-         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
-        :paramtype ip_addr: str
-        :keyword hashkey: 해쉬키
-         ======
-
-         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값
-
-
-         * API문서 > hashkey 참조. Default value is None.
-        :paramtype hashkey: str
-        :keyword gt_uid: [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
-        :paramtype gt_uid: str
-        :keyword fid_cond_mrkt_div_code: FID 조건 시장 분류 코드
-         =======================
-
-         J : 주식, ETF, ETN
-         W: ELW. Known values are: "J" and "W". Default value is "J".
-        :paramtype fid_cond_mrkt_div_code: str
-        :return: JSON object
-        :rtype: JSON
+        :return: None
+        :rtype: None
         :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # response body for status code(s): 200
-                response == {
-                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc138"uc9c0.
-                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
-                    "output": [
-                        {
-                            "acml_prtt_rate": "str",  # Optional. "ub204"uc801
-                              "ubd84"ud560 "ube44"uc728.
-                            "acml_vol": "str",  # Optional. "ub204"uc801
-                              "uac70"ub798"ub7c9.
-                            "flng_cls_code": "str",  # Optional. "ub77d "uad6c"ubd84
-                              "ucf54"ub4dc ============  01: "uad8c"ub9ac"ub77d 02: "ubc30"ub2f9"ub77d
-                              03: "ubd84"ubc30"ub77d 04: "uad8c"ubc30"ub77d 05:
-                              "uc911"uac04("ubd84"uae30)"ubc30"ub2f9"ub77d 06:
-                              "uad8c"ub9ac"uc911"uac04"ubc30"ub2f9"ub77d 07:
-                              "uad8c"ub9ac"ubd84"uae30"ubc30"ub2f9"ub77d.
-                            "frgn_ntby_qty": "str",  # Optional. "uc678"uad6d"uc778
-                              "uc21c"ub9e4"uc218 "uc218"ub7c9.
-                            "hts_frgn_ehrt": "str",  # Optional. HTS "uc678"uad6d"uc778
-                              "uc18c"uc9c4"uc728.
-                            "prdy_ctrt": "str",  # Optional. "uc804"uc77c
-                              "ub300"ube44"uc728.
-                            "prdy_vrss": "str",  # Optional. "uc804"uc77c "ub300"ube44
-                              "uac70"ub798"ub7c9.
-                            "prdy_vrss_sign": "str",  # Optional. "uc804"uc77c
-                              "ub300"ube44 "ubd80"ud638 ==============  1: "uc0c1"ud55c 2: "uc0c1"uc2b9
-                              3: "ubcf4"ud569 4: "ud558"ud55c 5: "ud558"ub77d.
-                            "prdy_vrss_vol_rate": "str",  # Optional. "uc804"uc77c
-                              "ub300"ube44 "uac70"ub798"ub7c9 "ube44"uc728.
-                            "stck_bsop_date": "str",  # Optional. "uc8fc"uc2dd
-                              "uc601"uc5c5 "uc77c"uc790.
-                            "stck_clpr": "str",  # Optional. "uc8fc"uc2dd "uc885"uac00.
-                            "stck_hgpr": "str",  # Optional. "uc8fc"uc2dd
-                              "ucd5c"uace0"uac00.
-                            "stck_lwpr": "str",  # Optional. "uc8fc"uc2dd
-                              "ucd5c"uc800"uac00.
-                            "stck_oprc": "str"  # Optional. "uc8fc"uc2dd "uc2dc"uac00.
-                        }
-                    ],
-                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80
-                      ==============  0 : "uc131"uacf5, 0 "uc774"uc678"uc758 "uac12 : "uc2e4"ud328.
-                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -757,23 +810,9 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[JSON] = kwargs.pop("cls", None)
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_domestic_stock_quotations_daily_price_request(
-            fid_input_iscd=fid_input_iscd,
-            fid_org_adj_prc=fid_org_adj_prc,
-            fid_period_div_code=fid_period_div_code,
-            tr_id=tr_id,
-            personalseckey=personalseckey,
-            tr_cont=tr_cont,
-            custtype=custtype,
-            seq_no=seq_no,
-            mac_address=mac_address,
-            phone_number=phone_number,
-            ip_addr=ip_addr,
-            hashkey=hashkey,
-            gt_uid=gt_uid,
-            fid_cond_mrkt_div_code=fid_cond_mrkt_div_code,
+        _request = build_gen_open_kis_get_domestic_stock_conclusion_request(
             headers=_headers,
             params=_params,
         )
@@ -794,23 +833,5304 @@ class GenOpenKisClientOperationsMixin(GenOpenKisClientMixinABC):
             )
             raise HttpResponseError(response=response)
 
-        response_headers = {}
-        response_headers["tr_id"] = self._deserialize(
-            "str", response.headers.get("tr_id")
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_domestic_stock_daily_price(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 일자별 시세 조회.
+
+        주식현재가 일자별 API입니다. 일/주/월별 주가를 확인할 수 있으며 최근 30일(주,별)로 제한되어 있습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_daily_price_request(
+            headers=_headers,
+            params=_params,
         )
-        response_headers["tr_cont"] = self._deserialize(
-            "str", response.headers.get("tr_cont")
-        )
-        response_headers["gt_uid"] = self._deserialize(
-            "str", response.headers.get("gt_uid")
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
         )
 
-        if response.content:
-            deserialized = response.json()
-        else:
-            deserialized = None
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
 
         if cls:
-            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+            return cls(pipeline_response, None, {})  # type: ignore
 
-        return cast(JSON, deserialized)  # type: ignore
+    @distributed_trace_async
+    async def get_domestic_stock_quote_and_exp(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 현재가 호가/예상체결 조회.
+
+        주식현재가 호가 예상체결 API입니다.
+
+        매수 매도 호가를 확인하실 수 있습니다.:code:`<br/>` 실시간 데이터를 원하신다면 웹소켓 API를 활용하세요.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_quote_and_exp_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_domestic_stock_investor(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 현재가 투자자 조회.
+
+        주식현재가 투자자 API입니다. 개인, 외국인, 기관 등 투자 정보를 확인할 수 있습니다.
+
+        [유의사항]:code:`<br/>`
+
+
+        * 외국인은 외국인(외국인투자등록 고유번호가 있는 경우)+기타 외국인을 지칭합니다.:code:`<br/>`
+        * 당일 데이터는 장 종료 후 제공됩니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_investor_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_domestic_stock_member(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 현재가 회원사 조회.
+
+        주식 현재가 회원사 API입니다. 회원사의 투자 정보를 확인할 수 있습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_member_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_domestic_stock_period_price(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 기간별 시세(일/주/월/년) 조회.
+
+        국내주식기간별시세(일/주/월/년) API입니다.:code:`<br/>`
+        실전계좌/모의계좌의 경우, 한 번의 호출에 최대 100건까지 확인 가능합니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_period_price_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_domestic_stock_time_conclusion(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 현재가 당일시간대별 체결 조회.
+
+        주식현재가 당일시간대별체결 API입니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_time_conclusion_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_domestic_stock_over_time_conclusion(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 현재가 시간외 시간대별 체결 조회.
+
+        주식현재가 시간외시간별체결 API입니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_over_time_conclusion_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_domestic_stock_daily_over_time_price(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 현재가 시간외 일자별 주가 조회.
+
+        주식현재가 시간외일자별주가 API입니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_daily_over_time_price_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_domestic_stock_over_time_price(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 시간외 현재가 조회.
+
+        국내주식 시간외현재가 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0230] 시간외 현재가 화면의 좌측 상단기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_over_time_price_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_domestic_stock_over_time_quote(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 시간외 호가 조회.
+
+        국내주식 시간외호가 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0230] 시간외 현재가 화면의 '호가' 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_over_time_quote_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_domestic_stock_minute_price(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 당일 분봉 조회.
+
+        주식당일분봉조회 API입니다.:code:`<br/>`
+        실전계좌/모의계좌의 경우, 한 번의 호출에 최대 30건까지 확인 가능합니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_minute_price_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_domestic_stock_price2(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 현재가 시세2 조회.
+
+        주식현재가 시세2 API입니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_price2_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_domestic_stock_closing_exp(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 장마감 예상체결가 조회.
+
+        국내주식 장마감 예상체결가 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0183] 장마감 예상체결가 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_closing_exp_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_etf_n_etn_price(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """ETF/ETN 현재가 기본시세 조회.
+
+        ETF/ETN 현재가 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0240] ETF/ETN 현재가 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_etf_n_etn_price_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_etf_n_etn_nav_stock_trend(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """ETF/ETN NAV 비교 추이(종목) 조회.
+
+        NAV 비교추이(종목) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0244] ETF/ETN 비교추이(NAV/IIV) 좌측 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면
+        기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_etf_n_etn_nav_stock_trend_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_etf_n_etn_nav_minute_trend(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """ETF/ETN NAV 비교 추이(분) 조회.
+
+        NAV 비교추이(분) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0244] ETF/ETN 비교추이(NAV/IIV) 좌측 화면 "분별" 비교추이 기능을 API로 개발한 사항으로, 해당 화면을
+        참고하시면 기능을 이해하기 쉽습니다.:code:`<br/>`
+        실전계좌의 경우, 한 번의 호출에 최근 30건까지 확인 가능합니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_etf_n_etn_nav_minute_trend_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_etf_n_etn_nav_daily_trend(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """ETF/ETN NAV 비교 추이(일) 조회.
+
+        NAV 비교추이(일) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0244] ETF/ETN 비교추이(NAV/IIV) 좌측 화면 "일별" 비교추이 기능을 API로 개발한 사항으로, 해당 화면을
+        참고하시면 기능을 이해하기 쉽습니다.:code:`<br/>`
+        실전계좌의 경우, 한 번의 호출에 최대 100건까지 확인 가능합니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_etf_n_etn_nav_daily_trend_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_etf_n_etn_component_stock_price(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """ETF/ETN 구성종목 시세 조회.
+
+        ETF 구성종목시세 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0245] ETF/ETN 구성종목시세 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_etf_n_etn_component_stock_price_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_index_daily_chart_price(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 업종기간별 시세(일/주/월/년) 조회.
+
+        국내주식 업종기간별시세(일/주/월/년) API입니다.
+
+        실전계좌/모의계좌의 경우, 한 번의 호출에 최대 50건까지 확인 가능합니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_index_daily_chart_price_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_index_minute_chart_price(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 업종분봉 조회.
+
+        국내주식 업종분봉조회 API입니다.
+
+        실전계좌의 경우, 한 번의 호출에 최대 102건까지 확인 가능합니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_index_minute_chart_price_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_index_price(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내업종 현재 지수 조회.
+
+        국내업종 현재지수 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0210] 업종 현재지수 화면 의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_index_price_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_index_daily_price(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내업종 일자별 지수 조회.
+
+        국내업종 일자별지수 API입니다. 한 번의 조회에 100건까지 확인 가능합니다.
+
+        한국투자 HTS(eFriend Plus) > [0212] 업종 일자별지수 화면 의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_index_daily_price_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_index_category_price(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내업종 구분별 전체 시세 조회.
+
+        국내업종 구분별전체시세 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0214] 업종 전체시세 화면 의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_index_category_price_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_index_total_exp(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 예상체결 전체지수 조회.
+
+        국내주식 예상체결 전체지수 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0185] 예상체결 전체지수 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_index_total_exp_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_index_tick_price(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내업종 시간별지수(초) 조회.
+
+        국내업종 시간별지수(초) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0211] 업종 시간별지수 화면에서 우측 '10초' 선택 시의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면
+        기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_index_tick_price_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_index_minute_price(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내업종 시간별지수(분) 조회.
+
+        국내업종 시간별지수(분) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0211] 업종 시간별지수 화면에서 우측 '1분' 선택 시의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을
+        이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_index_minute_price_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_index_trend_exp(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내업종 예상체결지수 추이.
+
+        국내주식 예상체결지수 추이 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0184] 예상체결지수 추이 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_index_trend_exp_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_financial_balance_sheet(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 대차대조표.
+
+        국내주식 대차대조표 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0635] 재무분석종합 화면의 하단 '1. 대차대조표' 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을
+        이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_financial_balance_sheet_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_financial_income_statement(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 손익계산서.
+
+        국내주식 손익계산서 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0635] 재무분석종합 화면의 하단 '2. 손익계산서' 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을
+        이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_financial_income_statement_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_financial_ratio(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 재무비율.
+
+        국내주식 재무비율 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0635] 재무분석종합 화면의 우측의 '재무 비율' 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_financial_ratio_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_financial_profit_ratio(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 수익성비율.
+
+        국내주식 수익성비율 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0635] 재무분석종합 화면의 하단 '4. 수익성비율' 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을
+        이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_financial_profit_ratio_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_financial_other_major_ratio(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 기타주요비율.
+
+        국내주식 기타주요비율 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0635] 재무분석종합 화면의 하단 '9. 기타주요비율' 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을
+        이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_financial_other_major_ratio_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_financial_stability_ratio(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 안정성비율.
+
+        국내주식 안정성비율 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0635] 재무분석종합 화면의 하단 '5. 안정성비율' 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을
+        이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_financial_stability_ratio_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_financial_growth_ratio(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 성장성비율.
+
+        국내주식 성장성비율 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0635] 재무분석종합 화면의 하단 '7.성장성비율' 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을
+        이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_financial_growth_ratio_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_financial_estimate_perform(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 종목추정실적.
+
+        국내주식 종목추정실적 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0613] 종목추정실적 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        ※ 본 화면의 추정실적 및 투자의견은 당월 초의 애널리스트의 의견사항이므로 월중 변동 사항이 있을 수 있음을 유의하시기 바랍니다.:code:`<br/>`
+        ※ 종목별 수익추정은 리서치본부에서 매월 발표되는 거래소, 코스닥 160여개 기업에 한정합니다. 구체적인 종목 리스트는 추정종목리스트를 참고하기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_financial_estimate_perform_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ksd_dividend_info(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """예탁원정보 (배당일정).
+
+        예탁원정보(배당일정) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0658] 배당 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
+        '주식배당지급일'은 배당주식의 주식교부일자를 말합니다. 배당주식의 계좌입고는 배당주식 상장일인데 일반적으로 주권교부일의 익영업일입니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ksd_dividend_info_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ksd_buyback_info(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """예탁원정보 (주식매수청구일정).
+
+        예탁원정보(주식매수청구일정) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0663] 주식매수청구 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ksd_buyback_info_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ksd_merger_and_split(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """예탁원정보 (합병/분할일정).
+
+        예탁원정보(합병/분할일정) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0664] 합병/분할 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ksd_merger_and_split_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ksd_change_par_value(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """예탁원정보 (액면교체일정).
+
+        예탁원정보(액면교체일정) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0657] 액면교체 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ksd_change_par_value_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ksd_decrease_capital(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """예탁원정보 (자본감소일정).
+
+        예탁원정보(자본감소일정) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0665] 자본감소 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ksd_decrease_capital_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ksd_list_info(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """예탁원정보 (상장정보일정).
+
+        예탁원정보(상장정보일정) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0666] 상장정보 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ksd_list_info_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ksd_public_offer_subscription(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """예탁원정보 (공모주청약일정).
+
+        예탁원정보(공모주청약일정) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0667] 공모주청약 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ksd_public_offer_subscription_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ksd_forfeited_stock(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """예탁원정보 (실권주일정).
+
+        예탁원정보(실권주일정) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0668] 실권주 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ksd_forfeited_stock_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ksd_mandatory_deposit(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """예탁원정보 (의무예치일정).
+
+        예탁원정보(의무예치일정) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0758] 의무예치 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ksd_mandatory_deposit_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ksd_right_issue(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """예탁원정보 (유상증자일정).
+
+        예탁원정보(유상증자일정) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0655] 유상증자 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ksd_right_issue_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ksd_bonus_issue(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """예탁원정보 (무상증자일정).
+
+        예탁원정보(무상증자일정) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0656] 무상증자 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ksd_bonus_issue_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ksd_shareholder_meeting(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """예탁원정보 (주주총회일정).
+
+        예탁원정보(주주총회일정) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0759] 주주총회 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ksd_shareholder_meeting_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_foreign_institution_total(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내기관_외국인 매매종목가집계.
+
+        국내기관_외국인 매매종목가집계 API입니다.
+
+        증권사 직원이 장중에 집계/입력한 자료를 단순 누계한 수치로서,:code:`<br/>`
+        입력시간은 외국인 09:30, 11:20, 13:20, 14:30 / 기관종합 10:00, 11:20, 13:20, 14:30 이며, 사정에 따라 변동될 수 있습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_foreign_institution_total_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_personal_search_list(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """종목조건검색 목록조회.
+
+        HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API입니다.:code:`<br/>`
+        종목조건검색 목록조회 API(/uapi/domestic-stock/v1/quotations/psearch-title)의 output인 'seq'을 종목조건검색조회
+        API(/uapi/domestic-stock/v1/quotations/psearch-result)의 input으로 사용하시면 됩니다.
+
+        ※ 시스템 안정성을 위해 API로 제공되는 조건검색 결과의 경우 조건당 100건으로 제한을 둔 점 양해 부탁드립니다.
+
+        ※ [0110] 화면의 '대상변경' 설정사항은 HTS [0110] 사용자 조건검색 화면에만 적용됨에 유의 부탁드립니다.
+
+        ※ '조회가 계속 됩니다. (다음을 누르십시오.)' 오류 발생 시 해결방법:code:`<br/>`
+        → HTS(efriend Plus) [0110] 조건검색 화면에서 조건을 등록하신 후, 왼쪽 하단의 "사용자조건 서버저장" 클릭하셔서 등록한 조건들을 서버로 보낸 후 다시
+        API 호출 시도 부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_personal_search_list_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_personal_search_detail(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """종목조건검색 조회.
+
+        HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API입니다.:code:`<br/>`
+        종목조건검색 목록조회 API(/uapi/domestic-stock/v1/quotations/psearch-title)의 output인 'seq'을 종목조건검색조회
+        API(/uapi/domestic-stock/v1/quotations/psearch-result)의 input으로 사용하시면 됩니다.
+
+        ※ 시스템 안정성을 위해 API로 제공되는 조건검색 결과의 경우 조건당 100건으로 제한을 둔 점 양해 부탁드립니다.
+
+        ※ [0110] 화면의 '대상변경' 설정사항은 HTS [0110] 사용자 조건검색 화면에만 적용됨에 유의 부탁드립니다.
+
+        ※ '조회가 계속 됩니다. (다음을 누르십시오.)' 오류 발생 시 해결방법:code:`<br/>`
+        → HTS(efriend Plus) [0110] 조건검색 화면에서 조건을 등록하신 후, 왼쪽 하단의 "사용자조건 서버저장" 클릭하셔서 등록한 조건들을 서버로 보낸 후 다시
+        API 호출 시도 부탁드립니다.
+
+        ※ {"rt_cd":"1","msg_cd":"MCA05918","msg1":"종목코드 오류입니다."} 메시지 발생 이유:code:`<br/>`
+        → 조건검색 결과 검색된 종목이 0개인 경우 위 응답값을 수신하게 됩니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_personal_search_detail_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_program_trade_by_stock(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """종목별 프로그램매매추이(체결).
+
+        국내주식 종목별 프로그램매매추이(체결) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0465] 종목별 프로그램 매매추이 화면(혹은 한국투자 MTS > 국내 현재가 > 기타수급 > 프로그램) 의 기능을 API로
+        개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_program_trade_by_stock_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_investor_trend(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """종목별 외인기관 추정가집계.
+
+        국내주식 종목별 외국인, 기관 추정가집계 API입니다.
+
+        한국투자 MTS > 국내 현재가 > 투자자 > 투자자동향 탭 > 왼쪽구분을 '추정(주)'로 선택 시 확인 가능한 데이터를 API로 개발한 사항으로, 해당 화면을 참고하시면
+        기능을 이해하기 쉽습니다.
+
+        증권사 직원이 장중에 집계/입력한 자료를 단순 누계한 수치로서,
+        입력시간은 외국인 09:30, 11:20, 13:20, 14:30 / 기관종합 10:00, 11:20, 13:20, 14:30 이며, 사정에 따라 변동될 수 있습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_investor_trend_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_daily_trade_volume(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """종목별일별매수매도체결량.
+
+        종목별일별매수매도체결량 API입니다. 실전계좌의 경우, 한 번의 호출에 최대 100건까지 확인 가능합니다.:code:`<br/>`
+        국내주식 종목의 일별 매수체결량, 매도체결량 데이터를 확인할 수 있습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_daily_trade_volume_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_investor_trend_by_market(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """시장별 투자자매매동향.
+
+        시장별 투자자매매동향(시세성) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0403] 시장별 시간동향 의 상단 표 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_investor_trend_by_market_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_daily_credit_balance(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 신용잔고 일별추이.
+
+        국내주식 신용잔고 일별추이 API입니다.:code:`<br/>`
+        한국투자 HTS(eFriend Plus) > [0476] 국내주식 신용잔고 일별추이 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        한 번의 호출에 최대 30건 확인 가능하며, fid_input_date_1 을 입력하여 다음 조회가 가능합니다.
+
+        ※ 상환수량은 "매도상환수량+현금상환수량"의 합계 수치입니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_daily_credit_balance_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_exp_trend(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 예상체결가 추이.
+
+        국내주식 예상체결가 추이 API입니다.:code:`<br/>`
+        한국투자 HTS(eFriend Plus) > [0184] 예상체결지수 추이 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 30건 확인 가능하며, 다음 조회가 불가합니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_exp_trend_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_daily_short_sale(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 공매도 일별추이.
+
+        국내주식 공매도 일별추이 API입니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_daily_short_sale_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_daily_program_trade(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 프로그램매매 종합현황(일별).
+
+        국내주식 프로그램매매 종합현황(일별) API입니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_daily_program_trade_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_over_time_exp_fluctuation_rate(  # pylint: disable=inconsistent-return-statements,name-too-long
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 시간외 예상체결 등락률.
+
+        국내주식 시간외예상체결등락률 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0236] 시간외 예상체결등락률 화면의 기능을 API로 개발한 사항으로,:code:`<br/>`
+        해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = (
+            build_gen_open_kis_get_technical_over_time_exp_fluctuation_rate_request(
+                headers=_headers,
+                params=_params,
+            )
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_hourly_program_trade(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """프로그램매매 종합현황(시간).
+
+        프로그램매매 종합현황(시간) API입니다.:code:`<br/>`
+        한국투자 HTS(eFriend Plus) > [0460] 프로그램매매 종합현황 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        ※ 장시간(09:00~15:30) 동안의 최근 30분간의 데이터 확인이 가능하며, 다음조회가 불가합니다.:code:`<br/>`
+        ※ 장시간(09:00~15:30) 이후에는 bsop_hour 에 153000 ~ 170000 까지의 시간데이터가 출력되지만 데이터는 모두 동일한 장마감 데이터인 점 유의
+        부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_hourly_program_trade_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_estimate_foreign_trade(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 외국계 매매종목 가집계.
+
+        외국계 매매종목 가집계 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0430] 외국계 매매종목 가집계 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_estimate_foreign_trade_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_foreign_purchase_trend(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 종목별 외국계 순매수추이.
+
+        종목별 외국계 순매수추이 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0433] 종목별 외국계 순매수추이 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_foreign_purchase_trend_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_trade_by_amount(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 체결금액별 매매비중.
+
+        국내주식 체결금액별 매매비중 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0135] 체결금액별 매매비중 화면의 "상단 표" 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_trade_by_amount_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_market_fund(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내 증시자금 종합.
+
+        국내 증시자금 종합 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0470] 증시자금 종합 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다. (단위:
+        억원)
+
+        ※ 해당자료는 금융투자협회의 자료를 제공하고 있으며, 오류와 지연이 발생할 수 있습니다.:code:`<br/>`
+        ※ 위 정보에 의한 투자판단의 최종책임은 정보이용자에게 있으며, 당사와 한국금융투자협회는 어떠한 법적인 책임도 지지 않사오니 투자에 참고로만 이용하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_market_fund_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_daily_investor_trend_by_market(  # pylint: disable=inconsistent-return-statements,name-too-long
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 시장별 투자자매매동향(일별).
+
+        시장별 투자자매매동향(일별) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0404] 시장별 일별동향 의 상단 표 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = (
+            build_gen_open_kis_get_technical_daily_investor_trend_by_market_request(
+                headers=_headers,
+                params=_params,
+            )
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_daily_program_trade_by_stock(  # pylint: disable=inconsistent-return-statements,name-too-long
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 종목별 프로그램매매추이(일별).
+
+        국내주식 종목별 프로그램매매추이(일별) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0465] 종목별 프로그램 매매추이 화면(혹은 한국투자 MTS > 국내 현재가 > 기타수급 > 프로그램) 의 "일자별" 클릭
+        시 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = (
+            build_gen_open_kis_get_technical_daily_program_trade_by_stock_request(
+                headers=_headers,
+                params=_params,
+            )
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_today_program_trend_by_investor(  # pylint: disable=inconsistent-return-statements,name-too-long
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 프로그램매매 투자자매매동향.
+
+        프로그램매매 투자자매매동향(당일) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0466] 프로그램매매 투자자별 동향 화면 의 "당일동향" 표의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면
+        기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = (
+            build_gen_open_kis_get_technical_today_program_trend_by_investor_request(
+                headers=_headers,
+                params=_params,
+            )
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_capture_up_low_price(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 상하한가 포착.
+
+        국내주식 상하한가 포착 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0917] 실시간 상하한가 포착 화면 의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_capture_up_low_price_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_volume_profile_indicator(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 매물대/거래비중.
+
+        국내주식 매물대/거래비중 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0113] 당일가격대별 매물대 화면의 데이터 중 일부를 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_volume_profile_indicator_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_technical_daily_member_trend(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 현재가 회원사 종목매매동향.
+
+        주식현재가 회원사 종목매매동향 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0454] 증권사 종목매매동향 화면을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_technical_daily_member_trend_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_volume(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 거래량순위.
+
+        국내주식 거래량순위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0171] 거래량 순위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 30건 확인 가능하며, 다음 조회가 불가합니다.:code:`<br/>`
+
+        30건 이상의 목록 조회가 필요한 경우, 대안으로 종목조건검색 API를 이용해서 원하는 종목 100개까지 검색할 수 있는 기능을 제공하고 있습니다.:code:`<br/>`
+        종목조건검색 API는 HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API로,:code:`<br/>`
+        HTS [0110]에서 여러가지 조건을 설정할 수 있는데, 그 중 거래량 순위(ex. 0봉전 거래량 상위순 100종목) 에 대해서도 설정해서 종목을 검색할 수
+        있습니다.:code:`<br/>`
+        자세한 사용 방법은 공지사항 - [조건검색 필독] 조건검색 API 이용안내 참고 부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_volume_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_fluctuation_rate(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 등락률 순위.
+
+        국내주식 등락률 순위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0170] 등락률 순위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 30건 확인 가능하며, 다음 조회가 불가합니다.
+
+        ※ 30건 이상의 목록 조회가 필요한 경우, 대안으로 종목조건검색 API를 이용해서 원하는 종목 100개까지 검색할 수 있는 기능을 제공하고
+        있습니다.:code:`<br/>`
+        종목조건검색 API는 HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API로,:code:`<br/>`
+        자세한 사용 방법은 공지사항 - [조건검색 필독] 조건검색 API 이용안내 참고 부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_fluctuation_rate_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_profit_asset_index(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 수익률/자산지표 순위.
+
+        국내주식 수익자산지표 순위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0173] 수익자산지표 순위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 30건 확인 가능하며, 다음 조회가 불가합니다.
+
+        ※ 30건 이상의 목록 조회가 필요한 경우, 대안으로 종목조건검색 API를 이용해서 원하는 종목 100개까지 검색할 수 있는 기능을 제공하고
+        있습니다.:code:`<br/>`
+        종목조건검색 API는 HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API로,:code:`<br/>`
+        자세한 사용 방법은 공지사항 - [조건검색 필독] 조건검색 API 이용안내 참고 부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_profit_asset_index_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_market_cap(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 시가총액 상위.
+
+        국내주식 시가총액 상위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0174] 시가총액 상위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 30건 확인 가능하며, 다음 조회가 불가합니다.
+
+        ※ 30건 이상의 목록 조회가 필요한 경우, 대안으로 종목조건검색 API를 이용해서 원하는 종목 100개까지 검색할 수 있는 기능을 제공하고
+        있습니다.:code:`<br/>`
+        종목조건검색 API는 HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API로,:code:`<br/>`
+        자세한 사용 방법은 공지사항 - [조건검색 필독] 조건검색 API 이용안내 참고 부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_market_cap_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_financial_ratio(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 재무비율 순위.
+
+        국내주식 재무비율 순위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0175] 재무비율순위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 30건 확인 가능하며, 다음 조회가 불가합니다.
+
+        ※ 30건 이상의 목록 조회가 필요한 경우, 대안으로 종목조건검색 API를 이용해서 원하는 종목 100개까지 검색할 수 있는 기능을 제공하고
+        있습니다.:code:`<br/>`
+        종목조건검색 API는 HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API로,:code:`<br/>`
+        자세한 사용 방법은 공지사항 - [조건검색 필독] 조건검색 API 이용안내 참고 부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_financial_ratio_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_after_balance(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 시간외잔량 순위.
+
+        국내주식 시간외잔량 순위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0176] 시간외잔량 상위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 30건 확인 가능하며, 다음 조회가 불가합니다.
+
+        ※ 30건 이상의 목록 조회가 필요한 경우, 대안으로 종목조건검색 API를 이용해서 원하는 종목 100개까지 검색할 수 있는 기능을 제공하고
+        있습니다.:code:`<br/>`
+        종목조건검색 API는 HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API로,:code:`<br/>`
+        자세한 사용 방법은 공지사항 - [조건검색 필독] 조건검색 API 이용안내 참고 부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_after_balance_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_prefer_disparate_ratio(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 우선주/괴리율 상위.
+
+        국내주식 우선주/괴리율 상위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0177] 우선주/괴리율 상위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 30건 확인 가능하며, 다음 조회가 불가합니다.
+
+        ※ 30건 이상의 목록 조회가 필요한 경우, 대안으로 종목조건검색 API를 이용해서 원하는 종목 100개까지 검색할 수 있는 기능을 제공하고
+        있습니다.:code:`<br/>`
+        종목조건검색 API는 HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API로,:code:`<br/>`
+        자세한 사용 방법은 공지사항 - [조건검색 필독] 조건검색 API 이용안내 참고 부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_prefer_disparate_ratio_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_quote_balance(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 호가잔량 순위.
+
+        국내주식 호가잔량 순위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0172] 호가잔량 순위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 30건 확인 가능하며, 다음 조회가 불가합니다.
+
+        ※ 30건 이상의 목록 조회가 필요한 경우, 대안으로 종목조건검색 API를 이용해서 원하는 종목 100개까지 검색할 수 있는 기능을 제공하고
+        있습니다.:code:`<br/>`
+        종목조건검색 API는 HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API로,:code:`<br/>`
+        자세한 사용 방법은 공지사항 - [조건검색 필독] 조건검색 API 이용안내 참고 부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_quote_balance_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_disparity(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 이격도 순위.
+
+        국내주식 이격도 순위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0178] 이격도 순위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 30건 확인 가능하며, 다음 조회가 불가합니다.
+
+        ※ 30건 이상의 목록 조회가 필요한 경우, 대안으로 종목조건검색 API를 이용해서 원하는 종목 100개까지 검색할 수 있는 기능을 제공하고
+        있습니다.:code:`<br/>`
+        종목조건검색 API는 HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API로,:code:`<br/>`
+        자세한 사용 방법은 공지사항 - [조건검색 필독] 조건검색 API 이용안내 참고 부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_disparity_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_market_value(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 시장가치 순위.
+
+        국내주식 시장가치 순위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0179] 시장가치순위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 30건 확인 가능하며, 다음 조회가 불가합니다.
+
+        ※ 30건 이상의 목록 조회가 필요한 경우, 대안으로 종목조건검색 API를 이용해서 원하는 종목 100개까지 검색할 수 있는 기능을 제공하고
+        있습니다.:code:`<br/>`
+        종목조건검색 API는 HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API로,:code:`<br/>`
+        자세한 사용 방법은 공지사항 - [조건검색 필독] 조건검색 API 이용안내 참고 부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_market_value_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_volume_power(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 체결강도 순위.
+
+        국내주식 체결강도 상위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0168] 체결강도 상위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 30건 확인 가능하며, 다음 조회가 불가합니다.
+
+        ※ 30건 이상의 목록 조회가 필요한 경우, 대안으로 종목조건검색 API를 이용해서 원하는 종목 100개까지 검색할 수 있는 기능을 제공하고
+        있습니다.:code:`<br/>`
+        종목조건검색 API는 HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API로,:code:`<br/>`
+        자세한 사용 방법은 공지사항 - [조건검색 필독] 조건검색 API 이용안내 참고 부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_volume_power_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_top_interest_stock(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 관심종목등록 상위.
+
+        국내주식 관심종목등록 상위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0180] 관심종목등록상위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 30건 확인 가능하며, 다음 조회가 불가합니다.
+
+        ※ 30건 이상의 목록 조회가 필요한 경우, 대안으로 종목조건검색 API를 이용해서 원하는 종목 100개까지 검색할 수 있는 기능을 제공하고
+        있습니다.:code:`<br/>`
+        종목조건검색 API는 HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API로,:code:`<br/>`
+        자세한 사용 방법은 공지사항 - [조건검색 필독] 조건검색 API 이용안내 참고 부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_top_interest_stock_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_exp_trans_up_down(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 예상체결 상승/하락 상위.
+
+        국내주식 예상체결 상승/하락상위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0182] 예상체결 상승/하락상위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 30건 확인 가능하며, 다음 조회가 불가합니다.
+
+        ※ 30건 이상의 목록 조회가 필요한 경우, 대안으로 종목조건검색 API를 이용해서 원하는 종목 100개까지 검색할 수 있는 기능을 제공하고
+        있습니다.:code:`<br/>`
+        종목조건검색 API는 HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API로,:code:`<br/>`
+        자세한 사용 방법은 공지사항 - [조건검색 필독] 조건검색 API 이용안내 참고 부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_exp_trans_up_down_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_trade(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 당사매매순위 상위.
+
+        국내주식 당사매매종목 상위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0186] 당사매매종목 상위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 30건 확인 가능하며, 다음 조회가 불가합니다.
+
+        ※ 30건 이상의 목록 조회가 필요한 경우, 대안으로 종목조건검색 API를 이용해서 원하는 종목 100개까지 검색할 수 있는 기능을 제공하고
+        있습니다.:code:`<br/>`
+        종목조건검색 API는 HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API로,:code:`<br/>`
+        자세한 사용 방법은 공지사항 - [조건검색 필독] 조건검색 API 이용안내 참고 부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_trade_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_near_new_high_low(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 신고가/신저가 근접종목 상위.
+
+        국내주식 신고/신저근접종목 상위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0187] 신고/신저 근접종목 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 30건 확인 가능하며, 다음 조회가 불가합니다.
+
+        ※ 30건 이상의 목록 조회가 필요한 경우, 대안으로 종목조건검색 API를 이용해서 원하는 종목 100개까지 검색할 수 있는 기능을 제공하고
+        있습니다.:code:`<br/>`
+        종목조건검색 API는 HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API로,:code:`<br/>`
+        자세한 사용 방법은 공지사항 - [조건검색 필독] 조건검색 API 이용안내 참고 부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_near_new_high_low_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_bulk_trans_num(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 대량체결건수 상위.
+
+        국내주식 대량체결건수 상위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0169] 대량체결건수 상위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 30건 확인 가능하며, 다음 조회가 불가합니다.
+
+        ※ 30건 이상의 목록 조회가 필요한 경우, 대안으로 종목조건검색 API를 이용해서 원하는 종목 100개까지 검색할 수 있는 기능을 제공하고
+        있습니다.:code:`<br/>`
+        종목조건검색 API는 HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API로,:code:`<br/>`
+        자세한 사용 방법은 공지사항 - [조건검색 필독] 조건검색 API 이용안내 참고 부탁드립니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_bulk_trans_num_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_short_sale(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 공매도 상위종목.
+
+        공매도 상위종목 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0482] 공매도 상위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_short_sale_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_credit_balance(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 신용잔고 상위.
+
+        국내주식 신용잔고 상위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0475] 신용잔고 상위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_credit_balance_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_dividend_rate(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 배당률 상위.
+
+        국내주식 배당률 상위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0188] 배당률 상위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_dividend_rate_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_over_time_fluctuation_rate(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 시간외등락률 순위.
+
+        국내주식 시간외등락율순위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0234] 시간외 등락률순위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_over_time_fluctuation_rate_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_ranking_over_time_volume(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 시간외거래량 순위.
+
+        국내주식 시간외거래량순위 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0235] 시간외 거래량순위 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_ranking_over_time_volume_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def check_domestic_holiday(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내 휴장일 확인.
+
+        국내휴장일조회 API입니다.
+
+        영업일, 거래일, 개장일, 결제일 여부를 조회할 수 있습니다.:code:`<br/>`
+        주문을 넣을 수 있는지 확인하고자 하실 경우 개장일여부(opnd_yn)을 사용하시면 됩니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_check_domestic_holiday_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def check_vi_status(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 변동성완화장치(VI) 현황.
+
+        HTS(eFriend Plus) [0139] 변동성 완화장치(VI) 현황 데이터를 확인할 수 있는 API입니다.
+
+        최근 30건까지 확인 가능합니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_check_vi_status_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_domestic_interest(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """금리종합(국내채권/금리).
+
+        금리 종합(국내채권/금리) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0702] 금리 종합 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        ※ 11:30 이후에 신규데이터가 수신되는 점 참고하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_interest_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_news_title(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """종합 시황/공시(제목만).
+
+        종합 시황/공시(제목) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0601] 종합 시황/공시 화면의 "우측 상단 리스트" 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을
+        이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_news_title_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def find_search_product_info(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """상품기본조회.
+
+        국내주식뿐 아니라 선물, 채권, 해외주식의 기본 정보를 조회하는 API 입니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_find_search_product_info_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def find_search_stock_info(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 기본조회.
+
+        주식기본조회 API입니다.
+
+        국내주식 종목의 종목상세정보를 확인할 수 있습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_find_search_stock_info_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_financial_credit_by_company(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 당사 신용가능종목.
+
+        국내주식 당사 신용가능종목 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0477] 당사 신용가능 종목 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 100건 확인 가능하며, 다음 조회가 불가합니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_financial_credit_by_company_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_domestic_stock_invest_opinion(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 종목투자의견.
+
+        국내주식 종목투자의견 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0605] 종목투자의견 화면 의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        한 번의 호출에 100건까지 조회가 가능하기에, 일자 파라미터(FID_INPUT_DATE_1, FID_INPUT_DATE_2)를 조절하여 다음 데이터 조회하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_invest_opinion_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
+    async def get_domestic_stock_securities_opinion(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 증권사별 투자의견.
+
+        국내주식 증권사별 투자의견 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0608] 증권사별 투자의견 화면 의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        한 번의 호출에 20건까지 조회가 가능하기에, 일자 파라미터(FID_INPUT_DATE_1, FID_INPUT_DATE_2)를 조절하여 다음 데이터 조회하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_securities_opinion_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
