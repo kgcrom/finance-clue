@@ -26,7 +26,7 @@ def mock_openkis_client_url() -> str:
 @pytest.fixture(scope="module")
 def mock_openkis_client(mock_openkis_client_url: str) -> OpenKisClient:
     """Returns a mocked OpenKisClient"""
-    return OpenKisClient("", "", endpoint=mock_openkis_client_url)
+    return OpenKisClient("key", "secret", endpoint=mock_openkis_client_url)
 
 
 @pytest.fixture(scope="module")

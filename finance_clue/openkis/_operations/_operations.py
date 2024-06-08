@@ -96,6 +96,37 @@ def build_gen_open_kis_revoke_access_token_request(
     return HttpRequest(method="POST", url=_url, headers=_headers, **kwargs)
 
 
+def build_gen_open_kis_get_hash_key_request(
+    *,
+    appkey: Optional[str] = None,
+    appsecret: Optional[str] = None,
+    json: Optional[JSON] = None,
+    **kwargs: Any,
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+
+    content_type: Optional[str] = kwargs.pop(
+        "content_type", _headers.pop("content-type", None)
+    )
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/uapi/hashkey"
+
+    # Construct headers
+    if content_type is not None:
+        _headers["content-type"] = _SERIALIZER.header(
+            "content_type", content_type, "str"
+        )
+    if appkey is not None:
+        _headers["appkey"] = _SERIALIZER.header("appkey", appkey, "str")
+    if appsecret is not None:
+        _headers["appsecret"] = _SERIALIZER.header("appsecret", appsecret, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, headers=_headers, json=json, **kwargs)
+
+
 def build_gen_open_kis_get_domestic_stock_price_request(
     **kwargs: Any,
 ) -> HttpRequest:  # pylint: disable=name-too-long
@@ -123,11 +154,38 @@ def build_gen_open_kis_get_domestic_stock_daily_price_request(  # pylint: disabl
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_domestic_stock_quote_and_exp_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_domestic_stock_quote_and_expected_conclusion_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
     _url = "/uapi/domestic-stock/v1/quotations/inquire-asking-price-exp-ccn"
+
+    return HttpRequest(method="GET", url=_url, **kwargs)
+
+
+def build_gen_open_kis_search_product_info_request(
+    **kwargs: Any,
+) -> HttpRequest:  # pylint: disable=name-too-long
+    # Construct URL
+    _url = "/uapi/domestic-stock/v1/quotations/search-info"
+
+    return HttpRequest(method="GET", url=_url, **kwargs)
+
+
+def build_gen_open_kis_search_stock_info_request(
+    **kwargs: Any,
+) -> HttpRequest:  # pylint: disable=name-too-long
+    # Construct URL
+    _url = "/uapi/domestic-stock/v1/quotations/search-stock-info"
+
+    return HttpRequest(method="GET", url=_url, **kwargs)
+
+
+def build_gen_open_kis_get_domestic_stock_securities_opinion_request(  # pylint: disable=name-too-long
+    **kwargs: Any,
+) -> HttpRequest:
+    # Construct URL
+    _url = "/uapi/domestic-stock/v1/quotations/invest-opbysec"
 
     return HttpRequest(method="GET", url=_url, **kwargs)
 
@@ -177,7 +235,7 @@ def build_gen_open_kis_get_domestic_stock_over_time_conclusion_request(  # pylin
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_domestic_stock_daily_over_time_price_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_domestic_stock_over_time_daily_price_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
@@ -204,7 +262,7 @@ def build_gen_open_kis_get_domestic_stock_over_time_quote_request(  # pylint: di
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_domestic_stock_minute_price_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_domestic_stock_time_minute_price_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
@@ -222,11 +280,45 @@ def build_gen_open_kis_get_domestic_stock_price2_request(
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_domestic_stock_closing_exp_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_domestic_stock_closing_expected_conclusion_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
     _url = "/uapi/domestic-stock/v1/quotations/exp-closing-price"
+
+    return HttpRequest(method="GET", url=_url, **kwargs)
+
+
+def build_gen_open_kis_get_vi_status_request(**kwargs: Any) -> HttpRequest:
+    # Construct URL
+    _url = "/uapi/domestic-stock/v1/quotations/inquire-vi-status"
+
+    return HttpRequest(method="GET", url=_url, **kwargs)
+
+
+def build_gen_open_kis_get_financial_credit_by_company_request(  # pylint: disable=name-too-long
+    **kwargs: Any,
+) -> HttpRequest:
+    # Construct URL
+    _url = "/uapi/domestic-stock/v1/quotations/credit-by-company"
+
+    return HttpRequest(method="GET", url=_url, **kwargs)
+
+
+def build_gen_open_kis_get_domestic_stock_invest_opinion_request(  # pylint: disable=name-too-long
+    **kwargs: Any,
+) -> HttpRequest:
+    # Construct URL
+    _url = "/uapi/domestic-stock/v1/quotations/invest-opinion"
+
+    return HttpRequest(method="GET", url=_url, **kwargs)
+
+
+def build_gen_open_kis_check_domestic_holiday_request(
+    **kwargs: Any,
+) -> HttpRequest:  # pylint: disable=name-too-long
+    # Construct URL
+    _url = "/uapi/domestic-stock/v1/quotations/chk-holiday"
 
     return HttpRequest(method="GET", url=_url, **kwargs)
 
@@ -240,7 +332,7 @@ def build_gen_open_kis_get_etf_n_etn_price_request(
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_etf_n_etn_nav_stock_trend_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_etf_n_etn_nav_comparison_trend_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
@@ -276,9 +368,9 @@ def build_gen_open_kis_get_etf_n_etn_component_stock_price_request(  # pylint: d
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_index_daily_chart_price_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_index_chart_price_request(
     **kwargs: Any,
-) -> HttpRequest:
+) -> HttpRequest:  # pylint: disable=name-too-long
     # Construct URL
     _url = "/uapi/domestic-stock/v1/quotations/inquire-daily-indexchartprice"
 
@@ -353,6 +445,24 @@ def build_gen_open_kis_get_index_trend_exp_request(
 ) -> HttpRequest:  # pylint: disable=name-too-long
     # Construct URL
     _url = "/uapi/domestic-stock/v1/quotations/exp-index-trend"
+
+    return HttpRequest(method="GET", url=_url, **kwargs)
+
+
+def build_gen_open_kis_get_domestic_interest_request(
+    **kwargs: Any,
+) -> HttpRequest:  # pylint: disable=name-too-long
+    # Construct URL
+    _url = "/uapi/domestic-stock/v1/quotations/comp-interest"
+
+    return HttpRequest(method="GET", url=_url, **kwargs)
+
+
+def build_gen_open_kis_get_news_title_request(
+    **kwargs: Any,
+) -> HttpRequest:  # pylint: disable=name-too-long
+    # Construct URL
+    _url = "/uapi/domestic-stock/v1/quotations/news-title"
 
     return HttpRequest(method="GET", url=_url, **kwargs)
 
@@ -438,7 +548,7 @@ def build_gen_open_kis_get_ksd_dividend_info_request(
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_ksd_buyback_info_request(
+def build_gen_open_kis_get_ksd_purchase_request_request(
     **kwargs: Any,
 ) -> HttpRequest:  # pylint: disable=name-too-long
     # Construct URL
@@ -546,7 +656,7 @@ def build_gen_open_kis_get_technical_foreign_institution_total_request(  # pylin
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_technical_personal_search_list_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_technical_personal_search_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
@@ -573,7 +683,7 @@ def build_gen_open_kis_get_technical_program_trade_by_stock_request(  # pylint: 
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_technical_investor_trend_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_technical_investor_trend_estimate_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
@@ -582,7 +692,7 @@ def build_gen_open_kis_get_technical_investor_trend_request(  # pylint: disable=
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_technical_daily_trade_volume_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_technical_trade_daily_volume_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
@@ -600,7 +710,7 @@ def build_gen_open_kis_get_technical_investor_trend_by_market_request(  # pylint
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_technical_daily_credit_balance_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_technical_credit_balance_daily_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
@@ -609,16 +719,16 @@ def build_gen_open_kis_get_technical_daily_credit_balance_request(  # pylint: di
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_technical_exp_trend_request(
+def build_gen_open_kis_get_technical_expected_conclusion_trend_request(  # pylint: disable=name-too-long
     **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
+) -> HttpRequest:
     # Construct URL
     _url = "/uapi/domestic-stock/v1/quotations/exp-price-trend"
 
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_technical_daily_short_sale_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_technical_short_sale_daily_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
@@ -627,7 +737,7 @@ def build_gen_open_kis_get_technical_daily_short_sale_request(  # pylint: disabl
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_technical_daily_program_trade_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_technical_program_trade_daily_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
@@ -645,7 +755,7 @@ def build_gen_open_kis_get_technical_over_time_exp_fluctuation_rate_request(  # 
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_technical_hourly_program_trade_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_technical_program_trade_today_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
@@ -654,7 +764,7 @@ def build_gen_open_kis_get_technical_hourly_program_trade_request(  # pylint: di
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_technical_estimate_foreign_trade_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_technical_foreign_trade_estimate_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
@@ -690,7 +800,7 @@ def build_gen_open_kis_get_technical_market_fund_request(
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_technical_daily_investor_trend_by_market_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_technical_investor_trend_by_market_daily_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
@@ -699,7 +809,7 @@ def build_gen_open_kis_get_technical_daily_investor_trend_by_market_request(  # 
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_technical_daily_program_trade_by_stock_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_technical_program_trade_by_stock_daily_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
@@ -708,7 +818,7 @@ def build_gen_open_kis_get_technical_daily_program_trade_by_stock_request(  # py
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_technical_today_program_trend_by_investor_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_technical_program_trend_by_investor_today_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
@@ -735,7 +845,7 @@ def build_gen_open_kis_get_technical_volume_profile_indicator_request(  # pylint
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_technical_daily_member_trend_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_technical_member_trend_daily_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
@@ -789,9 +899,9 @@ def build_gen_open_kis_get_ranking_financial_ratio_request(  # pylint: disable=n
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_ranking_after_balance_request(
+def build_gen_open_kis_get_ranking_after_hour_balance_request(  # pylint: disable=name-too-long
     **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
+) -> HttpRequest:
     # Construct URL
     _url = "/uapi/domestic-stock/v1/ranking/after-hour-balance"
 
@@ -852,7 +962,7 @@ def build_gen_open_kis_get_ranking_top_interest_stock_request(  # pylint: disabl
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_ranking_exp_trans_up_down_request(  # pylint: disable=name-too-long
+def build_gen_open_kis_get_ranking_expected_conclusion_up_down_request(  # pylint: disable=name-too-long
     **kwargs: Any,
 ) -> HttpRequest:
     # Construct URL
@@ -861,9 +971,9 @@ def build_gen_open_kis_get_ranking_exp_trans_up_down_request(  # pylint: disable
     return HttpRequest(method="GET", url=_url, **kwargs)
 
 
-def build_gen_open_kis_get_ranking_trade_request(
+def build_gen_open_kis_get_ranking_trade_by_company_request(  # pylint: disable=name-too-long
     **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
+) -> HttpRequest:
     # Construct URL
     _url = "/uapi/domestic-stock/v1/ranking/traded-by-company"
 
@@ -929,87 +1039,6 @@ def build_gen_open_kis_get_ranking_over_time_volume_request(  # pylint: disable=
 ) -> HttpRequest:
     # Construct URL
     _url = "/uapi/domestic-stock/v1/ranking/overtime-volume"
-
-    return HttpRequest(method="GET", url=_url, **kwargs)
-
-
-def build_gen_open_kis_check_domestic_holiday_request(
-    **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
-    # Construct URL
-    _url = "/uapi/domestic-stock/v1/quotations/chk-holiday"
-
-    return HttpRequest(method="GET", url=_url, **kwargs)
-
-
-def build_gen_open_kis_check_vi_status_request(
-    **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
-    # Construct URL
-    _url = "/uapi/domestic-stock/v1/quotations/inquire-vi-status"
-
-    return HttpRequest(method="GET", url=_url, **kwargs)
-
-
-def build_gen_open_kis_get_domestic_interest_request(
-    **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
-    # Construct URL
-    _url = "/uapi/domestic-stock/v1/quotations/comp-interest"
-
-    return HttpRequest(method="GET", url=_url, **kwargs)
-
-
-def build_gen_open_kis_get_news_title_request(
-    **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
-    # Construct URL
-    _url = "/uapi/domestic-stock/v1/quotations/news-title"
-
-    return HttpRequest(method="GET", url=_url, **kwargs)
-
-
-def build_gen_open_kis_find_search_product_info_request(
-    **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
-    # Construct URL
-    _url = "/uapi/domestic-stock/v1/quotations/search-info"
-
-    return HttpRequest(method="GET", url=_url, **kwargs)
-
-
-def build_gen_open_kis_find_search_stock_info_request(
-    **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
-    # Construct URL
-    _url = "/uapi/domestic-stock/v1/quotations/search-stock-info"
-
-    return HttpRequest(method="GET", url=_url, **kwargs)
-
-
-def build_gen_open_kis_get_financial_credit_by_company_request(  # pylint: disable=name-too-long
-    **kwargs: Any,
-) -> HttpRequest:
-    # Construct URL
-    _url = "/uapi/domestic-stock/v1/quotations/credit-by-company"
-
-    return HttpRequest(method="GET", url=_url, **kwargs)
-
-
-def build_gen_open_kis_get_domestic_stock_invest_opinion_request(  # pylint: disable=name-too-long
-    **kwargs: Any,
-) -> HttpRequest:
-    # Construct URL
-    _url = "/uapi/domestic-stock/v1/quotations/invest-opinion"
-
-    return HttpRequest(method="GET", url=_url, **kwargs)
-
-
-def build_gen_open_kis_get_domestic_stock_securities_opinion_request(  # pylint: disable=name-too-long
-    **kwargs: Any,
-) -> HttpRequest:
-    # Construct URL
-    _url = "/uapi/domestic-stock/v1/quotations/invest-opbysec"
 
     return HttpRequest(method="GET", url=_url, **kwargs)
 
@@ -1446,6 +1475,102 @@ class GenOpenKisClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
+    def get_hash_key(
+        self,
+        body: Optional[JSON] = None,
+        *,
+        appkey: Optional[str] = None,
+        appsecret: Optional[str] = None,
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """Hashkey 생성.
+
+        해쉬키(Hashkey)는 보안을 위한 요소로 사용자가 보낸 요청 값을 중간에 탈취하여 변조하지 못하도록 하는데 사용됩니다.:code:`<br/>`
+        해쉬키를 사용하면 POST로 보내는 요청(주로 주문/정정/취소 API 해당)의 body 값을 사전에 암호화시킬 수 있습니다.:code:`<br/>`
+        해쉬키는 비필수값으로 사용하지 않아도 POST API 호출은 가능합니다.
+
+        :param body: Default value is None.
+        :type body: JSON
+        :keyword appkey: Default value is None.
+        :paramtype appkey: str
+        :keyword appsecret: Default value is None.
+        :paramtype appsecret: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "HASH": "str",  # Optional. [POST API "ub300"uc0c1] Client"uac00
+                      "uc694"uccad"ud558"ub294 Request Body"ub97c hashkey api"ub85c "uc0dd"uc131"ud55c
+                      Hash"uac12   * API"ubb38"uc11c > hashkey "ucc38"uc870.
+                    "JsonBody": {}  # Optional. "ud574"uc26c"ud0a4 "uc0dd"uc131 "uc694"uccad
+                      JsonBody "ub370"uc774"ud130.
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = kwargs.pop("params", {}) or {}
+
+        content_type: str = kwargs.pop(
+            "content_type", _headers.pop("content-type", "application/json")
+        )
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        if body is not None:
+            _json = body
+        else:
+            _json = None
+
+        _request = build_gen_open_kis_get_hash_key_request(
+            appkey=appkey,
+            appsecret=appsecret,
+            content_type=content_type,
+            json=_json,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
     def get_domestic_stock_price(
         self, **kwargs: Any
     ) -> None:  # pylint: disable=inconsistent-return-statements
@@ -1602,9 +1727,9 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_domestic_stock_quote_and_exp(
+    def get_domestic_stock_quote_and_expected_conclusion(  # pylint: disable=inconsistent-return-statements,name-too-long
         self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+    ) -> None:
         """국내주식 현재가 호가/예상체결 조회.
 
         주식현재가 호가 예상체결 API입니다.
@@ -1628,7 +1753,168 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_domestic_stock_quote_and_exp_request(
+        _request = (
+            build_gen_open_kis_get_domestic_stock_quote_and_expected_conclusion_request(
+                headers=_headers,
+                params=_params,
+            )
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace
+    def search_product_info(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """상품기본조회.
+
+        국내주식뿐 아니라 선물, 채권, 해외주식의 기본 정보를 조회하는 API 입니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_search_product_info_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace
+    def search_stock_info(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 기본조회.
+
+        주식기본조회 API입니다.
+
+        국내주식 종목의 종목상세정보를 확인할 수 있습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_search_stock_info_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace
+    def get_domestic_stock_securities_opinion(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 증권사별 투자의견.
+
+        국내주식 증권사별 투자의견 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0608] 증권사별 투자의견 화면 의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        한 번의 호출에 20건까지 조회가 가능하기에, 일자 파라미터(FID_INPUT_DATE_1, FID_INPUT_DATE_2)를 조절하여 다음 데이터 조회하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_securities_opinion_request(
             headers=_headers,
             params=_params,
         )
@@ -1917,7 +2203,7 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_domestic_stock_daily_over_time_price(  # pylint: disable=inconsistent-return-statements
+    def get_domestic_stock_over_time_daily_price(  # pylint: disable=inconsistent-return-statements
         self, **kwargs: Any
     ) -> None:
         """국내주식 현재가 시간외 일자별 주가 조회.
@@ -1941,7 +2227,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_domestic_stock_daily_over_time_price_request(
+        _request = build_gen_open_kis_get_domestic_stock_over_time_daily_price_request(
             headers=_headers,
             params=_params,
         )
@@ -2074,9 +2360,9 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_domestic_stock_minute_price(
+    def get_domestic_stock_time_minute_price(  # pylint: disable=inconsistent-return-statements
         self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+    ) -> None:
         """국내주식 당일 분봉 조회.
 
         주식당일분봉조회 API입니다.:code:`<br/>`
@@ -2099,7 +2385,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_domestic_stock_minute_price_request(
+        _request = build_gen_open_kis_get_domestic_stock_time_minute_price_request(
             headers=_headers,
             params=_params,
         )
@@ -2177,9 +2463,9 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_domestic_stock_closing_exp(
+    def get_domestic_stock_closing_expected_conclusion(  # pylint: disable=inconsistent-return-statements,name-too-long
         self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+    ) -> None:
         """국내주식 장마감 예상체결가 조회.
 
         국내주식 장마감 예상체결가 API입니다.
@@ -2203,7 +2489,226 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_domestic_stock_closing_exp_request(
+        _request = (
+            build_gen_open_kis_get_domestic_stock_closing_expected_conclusion_request(
+                headers=_headers,
+                params=_params,
+            )
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace
+    def get_vi_status(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 변동성완화장치(VI) 현황.
+
+        HTS(eFriend Plus) [0139] 변동성 완화장치(VI) 현황 데이터를 확인할 수 있는 API입니다.
+
+        최근 30건까지 확인 가능합니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_vi_status_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace
+    def get_financial_credit_by_company(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내주식 당사 신용가능종목.
+
+        국내주식 당사 신용가능종목 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0477] 당사 신용가능 종목 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        최대 100건 확인 가능하며, 다음 조회가 불가합니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_financial_credit_by_company_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace
+    def get_domestic_stock_invest_opinion(  # pylint: disable=inconsistent-return-statements
+        self, **kwargs: Any
+    ) -> None:
+        """국내주식 종목투자의견.
+
+        국내주식 종목투자의견 API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0605] 종목투자의견 화면 의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
+
+        한 번의 호출에 100건까지 조회가 가능하기에, 일자 파라미터(FID_INPUT_DATE_1, FID_INPUT_DATE_2)를 조절하여 다음 데이터 조회하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_stock_invest_opinion_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace
+    def check_domestic_holiday(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """국내 휴장일 확인.
+
+        국내휴장일조회 API입니다.
+
+        영업일, 거래일, 개장일, 결제일 여부를 조회할 수 있습니다.:code:`<br/>`
+        주문을 넣을 수 있는지 확인하고자 하실 경우 개장일여부(opnd_yn)을 사용하시면 됩니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_check_domestic_holiday_request(
             headers=_headers,
             params=_params,
         )
@@ -2283,9 +2788,9 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_etf_n_etn_nav_stock_trend(
+    def get_etf_n_etn_nav_comparison_trend(  # pylint: disable=inconsistent-return-statements
         self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+    ) -> None:
         """ETF/ETN NAV 비교 추이(종목) 조회.
 
         NAV 비교추이(종목) API입니다.
@@ -2310,7 +2815,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_etf_n_etn_nav_stock_trend_request(
+        _request = build_gen_open_kis_get_etf_n_etn_nav_comparison_trend_request(
             headers=_headers,
             params=_params,
         )
@@ -2501,7 +3006,7 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_index_daily_chart_price(
+    def get_index_chart_price(
         self, **kwargs: Any
     ) -> None:  # pylint: disable=inconsistent-return-statements
         """국내주식 업종기간별 시세(일/주/월/년) 조회.
@@ -2527,7 +3032,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_index_daily_chart_price_request(
+        _request = build_gen_open_kis_get_index_chart_price_request(
             headers=_headers,
             params=_params,
         )
@@ -2954,6 +3459,115 @@ class GenOpenKisClientOperationsMixin(
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_index_trend_exp_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace
+    def get_domestic_interest(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """금리종합(국내채권/금리).
+
+        금리 종합(국내채권/금리) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0702] 금리 종합 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
+        쉽습니다.:code:`<br/>`
+        ※ 11:30 이후에 신규데이터가 수신되는 점 참고하시기 바랍니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_domestic_interest_request(
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace
+    def get_news_title(
+        self, **kwargs: Any
+    ) -> None:  # pylint: disable=inconsistent-return-statements
+        """종합 시황/공시(제목만).
+
+        종합 시황/공시(제목) API입니다.
+
+        한국투자 HTS(eFriend Plus) > [0601] 종합 시황/공시 화면의 "우측 상단 리스트" 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을
+        이해하기 쉽습니다.
+
+        :return: None
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_kis_get_news_title_request(
             headers=_headers,
             params=_params,
         )
@@ -3470,7 +4084,7 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_ksd_buyback_info(
+    def get_ksd_purchase_request(
         self, **kwargs: Any
     ) -> None:  # pylint: disable=inconsistent-return-statements
         """예탁원정보 (주식매수청구일정).
@@ -3498,7 +4112,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_ksd_buyback_info_request(
+        _request = build_gen_open_kis_get_ksd_purchase_request_request(
             headers=_headers,
             params=_params,
         )
@@ -4129,9 +4743,9 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_technical_personal_search_list(  # pylint: disable=inconsistent-return-statements
+    def get_technical_personal_search(
         self, **kwargs: Any
-    ) -> None:
+    ) -> None:  # pylint: disable=inconsistent-return-statements
         """종목조건검색 목록조회.
 
         HTS(efriend Plus) [0110] 조건검색에서 등록 및 서버저장한 나의 조건 목록을 확인할 수 있는 API입니다.:code:`<br/>`
@@ -4163,7 +4777,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_technical_personal_search_list_request(
+        _request = build_gen_open_kis_get_technical_personal_search_request(
             headers=_headers,
             params=_params,
         )
@@ -4308,9 +4922,9 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_technical_investor_trend(
+    def get_technical_investor_trend_estimate(  # pylint: disable=inconsistent-return-statements
         self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+    ) -> None:
         """종목별 외인기관 추정가집계.
 
         국내주식 종목별 외국인, 기관 추정가집계 API입니다.
@@ -4338,7 +4952,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_technical_investor_trend_request(
+        _request = build_gen_open_kis_get_technical_investor_trend_estimate_request(
             headers=_headers,
             params=_params,
         )
@@ -4365,7 +4979,7 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_technical_daily_trade_volume(
+    def get_technical_trade_daily_volume(
         self, **kwargs: Any
     ) -> None:  # pylint: disable=inconsistent-return-statements
         """종목별일별매수매도체결량.
@@ -4390,7 +5004,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_technical_daily_trade_volume_request(
+        _request = build_gen_open_kis_get_technical_trade_daily_volume_request(
             headers=_headers,
             params=_params,
         )
@@ -4470,7 +5084,7 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_technical_daily_credit_balance(  # pylint: disable=inconsistent-return-statements
+    def get_technical_credit_balance_daily(  # pylint: disable=inconsistent-return-statements
         self, **kwargs: Any
     ) -> None:
         """국내주식 신용잔고 일별추이.
@@ -4499,7 +5113,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_technical_daily_credit_balance_request(
+        _request = build_gen_open_kis_get_technical_credit_balance_daily_request(
             headers=_headers,
             params=_params,
         )
@@ -4526,9 +5140,9 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_technical_exp_trend(
+    def get_technical_expected_conclusion_trend(  # pylint: disable=inconsistent-return-statements
         self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+    ) -> None:
         """국내주식 예상체결가 추이.
 
         국내주식 예상체결가 추이 API입니다.:code:`<br/>`
@@ -4553,7 +5167,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_technical_exp_trend_request(
+        _request = build_gen_open_kis_get_technical_expected_conclusion_trend_request(
             headers=_headers,
             params=_params,
         )
@@ -4580,7 +5194,7 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_technical_daily_short_sale(
+    def get_technical_short_sale_daily(
         self, **kwargs: Any
     ) -> None:  # pylint: disable=inconsistent-return-statements
         """국내주식 공매도 일별추이.
@@ -4604,7 +5218,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_technical_daily_short_sale_request(
+        _request = build_gen_open_kis_get_technical_short_sale_daily_request(
             headers=_headers,
             params=_params,
         )
@@ -4631,7 +5245,7 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_technical_daily_program_trade(  # pylint: disable=inconsistent-return-statements
+    def get_technical_program_trade_daily(  # pylint: disable=inconsistent-return-statements
         self, **kwargs: Any
     ) -> None:
         """국내주식 프로그램매매 종합현황(일별).
@@ -4655,7 +5269,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_technical_daily_program_trade_request(
+        _request = build_gen_open_kis_get_technical_program_trade_daily_request(
             headers=_headers,
             params=_params,
         )
@@ -4738,7 +5352,7 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_technical_hourly_program_trade(  # pylint: disable=inconsistent-return-statements
+    def get_technical_program_trade_today(  # pylint: disable=inconsistent-return-statements
         self, **kwargs: Any
     ) -> None:
         """프로그램매매 종합현황(시간).
@@ -4767,7 +5381,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_technical_hourly_program_trade_request(
+        _request = build_gen_open_kis_get_technical_program_trade_today_request(
             headers=_headers,
             params=_params,
         )
@@ -4794,7 +5408,7 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_technical_estimate_foreign_trade(  # pylint: disable=inconsistent-return-statements
+    def get_technical_foreign_trade_estimate(  # pylint: disable=inconsistent-return-statements
         self, **kwargs: Any
     ) -> None:
         """국내주식 외국계 매매종목 가집계.
@@ -4820,7 +5434,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_technical_estimate_foreign_trade_request(
+        _request = build_gen_open_kis_get_technical_foreign_trade_estimate_request(
             headers=_headers,
             params=_params,
         )
@@ -5012,7 +5626,7 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_technical_daily_investor_trend_by_market(  # pylint: disable=inconsistent-return-statements,name-too-long
+    def get_technical_investor_trend_by_market_daily(  # pylint: disable=inconsistent-return-statements,name-too-long
         self, **kwargs: Any
     ) -> None:
         """국내주식 시장별 투자자매매동향(일별).
@@ -5039,7 +5653,7 @@ class GenOpenKisClientOperationsMixin(
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         _request = (
-            build_gen_open_kis_get_technical_daily_investor_trend_by_market_request(
+            build_gen_open_kis_get_technical_investor_trend_by_market_daily_request(
                 headers=_headers,
                 params=_params,
             )
@@ -5067,7 +5681,7 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_technical_daily_program_trade_by_stock(  # pylint: disable=inconsistent-return-statements,name-too-long
+    def get_technical_program_trade_by_stock_daily(  # pylint: disable=inconsistent-return-statements,name-too-long
         self, **kwargs: Any
     ) -> None:
         """국내주식 종목별 프로그램매매추이(일별).
@@ -5095,7 +5709,7 @@ class GenOpenKisClientOperationsMixin(
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         _request = (
-            build_gen_open_kis_get_technical_daily_program_trade_by_stock_request(
+            build_gen_open_kis_get_technical_program_trade_by_stock_daily_request(
                 headers=_headers,
                 params=_params,
             )
@@ -5123,7 +5737,7 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_technical_today_program_trend_by_investor(  # pylint: disable=inconsistent-return-statements,name-too-long
+    def get_technical_program_trend_by_investor_today(  # pylint: disable=inconsistent-return-statements,name-too-long
         self, **kwargs: Any
     ) -> None:
         """국내주식 프로그램매매 투자자매매동향.
@@ -5151,7 +5765,7 @@ class GenOpenKisClientOperationsMixin(
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         _request = (
-            build_gen_open_kis_get_technical_today_program_trend_by_investor_request(
+            build_gen_open_kis_get_technical_program_trend_by_investor_today_request(
                 headers=_headers,
                 params=_params,
             )
@@ -5286,7 +5900,7 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_technical_daily_member_trend(
+    def get_technical_member_trend_daily(
         self, **kwargs: Any
     ) -> None:  # pylint: disable=inconsistent-return-statements
         """국내주식 현재가 회원사 종목매매동향.
@@ -5312,7 +5926,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_technical_daily_member_trend_request(
+        _request = build_gen_open_kis_get_technical_member_trend_daily_request(
             headers=_headers,
             params=_params,
         )
@@ -5640,7 +6254,7 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_ranking_after_balance(
+    def get_ranking_after_hour_balance(
         self, **kwargs: Any
     ) -> None:  # pylint: disable=inconsistent-return-statements
         """국내주식 시간외잔량 순위.
@@ -5673,7 +6287,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_ranking_after_balance_request(
+        _request = build_gen_open_kis_get_ranking_after_hour_balance_request(
             headers=_headers,
             params=_params,
         )
@@ -6060,9 +6674,9 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_ranking_exp_trans_up_down(
+    def get_ranking_expected_conclusion_up_down(  # pylint: disable=inconsistent-return-statements
         self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+    ) -> None:
         """국내주식 예상체결 상승/하락 상위.
 
         국내주식 예상체결 상승/하락상위 API입니다.
@@ -6093,7 +6707,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_ranking_exp_trans_up_down_request(
+        _request = build_gen_open_kis_get_ranking_expected_conclusion_up_down_request(
             headers=_headers,
             params=_params,
         )
@@ -6120,7 +6734,7 @@ class GenOpenKisClientOperationsMixin(
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def get_ranking_trade(
+    def get_ranking_trade_by_company(
         self, **kwargs: Any
     ) -> None:  # pylint: disable=inconsistent-return-statements
         """국내주식 당사매매순위 상위.
@@ -6153,7 +6767,7 @@ class GenOpenKisClientOperationsMixin(
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_kis_get_ranking_trade_request(
+        _request = build_gen_open_kis_get_ranking_trade_by_company_request(
             headers=_headers,
             params=_params,
         )
@@ -6539,491 +7153,6 @@ class GenOpenKisClientOperationsMixin(
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_ranking_over_time_volume_request(
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = (
-            self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                response.read()  # Load the body in memory and close the socket
-            map_error(
-                status_code=response.status_code, response=response, error_map=error_map
-            )
-            raise HttpResponseError(response=response)
-
-        if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
-
-    @distributed_trace
-    def check_domestic_holiday(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
-        """국내 휴장일 확인.
-
-        국내휴장일조회 API입니다.
-
-        영업일, 거래일, 개장일, 결제일 여부를 조회할 수 있습니다.:code:`<br/>`
-        주문을 넣을 수 있는지 확인하고자 하실 경우 개장일여부(opnd_yn)을 사용하시면 됩니다.
-
-        :return: None
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping[int, Type[HttpResponseError]] = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        _request = build_gen_open_kis_check_domestic_holiday_request(
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = (
-            self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                response.read()  # Load the body in memory and close the socket
-            map_error(
-                status_code=response.status_code, response=response, error_map=error_map
-            )
-            raise HttpResponseError(response=response)
-
-        if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
-
-    @distributed_trace
-    def check_vi_status(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
-        """국내주식 변동성완화장치(VI) 현황.
-
-        HTS(eFriend Plus) [0139] 변동성 완화장치(VI) 현황 데이터를 확인할 수 있는 API입니다.
-
-        최근 30건까지 확인 가능합니다.
-
-        :return: None
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping[int, Type[HttpResponseError]] = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        _request = build_gen_open_kis_check_vi_status_request(
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = (
-            self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                response.read()  # Load the body in memory and close the socket
-            map_error(
-                status_code=response.status_code, response=response, error_map=error_map
-            )
-            raise HttpResponseError(response=response)
-
-        if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
-
-    @distributed_trace
-    def get_domestic_interest(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
-        """금리종합(국내채권/금리).
-
-        금리 종합(국내채권/금리) API입니다.
-
-        한국투자 HTS(eFriend Plus) > [0702] 금리 종합 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
-        쉽습니다.:code:`<br/>`
-        ※ 11:30 이후에 신규데이터가 수신되는 점 참고하시기 바랍니다.
-
-        :return: None
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping[int, Type[HttpResponseError]] = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        _request = build_gen_open_kis_get_domestic_interest_request(
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = (
-            self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                response.read()  # Load the body in memory and close the socket
-            map_error(
-                status_code=response.status_code, response=response, error_map=error_map
-            )
-            raise HttpResponseError(response=response)
-
-        if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
-
-    @distributed_trace
-    def get_news_title(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
-        """종합 시황/공시(제목만).
-
-        종합 시황/공시(제목) API입니다.
-
-        한국투자 HTS(eFriend Plus) > [0601] 종합 시황/공시 화면의 "우측 상단 리스트" 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을
-        이해하기 쉽습니다.
-
-        :return: None
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping[int, Type[HttpResponseError]] = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        _request = build_gen_open_kis_get_news_title_request(
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = (
-            self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                response.read()  # Load the body in memory and close the socket
-            map_error(
-                status_code=response.status_code, response=response, error_map=error_map
-            )
-            raise HttpResponseError(response=response)
-
-        if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
-
-    @distributed_trace
-    def find_search_product_info(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
-        """상품기본조회.
-
-        국내주식뿐 아니라 선물, 채권, 해외주식의 기본 정보를 조회하는 API 입니다.
-
-        :return: None
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping[int, Type[HttpResponseError]] = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        _request = build_gen_open_kis_find_search_product_info_request(
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = (
-            self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                response.read()  # Load the body in memory and close the socket
-            map_error(
-                status_code=response.status_code, response=response, error_map=error_map
-            )
-            raise HttpResponseError(response=response)
-
-        if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
-
-    @distributed_trace
-    def find_search_stock_info(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
-        """국내주식 기본조회.
-
-        주식기본조회 API입니다.
-
-        국내주식 종목의 종목상세정보를 확인할 수 있습니다.
-
-        :return: None
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping[int, Type[HttpResponseError]] = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        _request = build_gen_open_kis_find_search_stock_info_request(
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = (
-            self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                response.read()  # Load the body in memory and close the socket
-            map_error(
-                status_code=response.status_code, response=response, error_map=error_map
-            )
-            raise HttpResponseError(response=response)
-
-        if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
-
-    @distributed_trace
-    def get_financial_credit_by_company(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
-        """국내주식 당사 신용가능종목.
-
-        국내주식 당사 신용가능종목 API입니다.
-
-        한국투자 HTS(eFriend Plus) > [0477] 당사 신용가능 종목 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
-        쉽습니다.:code:`<br/>`
-        최대 100건 확인 가능하며, 다음 조회가 불가합니다.
-
-        :return: None
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping[int, Type[HttpResponseError]] = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        _request = build_gen_open_kis_get_financial_credit_by_company_request(
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = (
-            self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                response.read()  # Load the body in memory and close the socket
-            map_error(
-                status_code=response.status_code, response=response, error_map=error_map
-            )
-            raise HttpResponseError(response=response)
-
-        if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
-
-    @distributed_trace
-    def get_domestic_stock_invest_opinion(  # pylint: disable=inconsistent-return-statements
-        self, **kwargs: Any
-    ) -> None:
-        """국내주식 종목투자의견.
-
-        국내주식 종목투자의견 API입니다.
-
-        한국투자 HTS(eFriend Plus) > [0605] 종목투자의견 화면 의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
-
-        한 번의 호출에 100건까지 조회가 가능하기에, 일자 파라미터(FID_INPUT_DATE_1, FID_INPUT_DATE_2)를 조절하여 다음 데이터 조회하시기 바랍니다.
-
-        :return: None
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping[int, Type[HttpResponseError]] = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        _request = build_gen_open_kis_get_domestic_stock_invest_opinion_request(
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = (
-            self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                response.read()  # Load the body in memory and close the socket
-            map_error(
-                status_code=response.status_code, response=response, error_map=error_map
-            )
-            raise HttpResponseError(response=response)
-
-        if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
-
-    @distributed_trace
-    def get_domestic_stock_securities_opinion(  # pylint: disable=inconsistent-return-statements
-        self, **kwargs: Any
-    ) -> None:
-        """국내주식 증권사별 투자의견.
-
-        국내주식 증권사별 투자의견 API입니다.
-
-        한국투자 HTS(eFriend Plus) > [0608] 증권사별 투자의견 화면 의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
-
-        한 번의 호출에 20건까지 조회가 가능하기에, 일자 파라미터(FID_INPUT_DATE_1, FID_INPUT_DATE_2)를 조절하여 다음 데이터 조회하시기 바랍니다.
-
-        :return: None
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping[int, Type[HttpResponseError]] = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        _request = build_gen_open_kis_get_domestic_stock_securities_opinion_request(
             headers=_headers,
             params=_params,
         )

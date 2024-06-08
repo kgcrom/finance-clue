@@ -23,7 +23,7 @@ def integration_openkis_client() -> OpenKisClient:
 
     app_key = environ.get("OPENKIS_APP_KEY", None)
     app_secret = environ.get("OPENKIS_APP_SECRET", None)
-    client = OpenKisClient(app_key, app_secret, True)
+    client = OpenKisClient(app_key, app_secret)
     client.init()
     return client
 

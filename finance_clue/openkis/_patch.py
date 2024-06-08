@@ -97,6 +97,9 @@ class CustomAuthenticationPolicy(SansIOHTTPPolicy):
         )
         request.http_request.headers["appkey"] = f"{credential_info.app_key}"
         request.http_request.headers["appsecret"] = f"{credential_info.app_secret}"
+        # if url lastIndexOf revokeP, remove finance_clue.json
+        if "/oauth2/revokeP" in request.http_request.url:
+            os.remove(access_token_file)
         return super().on_request(request)
 
 
@@ -121,36 +124,42 @@ class OpenKisClient(GenOpenKisClient):
         if os.path.exists(access_token_file):
             with open(access_token_file, "r") as f:
                 token_obj = json.load(f)
-                access_token = token_obj["open_kis"]
+                open_kis = token_obj["open_kis"]
 
-                # TODO 시간 지났으면 갱신하기
                 self._credential.update_token(
-                    access_token=access_token["access_token"],
+                    access_token=open_kis["access_token"],
                     access_token_token_expired=datetime.fromisoformat(
-                        access_token["access_token_token_expired"]
+                        open_kis["access_token_token_expired"]
                     ),
-                    token_type=access_token["token_type"],
-                    expires_in=access_token["expires_in"],
+                    token_type=open_kis["token_type"],
+                    expires_in=open_kis["expires_in"],
                 )
 
-        else:
-            resp = self.get_access_token(
-                {
-                    "appkey": self._credential.app_key,
-                    "appsecret": self._credential.app_secret,
-                    "grant_type": self._credential.grant_type,
-                }
-            )
+                # return if token is still valid(5 minutes before expiration) to avoid unnecessary token request
+                # if token is expired, get new token
+                if (
+                    self._credential.access_token_token_expired
+                    - datetime.now()
+                ).total_seconds() > 300:
+                    return
 
-            _write_access_token(resp)
-            self._credential.update_token(
-                access_token=resp["access_token"],
-                access_token_token_expired=datetime.fromisoformat(
-                    resp["access_token_token_expired"]
-                ),
-                token_type=resp["token_type"],
-                expires_in=resp["expires_in"],
-            )
+        resp = self.get_access_token(
+            {
+                "appkey": self._credential.app_key,
+                "appsecret": self._credential.app_secret,
+                "grant_type": self._credential.grant_type,
+            }
+        )
+
+        _write_access_token(resp)
+        self._credential.update_token(
+            access_token=resp["access_token"],
+            access_token_token_expired=datetime.fromisoformat(
+                resp["access_token_token_expired"]
+            ),
+            token_type=resp["token_type"],
+            expires_in=resp["expires_in"],
+        )
 
 
 def patch_sdk():
