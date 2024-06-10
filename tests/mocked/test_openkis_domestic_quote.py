@@ -7,7 +7,6 @@ from finance_clue.openkis import OpenKisClient
 def test_domestic_quotation_inquiry_price(
     mock_openkis_client: OpenKisClient, mock_openkis_client_url: str
 ):
-    # TODO: check valid schema for response (https://github.com/keleshev/schema)
     # TODO: expected dict should be in a separate file(fixture)
     expected = {
         "output": {

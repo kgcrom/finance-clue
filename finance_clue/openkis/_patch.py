@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from datetime import datetime
 import json
 import os
-from typing import Awaitable, List, Union
+from typing import Any, Awaitable, Dict, List, MutableMapping, Union
 
 from azure.core.credentials import AccessToken
 from azure.core.pipeline import PipelineRequest
@@ -162,6 +162,18 @@ class OpenKisClient(GenOpenKisClient):
         )
 
 
+def attach_headers():
+    """Attach headers to the body of a response."""
+
+    def decorator(
+        _, body: MutableMapping[str, Any], headers: Dict[str, Any]
+    ) -> MutableMapping[str, Any]:
+        body["headers"] = headers
+        return body
+
+    return decorator
+
+
 def patch_sdk():
     """Do not remove from this file.
 
@@ -172,5 +184,6 @@ def patch_sdk():
 
 
 __all__: List[str] = [
-    "OpenKisClient"
+    "OpenKisClient",
+    "attach_headers",
 ]  # Add all objects you want publicly available to users at this package level

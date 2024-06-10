@@ -1,13 +1,10 @@
-import pytest
-import responses
-
 from finance_clue.openkis import OpenKisClient
 
 
 def test_domestic_stock_price(integration_openkis_client: OpenKisClient):
     """국내주식 현재가 시세 조회 integrated test"""
     resp = integration_openkis_client.get_domestic_stock_price(fid_input_iscd="005930")
-    # TODO schema validation  https://github.com/keleshev/schema
+    # TODO: check valid schema for response (https://github.com/keleshev/schema)
     example = {
         "output": {
             "iscd_stat_cls_code": "55",
