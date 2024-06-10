@@ -1,11 +1,12 @@
 """Integration tests OpenKIS 권한"""
 
 from os import environ
-
-from finance_clue.openkis import OpenKisClient
 import time
 
+from finance_clue.openkis import OpenKisClient
+
 # token 재생성은 1분에 1회 호출만 가능하다.
+
 
 # OpenKis 인스턴스 만들 때 내부적으로 토큰 생성
 # TODO integration_openkis_client 호출 했을 때 어떻게 관리할지 고민
@@ -25,14 +26,17 @@ def test_get_access_and_revoke_token(integration_openkis_client: OpenKisClient):
 
     time.sleep(3)
     access_token = resp["access_token"]
-    revoke_resp = integration_openkis_client.revoke_access_token({
-        "appkey": app_key,
-        "appsecret": app_secret,
-        "token": access_token,
-    })
+    revoke_resp = integration_openkis_client.revoke_access_token(
+        {
+            "appkey": app_key,
+            "appsecret": app_secret,
+            "token": access_token,
+        }
+    )
 
     assert revoke_resp["code"] == 200
     assert revoke_resp["message"] == "접근토큰 폐기에 성공하였습니다."
+
 
 def test_get_hash_key(integration_openkis_client: OpenKisClient):
     data = {
@@ -54,4 +58,3 @@ def test_get_hash_key(integration_openkis_client: OpenKisClient):
 
     assert resp["HASH"] is not None
     assert resp["BODY"] is not None
-    

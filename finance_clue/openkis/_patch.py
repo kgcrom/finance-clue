@@ -99,7 +99,8 @@ class CustomAuthenticationPolicy(SansIOHTTPPolicy):
         request.http_request.headers["appsecret"] = f"{credential_info.app_secret}"
         # if url lastIndexOf revokeP, remove finance_clue.json
         if "/oauth2/revokeP" in request.http_request.url:
-            os.remove(access_token_file)
+            if os.path.exists(access_token_file):
+                os.remove(access_token_file)
         return super().on_request(request)
 
 
@@ -138,8 +139,7 @@ class OpenKisClient(GenOpenKisClient):
                 # return if token is still valid(5 minutes before expiration) to avoid unnecessary token request
                 # if token is expired, get new token
                 if (
-                    self._credential.access_token_token_expired
-                    - datetime.now()
+                    self._credential.access_token_token_expired - datetime.now()
                 ).total_seconds() > 300:
                     return
 
