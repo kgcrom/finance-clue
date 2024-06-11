@@ -1,4 +1,5 @@
 from finance_clue.openkis import OpenKisClient
+from finance_clue.openkis import attach_headers
 
 
 def test_domestic_stock_price(integration_openkis_client: OpenKisClient):
@@ -419,3 +420,194 @@ def test_domestic_stock_quote_and_expected_conclusion(
     }
     assert resp["rt_cd"] == "0"
     assert resp["output2"]["antc_mkop_cls_code"] in ("311", "112")
+
+
+def test_domestic_stock_investor(
+    integration_openkis_client: OpenKisClient,
+):
+    """국내주식 현재가 투자자 조회 integrated test"""
+    resp = integration_openkis_client.get_domestic_stock_investor(
+        fid_input_iscd="005930",
+    )
+
+    example = {
+        "output": [
+            {
+                "stck_bsop_date": "20240611",
+                "stck_clpr": "75700",
+                "prdy_vrss": "0",
+                "prdy_vrss_sign": "0",
+                "prsn_ntby_qty": "",
+                "frgn_ntby_qty": "",
+                "orgn_ntby_qty": "",
+                "prsn_ntby_tr_pbmn": "",
+                "frgn_ntby_tr_pbmn": "",
+                "orgn_ntby_tr_pbmn": "",
+                "prsn_shnu_vol": "",
+                "frgn_shnu_vol": "",
+                "orgn_shnu_vol": "",
+                "prsn_shnu_tr_pbmn": "",
+                "frgn_shnu_tr_pbmn": "",
+                "orgn_shnu_tr_pbmn": "",
+                "prsn_seln_vol": "",
+                "frgn_seln_vol": "",
+                "orgn_seln_vol": "",
+                "prsn_seln_tr_pbmn": "",
+                "frgn_seln_tr_pbmn": "",
+                "orgn_seln_tr_pbmn": "",
+            },
+            {
+                "stck_bsop_date": "20240610",
+                "stck_clpr": "75700",
+                "prdy_vrss": "-1600",
+                "prdy_vrss_sign": "5",
+                "prsn_ntby_qty": "4101492",
+                "frgn_ntby_qty": "-1893335",
+                "orgn_ntby_qty": "-2315098",
+                "prsn_ntby_tr_pbmn": "311359",
+                "frgn_ntby_tr_pbmn": "-143714",
+                "orgn_ntby_tr_pbmn": "-175760",
+                "prsn_shnu_vol": "6871840",
+                "frgn_shnu_vol": "3111002",
+                "orgn_shnu_vol": "4458284",
+                "prsn_shnu_tr_pbmn": "521948",
+                "frgn_shnu_tr_pbmn": "236549",
+                "orgn_shnu_tr_pbmn": "338887",
+                "prsn_seln_vol": "2770348",
+                "frgn_seln_vol": "5004337",
+                "orgn_seln_vol": "6773382",
+                "prsn_seln_tr_pbmn": "210588",
+                "frgn_seln_tr_pbmn": "380262",
+                "orgn_seln_tr_pbmn": "514646",
+            },
+        ],
+        "rt_cd": "0",
+        "msg_cd": "MCA00000",
+        "msg1": "정상처리 되었습니다.",
+    }
+
+    assert resp["rt_cd"] == "0"
+    assert resp["msg_cd"] == "MCA00000"
+
+
+def test_domestic_stock_member(
+    integration_openkis_client: OpenKisClient,
+):
+    """국내주식 현재가 회원사 조회 integrated test"""
+    resp = integration_openkis_client.get_domestic_stock_member(
+        fid_input_iscd="005930", cls=attach_headers()
+    )
+
+    # 무의미한 데이터
+
+
+def test_domestic_stock_period_price(
+    integration_openkis_client: OpenKisClient,
+):
+    """국내주식기간별 시세 조회 integrated test"""
+    resp = integration_openkis_client.get_domestic_stock_period_price(
+        fid_input_iscd="005930",
+        fid_input_date1="20240428",
+        fid_input_date2="20240510",
+        fid_period_div_code="D",
+        fid_org_adj_prc="1",
+    )
+
+    example = {
+        "output1": {
+            "prdy_vrss": "0",
+            "prdy_vrss_sign": "3",
+            "prdy_ctrt": "0.00",
+            "stck_prdy_clpr": "75700",
+            "acml_vol": "0",
+            "acml_tr_pbmn": "0",
+            "hts_kor_isnm": "삼성전자",
+            "stck_prpr": "75700",
+            "stck_shrn_iscd": "005930",
+            "prdy_vol": "14598755",
+            "stck_mxpr": "98400",
+            "stck_llam": "53000",
+            "stck_oprc": "0",
+            "stck_hgpr": "0",
+            "stck_lwpr": "0",
+            "stck_prdy_oprc": "76100",
+            "stck_prdy_hgpr": "76600",
+            "stck_prdy_lwpr": "75600",
+            "askp": "0",
+            "bidp": "0",
+            "prdy_vrss_vol": "-14598755",
+            "vol_tnrt": "0.00",
+            "stck_fcam": "100",
+            "lstn_stcn": "5969782550",
+            "cpfn": "7780",
+            "hts_avls": "4519125",
+            "per": "35.52",
+            "eps": "2131.00",
+            "pbr": "1.46",
+            "itewhol_loan_rmnd_ratem name": "0.16",
+        },
+        "output2": [
+            {
+                "stck_bsop_date": "20240510",
+                "stck_clpr": "79200",
+                "stck_oprc": "80400",
+                "stck_hgpr": "81100",
+                "stck_lwpr": "78900",
+                "acml_vol": "16976124",
+                "acml_tr_pbmn": "1351235284800",
+                "flng_cls_code": "00",
+                "prtt_rate": "0.00",
+                "mod_yn": "N",
+                "prdy_vrss_sign": "5",
+                "prdy_vrss": "-500",
+                "revl_issu_reas": "",
+            }
+        ],
+        "rt_cd": "0",
+        "msg_cd": "MCA00000",
+        "msg1": "정상처리 되었습니다.",
+    }
+    assert resp["rt_cd"] == "0"
+    assert resp["output1"]["hts_kor_isnm"] == "삼성전자"
+    assert len(resp["output2"]) == 8
+
+
+def test_domestic_stock_time_conclusion(
+    integration_openkis_client: OpenKisClient,
+):
+    """국내주식 현재가 당일시간대별체결 조회 integrated test"""
+    resp = integration_openkis_client.get_domestic_stock_time_conclusion(
+        fid_input_iscd="005930",
+        fid_input_hour1="155000",
+    )
+    example = {
+        "output1": {
+            "stck_prpr": "75200",
+            "prdy_vrss": "-500",
+            "prdy_vrss_sign": "5",
+            "prdy_ctrt": "-0.66",
+            "acml_vol": "16971175",
+            "prdy_vol": "14598755",
+            "rprs_mrkt_kor_name": "KOSPI200",
+        },
+        "output2": [
+            {
+                "stck_cntg_hour": "154957",
+                "stck_prpr": "75200",
+                "prdy_vrss": "-500",
+                "prdy_vrss_sign": "5",
+                "prdy_ctrt": "-0.66",
+                "askp": "75300",
+                "bidp": "75200",
+                "tday_rltv": "75.94",
+                "acml_vol": "16649559",
+                "cnqn": "4",
+            }
+        ],
+        "rt_cd": "0",
+        "msg_cd": "MCA00000",
+        "msg1": "정상처리 되었습니다.",
+    }
+
+    assert resp["rt_cd"] == "0"
+    assert resp["output1"]["rprs_mrkt_kor_name"] == "KOSPI200"
