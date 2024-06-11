@@ -1,3 +1,5 @@
+import responses
+
 from finance_clue.openkis import OpenKisClient
 from finance_clue.openkis import attach_headers
 
@@ -611,3 +613,221 @@ def test_domestic_stock_time_conclusion(
 
     assert resp["rt_cd"] == "0"
     assert resp["output1"]["rprs_mrkt_kor_name"] == "KOSPI200"
+
+
+def test_domestic_stock_over_time_conclusion(
+    integration_openkis_client: OpenKisClient,
+):
+    """국내주식 현재가 시간외시간별체결 integrated test"""
+    resp = integration_openkis_client.get_domestic_stock_over_time_conclusion(
+        fid_input_iscd="005930",
+    )
+
+    example = {
+        "output1": {
+            "ovtm_untp_prpr": "75300",
+            "ovtm_untp_prdy_vrss": "100",
+            "ovtm_untp_prdy_vrss_sign": "2",
+            "ovtm_untp_prdy_ctrt": "0.13",
+            "ovtm_untp_vol": "57438",
+            "ovtm_untp_tr_pbmn": "4327338700",
+            "ovtm_untp_mxpr": "82700",
+            "ovtm_untp_llam": "67700",
+            "ovtm_untp_oprc": "75300",
+            "ovtm_untp_hgpr": "75400",
+            "ovtm_untp_lwpr": "75300",
+            "ovtm_untp_antc_cnpr": "0",
+            "ovtm_untp_antc_cntg_vrss": "0",
+            "ovtm_untp_antc_cntg_vrss_sign": "3",
+            "ovtm_untp_antc_cntg_ctrt": "0.00",
+            "ovtm_untp_antc_vol": "0",
+            "uplm_sign": "1",
+            "lslm_sign": "4",
+        },
+        "output2": [
+            {
+                "stck_cntg_hour": "180016",
+                "stck_prpr": "75300",
+                "prdy_vrss": "100",
+                "prdy_vrss_sign": "2",
+                "prdy_ctrt": "0.13",
+                "askp": "75400",
+                "bidp": "75300",
+                "acml_vol": "57438",
+                "cntg_vol": "8887",
+            }
+        ],
+        "rt_cd": "0",
+        "msg_cd": "MCA00000",
+        "msg1": "정상처리 되었습니다.",
+    }
+
+    assert resp["rt_cd"] == "0"
+    assert resp["msg_cd"] == "MCA00000"
+
+
+def test_domestic_stock_over_time_daily_price(
+    integration_openkis_client: OpenKisClient,
+):
+    """국내주식 시간외일자별 주가 조회 integrated test"""
+    resp = integration_openkis_client.get_domestic_stock_over_time_daily_price(
+        fid_input_iscd="005930",
+    )
+
+    example = {
+        "output1": {
+            "ovtm_untp_prpr": "75300",
+            "ovtm_untp_prdy_vrss": "100",
+            "ovtm_untp_prdy_vrss_sign": "2",
+            "ovtm_untp_prdy_ctrt": "0.13",
+            "ovtm_untp_vol": "57438",
+            "ovtm_untp_tr_pbmn": "4327338700",
+            "ovtm_untp_mxpr": "82700",
+            "ovtm_untp_llam": "67700",
+            "ovtm_untp_oprc": "75300",
+            "ovtm_untp_hgpr": "75400",
+            "ovtm_untp_lwpr": "75300",
+            "ovtm_untp_antc_cnpr": "0",
+            "ovtm_untp_antc_cntg_vrss": "0",
+            "ovtm_untp_antc_cntg_vrss_sign": "3",
+            "ovtm_untp_antc_cntg_ctrt": "0.00",
+            "ovtm_untp_antc_vol": "0",
+        },
+        "output2": [
+            {
+                "stck_bsop_date": "20240611",
+                "ovtm_untp_prpr": "75300",
+                "ovtm_untp_prdy_vrss": "100",
+                "ovtm_untp_prdy_vrss_sign": "2",
+                "ovtm_untp_prdy_ctrt": "0.13",
+                "ovtm_untp_vol": "57438",
+                "stck_clpr": "75200",
+                "prdy_vrss": "-500",
+                "prdy_vrss_sign": "5",
+                "prdy_ctrt": "-0.66",
+                "acml_vol": "16971176",
+                "ovtm_untp_tr_pbmn": "4327338700",
+            }
+        ],
+        "rt_cd": "0",
+        "msg_cd": "MCA00000",
+        "msg1": "정상처리 되었습니다.",
+    }
+
+    assert resp["rt_cd"] == "0"
+    assert resp["msg_cd"] == "MCA00000"
+
+
+def test_domestic_stock_time_minute_price(
+    integration_openkis_client: OpenKisClient,
+):
+    resp = integration_openkis_client.get_domestic_stock_time_minute_price(
+        fid_input_iscd="005930",
+        fid_input_hour1="125000",
+    )
+    example = {
+        "output1": {
+            "prdy_vrss": "-500",
+            "prdy_vrss_sign": "5",
+            "prdy_ctrt": "-0.66",
+            "stck_prdy_clpr": "75700",
+            "acml_vol": "16971175",
+            "acml_tr_pbmn": "1280831574634",
+            "hts_kor_isnm": "삼성전자",
+            "stck_prpr": "75200",
+        },
+        "output2": [
+            {
+                "stck_bsop_date": "20240611",
+                "stck_cntg_hour": "125000",
+                "stck_prpr": "75300",
+                "stck_oprc": "75300",
+                "stck_hgpr": "75400",
+                "stck_lwpr": "75300",
+                "cntg_vol": "69449",
+                "acml_tr_pbmn": "677732980500",
+            },
+            {
+                "stck_bsop_date": "20240611",
+                "stck_cntg_hour": "124900",
+                "stck_prpr": "75300",
+                "stck_oprc": "75300",
+                "stck_hgpr": "75400",
+                "stck_lwpr": "75300",
+                "cntg_vol": "19914",
+                "acml_tr_pbmn": "672499305400",
+            },
+        ],
+        "rt_cd": "0",
+        "msg_cd": "MCA00000",
+        "msg1": "정상처리 되었습니다.",
+    }
+
+    assert resp["rt_cd"] == "0"
+
+
+def test_domestic_stock_price2(
+    integration_openkis_client: OpenKisClient,
+):
+    """국내주식 현재가 시세2 조회 integrated test"""
+    resp = integration_openkis_client.get_domestic_stock_price2(
+        fid_input_iscd="005930",
+    )
+
+    example = {
+        "output": {
+            "rprs_mrkt_kor_name": "KOSPI200",
+            "insn_pbnt_yn": "N",
+            "stck_prpr": "75200",
+            "prdy_vrss": "-500",
+            "prdy_vrss_sign": "5",
+            "prdy_ctrt": "-0.66",
+            "acml_tr_pbmn": "1280831574634",
+            "acml_vol": "16971175",
+            "prdy_vol": "14598755",
+            "prdy_vrss_vol_rate": "116.25",
+            "bstp_kor_isnm": "전기.전자",
+            "sltr_yn": "N",
+            "mang_issu_yn": "N",
+            "trht_yn": "N",
+            "oprc_rang_cont_yn": "N",
+            "vlnt_fin_cls_code": "N",
+            "stck_prdy_clpr": "75700",
+            "stck_oprc": "75900",
+            "prdy_clpr_vrss_oprc_rate": "0.26",
+            "oprc_vrss_prpr_sign": "5",
+            "oprc_vrss_prpr": "-700",
+            "stck_hgpr": "76000",
+            "prdy_clpr_vrss_hgpr_rate": "0.40",
+            "hgpr_vrss_prpr_sign": "5",
+            "hgpr_vrss_prpr": "-800",
+            "stck_lwpr": "75100",
+            "prdy_clpr_vrss_lwpr_rate": "-0.79",
+            "lwpr_vrss_prpr_sign": "2",
+            "lwpr_vrss_prpr": "100",
+            "marg_rate": "20.00",
+            "crdt_rate": "20.00",
+            "crdt_able_yn": "Y",
+            "elw_pblc_yn": "Y",
+            "stck_mxpr": "98400",
+            "stck_llam": "53000",
+            "bstp_cls_code": "005930",
+            "stck_sdpr": "75700",
+            "vlnt_deal_cls_name": " ",
+            "new_lstn_cls_name": "        ",
+            "divi_app_cls_code": "  ",
+            "short_over_cls_code": "          ",
+            "vi_cls_code": "N",
+            "low_current_yn": "N",
+            "ssts_hot_yn": " ",
+            "stange_runup_yn": "N",
+            "invt_caful_yn": "N",
+            "mrkt_warn_cls_code": "00",
+            "short_over_yn": "N",
+        },
+        "rt_cd": "0",
+        "msg_cd": "MCA00000",
+        "msg1": "정상처리 되었습니다.",
+    }
+
+    assert resp["rt_cd"] == "0"
