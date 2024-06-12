@@ -762,21 +762,129 @@ def build_gen_open_kis_get_domestic_stock_over_time_daily_price_request(  # pyli
 
 
 def build_gen_open_kis_get_domestic_stock_over_time_price_request(  # pylint: disable=name-too-long
+    *,
+    fid_input_iscd: str,
+    personalseckey: Optional[str] = None,
+    tr_cont: str = "",
+    custtype: str = "P",
+    seq_no: Optional[str] = None,
+    mac_address: Optional[str] = None,
+    phone_number: Optional[str] = None,
+    ip_address: Optional[str] = None,
+    hashkey: Optional[str] = None,
+    gt_uid: Optional[str] = None,
+    tr_id: str = "FHPST02300000",
+    fid_cond_mrkt_div_code: str = "J",
     **kwargs: Any,
 ) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
     # Construct URL
     _url = "/uapi/domestic-stock/v1/quotations/inquire-overtime-price"
 
-    return HttpRequest(method="GET", url=_url, **kwargs)
+    # Construct parameters
+    _params["fid_input_iscd"] = _SERIALIZER.query(
+        "fid_input_iscd", fid_input_iscd, "str"
+    )
+    _params["fid_cond_mrkt_div_code"] = _SERIALIZER.query(
+        "fid_cond_mrkt_div_code", fid_cond_mrkt_div_code, "str"
+    )
+
+    # Construct headers
+    if personalseckey is not None:
+        _headers["personalseckey"] = _SERIALIZER.header(
+            "personalseckey", personalseckey, "str"
+        )
+    if tr_cont is not None:
+        _headers["tr_cont"] = _SERIALIZER.header("tr_cont", tr_cont, "str")
+    if custtype is not None:
+        _headers["custtype"] = _SERIALIZER.header("custtype", custtype, "str")
+    if seq_no is not None:
+        _headers["seq_no"] = _SERIALIZER.header("seq_no", seq_no, "str")
+    if mac_address is not None:
+        _headers["mac_address"] = _SERIALIZER.header("mac_address", mac_address, "str")
+    if phone_number is not None:
+        _headers["phone_number"] = _SERIALIZER.header(
+            "phone_number", phone_number, "str"
+        )
+    if ip_address is not None:
+        _headers["ip_address"] = _SERIALIZER.header("ip_address", ip_address, "str")
+    if hashkey is not None:
+        _headers["hashkey"] = _SERIALIZER.header("hashkey", hashkey, "str")
+    if gt_uid is not None:
+        _headers["gt_uid"] = _SERIALIZER.header("gt_uid", gt_uid, "str")
+    _headers["tr_id"] = _SERIALIZER.header("tr_id", tr_id, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
 def build_gen_open_kis_get_domestic_stock_over_time_quote_request(  # pylint: disable=name-too-long
+    *,
+    fid_input_iscd: str,
+    personalseckey: Optional[str] = None,
+    tr_cont: str = "",
+    custtype: str = "P",
+    seq_no: Optional[str] = None,
+    mac_address: Optional[str] = None,
+    phone_number: Optional[str] = None,
+    ip_address: Optional[str] = None,
+    hashkey: Optional[str] = None,
+    gt_uid: Optional[str] = None,
+    tr_id: str = "FHPST02300400",
+    fid_cond_mrkt_div_code: str = "J",
     **kwargs: Any,
 ) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
     # Construct URL
     _url = "/uapi/domestic-stock/v1/quotations/inquire-overtime-asking-price"
 
-    return HttpRequest(method="GET", url=_url, **kwargs)
+    # Construct parameters
+    _params["fid_input_iscd"] = _SERIALIZER.query(
+        "fid_input_iscd", fid_input_iscd, "str"
+    )
+    _params["fid_cond_mrkt_div_code"] = _SERIALIZER.query(
+        "fid_cond_mrkt_div_code", fid_cond_mrkt_div_code, "str"
+    )
+
+    # Construct headers
+    if personalseckey is not None:
+        _headers["personalseckey"] = _SERIALIZER.header(
+            "personalseckey", personalseckey, "str"
+        )
+    if tr_cont is not None:
+        _headers["tr_cont"] = _SERIALIZER.header("tr_cont", tr_cont, "str")
+    if custtype is not None:
+        _headers["custtype"] = _SERIALIZER.header("custtype", custtype, "str")
+    if seq_no is not None:
+        _headers["seq_no"] = _SERIALIZER.header("seq_no", seq_no, "str")
+    if mac_address is not None:
+        _headers["mac_address"] = _SERIALIZER.header("mac_address", mac_address, "str")
+    if phone_number is not None:
+        _headers["phone_number"] = _SERIALIZER.header(
+            "phone_number", phone_number, "str"
+        )
+    if ip_address is not None:
+        _headers["ip_address"] = _SERIALIZER.header("ip_address", ip_address, "str")
+    if hashkey is not None:
+        _headers["hashkey"] = _SERIALIZER.header("hashkey", hashkey, "str")
+    if gt_uid is not None:
+        _headers["gt_uid"] = _SERIALIZER.header("gt_uid", gt_uid, "str")
+    _headers["tr_id"] = _SERIALIZER.header("tr_id", tr_id, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
 def build_gen_open_kis_get_domestic_stock_time_minute_price_request(  # pylint: disable=name-too-long
@@ -4580,18 +4688,174 @@ class GenOpenKisClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
-    def get_domestic_stock_over_time_price(  # pylint: disable=inconsistent-return-statements
-        self, **kwargs: Any
-    ) -> None:
+    def get_domestic_stock_over_time_price(
+        self,
+        *,
+        fid_input_iscd: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "FHPST02300000",
+        fid_cond_mrkt_div_code: str = "J",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """국내주식 시간외 현재가 조회.
 
         국내주식 시간외현재가 API입니다.
 
         한국투자 HTS(eFriend Plus) > [0230] 시간외 현재가 화면의 좌측 상단기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
 
-        :return: None
-        :rtype: None
+        :keyword fid_input_iscd: FID 조건 종목코드
+
+         종목번호 (6자리):code:`<br/>`
+         ETN의 경우, Q로 시작 (EX. Q500001). Required.
+        :paramtype fid_input_iscd: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자미지원:code:`<br/>`
+         FHPST02300000 : 국내주식 시간외 현재가. "FHPST02300000" Default value is "FHPST02300000".
+        :paramtype tr_id: str
+        :keyword fid_cond_mrkt_div_code: 시장 분류 코드:code:`<br/>`
+         J : 주식, ETF, ETN. Default value is "J".
+        :paramtype fid_cond_mrkt_div_code: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output1": {
+                        "askp": "str",  # Optional. "ub9e4"ub3c4"ud638"uac00.
+                        "bidp": "str",  # Optional. "ub9e4"uc218"ud638"uac00.
+                        "bstp_kor_isnm": "str",  # Optional. "uc5c5"uc885 "ud55c"uae00
+                          "uc885"ubaa9"uba85.
+                        "crdt_able_yn": "str",  # Optional. "uc2e0"uc6a9 "uac00"ub2a5
+                          "uc5ec"ubd80. Known values are: "Y" and "N".
+                        "flng_cls_name": "str",  # Optional. "ub77d "uad6c"ubd84
+                          "uc774"ub984.
+                        "insn_pbnt_yn": "str",  # Optional. "ubd88"uc131"uc2e4 "uacf5"uc2dc
+                          "uc5ec"ubd80. Known values are: "Y" and "N".
+                        "mang_issu_cls_name": "str",  # Optional. "uad00"ub9ac "uc885"ubaa9
+                          "uad6c"ubd84 "uba85.
+                        "mang_issu_yn": "str",  # Optional. "uad00"ub9ac "uc885"ubaa9
+                          "uc5ec"ubd80. Known values are: "Y" and "N".
+                        "marg_rate": "str",  # Optional. "uc99d"uac70"uae08 "ube44"uc728.
+                        "mrkt_warn_cls_code": "str",  # Optional. "uc2dc"uc7a5 "uacbd"uace0
+                          "uad6c"ubd84 "ucf54"ub4dc.
+                        "mrkt_warn_cls_name": "str",  # Optional. "uc2dc"uc7a5 "uacbd"uad6c
+                          "uad6c"ubd84 "uba85.
+                        "new_lstn_cls_name": "str",  # Optional. "uc2e0"uaddc "uc0c1"uc7a5
+                          "uad6c"ubd84 "uba85.
+                        "ovtm_untp_antc_cnpr": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "uc608"uc0c1 "uccb4"uacb0"uac00.
+                        "ovtm_untp_antc_cnqn": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "uc608"uc0c1 "uccb4"uacb0"ub7c9.
+                        "ovtm_untp_antc_cntg_ctrt": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "uc608"uc0c1 "uccb4"uacb0 "ub300"ube44"uc728.
+                        "ovtm_untp_antc_cntg_vrss": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "uc608"uc0c1 "uccb4"uacb0 "ub300"ube44.
+                        "ovtm_untp_antc_cntg_vrss_sign": "str",  # Optional.
+                          "uc2dc"uac04"uc678 "ub2e8"uc77c"uac00 "uc608"uc0c1 "uccb4"uacb0 "ub300"ube44
+                          "ubd80"ud638  1 : "uc0c1"ud55c:code:`<br/>` 2 : "uc0c1"uc2b9:code:`<br/>` 3 :
+                          "ubcf4"ud569:code:`<br/>` 4 : "ud558"ud55c:code:`<br/>` 5 : "ud558"ub77d.
+                          Known values are: "1", "2", "3", "4", and "5".
+                        "ovtm_untp_hgpr": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ucd5c"uace0"uac00.
+                        "ovtm_untp_llam": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ud558"ud55c"uac00.
+                        "ovtm_untp_lwpr": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ucd5c"uc800"uac00.
+                        "ovtm_untp_mxpr": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "uc0c1"ud55c"uac00.
+                        "ovtm_untp_oprc": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "uc2dc"uac002.
+                        "ovtm_untp_prdy_ctrt": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "uc804"uc77c "ub300"ube44"uc728.
+                        "ovtm_untp_prdy_vrss": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "uc804"uc77c "ub300"ube44.
+                        "ovtm_untp_prdy_vrss_sign": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "uc804"uc77c "ub300"ube44 "ubd80"ud638  1 :
+                          "uc0c1"ud55c:code:`<br/>` 2 : "uc0c1"uc2b9:code:`<br/>` 3 :
+                          "ubcf4"ud569:code:`<br/>` 4 : "ud558"ud55c:code:`<br/>` 5 : "ud558"ub77d.
+                          Known values are: "1", "2", "3", "4", and "5".
+                        "ovtm_untp_prpr": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ud604"uc7ac"uac00.
+                        "ovtm_untp_sdpr": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "uae30"uc900"uac00.
+                        "ovtm_untp_tr_pbmn": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "uc804"uc77c "uac70"ub798 "ub300"uae08.
+                        "ovtm_untp_vol": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "uc804"uc77c "uac70"ub798"ub7c9.
+                        "ovtm_vi_cls_code": "str",  # Optional.
+                          "uc2dc"uac04"uc678"ub2e8"uc77c"uac00VI"uc801"uc6a9"uad6c"ubd84"ucf54"ub4dc.
+                        "revl_issu_reas_name": "str",  # Optional. "uc7ac"ud3c9"uac00
+                          "uc885"ubaa9 "uc0ac"uc720 "uba85.
+                        "rprs_mrkt_kor_name": "str",  # Optional. "ub300"ud45c "uc2dc"uc7a5
+                          "ud55c"uae00 "uba85.
+                        "sltr_yn": "str",  # Optional. "uc815"ub9ac"ub9e4"ub9e4 "uc5ec"ubd80.
+                          Known values are: "Y" and "N".
+                        "trht_yn": "str",  # Optional. "uac70"ub798"uc815"uc9c0 "uc5ec"ubd80.
+                          Known values are: "Y" and "N".
+                        "vlnt_deal_cls_name": "str"  # Optional. "uc784"uc758 "ub9e4"ub9e4
+                          "uad6c"ubd84 "uba85.
+                    },
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -4604,9 +4868,21 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_domestic_stock_over_time_price_request(
+            fid_input_iscd=fid_input_iscd,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
+            fid_cond_mrkt_div_code=fid_cond_mrkt_div_code,
             headers=_headers,
             params=_params,
         )
@@ -4629,22 +4905,248 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
-    def get_domestic_stock_over_time_quote(  # pylint: disable=inconsistent-return-statements
-        self, **kwargs: Any
-    ) -> None:
+    def get_domestic_stock_over_time_quote(
+        self,
+        *,
+        fid_input_iscd: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "FHPST02300400",
+        fid_cond_mrkt_div_code: str = "J",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """국내주식 시간외 호가 조회.
 
         국내주식 시간외호가 API입니다.
 
         한국투자 HTS(eFriend Plus) > [0230] 시간외 현재가 화면의 '호가' 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
 
-        :return: None
-        :rtype: None
+        :keyword fid_input_iscd: FID 조건 종목코드
+
+         종목번호 (6자리):code:`<br/>`
+         ETN의 경우, Q로 시작 (EX. Q500001). Required.
+        :paramtype fid_input_iscd: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         FHPST02300400 : 주식 당일 분봉 조회. "FHPST02300400" Default value is "FHPST02300400".
+        :paramtype tr_id: str
+        :keyword fid_cond_mrkt_div_code: 시장 분류 코드:code:`<br/>`
+         J : 주식, ETF, ETN:code:`<br/>`. Known values are: "J" and "U". Default value is "J".
+        :paramtype fid_cond_mrkt_div_code: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output": {
+                        "ovtm_total_askp_icdc": "str",  # Optional. "uc2dc"uac04"uc678 "ucd1d
+                          "ub9e4"ub3c4"ud638"uac00 "uc99d"uac10.
+                        "ovtm_total_askp_rsqn": "str",  # Optional. "uc2dc"uac04"uc678 "ucd1d
+                          "ub9e4"ub3c4"ud638"uac00 "uc794"ub7c9.
+                        "ovtm_total_bidp_icdc": "str",  # Optional. "uc2dc"uac04"uc678 "ucd1d
+                          "ub9e4"uc218"ud638"uac00 "uc99d"uac10.
+                        "ovtm_total_bidp_rsqn": "str",  # Optional. "uc2dc"uac04"uc678 "ucd1d
+                          "ub9e4"uc218"ud638"uac00 "uc794"ub7c9.
+                        "ovtm_untp_askp1": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac001.
+                        "ovtm_untp_askp10": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac0010.
+                        "ovtm_untp_askp2": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac002.
+                        "ovtm_untp_askp3": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac003.
+                        "ovtm_untp_askp4": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac004.
+                        "ovtm_untp_askp5": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac005.
+                        "ovtm_untp_askp6": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac006.
+                        "ovtm_untp_askp7": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac007.
+                        "ovtm_untp_askp8": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac008.
+                        "ovtm_untp_askp9": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac009.
+                        "ovtm_untp_askp_icdc1": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac00 "uc99d"uac101.
+                        "ovtm_untp_askp_icdc2": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac00 "uc99d"uac102.
+                        "ovtm_untp_askp_icdc3": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac00 "uc99d"uac103.
+                        "ovtm_untp_askp_rsqn1": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac00 "uc794"ub7c91.
+                        "ovtm_untp_askp_rsqn10": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac00 "uc794"ub7c910.
+                        "ovtm_untp_askp_rsqn2": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac00 "uc794"ub7c92.
+                        "ovtm_untp_askp_rsqn3": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac00 "uc794"ub7c93.
+                        "ovtm_untp_askp_rsqn4": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac00 "uc794"ub7c94.
+                        "ovtm_untp_askp_rsqn5": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac00 "uc794"ub7c95.
+                        "ovtm_untp_askp_rsqn6": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac00 "uc794"ub7c96.
+                        "ovtm_untp_askp_rsqn7": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac00 "uc794"ub7c97.
+                        "ovtm_untp_askp_rsqn8": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac00 "uc794"ub7c98.
+                        "ovtm_untp_askp_rsqn9": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"ub3c4"ud638"uac00 "uc794"ub7c99.
+                        "ovtm_untp_bidp1": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac001.
+                        "ovtm_untp_bidp10": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac0010.
+                        "ovtm_untp_bidp2": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac002.
+                        "ovtm_untp_bidp3": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac003.
+                        "ovtm_untp_bidp4": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac004.
+                        "ovtm_untp_bidp5": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac005.
+                        "ovtm_untp_bidp6": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac006.
+                        "ovtm_untp_bidp7": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac007.
+                        "ovtm_untp_bidp8": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac008.
+                        "ovtm_untp_bidp9": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac009.
+                        "ovtm_untp_bidp_icdc1": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac00 "uc99d"uac101.
+                        "ovtm_untp_bidp_icdc2": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac00 "uc99d"uac102.
+                        "ovtm_untp_bidp_icdc3": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac00 "uc99d"uac103.
+                        "ovtm_untp_bidp_rsqn1": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac00 "uc794"ub7c91.
+                        "ovtm_untp_bidp_rsqn10": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac00 "uc794"ub7c910.
+                        "ovtm_untp_bidp_rsqn2": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac00 "uc794"ub7c92.
+                        "ovtm_untp_bidp_rsqn3": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac00 "uc794"ub7c93.
+                        "ovtm_untp_bidp_rsqn4": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac00 "uc794"ub7c94.
+                        "ovtm_untp_bidp_rsqn5": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac00 "uc794"ub7c95.
+                        "ovtm_untp_bidp_rsqn6": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac00 "uc794"ub7c96.
+                        "ovtm_untp_bidp_rsqn7": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac00 "uc794"ub7c97.
+                        "ovtm_untp_bidp_rsqn8": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac00 "uc794"ub7c98.
+                        "ovtm_untp_bidp_rsqn9": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ub9e4"uc218"ud638"uac00 "uc794"ub7c99.
+                        "ovtm_untp_last_hour": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ucd5c"uc885 "uc2dc"uac04.
+                        "ovtm_untp_ntby_bidp_rsqn": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "uc21c"ub9e4"uc218 "ud638"uac00 "uc794"ub7c9.
+                        "ovtm_untp_total_askp_rsqn": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ucd1d "ub9e4"ub3c4"ud638"uac00 "uc794"ub7c9.
+                        "ovtm_untp_total_askp_rsqn_icdc": "str",  # Optional.
+                          "uc2dc"uac04"uc678 "ub2e8"uc77c"uac00 "ucd1d "ub9e4"ub3c4"ud638"uac00
+                          "uc99d"uac10.
+                        "ovtm_untp_total_bidp_rsqn": "str",  # Optional. "uc2dc"uac04"uc678
+                          "ub2e8"uc77c"uac00 "ucd1d "ub9e4"uc218"ud638"uac00 "uc794"ub7c9.
+                        "ovtm_untp_total_bidp_rsqn_icdc": "str",  # Optional.
+                          "uc2dc"uac04"uc678 "ub2e8"uc77c"uac00 "ucd1d "ub9e4"uc218"ud638"uac00
+                          "uc99d"uac10.
+                        "total_askp_rsqn": "str",  # Optional. "ucd1d
+                          "ub9e4"ub3c4"ud638"uac00 "uc794"ub7c9.
+                        "total_askp_rsqn_icdc": "str",  # Optional. "ucd1d
+                          "ub9e4"ub3c4"ud638"uac00 "uc794"ub7c9 "uc99d"uac10.
+                        "total_bidp_rsqn": "str",  # Optional. "ucd1d
+                          "ub9e4"uc218"ud638"uac00 "uc794"ub7c9.
+                        "total_bidp_rsqn_icdc": "str"  # Optional. "ucd1d
+                          "ub9e4"uc218"ud638"uac00 "uc794"ub7c9 "uc99d"uac10.
+                    },
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -4657,9 +5159,21 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_domestic_stock_over_time_quote_request(
+            fid_input_iscd=fid_input_iscd,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
+            fid_cond_mrkt_div_code=fid_cond_mrkt_div_code,
             headers=_headers,
             params=_params,
         )
@@ -4682,8 +5196,29 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
     def get_domestic_stock_time_minute_price(
@@ -4779,7 +5314,7 @@ class GenOpenKisClientOperationsMixin(
         :paramtype gt_uid: str
         :keyword tr_id: 거래ID
 
-         [실전투자/모의투자]:code:`<br/>`
+         모의투자 미지원:code:`<br/>`
          FHKST03010200 : 주식 당일 분봉 조회. "FHKST03010200" Default value is "FHKST03010200".
         :paramtype tr_id: str
         :keyword fid_cond_mrkt_div_code: 시장 분류 코드:code:`<br/>`
@@ -4995,7 +5530,7 @@ class GenOpenKisClientOperationsMixin(
         :paramtype gt_uid: str
         :keyword tr_id: 거래ID
 
-         [실전투자/모의투자]:code:`<br/>`
+         모의투자 미지원:code:`<br/>`
          FHPST01010000 : 주식현재가 시세2. "FHPST01010000" Default value is "FHPST01010000".
         :paramtype tr_id: str
         :keyword fid_cond_mrkt_div_code: 시장 분류 코드:code:`<br/>`

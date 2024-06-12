@@ -831,3 +831,129 @@ def test_domestic_stock_price2(
     }
 
     assert resp["rt_cd"] == "0"
+
+
+def test_domestic_stock_over_time_price(
+    integration_openkis_client: OpenKisClient,
+):
+    """국내주식 시간외현재가 조회 integrated test"""
+    resp = integration_openkis_client.get_domestic_stock_over_time_price(
+        fid_input_iscd="005930",
+    )
+
+    example = {
+        "output": {
+            "bstp_kor_isnm": "전기.전자",
+            "ovtm_untp_prpr": "76300",
+            "ovtm_untp_prdy_vrss": "-200",
+            "ovtm_untp_prdy_vrss_sign": "5",
+            "ovtm_untp_prdy_ctrt": "-0.26",
+            "ovtm_untp_vol": "114141",
+            "ovtm_untp_tr_pbmn": "8715131400",
+            "ovtm_untp_mxpr": "84100",
+            "ovtm_untp_llam": "68900",
+            "ovtm_untp_oprc": "76400",
+            "ovtm_untp_hgpr": "76400",
+            "ovtm_untp_lwpr": "76300",
+            "marg_rate": "20.00",
+            "ovtm_untp_antc_cnpr": "0",
+            "ovtm_untp_antc_cntg_vrss": "0",
+            "ovtm_untp_antc_cntg_vrss_sign": "3",
+            "ovtm_untp_antc_cntg_ctrt": "0.00",
+            "ovtm_untp_antc_cnqn": "0",
+            "crdt_able_yn": "Y",
+            "new_lstn_cls_name": "        ",
+            "sltr_yn": "N",
+            "mang_issu_yn": "N",
+            "mrkt_warn_cls_code": "00",
+            "trht_yn": "N",
+            "vlnt_deal_cls_name": " ",
+            "ovtm_untp_sdpr": "76500",
+            "insn_pbnt_yn": "N",
+            "rprs_mrkt_kor_name": "KOSPI200",
+            "ovtm_vi_cls_code": "N",
+            "bidp": "76400",
+            "askp": "76500",
+        },
+        "rt_cd": "0",
+        "msg_cd": "MCA00000",
+        "msg1": "정상처리 되었습니다.",
+    }
+
+    assert resp["rt_cd"] == "0"
+    assert resp["msg_cd"] == "MCA00000"
+
+
+def test_domestic_stock_over_time_quote(
+    integration_openkis_client: OpenKisClient,
+):
+    """국내주식 시간외호가 조회 integrated test"""
+    resp = integration_openkis_client.get_domestic_stock_over_time_quote(
+        fid_input_iscd="005930",
+    )
+
+    example = {
+        "ovtm_untp_last_hour": "180014",
+        "ovtm_untp_askp1": "76400",
+        "ovtm_untp_askp2": "76500",
+        "ovtm_untp_askp3": "76600",
+        "ovtm_untp_askp4": "76700",
+        "ovtm_untp_askp5": "76800",
+        "ovtm_untp_askp6": "76900",
+        "ovtm_untp_askp7": "77000",
+        "ovtm_untp_askp8": "77100",
+        "ovtm_untp_askp9": "77200",
+        "ovtm_untp_askp10": "77300",
+        "ovtm_untp_bidp1": "76300",
+        "ovtm_untp_bidp2": "76200",
+        "ovtm_untp_bidp3": "76100",
+        "ovtm_untp_bidp4": "76000",
+        "ovtm_untp_bidp5": "75900",
+        "ovtm_untp_bidp6": "75800",
+        "ovtm_untp_bidp7": "75700",
+        "ovtm_untp_bidp8": "75600",
+        "ovtm_untp_bidp9": "75500",
+        "ovtm_untp_bidp10": "75400",
+        "ovtm_untp_askp_icdc1": "0",
+        "ovtm_untp_askp_icdc2": "0",
+        "ovtm_untp_askp_icdc3": "0",
+        "ovtm_untp_bidp_icdc1": "0",
+        "ovtm_untp_bidp_icdc2": "0",
+        "ovtm_untp_bidp_icdc3": "0",
+        "ovtm_untp_askp_rsqn1": "12408",
+        "ovtm_untp_askp_rsqn2": "19023",
+        "ovtm_untp_askp_rsqn3": "10262",
+        "ovtm_untp_askp_rsqn4": "9273",
+        "ovtm_untp_askp_rsqn5": "5104",
+        "ovtm_untp_askp_rsqn6": "3911",
+        "ovtm_untp_askp_rsqn7": "7323",
+        "ovtm_untp_askp_rsqn8": "2862",
+        "ovtm_untp_askp_rsqn9": "699",
+        "ovtm_untp_askp_rsqn10": "1039",
+        "ovtm_untp_bidp_rsqn1": "6325",
+        "ovtm_untp_bidp_rsqn2": "9159",
+        "ovtm_untp_bidp_rsqn3": "9338",
+        "ovtm_untp_bidp_rsqn4": "5478",
+        "ovtm_untp_bidp_rsqn5": "1114",
+        "ovtm_untp_bidp_rsqn6": "447",
+        "ovtm_untp_bidp_rsqn7": "133",
+        "ovtm_untp_bidp_rsqn8": "161",
+        "ovtm_untp_bidp_rsqn9": "964",
+        "ovtm_untp_bidp_rsqn10": "1166",
+        "ovtm_untp_total_askp_rsqn": "71904",
+        "ovtm_untp_total_bidp_rsqn": "34285",
+        "ovtm_untp_total_askp_rsqn_icdc": "30211",
+        "ovtm_untp_total_bidp_rsqn_icdc": "9463",
+        "ovtm_untp_ntby_bidp_rsqn": "-37619",
+        "total_askp_rsqn": "842462",
+        "total_bidp_rsqn": "637237",
+        "total_askp_rsqn_icdc": "0",
+        "total_bidp_rsqn_icdc": "0",
+        "ovtm_total_askp_rsqn": "41880",
+        "ovtm_total_bidp_rsqn": "0",
+        "ovtm_total_askp_icdc": "0",
+        "ovtm_total_bidp_icdc": "0",
+    }
+
+    assert resp["rt_cd"] == "0"
+    assert resp["msg_cd"] == "MCA00000"
