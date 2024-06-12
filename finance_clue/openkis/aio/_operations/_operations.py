@@ -3229,7 +3229,7 @@ class GenOpenKisClientOperationsMixin(
         :paramtype gt_uid: str
         :keyword tr_id: 거래ID
 
-         모의투자미지원:code:`<br/>`
+         모의투자 미지원:code:`<br/>`
          FHPST02300000 : 국내주식 시간외 현재가. "FHPST02300000" Default value is "FHPST02300000".
         :paramtype tr_id: str
         :keyword fid_cond_mrkt_div_code: 시장 분류 코드:code:`<br/>`
@@ -3470,7 +3470,7 @@ class GenOpenKisClientOperationsMixin(
         :keyword tr_id: 거래ID
 
          모의투자 미지원:code:`<br/>`
-         FHPST02300400 : 주식 당일 분봉 조회. "FHPST02300400" Default value is "FHPST02300400".
+         FHPST02300400 : 국내주식 시간외호가 조회. "FHPST02300400" Default value is "FHPST02300400".
         :paramtype tr_id: str
         :keyword fid_cond_mrkt_div_code: 시장 분류 코드:code:`<br/>`
          J : 주식, ETF, ETN:code:`<br/>`. Known values are: "J" and "U". Default value is "J".
@@ -4208,18 +4208,147 @@ class GenOpenKisClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_domestic_stock_closing_expected_conclusion(  # pylint: disable=inconsistent-return-statements,name-too-long
-        self, **kwargs: Any
-    ) -> None:
+    async def get_domestic_stock_closing_expected_conclusion(  # pylint: disable=name-too-long
+        self,
+        *,
+        fid_rank_sort_cls_code: str = "0",
+        fid_input_iscd: str = "0",
+        fid_blng_cls_code: str = "0",
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "FHKST117300C0",
+        fid_cond_mrkt_div_code: str = "J",
+        fid_cond_scr_div_code: str = "11173",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """국내주식 장마감 예상체결가 조회.
 
         국내주식 장마감 예상체결가 API입니다.
 
         한국투자 HTS(eFriend Plus) > [0183] 장마감 예상체결가 화면의 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기 쉽습니다.
 
-        :return: None
-        :rtype: None
+        :keyword fid_rank_sort_cls_code: 순위 정렬 구분 코드
+
+         0:전체:code:`<br/>`
+         1:상한가마감예상:code:`<br/>`
+         2:하한가마감예상:code:`<br/>`
+         3:직전대비상승률상위:code:`<br/>`
+         4:직전대비하락률상위. Known values are: "0", "1", "2", "3", and "4". Required. Default value is "0".
+        :paramtype fid_rank_sort_cls_code: str
+        :keyword fid_input_iscd: 종목코드
+
+         0000:전체:code:`<br/>`
+         0001:거래소:code:`<br/>`
+         1001:코스닥:code:`<br/>`
+         2001:코스피200:code:`<br/>`
+         4001: KRX100. Known values are: "0000", "0001", "1001", "2001", and "4001". Required. Default
+         value is "0".
+        :paramtype fid_input_iscd: str
+        :keyword fid_blng_cls_code: 소속 구분 코드
+
+         0:전체:code:`<br/>`
+         1:종가범위연장. Known values are: "0" and "1". Required. Default value is "0".
+        :paramtype fid_blng_cls_code: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         FHKST117300C0 : 국내주식 장마감 예상체결가 조회. "FHKST117300C0" Default value is "FHKST117300C0".
+        :paramtype tr_id: str
+        :keyword fid_cond_mrkt_div_code: FID 조건 시장 분류 코드
+
+         J : 주식. "J" Default value is "J".
+        :paramtype fid_cond_mrkt_div_code: str
+        :keyword fid_cond_scr_div_code: FID 조건 화면 구분 코드:code:`<br/>`
+         Unique key(11173). "11173" Default value is "11173".
+        :paramtype fid_cond_scr_div_code: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output": [
+                        {
+                            "cntg_vol": "str",  # Optional. "uccb4"uacb0
+                              "uac70"ub798"ub7c9.
+                            "hts_kor_isnm": "str",  # Optional. HTS "ud55c"uae00
+                              "uc885"ubaa9"uba85.
+                            "prdy_ctrt": "str",  # Optional. "uc804"uc77c
+                              "ub300"ube44"uc728.
+                            "prdy_vrss": "str",  # Optional. "uc804"uc77c "ub300"ube44.
+                            "prdy_vrss_sign": "str",  # Optional. "uc804"uc77c
+                              "ub300"ube44 "ubd80"ud638  1 : "uc0c1"ud55c:code:`<br/>` 2 :
+                              "uc0c1"uc2b9:code:`<br/>` 3 : "ubcf4"ud569:code:`<br/>` 4 :
+                              "ud558"ud55c:code:`<br/>` 5 : "ud558"ub77d. Known values are: "1", "2",
+                              "3", "4", and "5".
+                            "sdpr_vrss_prpr": "str",  # Optional. "uae30"uc900"uac00
+                              "ub300"ube44 "ud604"uc7ac"uac00.
+                            "sdpr_vrss_prpr_rate": "str",  # Optional. "uae30"uc900"uac00
+                              "ub300"ube44 "ud604"uc7ac"uac00 "ube44"uc728.
+                            "stck_prpr": "str",  # Optional. "uc8fc"uc2dd
+                              "ud604"uc7ac"uac00.
+                            "stck_shrn_iscd": "str"  # Optional. "uc8fc"uc2dd
+                              "ub2e8"ucd95 "uc885"ubaa9"ucf54"ub4dc.
+                        }
+                    ],
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -4232,10 +4361,25 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = (
             build_gen_open_kis_get_domestic_stock_closing_expected_conclusion_request(
+                fid_rank_sort_cls_code=fid_rank_sort_cls_code,
+                fid_input_iscd=fid_input_iscd,
+                fid_blng_cls_code=fid_blng_cls_code,
+                personalseckey=personalseckey,
+                tr_cont=tr_cont,
+                custtype=custtype,
+                seq_no=seq_no,
+                mac_address=mac_address,
+                phone_number=phone_number,
+                ip_address=ip_address,
+                hashkey=hashkey,
+                gt_uid=gt_uid,
+                tr_id=tr_id,
+                fid_cond_mrkt_div_code=fid_cond_mrkt_div_code,
+                fid_cond_scr_div_code=fid_cond_scr_div_code,
                 headers=_headers,
                 params=_params,
             )
@@ -4257,22 +4401,187 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
     async def get_vi_status(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+        self,
+        *,
+        fid_input_iscd: str,
+        fid_div_cls_code: str = "0",
+        fid_mrkt_cls_code: str = "0",
+        fid_rank_sort_cls_code: str = "0",
+        fid_input_date1: str,
+        fid_trgt_cls_code: str,
+        fid_trgt_exls_cls_code: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "FHPST01390000",
+        fid_cond_scr_div_code: str = "20139",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """국내주식 변동성완화장치(VI) 현황.
 
         HTS(eFriend Plus) [0139] 변동성 완화장치(VI) 현황 데이터를 확인할 수 있는 API입니다.
 
         최근 30건까지 확인 가능합니다.
 
-        :return: None
-        :rtype: None
+        :keyword fid_input_iscd: FID 조건 종목코드
+
+         종목번호 (6자리):code:`<br/>`
+         ETN의 경우, Q로 시작 (EX. Q500001). Required.
+        :paramtype fid_input_iscd: str
+        :keyword fid_div_cls_code: FID 분류 구분 코드
+
+         0: 전체:code:`<br/>`
+         1: 상승:code:`<br/>`
+         2: 하락. Known values are: "0", "1", and "2". Required. Default value is "0".
+        :paramtype fid_div_cls_code: str
+        :keyword fid_mrkt_cls_code: FID 시장 구분 코드
+
+         0: 전체:code:`<br/>`
+         1: 거래소:code:`<br/>`
+         2: 코스닥. Known values are: "0", "1", and "2". Required. Default value is "0".
+        :paramtype fid_mrkt_cls_code: str
+        :keyword fid_rank_sort_cls_code: FID 순위 정렬 구분 코드
+
+         0: 전체:code:`<br/>`
+         1: 정적:code:`<br/>`
+         2: 동적:code:`<br/>`
+         3: 정적&동적. Known values are: "0", "1", "2", and "3". Required. Default value is "0".
+        :paramtype fid_rank_sort_cls_code: str
+        :keyword fid_input_date1: FID 입력일자
+
+         YYYYMMDD. Required.
+        :paramtype fid_input_date1: str
+        :keyword fid_trgt_cls_code: FID 대상 구분 코드. Required.
+        :paramtype fid_trgt_cls_code: str
+        :keyword fid_trgt_exls_cls_code: FID 대상 제외 구분 코드. Required.
+        :paramtype fid_trgt_exls_cls_code: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         FHPST01390000 : 변동성완화장치(VI) 현황. "FHPST01390000" Default value is "FHPST01390000".
+        :paramtype tr_id: str
+        :keyword fid_cond_scr_div_code: FID 조건 화면 구분 코드:code:`<br/>`
+         Unique key(20139). "20139" Default value is "20139".
+        :paramtype fid_cond_scr_div_code: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output": [
+                        {
+                            "bsop_date": "str",  # Optional. "uc601"uc5c5 "uc77c"uc790.
+                            "cntg_vi_hour": "str",  # Optional.
+                              VI"ubc1c"ub3d9"uc2dc"uac04.
+                            "hts_kor_isnm": "str",  # Optional. HTS "ud55c"uae00
+                              "uc885"ubaa9"uba85.
+                            "mksc_shrn_iscd": "str",  # Optional.
+                              "uc720"uac00"uc99d"uad8c "ub2e8"ucd95 "uc885"ubaa9"ucf54"ub4dc.
+                            "vi_cls_code": "str",  # Optional.
+                              VI"ubc1c"ub3d9"uc0c1"ud0dc:code:`<br/>` Y: "ubc1c"ub3d9 / N:
+                              "ud574"uc81c. Known values are: "Y" and "N".
+                            "vi_cncl_hour": "str",  # Optional.
+                              VI"ud574"uc81c"uc2dc"uac04.
+                            "vi_count": "str",  # Optional. VI"ubc1c"ub3d9"ud69f"uc218.
+                            "vi_dmc_dprt": "str",  # Optional.
+                              "ub3d9"uc801VI"ubc1c"ub3d9"uad34"ub9ac"uc728.
+                            "vi_dmc_stnd_prc": "str",  # Optional.
+                              "ub3d9"uc801VI"ubc1c"ub3d9"uae30"uc900"uac00"uaca9.
+                            "vi_dprt": "str",  # Optional.
+                              "uc815"uc801VI"ubc1c"ub3d9"uad34"ub9ac"uc728.
+                            "vi_kind_code": "str",  # Optional.
+                              VI"uc885"ub958"ucf54"ub4dc  1:"uc815"uc801:code:`<br/>`
+                              2:"ub3d9"uc801:code:`<br/>` 3:"uc815"uc801&"ub3d9"uc801. Known values
+                              are: "1", "2", and "3".
+                            "vi_prc": "str",  # Optional. VI"ubc1c"ub3d9"uac00"uaca9.
+                            "vi_stnd_prc": "str"  # Optional.
+                              "uc815"uc801VI"ubc1c"ub3d9"uae30"uc900"uac00"uaca9.
+                        }
+                    ],
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -4285,9 +4594,27 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_vi_status_request(
+            fid_input_iscd=fid_input_iscd,
+            fid_div_cls_code=fid_div_cls_code,
+            fid_mrkt_cls_code=fid_mrkt_cls_code,
+            fid_rank_sort_cls_code=fid_rank_sort_cls_code,
+            fid_input_date1=fid_input_date1,
+            fid_trgt_cls_code=fid_trgt_cls_code,
+            fid_trgt_exls_cls_code=fid_trgt_exls_cls_code,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
+            fid_cond_scr_div_code=fid_cond_scr_div_code,
             headers=_headers,
             params=_params,
         )
@@ -4308,8 +4635,29 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
     async def get_financial_credit_by_company(  # pylint: disable=inconsistent-return-statements

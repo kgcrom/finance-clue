@@ -957,3 +957,97 @@ def test_domestic_stock_over_time_quote(
 
     assert resp["rt_cd"] == "0"
     assert resp["msg_cd"] == "MCA00000"
+
+
+def test_domestic_stock_closing_epxected_conclusion(
+    integration_openkis_client: OpenKisClient,
+):
+    """국내주식 장마감 예상체결가 조회 integrated test"""
+    resp = integration_openkis_client.get_domestic_stock_closing_expected_conclusion(
+        fid_input_iscd="0000"
+    )
+
+    example = {
+        "output": [
+            {
+                "stck_shrn_iscd": "000020",
+                "hts_kor_isnm": "동화약품",
+                "stck_prpr": "8140",
+                "prdy_vrss": "60",
+                "prdy_vrss_sign": "2",
+                "prdy_ctrt": "0.74",
+                "sdpr_vrss_prpr": "0",
+                "sdpr_vrss_prpr_rate": "0.00",
+                "cntg_vol": "326",
+            },
+            {
+                "stck_shrn_iscd": "000040",
+                "hts_kor_isnm": "KR모터스",
+                "stck_prpr": "643",
+                "prdy_vrss": "-13",
+                "prdy_vrss_sign": "5",
+                "prdy_ctrt": "-1.98",
+                "sdpr_vrss_prpr": "0",
+                "sdpr_vrss_prpr_rate": "0.00",
+                "cntg_vol": "12051",
+            },
+        ],
+        "rt_cd": "0",
+        "msg_cd": "MCA00000",
+        "msg1": "정상처리 되었습니다.",
+    }
+
+    assert resp["rt_cd"] == "0"
+    assert resp["msg_cd"] == "MCA00000"
+
+
+def test_domestic_stock_vi_status(
+    integration_openkis_client: OpenKisClient,
+):
+    resp = integration_openkis_client.get_vi_status(
+        fid_input_iscd="",
+        fid_input_date1="20240126",
+        fid_rank_sort_cls_code="1",
+        fid_trgt_cls_code="",
+        fid_trgt_exls_cls_code="",
+    )
+
+    example = {
+        "output": [
+            {
+                "hts_kor_isnm": "유아이디",
+                "mksc_shrn_iscd": "069330",
+                "vi_cls_code": "N",
+                "bsop_date": "20240126",
+                "cntg_vi_hour": "180030",
+                "vi_cncl_hour": "180242",
+                "vi_kind_code": "2",
+                "vi_prc": "1523",
+                "vi_stnd_prc": "0",
+                "vi_dprt": "0.00",
+                "vi_dmc_stnd_prc": "1640",
+                "vi_dmc_dprt": "-7.13",
+                "vi_count": "2",
+            },
+            {
+                "hts_kor_isnm": "성창기업지주",
+                "mksc_shrn_iscd": "000180",
+                "vi_cls_code": "N",
+                "bsop_date": "20240126",
+                "cntg_vi_hour": "175030",
+                "vi_cncl_hour": "175252",
+                "vi_kind_code": "2",
+                "vi_prc": "1857",
+                "vi_stnd_prc": "0",
+                "vi_dprt": "0.00",
+                "vi_dmc_stnd_prc": "1992",
+                "vi_dmc_dprt": "-6.78",
+                "vi_count": "3",
+            },
+        ],
+        "rt_cd": "0",
+        "msg_cd": "MCA00000",
+        "msg1": "정상처리 되었습니다.",
+    }
+
+    assert resp["rt_cd"] == "0"
