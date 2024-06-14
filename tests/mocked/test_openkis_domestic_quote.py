@@ -1084,8 +1084,7 @@ def test_domestic_stock_closing_expected_conclusion(
     resp = mock_openkis_client.get_domestic_stock_closing_expected_conclusion(
         fid_input_iscd="0000"
     )
-    assert resp["rt_cd"] == "0"
-    assert resp["msg_cd"] == "MCA00000"
+    assert resp == expected
 
 
 @responses.activate
@@ -1144,4 +1143,130 @@ def test_domestic_stock_vi_status(
         fid_trgt_exls_cls_code="",
     )
 
-    assert resp["rt_cd"] == "0"
+    assert resp == expected
+
+
+@responses.activate
+def test_domestic_stock_credit_by_company(
+    mock_openkis_client: OpenKisClient, mock_openkis_client_url: str
+):
+    expected = {
+        "output": [
+            {
+                "stck_shrn_iscd": "000020",
+                "hts_kor_isnm": "동화약품",
+                "crdt_rate": "60.00",
+            },
+            {
+                "stck_shrn_iscd": "000070",
+                "hts_kor_isnm": "삼양홀딩스",
+                "crdt_rate": "40.00",
+            },
+            {
+                "stck_shrn_iscd": "000080",
+                "hts_kor_isnm": "하이트진로",
+                "crdt_rate": "40.00",
+            },
+        ],
+        "rt_cd": "0",
+        "msg_cd": "MCA00000",
+        "msg1": "정상처리 되었습니다.",
+    }
+    responses.add(
+        responses.GET,
+        f"{mock_openkis_client_url}/uapi/domestic-stock/v1/quotations/credit-by-company",
+        json=expected,
+        status=200,
+    )
+    resp = mock_openkis_client.get_financial_credit_by_company(fid_input_iscd="0000")
+
+    assert resp == expected
+
+
+@responses.activate
+def test_domestic_stock_invest_opinion(
+    mock_openkis_client: OpenKisClient, mock_openkis_client_url: str
+):
+    expected = {
+        "output": [
+            {
+                "stck_bsop_date": "20240226",
+                "invt_opnn": "BUY",
+                "invt_opnn_cls_code": "2",
+                "rgbf_invt_opnn": "BUY",
+                "rgbf_invt_opnn_cls_code": "3",
+                "mbcr_name": "하이투자",
+                "hts_goal_prc": "84000",
+                "stck_prdy_clpr": "72900",
+                "stck_nday_esdg": "-11100",
+                "nday_dprt": "-13.21",
+                "stft_esdg": "-4000",
+                "dprt": "-4.76",
+            }
+        ],
+        "rt_cd": "0",
+        "msg_cd": "MCA00000",
+        "msg1": "정상처리 되었습니다.",
+    }
+
+    responses.add(
+        responses.GET,
+        f"{mock_openkis_client_url}/uapi/domestic-stock/v1/quotations/invest-opinion",
+        json=expected,
+        status=200,
+    )
+
+    resp = mock_openkis_client.get_domestic_stock_invest_opinion(
+        fid_input_iscd="005930",
+        fid_input_date1="20240126",
+        fid_input_date2="20240226",
+    )
+
+    assert resp == expected
+
+
+@responses.activate
+def test_domestic_stock_check_holiday(
+    mock_openkis_client: OpenKisClient, mock_openkis_client_url: str
+):
+    expected = {
+        "ctx_area_nk": "20240704            ",
+        "ctx_area_fk": "20240611            ",
+        "output": [
+            {
+                "bass_dt": "20240611",
+                "wday_dvsn_cd": "03",
+                "bzdy_yn": "Y",
+                "tr_day_yn": "Y",
+                "opnd_yn": "Y",
+                "sttl_day_yn": "Y",
+            },
+            {
+                "bass_dt": "20240612",
+                "wday_dvsn_cd": "04",
+                "bzdy_yn": "Y",
+                "tr_day_yn": "Y",
+                "opnd_yn": "Y",
+                "sttl_day_yn": "Y",
+            },
+            {
+                "bass_dt": "20240613",
+                "wday_dvsn_cd": "05",
+                "bzdy_yn": "Y",
+                "tr_day_yn": "Y",
+                "opnd_yn": "Y",
+                "sttl_day_yn": "Y",
+            },
+        ],
+        "rt_cd": "0",
+        "msg_cd": "KIOK0500",
+        "msg1": "조회가 계속됩니다..다음버튼을 Click 하십시오.",
+    }
+    responses.add(
+        responses.GET,
+        f"{mock_openkis_client_url}/uapi/domestic-stock/v1/quotations/chk-holiday",
+        json=expected,
+        status=200,
+    )
+    resp = mock_openkis_client.check_domestic_holiday(bass_dt="20240611")
+    assert resp == expected
