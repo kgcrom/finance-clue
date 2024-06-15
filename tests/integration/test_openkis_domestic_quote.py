@@ -1157,3 +1157,162 @@ def test_domestic_stock_check_holiday(integration_openkis_client: OpenKisClient)
     }
     assert resp["rt_cd"] == "0"
     assert resp["msg_cd"] == "KIOK0500"
+
+
+def test_domestic_stock_search_product_info(
+    integration_openkis_client: OpenKisClient,
+):
+    resp = integration_openkis_client.search_product_info(
+        pdno="AAPL", prdt_type_cd="512"
+    )
+
+    example = {
+        "output": {
+            "pdno": "AAPL",
+            "prdt_type_cd": "512",
+            "prdt_name": "애플",
+            "prdt_name120": "애플",
+            "prdt_abrv_name": "애플",
+            "prdt_eng_name": "APPLE INC",
+            "prdt_eng_name120": "APPLE INC",
+            "prdt_eng_abrv_name": "APPLE INC",
+            "std_pdno": "US0378331005",
+            "shtn_pdno": "AAPL",
+            "prdt_sale_stat_cd": "",
+            "prdt_risk_grad_cd": "",
+            "prdt_clsf_cd": "101210",
+            "prdt_clsf_name": "해외주식",
+            "sale_strt_dt": "",
+            "sale_end_dt": "",
+            "wrap_asst_type_cd": "06",
+            "ivst_prdt_type_cd": "1012",
+            "ivst_prdt_type_cd_name": "해외주식",
+            "frst_erlm_dt": "",
+        },
+        "rt_cd": "0",
+        "msg_cd": "KIOK0530",
+        "msg1": "조회되었습니다                                                                  ",
+    }
+
+    assert resp["rt_cd"] == "0"
+
+
+def test_domestic_stock_search_stock_info(
+    integration_openkis_client: OpenKisClient,
+):
+    resp = integration_openkis_client.search_stock_info(
+        pdno="000660", prdt_type_cd="300"
+    )
+
+    example = {
+        "output": {
+            "pdno": "00000A000660",
+            "prdt_type_cd": "300",
+            "mket_id_cd": "STK",
+            "scty_grp_id_cd": "ST",
+            "excg_dvsn_cd": "02",
+            "setl_mmdd": "12",
+            "lstg_stqt": "728002365",
+            "lstg_cptl_amt": "0",
+            "cpta": "3657652050000",
+            "papr": "5000",
+            "issu_pric": "5000",
+            "kospi200_item_yn": "Y",
+            "scts_mket_lstg_dt": "19961226",
+            "scts_mket_lstg_abol_dt": "",
+            "kosdaq_mket_lstg_dt": "",
+            "kosdaq_mket_lstg_abol_dt": "",
+            "frbd_mket_lstg_dt": "19961226",
+            "frbd_mket_lstg_abol_dt": "",
+            "reits_kind_cd": "",
+            "etf_dvsn_cd": "0",
+            "oilf_fund_yn": "N",
+            "idx_bztp_lcls_cd": "002",
+            "idx_bztp_mcls_cd": "013",
+            "idx_bztp_scls_cd": "013",
+            "stck_kind_cd": "101",
+            "mfnd_opng_dt": "",
+            "mfnd_end_dt": "",
+            "dpsi_erlm_cncl_dt": "",
+            "etf_cu_qty": "0",
+            "prdt_name": "에스케이하이닉스보통주",
+            "prdt_name120": "에스케이하이닉스보통주",
+            "prdt_abrv_name": "SK하이닉스",
+            "std_pdno": "KR7000660001",
+            "prdt_eng_name": "SK hynix",
+            "prdt_eng_name120": "SK hynix",
+            "prdt_eng_abrv_name": "SK hynix",
+            "dpsi_aptm_erlm_yn": "Y",
+            "etf_txtn_type_cd": "00",
+            "etf_type_cd": "",
+            "lstg_abol_dt": "",
+            "nwst_odst_dvsn_cd": "1",
+            "sbst_pric": "172380",
+            "thco_sbst_pric": "172380",
+            "thco_sbst_pric_chng_dt": "20240614",
+            "tr_stop_yn": "N",
+            "admn_item_yn": "N",
+            "thdt_clpr": "221000",
+            "bfdy_clpr": "221000",
+            "clpr_chng_dt": "20240614",
+            "std_idst_clsf_cd": "032601",
+            "std_idst_clsf_cd_name": "반도체 제조업",
+            "idx_bztp_lcls_cd_name": "시가총액규모대",
+            "idx_bztp_mcls_cd_name": "전기,전자",
+            "idx_bztp_scls_cd_name": "전기,전자",
+            "ocr_no": "1147",
+            "crfd_item_yn": "N",
+            "elec_scty_yn": "Y",
+            "issu_istt_cd": "00066",
+            "etf_chas_erng_rt_dbnb": "0",
+            "etf_etn_ivst_heed_item_yn": "N",
+            "stln_int_rt_dvsn_cd": "01",
+            "frnr_psnl_lmt_rt": "0.00000000",
+            "lstg_rqsr_issu_istt_cd": "",
+            "lstg_rqsr_item_cd": "",
+            "trst_istt_issu_istt_cd": "",
+        },
+        "rt_cd": "0",
+        "msg_cd": "KIOK0530",
+        "msg1": "조회되었습니다                                                                  ",
+    }
+
+    assert resp["rt_cd"] == "0"
+
+
+def test_domestic_stock_securities_opinion(
+    integration_openkis_client: OpenKisClient,
+):
+    resp = integration_openkis_client.get_domestic_stock_securities_opinion(
+        fid_input_iscd="999",
+        fid_input_date1="20240601",
+        fid_input_date2="20240613",
+    )
+
+    example = {
+        "output": [
+            {
+                "stck_bsop_date": "20240613",
+                "stck_shrn_iscd": "286940",
+                "hts_kor_isnm": "롯데이노베이트",
+                "invt_opnn": "BUY",
+                "invt_opnn_cls_code": "2",
+                "rgbf_invt_opnn": "BUY",
+                "rgbf_invt_opnn_cls_code": "3",
+                "mbcr_name": "상상인",
+                "stck_prpr": "28150",
+                "prdy_vrss": "-450",
+                "prdy_vrss_sign": "5",
+                "prdy_ctrt": "-1.57",
+                "hts_goal_prc": "38000",
+                "stck_prdy_clpr": "27900",
+                "stft_esdg": "-9850",
+                "dprt": "-25.92",
+            }
+        ],
+        "rt_cd": "0",
+        "msg_cd": "MCA00000",
+        "msg1": "정상처리 되었습니다.",
+    }
+
+    assert resp["rt_cd"] == "0"
