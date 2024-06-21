@@ -183,31 +183,84 @@ class MyTestCase(unittest.TestCase):
         assert resp == expected
 
     @responses.activate
+    def test_chart_price(self):
+        expected = example = {
+            "output1": {
+                "bstp_nmix_prdy_vrss": "-23.37",
+                "prdy_vrss_sign": "5",
+                "bstp_nmix_prdy_ctrt": "-0.83",
+                "prdy_nmix": "2807.63",
+                "acml_vol": "631143",
+                "acml_tr_pbmn": "14492985",
+                "hts_kor_isnm": "종합",
+                "bstp_nmix_prpr": "2784.26",
+                "bstp_cls_code": "0001",
+                "prdy_vol": "758166",
+                "bstp_nmix_oprc": "2794.87",
+                "bstp_nmix_hgpr": "2797.00",
+                "bstp_nmix_lwpr": "2777.33",
+                "futs_prdy_oprc": "2802.10",
+                "futs_prdy_hgpr": "2812.62",
+                "futs_prdy_lwpr": "2796.37",
+            },
+            "output2": [
+                {
+                    "stck_bsop_date": "20240620",
+                    "bstp_nmix_prpr": "2807.63",
+                    "bstp_nmix_oprc": "2802.10",
+                    "bstp_nmix_hgpr": "2812.62",
+                    "bstp_nmix_lwpr": "2796.37",
+                    "acml_vol": "758166",
+                    "acml_tr_pbmn": "13576970",
+                    "mod_yn": "N",
+                }
+            ],
+            "rt_cd": "0",
+            "msg_cd": "MCA00000",
+            "msg1": "정상처리 되었습니다.",
+        }
+
+        responses.add(
+            responses.GET,
+            f"{self.openkis_client_url}/uapi/domestic-stock/v1/quotations/inquire-daily-indexchartprice",
+            json=expected,
+            status=200,
+        )
+        resp = self.openkis_client.get_index_chart_price(
+            fid_input_iscd="0001",
+            fid_input_date1="20240610",
+            fid_input_date2="20240620",
+            fid_period_div_code="D",
+        )
+
+        assert resp == expected
+
+    @responses.activate
     def test_total_expected_conclusion(self):
         expected = {
             "output1": {
-                "bstp_nmix_prpr": "2800.06",
-                "bstp_nmix_prdy_vrss": "2.73",
-                "prdy_vrss_sign": "2",
-                "prdy_ctrt": "0.10",
-                "acml_vol": "6238",
-                "ascn_issu_cnt": "383",
-                "down_issu_cnt": "283",
-                "stnr_issu_cnt": "221",
+                "bstp_nmix_prpr": "2792.43",
+                "bstp_nmix_prdy_vrss": "-15.20",
+                "prdy_vrss_sign": "5",
+                "prdy_ctrt": "-0.54",
+                "acml_vol": "7103",
+                "ascn_issu_cnt": "273",
+                "down_issu_cnt": "357",
+                "stnr_issu_cnt": "253",
             },
             "output2": [
                 {
                     "bstp_cls_code": "0001",
                     "hts_kor_isnm": "종합",
-                    "bstp_nmix_prpr": "2800.06",
-                    "bstp_nmix_prdy_vrss": "2.73",
-                    "prdy_vrss_sign": "2",
-                    "bstp_nmix_prdy_ctrt": "0.10",
-                    "acml_vol": "6238",
-                    "nmix_sdpr": "2797.33",
-                    "ascn_issu_cnt": "383",
-                    "stnr_issu_cnt": "221",
-                    "down_issu_cnt": "283",
+                    "bstp_nmix_prpr": "2792.43",
+                    "bstp_nmix_prdy_vrss": "-15.20",
+                    "prdy_vrss_sign": "5",
+                    "bstp_nmix_prdy_ctrt": "-0.54",
+                    "acml_vol": "7103",
+                    "nmix_sdpr": "2807.63",
+                    "ascn_issu_cnt": "273",
+                    "stnr_issu_cnt": "253",
+                    "down_issu_cnt": "357",
                 }
             ],
             "rt_cd": "0",
@@ -221,8 +274,8 @@ class MyTestCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.openkis_client.get_index_total_exp(
-            fid_mrkt_cls_code="O", fid_input_iscd="0001", fid_mkop_cls_code="1"
+        resp = self.openkis_client.get_index_total_expected_conclusion(
+            fid_mrkt_cls_code="O", fid_mkop_cls_code="1", fid_input_iscd="0001"
         )
         assert resp == expected
 
@@ -310,18 +363,107 @@ class MyTestCase(unittest.TestCase):
         assert resp == expected
 
     @responses.activate
+    def test_minute_chart_price(self):
+        expected = {
+            "output1": {
+                "bstp_nmix_prdy_vrss": "-23.37",
+                "prdy_vrss_sign": "5",
+                "bstp_nmix_prdy_ctrt": "-0.83",
+                "prdy_nmix": "2807.63",
+                "acml_vol": "631143",
+                "acml_tr_pbmn": "14492985",
+                "hts_kor_isnm": "종합",
+                "bstp_nmix_prpr": "2784.26",
+                "bstp_cls_code": "0001",
+                "prdy_vol": "758166",
+                "bstp_nmix_oprc": "2794.87",
+                "bstp_nmix_hgpr": "2797.00",
+                "bstp_nmix_lwpr": "2777.33",
+                "futs_prdy_oprc": "2802.10",
+                "futs_prdy_hgpr": "2812.62",
+                "futs_prdy_lwpr": "2796.37",
+            },
+            "output2": [
+                {
+                    "stck_bsop_date": "20240621",
+                    "stck_cntg_hour": "999999",
+                    "bstp_nmix_prpr": "2784.26",
+                    "bstp_nmix_oprc": "2784.26",
+                    "bstp_nmix_hgpr": "2784.26",
+                    "bstp_nmix_lwpr": "2784.26",
+                    "cntg_vol": "13614",
+                    "acml_tr_pbmn": "14492985",
+                },
+                {
+                    "stck_bsop_date": "20240621",
+                    "stck_cntg_hour": "888888",
+                    "bstp_nmix_prpr": "2784.26",
+                    "bstp_nmix_oprc": "2784.26",
+                    "bstp_nmix_hgpr": "2784.26",
+                    "bstp_nmix_lwpr": "2784.26",
+                    "cntg_vol": "3",
+                    "acml_tr_pbmn": "14120241",
+                },
+            ],
+            "rt_cd": "0",
+            "msg_cd": "MCA00000",
+            "msg1": "정상처리 되었습니다.",
+        }
+
+        responses.add(
+            responses.GET,
+            f"{self.openkis_client_url}/uapi/domestic-stock/v1/quotations/inquire-time-indexchartprice",
+            json=expected,
+            status=200,
+        )
+        resp = self.openkis_client.get_index_minute_chart_price(
+            fid_etc_cls_code="0",
+            fid_input_hour1="300",
+            fid_pw_data_incu_yn="N",
+            fid_input_iscd="0001",
+        )
+        assert resp == expected
+
+    @responses.activate
     def test_expected_conclusion_index_trend(self):
         expected = {
             "output": [
                 {
                     "stck_cntg_hour": "666666",
-                    "bstp_nmix_prpr": "2800.06",
-                    "prdy_vrss_sign": "2",
-                    "bstp_nmix_prdy_vrss": "2.73",
-                    "prdy_ctrt": "0.10",
-                    "acml_vol": "6238",
-                    "acml_tr_pbmn": "164313",
-                }
+                    "bstp_nmix_prpr": "2792.43",
+                    "prdy_vrss_sign": "5",
+                    "bstp_nmix_prdy_vrss": "-15.20",
+                    "prdy_ctrt": "-0.54",
+                    "acml_vol": "7103",
+                    "acml_tr_pbmn": "219947",
+                },
+                {
+                    "stck_cntg_hour": "085950",
+                    "bstp_nmix_prpr": "2790.37",
+                    "prdy_vrss_sign": "5",
+                    "bstp_nmix_prdy_vrss": "-17.26",
+                    "prdy_ctrt": "-0.61",
+                    "acml_vol": "6326",
+                    "acml_tr_pbmn": "205510",
+                },
+                {
+                    "stck_cntg_hour": "085940",
+                    "bstp_nmix_prpr": "2791.66",
+                    "prdy_vrss_sign": "5",
+                    "bstp_nmix_prdy_vrss": "-15.97",
+                    "prdy_ctrt": "-0.57",
+                    "acml_vol": "5886",
+                    "acml_tr_pbmn": "195799",
+                },
+                {
+                    "stck_cntg_hour": "085930",
+                    "bstp_nmix_prpr": "2791.73",
+                    "prdy_vrss_sign": "5",
+                    "bstp_nmix_prdy_vrss": "-15.90",
+                    "prdy_ctrt": "-0.57",
+                    "acml_vol": "5740",
+                    "acml_tr_pbmn": "194375",
+                },
             ],
             "rt_cd": "0",
             "msg_cd": "MCA00000",
