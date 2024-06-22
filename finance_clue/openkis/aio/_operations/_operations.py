@@ -9733,9 +9733,25 @@ class GenOpenKisClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_financial_balance_sheet(  # pylint: disable=inconsistent-return-statements
-        self, **kwargs: Any
-    ) -> None:
+    async def get_financial_balance_sheet(
+        self,
+        *,
+        fid_input_iscd: str,
+        fid_div_cls_code: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "FHKST66430100",
+        fid_cond_mrkt_div_code: str = "J",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """국내주식 대차대조표.
 
         국내주식 대차대조표 API입니다.
@@ -9743,9 +9759,96 @@ class GenOpenKisClientOperationsMixin(
         한국투자 HTS(eFriend Plus) > [0635] 재무분석종합 화면의 하단 '1. 대차대조표' 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을
         이해하기 쉽습니다.
 
-        :return: None
-        :rtype: None
+        :keyword fid_input_iscd: FID 입력 종목코드
+
+         000660: 종목코드. Required.
+        :paramtype fid_input_iscd: str
+        :keyword fid_div_cls_code: 분류 구분 코드
+
+         0: 년, 1: 분기. Known values are: "0" and "1". Required.
+        :paramtype fid_div_cls_code: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         FHKST66430100 : 국내주식 대차대조표. "FHKST66430100" Default value is "FHKST66430100".
+        :paramtype tr_id: str
+        :keyword fid_cond_mrkt_div_code: 조건 시장 분류 코드
+
+         J. "J" Default value is "J".
+        :paramtype fid_cond_mrkt_div_code: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output": {
+                        "cfp_surp": "str",  # Optional. "uc790"ubcf8 "uc789"uc5ec"uae08,
+                          "ucd9c"ub825"ub418"uc9c0 "uc54a"ub294 "ub370"uc774"ud130(99.99"ub85c
+                          "ud45c"uc2dc).
+                        "cpfn": "str",  # Optional. "uc790"ubcf8"uae08.
+                        "cras": "str",  # Optional. "uc720"ub3d9"uc790"uc0b0.
+                        "fix_lblt": "str",  # Optional. "uace0"uc815"ubd80"ucc44.
+                        "flow_lblt": "str",  # Optional. "uc720"ub3d9"ubd80"ucc44.
+                        "fxas": "str",  # Optional. "uace0"uc815"uc790"uc0b0.
+                        "prfi_surp": "str",  # Optional. "uc774"uc775 "uc789"uc5ec"uae08,
+                          "ucd9c"ub825"ub418"uc9c0 "uc54a"ub294 "ub370"uc774"ud130(99.99"ub85c
+                          "ud45c"uc2dc).
+                        "stac_yymm": "str",  # Optional. "uacb0"uc0b0 "ub144"uc6d4.
+                        "total_aset": "str",  # Optional. "uc790"uc0b0"ucd1d"uacc4.
+                        "total_cptl": "str",  # Optional. "uc790"ubcf8"ucd1d"uacc4.
+                        "total_lblt": "str"  # Optional. "ubd80"ucc44"ucd1d"uacc4.
+                    },
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -9758,9 +9861,22 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_financial_balance_sheet_request(
+            fid_input_iscd=fid_input_iscd,
+            fid_div_cls_code=fid_div_cls_code,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
+            fid_cond_mrkt_div_code=fid_cond_mrkt_div_code,
             headers=_headers,
             params=_params,
         )
@@ -9781,13 +9897,50 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_financial_income_statement(  # pylint: disable=inconsistent-return-statements
-        self, **kwargs: Any
-    ) -> None:
+    async def get_financial_income_statement(
+        self,
+        *,
+        fid_input_iscd: str,
+        fid_div_cls_code: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "FHKST66430200",
+        fid_cond_mrkt_div_code: str = "J",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """국내주식 손익계산서.
 
         국내주식 손익계산서 API입니다.
@@ -9795,9 +9948,98 @@ class GenOpenKisClientOperationsMixin(
         한국투자 HTS(eFriend Plus) > [0635] 재무분석종합 화면의 하단 '2. 손익계산서' 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을
         이해하기 쉽습니다.
 
-        :return: None
-        :rtype: None
+        :keyword fid_input_iscd: FID 입력 종목코드
+
+         000660: 종목코드. Required.
+        :paramtype fid_input_iscd: str
+        :keyword fid_div_cls_code: 분류 구분 코드
+
+         0: 년, 1: 분기. Known values are: "0" and "1". Required.
+        :paramtype fid_div_cls_code: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         FHKST66430200 : 국내주식 손익계산서. "FHKST66430200" Default value is "FHKST66430200".
+        :paramtype tr_id: str
+        :keyword fid_cond_mrkt_div_code: 조건 시장 분류 코드
+
+         J. "J" Default value is "J".
+        :paramtype fid_cond_mrkt_div_code: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output": {
+                        "bsop_non_ernn": "str",  # Optional. "uc601"uc5c5 "uc678
+                          "uc218"uc775.
+                        "bsop_non_expn": "str",  # Optional. "uc601"uc5c5 "uc678
+                          "ube44"uc6a9.
+                        "bsop_prti": "str",  # Optional. "uc601"uc5c5 "uc774"uc775.
+                        "depr_cost": "str",  # Optional. "uac10"uac00"uc0c1"uac01"ube44.
+                        "op_prfi": "str",  # Optional. "uacbd"uc0c1 "uc774"uc775.
+                        "sale_account": "str",  # Optional. "ub9e4"ucd9c"uc561.
+                        "sale_cost": "str",  # Optional. "ub9e4"ucd9c "uc6d0"uac00.
+                        "sale_totl_prfi": "str",  # Optional. "ub9e4"ucd9c "ucd1d
+                          "uc774"uc775.
+                        "sell_mang": "str",  # Optional. "ud310"ub9e4 "ubc0f
+                          "uad00"ub9ac"ube44.
+                        "spec_loss": "str",  # Optional. "ud2b9"ubcc4 "uc190"uc2e4.
+                        "spec_prfi": "str",  # Optional. "ud2b9"ubcc4 "uc774"uc775.
+                        "stac_yymm": "str",  # Optional. "uacb0"uc0b0 "ub144"uc6d4.
+                        "thtr_ntin": "str"  # Optional. "ub2f9"uae30"uc21c"uc774"uc775.
+                    },
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -9810,9 +10052,22 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_financial_income_statement_request(
+            fid_input_iscd=fid_input_iscd,
+            fid_div_cls_code=fid_div_cls_code,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
+            fid_cond_mrkt_div_code=fid_cond_mrkt_div_code,
             headers=_headers,
             params=_params,
         )
@@ -9833,13 +10088,50 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
     async def get_financial_ratio(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+        self,
+        *,
+        fid_input_iscd: str,
+        fid_div_cls_code: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "FHKST66430300",
+        fid_cond_mrkt_div_code: str = "J",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """국내주식 재무비율.
 
         국내주식 재무비율 API입니다.
@@ -9847,9 +10139,93 @@ class GenOpenKisClientOperationsMixin(
         한국투자 HTS(eFriend Plus) > [0635] 재무분석종합 화면의 우측의 '재무 비율' 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을 이해하기
         쉽습니다.
 
-        :return: None
-        :rtype: None
+        :keyword fid_input_iscd: FID 입력 종목코드
+
+         000660: 종목코드. Required.
+        :paramtype fid_input_iscd: str
+        :keyword fid_div_cls_code: 분류 구분 코드
+
+         0: 년, 1: 분기. Known values are: "0" and "1". Required.
+        :paramtype fid_div_cls_code: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         FHKST66430300 : 국내주식 재무비율. "FHKST66430300" Default value is "FHKST66430300".
+        :paramtype tr_id: str
+        :keyword fid_cond_mrkt_div_code: 조건 시장 분류 코드
+
+         J. "J" Default value is "J".
+        :paramtype fid_cond_mrkt_div_code: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output": {
+                        "bps": "str",  # Optional. BPS.
+                        "bsop_prfi_inrt": "str",  # Optional. "uc601"uc5c5 "uc774"uc775
+                          "uc99d"uac00"uc728.
+                        "eps": "str",  # Optional. EPS.
+                        "grs": "str",  # Optional. "ub9e4"ucd9c"uc561 "uc99d"uac00"uc728.
+                        "lblt_rate": "str",  # Optional. "ubd80"ucc44 "ube44"uc728.
+                        "ntin_inrt": "str",  # Optional. "uc21c"uc774"uc775
+                          "uc99d"uac00"uc728.
+                        "roe_val": "str",  # Optional. ROE "uac12.
+                        "rsrv_rate": "str",  # Optional. "uc720"ubcf4 "ube44"uc728.
+                        "sps": "str",  # Optional. "uc8fc"ub2f9"ub9e4"ucd9c"uc561.
+                        "stac_yymm": "str"  # Optional. "uacb0"uc0b0 "ub144"uc6d4.
+                    },
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -9862,9 +10238,22 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_financial_ratio_request(
+            fid_input_iscd=fid_input_iscd,
+            fid_div_cls_code=fid_div_cls_code,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
+            fid_cond_mrkt_div_code=fid_cond_mrkt_div_code,
             headers=_headers,
             params=_params,
         )
@@ -9885,13 +10274,50 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
     async def get_financial_profit_ratio(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+        self,
+        *,
+        fid_input_iscd: str,
+        fid_div_cls_code: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "FHKST66430400",
+        fid_cond_mrkt_div_code: str = "J",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """국내주식 수익성비율.
 
         국내주식 수익성비율 API입니다.
@@ -9899,9 +10325,90 @@ class GenOpenKisClientOperationsMixin(
         한국투자 HTS(eFriend Plus) > [0635] 재무분석종합 화면의 하단 '4. 수익성비율' 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을
         이해하기 쉽습니다.
 
-        :return: None
-        :rtype: None
+        :keyword fid_input_iscd: FID 입력 종목코드
+
+         000660: 종목코드. Required.
+        :paramtype fid_input_iscd: str
+        :keyword fid_div_cls_code: 분류 구분 코드
+
+         0: 년, 1: 분기. Known values are: "0" and "1". Required.
+        :paramtype fid_div_cls_code: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         FHKST66430400 : 국내주식 수익성비율. "FHKST66430400" Default value is "FHKST66430400".
+        :paramtype tr_id: str
+        :keyword fid_cond_mrkt_div_code: 조건 시장 분류 코드
+
+         J. "J" Default value is "J".
+        :paramtype fid_cond_mrkt_div_code: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output": {
+                        "cptl_ntin_rate": "str",  # Optional. "ucd1d"uc790"ubcf8
+                          "uc21c"uc774"uc775"uc728.
+                        "sale_ntin_rate": "str",  # Optional. "ub9e4"ucd9c"uc561
+                          "uc21c"uc774"uc775"uc728.
+                        "sale_totl_rate": "str",  # Optional. "ub9e4"ucd9c"uc561
+                          "ucd1d"uc774"uc775"uc728.
+                        "self_cptl_ntin_inrt": "str",  # Optional. "uc790"uae30"uc790"ubcf8
+                          "uc21c"uc774"uc775"uc728.
+                        "stac_yymm": "str"  # Optional. "uacb0"uc0b0 "ub144"uc6d4.
+                    },
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -9914,9 +10421,22 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_financial_profit_ratio_request(
+            fid_input_iscd=fid_input_iscd,
+            fid_div_cls_code=fid_div_cls_code,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
+            fid_cond_mrkt_div_code=fid_cond_mrkt_div_code,
             headers=_headers,
             params=_params,
         )
@@ -9937,13 +10457,50 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_financial_other_major_ratio(  # pylint: disable=inconsistent-return-statements
-        self, **kwargs: Any
-    ) -> None:
+    async def get_financial_other_major_ratio(
+        self,
+        *,
+        fid_input_iscd: str,
+        fid_div_cls_code: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "FHKST66430500",
+        fid_cond_mrkt_div_code: str = "J",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """국내주식 기타주요비율.
 
         국내주식 기타주요비율 API입니다.
@@ -9951,9 +10508,86 @@ class GenOpenKisClientOperationsMixin(
         한국투자 HTS(eFriend Plus) > [0635] 재무분석종합 화면의 하단 '9. 기타주요비율' 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을
         이해하기 쉽습니다.
 
-        :return: None
-        :rtype: None
+        :keyword fid_input_iscd: FID 입력 종목코드
+
+         000660: 종목코드. Required.
+        :paramtype fid_input_iscd: str
+        :keyword fid_div_cls_code: 분류 구분 코드
+
+         0: 년, 1: 분기. Known values are: "0" and "1". Required.
+        :paramtype fid_div_cls_code: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         FHKST66430500 : 국내주식 기타주요비율. "FHKST66430500" Default value is "FHKST66430500".
+        :paramtype tr_id: str
+        :keyword fid_cond_mrkt_div_code: 조건 시장 분류 코드
+
+         J. "J" Default value is "J".
+        :paramtype fid_cond_mrkt_div_code: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output": {
+                        "ebitda": "str",  # Optional. EBITDA.
+                        "ev_ebitda": "str",  # Optional. EV_EBITDA.
+                        "eva": "str",  # Optional. EVA.
+                        "payout_rate": "str",  # Optional. "ubc30"ub2f9 "uc131"ud5a5.
+                        "stac_yymm": "str"  # Optional. "uacb0"uc0b0 "ub144"uc6d4.
+                    },
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -9966,9 +10600,22 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_financial_other_major_ratio_request(
+            fid_input_iscd=fid_input_iscd,
+            fid_div_cls_code=fid_div_cls_code,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
+            fid_cond_mrkt_div_code=fid_cond_mrkt_div_code,
             headers=_headers,
             params=_params,
         )
@@ -9989,13 +10636,50 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_financial_stability_ratio(  # pylint: disable=inconsistent-return-statements
-        self, **kwargs: Any
-    ) -> None:
+    async def get_financial_stability_ratio(
+        self,
+        *,
+        fid_input_iscd: str,
+        fid_div_cls_code: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "FHKST66430600",
+        fid_cond_mrkt_div_code: str = "J",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """국내주식 안정성비율.
 
         국내주식 안정성비율 API입니다.
@@ -10003,9 +10687,87 @@ class GenOpenKisClientOperationsMixin(
         한국투자 HTS(eFriend Plus) > [0635] 재무분석종합 화면의 하단 '5. 안정성비율' 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을
         이해하기 쉽습니다.
 
-        :return: None
-        :rtype: None
+        :keyword fid_input_iscd: FID 입력 종목코드
+
+         000660: 종목코드. Required.
+        :paramtype fid_input_iscd: str
+        :keyword fid_div_cls_code: 분류 구분 코드
+
+         0: 년, 1: 분기. Known values are: "0" and "1". Required.
+        :paramtype fid_div_cls_code: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         FHKST66430600 : 국내주식 대차대조표. "FHKST66430600" Default value is "FHKST66430600".
+        :paramtype tr_id: str
+        :keyword fid_cond_mrkt_div_code: 조건 시장 분류 코드
+
+         J. "J" Default value is "J".
+        :paramtype fid_cond_mrkt_div_code: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output": {
+                        "bram_depn": "str",  # Optional. "ucc28"uc785"uae08
+                          "uc758"uc874"ub3c4.
+                        "crnt_rate": "str",  # Optional. "uc720"ub3d9 "ube44"uc728.
+                        "lblt_rate": "str",  # Optional. "ubd80"ucc44 "ube44"uc728.
+                        "quck_rate": "str",  # Optional. "ub2f9"uc88c "ube44"uc728.
+                        "stacc_yymm": "str"  # Optional. "uacb0"uc0b0 "ub144"uc6d4.
+                    },
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -10018,9 +10780,22 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_financial_stability_ratio_request(
+            fid_input_iscd=fid_input_iscd,
+            fid_div_cls_code=fid_div_cls_code,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
+            fid_cond_mrkt_div_code=fid_cond_mrkt_div_code,
             headers=_headers,
             params=_params,
         )
@@ -10041,13 +10816,50 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
     async def get_financial_growth_ratio(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+        self,
+        *,
+        fid_input_iscd: str,
+        fid_div_cls_code: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "FHKST66430800",
+        fid_cond_mrkt_div_code: str = "J",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """국내주식 성장성비율.
 
         국내주식 성장성비율 API입니다.
@@ -10055,9 +10867,89 @@ class GenOpenKisClientOperationsMixin(
         한국투자 HTS(eFriend Plus) > [0635] 재무분석종합 화면의 하단 '7.성장성비율' 기능을 API로 개발한 사항으로, 해당 화면을 참고하시면 기능을
         이해하기 쉽습니다.
 
-        :return: None
-        :rtype: None
+        :keyword fid_input_iscd: FID 입력 종목코드
+
+         000660: 종목코드. Required.
+        :paramtype fid_input_iscd: str
+        :keyword fid_div_cls_code: 분류 구분 코드
+
+         0: 년, 1: 분기. Known values are: "0" and "1". Required.
+        :paramtype fid_div_cls_code: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         FHKST66430800 : 국내주식 성장성비율. "FHKST66430800" Default value is "FHKST66430800".
+        :paramtype tr_id: str
+        :keyword fid_cond_mrkt_div_code: 조건 시장 분류 코드
+
+         J. "J" Default value is "J".
+        :paramtype fid_cond_mrkt_div_code: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output": {
+                        "bsop_prfi_inrt": "str",  # Optional. "uc601"uc5c5 "uc774"uc775
+                          "uc99d"uac00"uc728.
+                        "equt_inrt": "str",  # Optional. "uc790"uae30"uc790"ubcf8
+                          "uc99d"uac00"uc728.
+                        "grs": "str",  # Optional. "ub9e4"ucd9c"uc561 "uc99d"uac00"uc728.
+                        "stac_yymm": "str",  # Optional. "uacb0"uc0b0 "ub144"uc6d4.
+                        "totl_aset_inrt": "str"  # Optional. "ucd1d"uc790"uc0b0
+                          "uc99d"uac00"uc728.
+                    },
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -10070,9 +10962,22 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_financial_growth_ratio_request(
+            fid_input_iscd=fid_input_iscd,
+            fid_div_cls_code=fid_div_cls_code,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
+            fid_cond_mrkt_div_code=fid_cond_mrkt_div_code,
             headers=_headers,
             params=_params,
         )
@@ -10093,13 +10998,48 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_financial_estimate_perform(  # pylint: disable=inconsistent-return-statements
-        self, **kwargs: Any
-    ) -> None:
+    async def get_financial_estimate_perform(
+        self,
+        *,
+        sht_cd: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "HHKST668300C0",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """국내주식 종목추정실적.
 
         국내주식 종목추정실적 API입니다.
@@ -10109,9 +11049,112 @@ class GenOpenKisClientOperationsMixin(
         ※ 본 화면의 추정실적 및 투자의견은 당월 초의 애널리스트의 의견사항이므로 월중 변동 사항이 있을 수 있음을 유의하시기 바랍니다.:code:`<br/>`
         ※ 종목별 수익추정은 리서치본부에서 매월 발표되는 거래소, 코스닥 160여개 기업에 한정합니다. 구체적인 종목 리스트는 추정종목리스트를 참고하기 바랍니다.
 
-        :return: None
-        :rtype: None
+        :keyword sht_cd: 종목코드 (ex, 005930). Required.
+        :paramtype sht_cd: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         HHKST668300C0 : 국내주식 종목추정실적. "HHKST668300C0" Default value is "HHKST668300C0".
+        :paramtype tr_id: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output1": {
+                        "capital": "str",  # Optional. "uc790"ubcf8"uae08.
+                        "estdate": "str",  # Optional. "ucd94"uc815"uc77c"uc790.
+                        "forn_item_lmtrt": "str",  # Optional. "ud589"uc0ac"uac00.
+                        "item_kor_nm": "str",  # Optional. HTS"ud55c"uae00"uc885"ubaa9"uba85.
+                        "name1": "str",  # Optional. "uc791"uc131"uc7901.
+                        "name2": "str",  # Optional. "uc791"uc131"uc7902.
+                        "rcmd_name": "str",  # Optional. "uc758"uacac.
+                        "sht_cd": "str"  # Optional. ELW"ub2e8"ucd95"uc885"ubaa9"ucf54"ub4dc.
+                    },
+                    "output2": [
+                        {
+                            "data1": "str",  # Optional.
+                              "uacb0"uc0b0"uc5f0"uc6d4(outblock4) "ucc38"uc870.
+                            "data2": "str",  # Optional.
+                              "uacb0"uc0b0"uc5f0"uc6d4(outblock4) "ucc38"uc870.
+                            "data3": "str",  # Optional.
+                              "uacb0"uc0b0"uc5f0"uc6d4(outblock4) "ucc38"uc870.
+                            "data4": "str",  # Optional.
+                              "uacb0"uc0b0"uc5f0"uc6d4(outblock4) "ucc38"uc870.
+                            "data5": "str"  # Optional.
+                              "uacb0"uc0b0"uc5f0"uc6d4(outblock4) "ucc38"uc870.
+                        }
+                    ],
+                    "output3": [
+                        {
+                            "data1": "str",  # Optional.
+                              "uacb0"uc0b0"uc5f0"uc6d4(outblock4) "ucc38"uc870.
+                            "data2": "str",  # Optional.
+                              "uacb0"uc0b0"uc5f0"uc6d4(outblock4) "ucc38"uc870.
+                            "data3": "str",  # Optional.
+                              "uacb0"uc0b0"uc5f0"uc6d4(outblock4) "ucc38"uc870.
+                            "data4": "str",  # Optional.
+                              "uacb0"uc0b0"uc5f0"uc6d4(outblock4) "ucc38"uc870.
+                            "data5": "str"  # Optional.
+                              "uacb0"uc0b0"uc5f0"uc6d4(outblock4) "ucc38"uc870.
+                        }
+                    ],
+                    "output4": [
+                        {
+                            "dt": "str"  # Optional. "uacb0"uc0b0"ub144"uc6d4.
+                        }
+                    ],
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -10124,9 +11167,20 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_financial_estimate_perform_request(
+            sht_cd=sht_cd,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
             headers=_headers,
             params=_params,
         )
@@ -10147,8 +11201,29 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
     async def get_ksd_dividend_info(
