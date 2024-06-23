@@ -255,8 +255,8 @@ def build_gen_open_kis_get_domestic_stock_conclusion_request(  # pylint: disable
 
 def build_gen_open_kis_get_domestic_stock_daily_price_request(  # pylint: disable=name-too-long
     *,
-    fid_org_adj_prc: str,
     fid_input_iscd: str,
+    fid_org_adj_prc: str,
     fid_period_div_code: str,
     personalseckey: Optional[str] = None,
     tr_cont: str = "",
@@ -280,11 +280,11 @@ def build_gen_open_kis_get_domestic_stock_daily_price_request(  # pylint: disabl
     _url = "/uapi/domestic-stock/v1/quotations/inquire-daily-price"
 
     # Construct parameters
-    _params["fid_org_adj_prc"] = _SERIALIZER.query(
-        "fid_org_adj_prc", fid_org_adj_prc, "str"
-    )
     _params["fid_input_iscd"] = _SERIALIZER.query(
         "fid_input_iscd", fid_input_iscd, "str"
+    )
+    _params["fid_org_adj_prc"] = _SERIALIZER.query(
+        "fid_org_adj_prc", fid_org_adj_prc, "str"
     )
     _params["fid_cond_mrkt_div_code"] = _SERIALIZER.query(
         "fid_cond_mrkt_div_code", fid_cond_mrkt_div_code, "str"
@@ -515,8 +515,8 @@ def build_gen_open_kis_get_domestic_stock_member_request(  # pylint: disable=nam
 
 def build_gen_open_kis_get_domestic_stock_period_price_request(  # pylint: disable=name-too-long
     *,
-    fid_org_adj_prc: str,
     fid_input_iscd: str,
+    fid_org_adj_prc: str,
     fid_input_date1: str,
     fid_input_date2: str,
     fid_period_div_code: str,
@@ -534,11 +534,11 @@ def build_gen_open_kis_get_domestic_stock_period_price_request(  # pylint: disab
     _url = "/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice"
 
     # Construct parameters
-    _params["fid_org_adj_prc"] = _SERIALIZER.query(
-        "fid_org_adj_prc", fid_org_adj_prc, "str"
-    )
     _params["fid_input_iscd"] = _SERIALIZER.query(
         "fid_input_iscd", fid_input_iscd, "str"
+    )
+    _params["fid_org_adj_prc"] = _SERIALIZER.query(
+        "fid_org_adj_prc", fid_org_adj_prc, "str"
     )
     _params["fid_input_date_1"] = _SERIALIZER.query(
         "fid_input_date1", fid_input_date1, "str", max_length=10
@@ -3255,112 +3255,768 @@ def build_gen_open_kis_get_financial_estimate_perform_request(  # pylint: disabl
     )
 
 
-def build_gen_open_kis_get_ksd_dividend_info_request(
+def build_gen_open_kis_get_ksd_dividend_info_request(  # pylint: disable=name-too-long
+    *,
+    cts: str = "",
+    f_dt: str,
+    t_dt: str,
+    sht_cd: str,
+    high_gb: str,
+    gb1: str,
+    personalseckey: Optional[str] = None,
+    tr_cont: str = "",
+    custtype: str = "P",
+    seq_no: Optional[str] = None,
+    mac_address: Optional[str] = None,
+    phone_number: Optional[str] = None,
+    ip_address: Optional[str] = None,
+    hashkey: Optional[str] = None,
+    gt_uid: Optional[str] = None,
+    tr_id: str = "HHKDB669102C0",
     **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
     # Construct URL
     _url = "/uapi/domestic-stock/v1/ksdinfo/dividend"
 
-    return HttpRequest(method="GET", url=_url, **kwargs)
+    # Construct parameters
+    _params["cts"] = _SERIALIZER.query("cts", cts, "str")
+    _params["f_dt"] = _SERIALIZER.query("f_dt", f_dt, "str")
+    _params["t_dt"] = _SERIALIZER.query("t_dt", t_dt, "str")
+    _params["sht_cd"] = _SERIALIZER.query("sht_cd", sht_cd, "str")
+    _params["high_gb"] = _SERIALIZER.query("high_gb", high_gb, "str")
+    _params["gb1"] = _SERIALIZER.query("gb1", gb1, "str")
+
+    # Construct headers
+    if personalseckey is not None:
+        _headers["personalseckey"] = _SERIALIZER.header(
+            "personalseckey", personalseckey, "str"
+        )
+    if tr_cont is not None:
+        _headers["tr_cont"] = _SERIALIZER.header("tr_cont", tr_cont, "str")
+    if custtype is not None:
+        _headers["custtype"] = _SERIALIZER.header("custtype", custtype, "str")
+    if seq_no is not None:
+        _headers["seq_no"] = _SERIALIZER.header("seq_no", seq_no, "str")
+    if mac_address is not None:
+        _headers["mac_address"] = _SERIALIZER.header("mac_address", mac_address, "str")
+    if phone_number is not None:
+        _headers["phone_number"] = _SERIALIZER.header(
+            "phone_number", phone_number, "str"
+        )
+    if ip_address is not None:
+        _headers["ip_address"] = _SERIALIZER.header("ip_address", ip_address, "str")
+    if hashkey is not None:
+        _headers["hashkey"] = _SERIALIZER.header("hashkey", hashkey, "str")
+    if gt_uid is not None:
+        _headers["gt_uid"] = _SERIALIZER.header("gt_uid", gt_uid, "str")
+    _headers["tr_id"] = _SERIALIZER.header("tr_id", tr_id, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
-def build_gen_open_kis_get_ksd_purchase_request_request(
+def build_gen_open_kis_get_ksd_purchase_request_request(  # pylint: disable=name-too-long
+    *,
+    cts: str = "",
+    f_dt: str,
+    t_dt: str,
+    sht_cd: str,
+    personalseckey: Optional[str] = None,
+    tr_cont: str = "",
+    custtype: str = "P",
+    seq_no: Optional[str] = None,
+    mac_address: Optional[str] = None,
+    phone_number: Optional[str] = None,
+    ip_address: Optional[str] = None,
+    hashkey: Optional[str] = None,
+    gt_uid: Optional[str] = None,
+    tr_id: str = "HHKDB669103C0",
     **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
     # Construct URL
     _url = "/uapi/domestic-stock/v1/ksdinfo/purreq"
 
-    return HttpRequest(method="GET", url=_url, **kwargs)
+    # Construct parameters
+    _params["cts"] = _SERIALIZER.query("cts", cts, "str")
+    _params["f_dt"] = _SERIALIZER.query("f_dt", f_dt, "str")
+    _params["t_dt"] = _SERIALIZER.query("t_dt", t_dt, "str")
+    _params["sht_cd"] = _SERIALIZER.query("sht_cd", sht_cd, "str")
+
+    # Construct headers
+    if personalseckey is not None:
+        _headers["personalseckey"] = _SERIALIZER.header(
+            "personalseckey", personalseckey, "str"
+        )
+    if tr_cont is not None:
+        _headers["tr_cont"] = _SERIALIZER.header("tr_cont", tr_cont, "str")
+    if custtype is not None:
+        _headers["custtype"] = _SERIALIZER.header("custtype", custtype, "str")
+    if seq_no is not None:
+        _headers["seq_no"] = _SERIALIZER.header("seq_no", seq_no, "str")
+    if mac_address is not None:
+        _headers["mac_address"] = _SERIALIZER.header("mac_address", mac_address, "str")
+    if phone_number is not None:
+        _headers["phone_number"] = _SERIALIZER.header(
+            "phone_number", phone_number, "str"
+        )
+    if ip_address is not None:
+        _headers["ip_address"] = _SERIALIZER.header("ip_address", ip_address, "str")
+    if hashkey is not None:
+        _headers["hashkey"] = _SERIALIZER.header("hashkey", hashkey, "str")
+    if gt_uid is not None:
+        _headers["gt_uid"] = _SERIALIZER.header("gt_uid", gt_uid, "str")
+    _headers["tr_id"] = _SERIALIZER.header("tr_id", tr_id, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
-def build_gen_open_kis_get_ksd_merger_and_split_request(
+def build_gen_open_kis_get_ksd_merger_and_split_request(  # pylint: disable=name-too-long
+    *,
+    cts: str = "",
+    f_dt: str,
+    t_dt: str,
+    sht_cd: str,
+    personalseckey: Optional[str] = None,
+    tr_cont: str = "",
+    custtype: str = "P",
+    seq_no: Optional[str] = None,
+    mac_address: Optional[str] = None,
+    phone_number: Optional[str] = None,
+    ip_address: Optional[str] = None,
+    hashkey: Optional[str] = None,
+    gt_uid: Optional[str] = None,
+    tr_id: str = "HHKDB669104C0",
     **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
     # Construct URL
     _url = "/uapi/domestic-stock/v1/ksdinfo/merger-split"
 
-    return HttpRequest(method="GET", url=_url, **kwargs)
+    # Construct parameters
+    _params["cts"] = _SERIALIZER.query("cts", cts, "str")
+    _params["f_dt"] = _SERIALIZER.query("f_dt", f_dt, "str")
+    _params["t_dt"] = _SERIALIZER.query("t_dt", t_dt, "str")
+    _params["sht_cd"] = _SERIALIZER.query("sht_cd", sht_cd, "str")
+
+    # Construct headers
+    if personalseckey is not None:
+        _headers["personalseckey"] = _SERIALIZER.header(
+            "personalseckey", personalseckey, "str"
+        )
+    if tr_cont is not None:
+        _headers["tr_cont"] = _SERIALIZER.header("tr_cont", tr_cont, "str")
+    if custtype is not None:
+        _headers["custtype"] = _SERIALIZER.header("custtype", custtype, "str")
+    if seq_no is not None:
+        _headers["seq_no"] = _SERIALIZER.header("seq_no", seq_no, "str")
+    if mac_address is not None:
+        _headers["mac_address"] = _SERIALIZER.header("mac_address", mac_address, "str")
+    if phone_number is not None:
+        _headers["phone_number"] = _SERIALIZER.header(
+            "phone_number", phone_number, "str"
+        )
+    if ip_address is not None:
+        _headers["ip_address"] = _SERIALIZER.header("ip_address", ip_address, "str")
+    if hashkey is not None:
+        _headers["hashkey"] = _SERIALIZER.header("hashkey", hashkey, "str")
+    if gt_uid is not None:
+        _headers["gt_uid"] = _SERIALIZER.header("gt_uid", gt_uid, "str")
+    _headers["tr_id"] = _SERIALIZER.header("tr_id", tr_id, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
-def build_gen_open_kis_get_ksd_change_par_value_request(
+def build_gen_open_kis_get_ksd_change_par_value_request(  # pylint: disable=name-too-long
+    *,
+    cts: str = "",
+    f_dt: str,
+    t_dt: str,
+    sht_cd: str,
+    market_gb: str,
+    personalseckey: Optional[str] = None,
+    tr_cont: str = "",
+    custtype: str = "P",
+    seq_no: Optional[str] = None,
+    mac_address: Optional[str] = None,
+    phone_number: Optional[str] = None,
+    ip_address: Optional[str] = None,
+    hashkey: Optional[str] = None,
+    gt_uid: Optional[str] = None,
+    tr_id: str = "HHKDB669105C0",
     **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
     # Construct URL
     _url = "/uapi/domestic-stock/v1/ksdinfo/rev-split"
 
-    return HttpRequest(method="GET", url=_url, **kwargs)
+    # Construct parameters
+    _params["cts"] = _SERIALIZER.query("cts", cts, "str")
+    _params["f_dt"] = _SERIALIZER.query("f_dt", f_dt, "str")
+    _params["t_dt"] = _SERIALIZER.query("t_dt", t_dt, "str")
+    _params["sht_cd"] = _SERIALIZER.query("sht_cd", sht_cd, "str")
+    _params["market_gb"] = _SERIALIZER.query("market_gb", market_gb, "str")
+
+    # Construct headers
+    if personalseckey is not None:
+        _headers["personalseckey"] = _SERIALIZER.header(
+            "personalseckey", personalseckey, "str"
+        )
+    if tr_cont is not None:
+        _headers["tr_cont"] = _SERIALIZER.header("tr_cont", tr_cont, "str")
+    if custtype is not None:
+        _headers["custtype"] = _SERIALIZER.header("custtype", custtype, "str")
+    if seq_no is not None:
+        _headers["seq_no"] = _SERIALIZER.header("seq_no", seq_no, "str")
+    if mac_address is not None:
+        _headers["mac_address"] = _SERIALIZER.header("mac_address", mac_address, "str")
+    if phone_number is not None:
+        _headers["phone_number"] = _SERIALIZER.header(
+            "phone_number", phone_number, "str"
+        )
+    if ip_address is not None:
+        _headers["ip_address"] = _SERIALIZER.header("ip_address", ip_address, "str")
+    if hashkey is not None:
+        _headers["hashkey"] = _SERIALIZER.header("hashkey", hashkey, "str")
+    if gt_uid is not None:
+        _headers["gt_uid"] = _SERIALIZER.header("gt_uid", gt_uid, "str")
+    _headers["tr_id"] = _SERIALIZER.header("tr_id", tr_id, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
-def build_gen_open_kis_get_ksd_decrease_capital_request(
+def build_gen_open_kis_get_ksd_decrease_capital_request(  # pylint: disable=name-too-long
+    *,
+    cts: str = "",
+    f_dt: str,
+    t_dt: str,
+    sht_cd: str,
+    personalseckey: Optional[str] = None,
+    tr_cont: str = "",
+    custtype: str = "P",
+    seq_no: Optional[str] = None,
+    mac_address: Optional[str] = None,
+    phone_number: Optional[str] = None,
+    ip_address: Optional[str] = None,
+    hashkey: Optional[str] = None,
+    gt_uid: Optional[str] = None,
+    tr_id: str = "HHKDB669106C0",
     **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
     # Construct URL
     _url = "/uapi/domestic-stock/v1/ksdinfo/cap-dcrs"
 
-    return HttpRequest(method="GET", url=_url, **kwargs)
+    # Construct parameters
+    _params["cts"] = _SERIALIZER.query("cts", cts, "str")
+    _params["f_dt"] = _SERIALIZER.query("f_dt", f_dt, "str")
+    _params["t_dt"] = _SERIALIZER.query("t_dt", t_dt, "str")
+    _params["sht_cd"] = _SERIALIZER.query("sht_cd", sht_cd, "str")
+
+    # Construct headers
+    if personalseckey is not None:
+        _headers["personalseckey"] = _SERIALIZER.header(
+            "personalseckey", personalseckey, "str"
+        )
+    if tr_cont is not None:
+        _headers["tr_cont"] = _SERIALIZER.header("tr_cont", tr_cont, "str")
+    if custtype is not None:
+        _headers["custtype"] = _SERIALIZER.header("custtype", custtype, "str")
+    if seq_no is not None:
+        _headers["seq_no"] = _SERIALIZER.header("seq_no", seq_no, "str")
+    if mac_address is not None:
+        _headers["mac_address"] = _SERIALIZER.header("mac_address", mac_address, "str")
+    if phone_number is not None:
+        _headers["phone_number"] = _SERIALIZER.header(
+            "phone_number", phone_number, "str"
+        )
+    if ip_address is not None:
+        _headers["ip_address"] = _SERIALIZER.header("ip_address", ip_address, "str")
+    if hashkey is not None:
+        _headers["hashkey"] = _SERIALIZER.header("hashkey", hashkey, "str")
+    if gt_uid is not None:
+        _headers["gt_uid"] = _SERIALIZER.header("gt_uid", gt_uid, "str")
+    _headers["tr_id"] = _SERIALIZER.header("tr_id", tr_id, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
-def build_gen_open_kis_get_ksd_list_info_request(
+def build_gen_open_kis_get_ksd_list_info_request(  # pylint: disable=name-too-long
+    *,
+    cts: str = "",
+    f_dt: str,
+    t_dt: str,
+    sht_cd: str,
+    personalseckey: Optional[str] = None,
+    tr_cont: str = "",
+    custtype: str = "P",
+    seq_no: Optional[str] = None,
+    mac_address: Optional[str] = None,
+    phone_number: Optional[str] = None,
+    ip_address: Optional[str] = None,
+    hashkey: Optional[str] = None,
+    gt_uid: Optional[str] = None,
+    tr_id: str = "HHKDB669107C0",
     **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
     # Construct URL
     _url = "/uapi/domestic-stock/v1/ksdinfo/list-info"
 
-    return HttpRequest(method="GET", url=_url, **kwargs)
+    # Construct parameters
+    _params["cts"] = _SERIALIZER.query("cts", cts, "str")
+    _params["f_dt"] = _SERIALIZER.query("f_dt", f_dt, "str")
+    _params["t_dt"] = _SERIALIZER.query("t_dt", t_dt, "str")
+    _params["sht_cd"] = _SERIALIZER.query("sht_cd", sht_cd, "str")
+
+    # Construct headers
+    if personalseckey is not None:
+        _headers["personalseckey"] = _SERIALIZER.header(
+            "personalseckey", personalseckey, "str"
+        )
+    if tr_cont is not None:
+        _headers["tr_cont"] = _SERIALIZER.header("tr_cont", tr_cont, "str")
+    if custtype is not None:
+        _headers["custtype"] = _SERIALIZER.header("custtype", custtype, "str")
+    if seq_no is not None:
+        _headers["seq_no"] = _SERIALIZER.header("seq_no", seq_no, "str")
+    if mac_address is not None:
+        _headers["mac_address"] = _SERIALIZER.header("mac_address", mac_address, "str")
+    if phone_number is not None:
+        _headers["phone_number"] = _SERIALIZER.header(
+            "phone_number", phone_number, "str"
+        )
+    if ip_address is not None:
+        _headers["ip_address"] = _SERIALIZER.header("ip_address", ip_address, "str")
+    if hashkey is not None:
+        _headers["hashkey"] = _SERIALIZER.header("hashkey", hashkey, "str")
+    if gt_uid is not None:
+        _headers["gt_uid"] = _SERIALIZER.header("gt_uid", gt_uid, "str")
+    _headers["tr_id"] = _SERIALIZER.header("tr_id", tr_id, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
 def build_gen_open_kis_get_ksd_public_offer_subscription_request(  # pylint: disable=name-too-long
+    *,
+    cts: str = "",
+    f_dt: str,
+    t_dt: str,
+    sht_cd: str,
+    personalseckey: Optional[str] = None,
+    tr_cont: str = "",
+    custtype: str = "P",
+    seq_no: Optional[str] = None,
+    mac_address: Optional[str] = None,
+    phone_number: Optional[str] = None,
+    ip_address: Optional[str] = None,
+    hashkey: Optional[str] = None,
+    gt_uid: Optional[str] = None,
+    tr_id: str = "HHKDB669108C0",
     **kwargs: Any,
 ) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
     # Construct URL
     _url = "/uapi/domestic-stock/v1/ksdinfo/pub-offer"
 
-    return HttpRequest(method="GET", url=_url, **kwargs)
+    # Construct parameters
+    _params["cts"] = _SERIALIZER.query("cts", cts, "str")
+    _params["f_dt"] = _SERIALIZER.query("f_dt", f_dt, "str")
+    _params["t_dt"] = _SERIALIZER.query("t_dt", t_dt, "str")
+    _params["sht_cd"] = _SERIALIZER.query("sht_cd", sht_cd, "str")
+
+    # Construct headers
+    if personalseckey is not None:
+        _headers["personalseckey"] = _SERIALIZER.header(
+            "personalseckey", personalseckey, "str"
+        )
+    if tr_cont is not None:
+        _headers["tr_cont"] = _SERIALIZER.header("tr_cont", tr_cont, "str")
+    if custtype is not None:
+        _headers["custtype"] = _SERIALIZER.header("custtype", custtype, "str")
+    if seq_no is not None:
+        _headers["seq_no"] = _SERIALIZER.header("seq_no", seq_no, "str")
+    if mac_address is not None:
+        _headers["mac_address"] = _SERIALIZER.header("mac_address", mac_address, "str")
+    if phone_number is not None:
+        _headers["phone_number"] = _SERIALIZER.header(
+            "phone_number", phone_number, "str"
+        )
+    if ip_address is not None:
+        _headers["ip_address"] = _SERIALIZER.header("ip_address", ip_address, "str")
+    if hashkey is not None:
+        _headers["hashkey"] = _SERIALIZER.header("hashkey", hashkey, "str")
+    if gt_uid is not None:
+        _headers["gt_uid"] = _SERIALIZER.header("gt_uid", gt_uid, "str")
+    _headers["tr_id"] = _SERIALIZER.header("tr_id", tr_id, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
-def build_gen_open_kis_get_ksd_forfeited_stock_request(
+def build_gen_open_kis_get_ksd_forfeited_stock_request(  # pylint: disable=name-too-long
+    *,
+    cts: str = "",
+    f_dt: str,
+    t_dt: str,
+    sht_cd: str,
+    personalseckey: Optional[str] = None,
+    tr_cont: str = "",
+    custtype: str = "P",
+    seq_no: Optional[str] = None,
+    mac_address: Optional[str] = None,
+    phone_number: Optional[str] = None,
+    ip_address: Optional[str] = None,
+    hashkey: Optional[str] = None,
+    gt_uid: Optional[str] = None,
+    tr_id: str = "HHKDB669109C0",
     **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
     # Construct URL
     _url = "/uapi/domestic-stock/v1/ksdinfo/forfeit"
 
-    return HttpRequest(method="GET", url=_url, **kwargs)
+    # Construct parameters
+    _params["cts"] = _SERIALIZER.query("cts", cts, "str")
+    _params["f_dt"] = _SERIALIZER.query("f_dt", f_dt, "str")
+    _params["t_dt"] = _SERIALIZER.query("t_dt", t_dt, "str")
+    _params["sht_cd"] = _SERIALIZER.query("sht_cd", sht_cd, "str")
+
+    # Construct headers
+    if personalseckey is not None:
+        _headers["personalseckey"] = _SERIALIZER.header(
+            "personalseckey", personalseckey, "str"
+        )
+    if tr_cont is not None:
+        _headers["tr_cont"] = _SERIALIZER.header("tr_cont", tr_cont, "str")
+    if custtype is not None:
+        _headers["custtype"] = _SERIALIZER.header("custtype", custtype, "str")
+    if seq_no is not None:
+        _headers["seq_no"] = _SERIALIZER.header("seq_no", seq_no, "str")
+    if mac_address is not None:
+        _headers["mac_address"] = _SERIALIZER.header("mac_address", mac_address, "str")
+    if phone_number is not None:
+        _headers["phone_number"] = _SERIALIZER.header(
+            "phone_number", phone_number, "str"
+        )
+    if ip_address is not None:
+        _headers["ip_address"] = _SERIALIZER.header("ip_address", ip_address, "str")
+    if hashkey is not None:
+        _headers["hashkey"] = _SERIALIZER.header("hashkey", hashkey, "str")
+    if gt_uid is not None:
+        _headers["gt_uid"] = _SERIALIZER.header("gt_uid", gt_uid, "str")
+    _headers["tr_id"] = _SERIALIZER.header("tr_id", tr_id, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
-def build_gen_open_kis_get_ksd_mandatory_deposit_request(
+def build_gen_open_kis_get_ksd_mandatory_deposit_request(  # pylint: disable=name-too-long
+    *,
+    cts: str = "",
+    f_dt: str,
+    t_dt: str,
+    sht_cd: str,
+    personalseckey: Optional[str] = None,
+    tr_cont: str = "",
+    custtype: str = "P",
+    seq_no: Optional[str] = None,
+    mac_address: Optional[str] = None,
+    phone_number: Optional[str] = None,
+    ip_address: Optional[str] = None,
+    hashkey: Optional[str] = None,
+    gt_uid: Optional[str] = None,
+    tr_id: str = "HHKDB669110C0",
     **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
     # Construct URL
     _url = "/uapi/domestic-stock/v1/ksdinfo/mand-deposit"
 
-    return HttpRequest(method="GET", url=_url, **kwargs)
+    # Construct parameters
+    _params["cts"] = _SERIALIZER.query("cts", cts, "str")
+    _params["f_dt"] = _SERIALIZER.query("f_dt", f_dt, "str")
+    _params["t_dt"] = _SERIALIZER.query("t_dt", t_dt, "str")
+    _params["sht_cd"] = _SERIALIZER.query("sht_cd", sht_cd, "str")
+
+    # Construct headers
+    if personalseckey is not None:
+        _headers["personalseckey"] = _SERIALIZER.header(
+            "personalseckey", personalseckey, "str"
+        )
+    if tr_cont is not None:
+        _headers["tr_cont"] = _SERIALIZER.header("tr_cont", tr_cont, "str")
+    if custtype is not None:
+        _headers["custtype"] = _SERIALIZER.header("custtype", custtype, "str")
+    if seq_no is not None:
+        _headers["seq_no"] = _SERIALIZER.header("seq_no", seq_no, "str")
+    if mac_address is not None:
+        _headers["mac_address"] = _SERIALIZER.header("mac_address", mac_address, "str")
+    if phone_number is not None:
+        _headers["phone_number"] = _SERIALIZER.header(
+            "phone_number", phone_number, "str"
+        )
+    if ip_address is not None:
+        _headers["ip_address"] = _SERIALIZER.header("ip_address", ip_address, "str")
+    if hashkey is not None:
+        _headers["hashkey"] = _SERIALIZER.header("hashkey", hashkey, "str")
+    if gt_uid is not None:
+        _headers["gt_uid"] = _SERIALIZER.header("gt_uid", gt_uid, "str")
+    _headers["tr_id"] = _SERIALIZER.header("tr_id", tr_id, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
-def build_gen_open_kis_get_ksd_right_issue_request(
+def build_gen_open_kis_get_ksd_right_issue_request(  # pylint: disable=name-too-long
+    *,
+    cts: str = "",
+    f_dt: str,
+    t_dt: str,
+    sht_cd: str,
+    gb1: str,
+    personalseckey: Optional[str] = None,
+    tr_cont: str = "",
+    custtype: str = "P",
+    seq_no: Optional[str] = None,
+    mac_address: Optional[str] = None,
+    phone_number: Optional[str] = None,
+    ip_address: Optional[str] = None,
+    hashkey: Optional[str] = None,
+    gt_uid: Optional[str] = None,
+    tr_id: str = "HHKDB669100C0",
     **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
     # Construct URL
     _url = "/uapi/domestic-stock/v1/ksdinfo/paidin-capin"
 
-    return HttpRequest(method="GET", url=_url, **kwargs)
+    # Construct parameters
+    _params["cts"] = _SERIALIZER.query("cts", cts, "str")
+    _params["f_dt"] = _SERIALIZER.query("f_dt", f_dt, "str")
+    _params["t_dt"] = _SERIALIZER.query("t_dt", t_dt, "str")
+    _params["sht_cd"] = _SERIALIZER.query("sht_cd", sht_cd, "str")
+    _params["gb1"] = _SERIALIZER.query("gb1", gb1, "str")
+
+    # Construct headers
+    if personalseckey is not None:
+        _headers["personalseckey"] = _SERIALIZER.header(
+            "personalseckey", personalseckey, "str"
+        )
+    if tr_cont is not None:
+        _headers["tr_cont"] = _SERIALIZER.header("tr_cont", tr_cont, "str")
+    if custtype is not None:
+        _headers["custtype"] = _SERIALIZER.header("custtype", custtype, "str")
+    if seq_no is not None:
+        _headers["seq_no"] = _SERIALIZER.header("seq_no", seq_no, "str")
+    if mac_address is not None:
+        _headers["mac_address"] = _SERIALIZER.header("mac_address", mac_address, "str")
+    if phone_number is not None:
+        _headers["phone_number"] = _SERIALIZER.header(
+            "phone_number", phone_number, "str"
+        )
+    if ip_address is not None:
+        _headers["ip_address"] = _SERIALIZER.header("ip_address", ip_address, "str")
+    if hashkey is not None:
+        _headers["hashkey"] = _SERIALIZER.header("hashkey", hashkey, "str")
+    if gt_uid is not None:
+        _headers["gt_uid"] = _SERIALIZER.header("gt_uid", gt_uid, "str")
+    _headers["tr_id"] = _SERIALIZER.header("tr_id", tr_id, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
-def build_gen_open_kis_get_ksd_bonus_issue_request(
+def build_gen_open_kis_get_ksd_bonus_issue_request(  # pylint: disable=name-too-long
+    *,
+    cts: str = "",
+    f_dt: str,
+    t_dt: str,
+    sht_cd: str,
+    personalseckey: Optional[str] = None,
+    tr_cont: str = "",
+    custtype: str = "P",
+    seq_no: Optional[str] = None,
+    mac_address: Optional[str] = None,
+    phone_number: Optional[str] = None,
+    ip_address: Optional[str] = None,
+    hashkey: Optional[str] = None,
+    gt_uid: Optional[str] = None,
+    tr_id: str = "HHKDB669101C0",
     **kwargs: Any,
-) -> HttpRequest:  # pylint: disable=name-too-long
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
     # Construct URL
     _url = "/uapi/domestic-stock/v1/ksdinfo/bonus-issue"
 
-    return HttpRequest(method="GET", url=_url, **kwargs)
+    # Construct parameters
+    _params["cts"] = _SERIALIZER.query("cts", cts, "str")
+    _params["f_dt"] = _SERIALIZER.query("f_dt", f_dt, "str")
+    _params["t_dt"] = _SERIALIZER.query("t_dt", t_dt, "str")
+    _params["sht_cd"] = _SERIALIZER.query("sht_cd", sht_cd, "str")
+
+    # Construct headers
+    if personalseckey is not None:
+        _headers["personalseckey"] = _SERIALIZER.header(
+            "personalseckey", personalseckey, "str"
+        )
+    if tr_cont is not None:
+        _headers["tr_cont"] = _SERIALIZER.header("tr_cont", tr_cont, "str")
+    if custtype is not None:
+        _headers["custtype"] = _SERIALIZER.header("custtype", custtype, "str")
+    if seq_no is not None:
+        _headers["seq_no"] = _SERIALIZER.header("seq_no", seq_no, "str")
+    if mac_address is not None:
+        _headers["mac_address"] = _SERIALIZER.header("mac_address", mac_address, "str")
+    if phone_number is not None:
+        _headers["phone_number"] = _SERIALIZER.header(
+            "phone_number", phone_number, "str"
+        )
+    if ip_address is not None:
+        _headers["ip_address"] = _SERIALIZER.header("ip_address", ip_address, "str")
+    if hashkey is not None:
+        _headers["hashkey"] = _SERIALIZER.header("hashkey", hashkey, "str")
+    if gt_uid is not None:
+        _headers["gt_uid"] = _SERIALIZER.header("gt_uid", gt_uid, "str")
+    _headers["tr_id"] = _SERIALIZER.header("tr_id", tr_id, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
 def build_gen_open_kis_get_ksd_shareholder_meeting_request(  # pylint: disable=name-too-long
+    *,
+    cts: str = "",
+    f_dt: str,
+    t_dt: str,
+    sht_cd: str,
+    personalseckey: Optional[str] = None,
+    tr_cont: str = "",
+    custtype: str = "P",
+    seq_no: Optional[str] = None,
+    mac_address: Optional[str] = None,
+    phone_number: Optional[str] = None,
+    ip_address: Optional[str] = None,
+    hashkey: Optional[str] = None,
+    gt_uid: Optional[str] = None,
+    tr_id: str = "HHKDB669111C0",
     **kwargs: Any,
 ) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
     # Construct URL
     _url = "/uapi/domestic-stock/v1/ksdinfo/sharehld-meet"
 
-    return HttpRequest(method="GET", url=_url, **kwargs)
+    # Construct parameters
+    _params["cts"] = _SERIALIZER.query("cts", cts, "str")
+    _params["f_dt"] = _SERIALIZER.query("f_dt", f_dt, "str")
+    _params["t_dt"] = _SERIALIZER.query("t_dt", t_dt, "str")
+    _params["sht_cd"] = _SERIALIZER.query("sht_cd", sht_cd, "str")
+
+    # Construct headers
+    if personalseckey is not None:
+        _headers["personalseckey"] = _SERIALIZER.header(
+            "personalseckey", personalseckey, "str"
+        )
+    if tr_cont is not None:
+        _headers["tr_cont"] = _SERIALIZER.header("tr_cont", tr_cont, "str")
+    if custtype is not None:
+        _headers["custtype"] = _SERIALIZER.header("custtype", custtype, "str")
+    if seq_no is not None:
+        _headers["seq_no"] = _SERIALIZER.header("seq_no", seq_no, "str")
+    if mac_address is not None:
+        _headers["mac_address"] = _SERIALIZER.header("mac_address", mac_address, "str")
+    if phone_number is not None:
+        _headers["phone_number"] = _SERIALIZER.header(
+            "phone_number", phone_number, "str"
+        )
+    if ip_address is not None:
+        _headers["ip_address"] = _SERIALIZER.header("ip_address", ip_address, "str")
+    if hashkey is not None:
+        _headers["hashkey"] = _SERIALIZER.header("hashkey", hashkey, "str")
+    if gt_uid is not None:
+        _headers["gt_uid"] = _SERIALIZER.header("gt_uid", gt_uid, "str")
+    _headers["tr_id"] = _SERIALIZER.header("tr_id", tr_id, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
 
 
 def build_gen_open_kis_get_technical_foreign_institution_total_request(  # pylint: disable=name-too-long
@@ -4793,8 +5449,8 @@ class GenOpenKisClientOperationsMixin(
     def get_domestic_stock_daily_price(
         self,
         *,
-        fid_org_adj_prc: str,
         fid_input_iscd: str,
+        fid_org_adj_prc: str,
         fid_period_div_code: str,
         personalseckey: Optional[str] = None,
         tr_cont: str = "",
@@ -4814,6 +5470,11 @@ class GenOpenKisClientOperationsMixin(
 
         주식현재가 일자별 API입니다. 일/주/월별 주가를 확인할 수 있으며 최근 30일(주,별)로 제한되어 있습니다.
 
+        :keyword fid_input_iscd: FID 조건 종목코드
+
+         종목번호 (6자리):code:`<br/>`
+         ETN의 경우, Q로 시작 (EX. Q500001). Required.
+        :paramtype fid_input_iscd: str
         :keyword fid_org_adj_prc: FID 수정주가 원주가 가격
 
          0 : 수정주가반영:code:`<br/>`
@@ -4822,11 +5483,6 @@ class GenOpenKisClientOperationsMixin(
 
          * 수정주가는 액면분할/액면병합 등 권리 발생 시 과거 시세를 현재 주가에 맞게 보정한 가격. Known values are: "0" and "1". Required.
         :paramtype fid_org_adj_prc: str
-        :keyword fid_input_iscd: FID 조건 종목코드
-
-         종목번호 (6자리):code:`<br/>`
-         ETN의 경우, Q로 시작 (EX. Q500001). Required.
-        :paramtype fid_input_iscd: str
         :keyword fid_period_div_code: FID 기간 분류 코드
 
          D : (일)최근 30거래일:code:`<br/>`
@@ -4950,8 +5606,8 @@ class GenOpenKisClientOperationsMixin(
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_domestic_stock_daily_price_request(
-            fid_org_adj_prc=fid_org_adj_prc,
             fid_input_iscd=fid_input_iscd,
+            fid_org_adj_prc=fid_org_adj_prc,
             fid_period_div_code=fid_period_div_code,
             personalseckey=personalseckey,
             tr_cont=tr_cont,
@@ -5731,8 +6387,8 @@ class GenOpenKisClientOperationsMixin(
     def get_domestic_stock_period_price(
         self,
         *,
-        fid_org_adj_prc: str,
         fid_input_iscd: str,
+        fid_org_adj_prc: str,
         fid_input_date1: str,
         fid_input_date2: str,
         fid_period_div_code: str,
@@ -5747,6 +6403,11 @@ class GenOpenKisClientOperationsMixin(
         국내주식기간별시세(일/주/월/년) API입니다.:code:`<br/>`
         실전계좌/모의계좌의 경우, 한 번의 호출에 최대 100건까지 확인 가능합니다.
 
+        :keyword fid_input_iscd: FID 조건 종목코드
+
+         종목번호 (6자리):code:`<br/>`
+         ETN의 경우, Q로 시작 (EX. Q500001). Required.
+        :paramtype fid_input_iscd: str
         :keyword fid_org_adj_prc: FID 수정주가 원주가 가격
 
          0 : 수정주가반영:code:`<br/>`
@@ -5755,11 +6416,6 @@ class GenOpenKisClientOperationsMixin(
 
          * 수정주가는 액면분할/액면병합 등 권리 발생 시 과거 시세를 현재 주가에 맞게 보정한 가격. Known values are: "0" and "1". Required.
         :paramtype fid_org_adj_prc: str
-        :keyword fid_input_iscd: FID 조건 종목코드
-
-         종목번호 (6자리):code:`<br/>`
-         ETN의 경우, Q로 시작 (EX. Q500001). Required.
-        :paramtype fid_input_iscd: str
         :keyword fid_input_date1: 입력 날짜 (시작):code:`<br/>`
          조회 시작일자 (ex. 20220501). Required.
         :paramtype fid_input_date1: str
@@ -5898,8 +6554,8 @@ class GenOpenKisClientOperationsMixin(
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_domestic_stock_period_price_request(
-            fid_org_adj_prc=fid_org_adj_prc,
             fid_input_iscd=fid_input_iscd,
+            fid_org_adj_prc=fid_org_adj_prc,
             fid_input_date1=fid_input_date1,
             fid_input_date2=fid_input_date2,
             fid_period_div_code=fid_period_div_code,
@@ -14771,8 +15427,27 @@ class GenOpenKisClientOperationsMixin(
 
     @distributed_trace
     def get_ksd_dividend_info(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+        self,
+        *,
+        cts: str = "",
+        f_dt: str,
+        t_dt: str,
+        sht_cd: str,
+        high_gb: str,
+        gb1: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "HHKDB669102C0",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """예탁원정보 (배당일정).
 
         예탁원정보(배당일정) API입니다.
@@ -14782,9 +15457,117 @@ class GenOpenKisClientOperationsMixin(
         ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
         '주식배당지급일'은 배당주식의 주식교부일자를 말합니다. 배당주식의 계좌입고는 배당주식 상장일인데 일반적으로 주권교부일의 익영업일입니다.
 
-        :return: None
-        :rtype: None
+        :keyword cts: CTS (공백). Required. Default value is "".
+        :paramtype cts: str
+        :keyword f_dt: 조회일자From (YYYYMMDD)
+
+         일자 ~. Required.
+        :paramtype f_dt: str
+        :keyword t_dt: 조회일자To (YYYYMMDD)
+
+         ~ 일자. Required.
+        :paramtype t_dt: str
+        :keyword sht_cd: 종목코드
+
+         공백: 전체, 특정종목 조회시 : 종목코드. Required.
+        :paramtype sht_cd: str
+        :keyword high_gb: 고배당구분코드
+
+         0:배당전체:code:`<br/>`
+         1:결산배당:code:`<br/>`
+         2:중간배당. Known values are: "0", "1", and "2". Required.
+        :paramtype high_gb: str
+        :keyword gb1: 배당구분코드
+
+         0:배당전체:code:`<br/>`
+         1:결산배당:code:`<br/>`
+         2:중간배당. Known values are: "0", "1", and "2". Required.
+        :paramtype gb1: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         HHKDB669102C0 : 예탁원정보 (배당일정). "HHKDB669102C0" Default value is "HHKDB669102C0".
+        :paramtype tr_id: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output1": [
+                        {
+                            "divi_kind": "str",  # Optional. "ubc30"ub2f9"uc885"ub958.
+                            "divi_pay_dt": "str",  # Optional.
+                              "ubc30"ub2f9"uae08"uc9c0"uae09"uc77c.
+                            "divi_rate": "str",  # Optional.
+                              "ud604"uae08"ubc30"ub2f9"ub960(%).
+                            "face_val": "str",  # Optional. "uc561"uba74"uac00.
+                            "high_divi_gb": "str",  # Optional.
+                              "uace0"ubc30"ub2f9"uc885"ubaa9"uc5ec"ubd80.
+                            "isin_name": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "odd_pay_dt": "str",  # Optional.
+                              "ub2e8"uc8fc"ub300"uae08"uc9c0"uae09"uc77c.
+                            "per_sto_divi_amt": "str",  # Optional.
+                              "ud604"uae08"ubc30"ub2f9"uae08.
+                            "record_date": "str",  # Optional. "uae30"uc900"uc77c.
+                            "sht_cd": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "stk_div_pay_dt": "str",  # Optional.
+                              "uc8fc"uc2dd"ubc30"ub2f9"uc9c0"uae09"uc77c.
+                            "stk_divi_rate": "str",  # Optional.
+                              "uc8fc"uc2dd"ubc30"ub2f9"ub960(%).
+                            "stk_kind": "str"  # Optional. "uc8fc"uc2dd"uc885"ub958.
+                        }
+                    ],
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -14797,9 +15580,25 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_ksd_dividend_info_request(
+            cts=cts,
+            f_dt=f_dt,
+            t_dt=t_dt,
+            sht_cd=sht_cd,
+            high_gb=high_gb,
+            gb1=gb1,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
             headers=_headers,
             params=_params,
         )
@@ -14822,13 +15621,51 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
     def get_ksd_purchase_request(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+        self,
+        *,
+        cts: str = "",
+        f_dt: str,
+        t_dt: str,
+        sht_cd: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "HHKDB669103C0",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """예탁원정보 (주식매수청구일정).
 
         예탁원정보(주식매수청구일정) API입니다.
@@ -14837,9 +15674,98 @@ class GenOpenKisClientOperationsMixin(
 
         ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
 
-        :return: None
-        :rtype: None
+        :keyword cts: CTS (공백). Required. Default value is "".
+        :paramtype cts: str
+        :keyword f_dt: 조회일자From (YYYYMMDD)
+
+         일자 ~. Required.
+        :paramtype f_dt: str
+        :keyword t_dt: 조회일자To (YYYYMMDD)
+
+         ~ 일자. Required.
+        :paramtype t_dt: str
+        :keyword sht_cd: 종목코드
+
+         공백: 전체, 특정종목 조회시 : 종목코드. Required.
+        :paramtype sht_cd: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         HHKDB669103C0 : 예탁원정보 (주식매수청구일정). "HHKDB669103C0" Default value is "HHKDB669103C0".
+        :paramtype tr_id: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output1": [
+                        {
+                            "buy_amt_pay_dt": "str",  # Optional.
+                              "ub9e4"uc218"ub300"uae08"uc9c0"uae09"uc77c.
+                            "buy_req_price": "str",  # Optional.
+                              "ub9e4"uc218"uccad"uad6c"uac00"uaca9.
+                            "buy_req_rcpt_term": "str",  # Optional.
+                              "ub9e4"uc218"uccad"uad6c"uc811"uc218"uc2dc"ud55c.
+                            "get_meet_dt": "str",  # Optional. "uc8fc"ucd1d"uc77c.
+                            "isin_name": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "opp_opi_rcpt_term": "str",  # Optional.
+                              "ubc18"ub300"uc758"uc0ac"uc811"uc218"uc2dc"ud55c.
+                            "record_date": "str",  # Optional. "uae30"uc900"uc77c.
+                            "sht_cd": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "stk_kind": "str"  # Optional. "uc8fc"uc2dd"uc885"ub958.
+                        }
+                    ],
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -14852,9 +15778,23 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_ksd_purchase_request_request(
+            cts=cts,
+            f_dt=f_dt,
+            t_dt=t_dt,
+            sht_cd=sht_cd,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
             headers=_headers,
             params=_params,
         )
@@ -14877,13 +15817,51 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
     def get_ksd_merger_and_split(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+        self,
+        *,
+        cts: str = "",
+        f_dt: str,
+        t_dt: str,
+        sht_cd: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "HHKDB669104C0",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """예탁원정보 (합병/분할일정).
 
         예탁원정보(합병/분할일정) API입니다.
@@ -14892,9 +15870,108 @@ class GenOpenKisClientOperationsMixin(
 
         ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
 
-        :return: None
-        :rtype: None
+        :keyword cts: CTS (공백). Required. Default value is "".
+        :paramtype cts: str
+        :keyword f_dt: 조회일자From (YYYYMMDD)
+
+         일자 ~. Required.
+        :paramtype f_dt: str
+        :keyword t_dt: 조회일자To (YYYYMMDD)
+
+         ~ 일자. Required.
+        :paramtype t_dt: str
+        :keyword sht_cd: 종목코드
+
+         공백: 전체, 특정종목 조회시 : 종목코드. Required.
+        :paramtype sht_cd: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         HHKDB669104C0 : 예탁원정보 (합병/분할일정). "HHKDB669104C0" Default value is "HHKDB669104C0".
+        :paramtype tr_id: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output1": [
+                        {
+                            "cust_cd": "str",  # Optional.
+                              "ud569"ubcd1("ubd84"ud560)"ud68c"uc0ac"ucf54"ub4dc.
+                            "cust_nm": "str",  # Optional.
+                              "ud569"ubcd1("ubd84"ud560)"ud68c"uc0ac"uba85.
+                            "issue_stk_qty": "str",  # Optional.
+                              "ubc1c"ud589"ud560"uc8fc"uc2dd.
+                            "list_dt": "str",  # Optional.
+                              "uc0c1"uc7a5/"ub4f1"ub85d"uc77c.
+                            "merge_rate": "str",  # Optional. "ube44"uc728.
+                            "merge_type": "str",  # Optional. "ud569"ubcd1"uc0ac"uc720.
+                            "odd_amt_pay_dt": "str",  # Optional.
+                              "ub2e8"uc8fc"ub300"uae08"uc9c0"uae09"uc77c.
+                            "opp_cust_cd": "str",  # Optional.
+                              "ud53c"ud569"ubcd1("ud53c"ubd84"ud560)"ud68c"uc0ac"ucf54"ub4dc.
+                            "opp_cust_nm": "str",  # Optional.
+                              "ud53c"ud569"ubcd1("ud53c"ubd84"ud560)"ud68c"uc0ac"uba85.
+                            "record_date": "str",  # Optional. "uae30"uc900"uc77c.
+                            "seq": "str",  # Optional. "uc5f0"ubc88.
+                            "sht_cd": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "td_stop_dt": "str",  # Optional.
+                              "ub9e4"ub9e4"uac70"ub798"uc815"uc9c0"uae30"uac04.
+                            "tot_issue_stk_qty": "str"  # Optional.
+                              "ubc1c"ud589"uc8fc"uc2dd.
+                        }
+                    ],
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -14907,9 +15984,23 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_ksd_merger_and_split_request(
+            cts=cts,
+            f_dt=f_dt,
+            t_dt=t_dt,
+            sht_cd=sht_cd,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
             headers=_headers,
             params=_params,
         )
@@ -14932,13 +16023,52 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
     def get_ksd_change_par_value(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+        self,
+        *,
+        cts: str = "",
+        f_dt: str,
+        t_dt: str,
+        sht_cd: str,
+        market_gb: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "HHKDB669105C0",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """예탁원정보 (액면교체일정).
 
         예탁원정보(액면교체일정) API입니다.
@@ -14947,9 +16077,100 @@ class GenOpenKisClientOperationsMixin(
 
         ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
 
-        :return: None
-        :rtype: None
+        :keyword cts: CTS (공백). Required. Default value is "".
+        :paramtype cts: str
+        :keyword f_dt: 조회일자From (YYYYMMDD)
+
+         일자 ~. Required.
+        :paramtype f_dt: str
+        :keyword t_dt: 조회일자To (YYYYMMDD)
+
+         ~ 일자. Required.
+        :paramtype t_dt: str
+        :keyword sht_cd: 종목코드
+
+         공백: 전체, 특정종목 조회시 : 종목코드. Required.
+        :paramtype sht_cd: str
+        :keyword market_gb: 시장구분
+
+         0: 전체, 1: 코스피, 2: 코스닥. Known values are: "0", "1", and "2". Required.
+        :paramtype market_gb: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         HHKDB669105C0 : 예탁원정보 (액면교체일정). "HHKDB669105C0" Default value is "HHKDB669105C0".
+        :paramtype tr_id: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output1": [
+                        {
+                            "inter_af_face_amt": "str",  # Optional.
+                              "ubcc0"uacbd"ud6c4"uc561"uba74"uac00.
+                            "inter_bf_face_amt": "str",  # Optional.
+                              "ubcc0"uacbd"uc804"uc561"uba74"uac00.
+                            "isin_name": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "list_dt": "str",  # Optional.
+                              "uc0c1"uc7a5/"ub4f1"ub85d"uc77c.
+                            "record_date": "str",  # Optional. "uae30"uc900"uc77c.
+                            "sht_cd": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "td_stop_dt": "str"  # Optional.
+                              "ub9e4"ub9e4"uac70"ub798"uc815"uc9c0"uae30"uac04.
+                        }
+                    ],
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -14962,9 +16183,24 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_ksd_change_par_value_request(
+            cts=cts,
+            f_dt=f_dt,
+            t_dt=t_dt,
+            sht_cd=sht_cd,
+            market_gb=market_gb,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
             headers=_headers,
             params=_params,
         )
@@ -14987,13 +16223,51 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
     def get_ksd_decrease_capital(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+        self,
+        *,
+        cts: str = "",
+        f_dt: str,
+        t_dt: str,
+        sht_cd: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "HHKDB669106C0",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """예탁원정보 (자본감소일정).
 
         예탁원정보(자본감소일정) API입니다.
@@ -15002,9 +16276,98 @@ class GenOpenKisClientOperationsMixin(
 
         ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
 
-        :return: None
-        :rtype: None
+        :keyword cts: CTS (공백). Required. Default value is "".
+        :paramtype cts: str
+        :keyword f_dt: 조회일자From (YYYYMMDD)
+
+         일자 ~. Required.
+        :paramtype f_dt: str
+        :keyword t_dt: 조회일자To (YYYYMMDD)
+
+         ~ 일자. Required.
+        :paramtype t_dt: str
+        :keyword sht_cd: 종목코드
+
+         공백: 전체, 특정종목 조회시 : 종목코드. Required.
+        :paramtype sht_cd: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         HHKDB669106C0 : 예탁원정보 (자본감소일정). "HHKDB669106C0" Default value is "HHKDB669106C0".
+        :paramtype tr_id: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output1": [
+                        {
+                            "comp_way": "str",  # Optional. "uacc4"uc0b0"ubc29"ubc95.
+                            "isin_name": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "list_dt": "str",  # Optional.
+                              "uc0c1"uc7a5/"ub4f1"ub85d"uc77c.
+                            "record_date": "str",  # Optional. "uae30"uc900"uc77c.
+                            "reduce_cap_rate": "str",  # Optional.
+                              "uac10"uc790"ubc30"uc815"uc728.
+                            "reduce_cap_type": "str",  # Optional.
+                              "uac10"uc790"uad6c"ubd84.
+                            "sht_cd": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "stk_kind": "str",  # Optional. "uc8fc"uc2dd"uc885"ub958.
+                            "td_stop_dt": "str"  # Optional.
+                              "ub9e4"ub9e4"uac70"ub798"uc815"uc9c0"uae30"uac04.
+                        }
+                    ],
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -15017,9 +16380,23 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_ksd_decrease_capital_request(
+            cts=cts,
+            f_dt=f_dt,
+            t_dt=t_dt,
+            sht_cd=sht_cd,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
             headers=_headers,
             params=_params,
         )
@@ -15042,13 +16419,51 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
     def get_ksd_list_info(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+        self,
+        *,
+        cts: str = "",
+        f_dt: str,
+        t_dt: str,
+        sht_cd: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "HHKDB669107C0",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """예탁원정보 (상장정보일정).
 
         예탁원정보(상장정보일정) API입니다.
@@ -15057,9 +16472,96 @@ class GenOpenKisClientOperationsMixin(
 
         ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
 
-        :return: None
-        :rtype: None
+        :keyword cts: CTS (공백). Required. Default value is "".
+        :paramtype cts: str
+        :keyword f_dt: 조회일자From (YYYYMMDD)
+
+         일자 ~. Required.
+        :paramtype f_dt: str
+        :keyword t_dt: 조회일자To (YYYYMMDD)
+
+         ~ 일자. Required.
+        :paramtype t_dt: str
+        :keyword sht_cd: 종목코드
+
+         공백: 전체, 특정종목 조회시 : 종목코드. Required.
+        :paramtype sht_cd: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         HHKDB669107C0 : 예탁원정보 (상장정보일정). "HHKDB669107C0" Default value is "HHKDB669107C0".
+        :paramtype tr_id: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output1": [
+                        {
+                            "isin_name": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "issue_price": "str",  # Optional. "ubc1c"ud589"uac00.
+                            "issue_stk_qty": "str",  # Optional.
+                              "uc0c1"uc7a5"uc8fc"uc2dd"uc218.
+                            "issue_type": "str",  # Optional. "uc0ac"uc720.
+                            "list_dt": "str",  # Optional.
+                              "uc0c1"uc7a5/"ub4f1"ub85d"uc77c.
+                            "sht_cd": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "stk_kind": "str",  # Optional. "uc8fc"uc2dd"uc885"ub958.
+                            "tot_issue_stk_qty": "str"  # Optional.
+                              "ucd1d"ubc1c"ud589"uc8fc"uc2dd"uc218.
+                        }
+                    ],
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -15072,9 +16574,23 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_ksd_list_info_request(
+            cts=cts,
+            f_dt=f_dt,
+            t_dt=t_dt,
+            sht_cd=sht_cd,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
             headers=_headers,
             params=_params,
         )
@@ -15097,13 +16613,51 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
-    def get_ksd_public_offer_subscription(  # pylint: disable=inconsistent-return-statements
-        self, **kwargs: Any
-    ) -> None:
+    def get_ksd_public_offer_subscription(
+        self,
+        *,
+        cts: str = "",
+        f_dt: str,
+        t_dt: str,
+        sht_cd: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "HHKDB669108C0",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """예탁원정보 (공모주청약일정).
 
         예탁원정보(공모주청약일정) API입니다.
@@ -15112,9 +16666,102 @@ class GenOpenKisClientOperationsMixin(
 
         ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
 
-        :return: None
-        :rtype: None
+        :keyword cts: CTS (공백). Required. Default value is "".
+        :paramtype cts: str
+        :keyword f_dt: 조회일자From (YYYYMMDD)
+
+         일자 ~. Required.
+        :paramtype f_dt: str
+        :keyword t_dt: 조회일자To (YYYYMMDD)
+
+         ~ 일자. Required.
+        :paramtype t_dt: str
+        :keyword sht_cd: 종목코드
+
+         공백: 전체, 특정종목 조회시 : 종목코드. Required.
+        :paramtype sht_cd: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         HHKDB669108C0 : 예탁원정보 (공모주청약일정). "HHKDB669108C0" Default value is "HHKDB669108C0".
+        :paramtype tr_id: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output1": [
+                        {
+                            "assign_stk_qty": "str",  # Optional.
+                              "ub2f9"uc0ac"ubc30"uc815"ubb3c"ub7c9.
+                            "face_value": "str",  # Optional. "uc561"uba74"uac00.
+                            "fix_subscr_pri": "str",  # Optional. "uacf5"ubaa8"uac00.
+                            "isin_name": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "lead_mgr": "str",  # Optional. "uc8fc"uac04"uc0ac.
+                            "list_dt": "str",  # Optional.
+                              "uc0c1"uc7a5/"ub4f1"ub85d"uc77c.
+                            "pay_dt": "str",  # Optional. "ub0a9"uc785"uc77c.
+                            "pub_af_cap": "str",  # Optional.
+                              "uacf5"ubaa8"ud6c4"uc790"ubcf8"uae08.
+                            "pub_bf_cap": "str",  # Optional.
+                              "uacf5"ubaa8"uc804"uc790"ubcf8"uae08.
+                            "record_date": "str",  # Optional. "uae30"uc900"uc77c.
+                            "refund_dt": "str",  # Optional. "ud658"ubd88"uc77c.
+                            "sht_cd": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "subscr_dt": "str"  # Optional. "uccad"uc57d"uae30"uac04.
+                        }
+                    ],
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -15127,9 +16774,23 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_ksd_public_offer_subscription_request(
+            cts=cts,
+            f_dt=f_dt,
+            t_dt=t_dt,
+            sht_cd=sht_cd,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
             headers=_headers,
             params=_params,
         )
@@ -15152,13 +16813,51 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
     def get_ksd_forfeited_stock(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+        self,
+        *,
+        cts: str = "",
+        f_dt: str,
+        t_dt: str,
+        sht_cd: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "HHKDB669109C0",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """예탁원정보 (실권주일정).
 
         예탁원정보(실권주일정) API입니다.
@@ -15167,9 +16866,96 @@ class GenOpenKisClientOperationsMixin(
 
         ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
 
-        :return: None
-        :rtype: None
+        :keyword cts: CTS (공백). Required. Default value is "".
+        :paramtype cts: str
+        :keyword f_dt: 조회일자From (YYYYMMDD)
+
+         일자 ~. Required.
+        :paramtype f_dt: str
+        :keyword t_dt: 조회일자To (YYYYMMDD)
+
+         ~ 일자. Required.
+        :paramtype t_dt: str
+        :keyword sht_cd: 종목코드
+
+         공백: 전체, 특정종목 조회시 : 종목코드. Required.
+        :paramtype sht_cd: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         HHKDB669109C0 : 예탁원정보 (실권주일정). "HHKDB669109C0" Default value is "HHKDB669109C0".
+        :paramtype tr_id: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output1": [
+                        {
+                            "isin_name": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "lead_mgr": "str",  # Optional. "uc8fc"uac04"uc0ac.
+                            "list_dt": "str",  # Optional.
+                              "uc0c1"uc7a5/"ub4f1"ub85d"uc77c.
+                            "record_date": "str",  # Optional. "uae30"uc900"uc77c.
+                            "refund_dt": "str",  # Optional. "ud658"ubd88"uc77c.
+                            "sht_cd": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "subscr_dt": "str",  # Optional. "uccad"uc57d"uc77c.
+                            "subscr_price": "str",  # Optional. "uacf5"ubaa8"uac00.
+                            "subscr_stk_qty": "str"  # Optional.
+                              "uacf5"ubaa8"uc8fc"uc2dd"uc218.
+                        }
+                    ],
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -15182,9 +16968,23 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_ksd_forfeited_stock_request(
+            cts=cts,
+            f_dt=f_dt,
+            t_dt=t_dt,
+            sht_cd=sht_cd,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
             headers=_headers,
             params=_params,
         )
@@ -15207,13 +17007,51 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
     def get_ksd_mandatory_deposit(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+        self,
+        *,
+        cts: str = "",
+        f_dt: str,
+        t_dt: str,
+        sht_cd: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "HHKDB669110C0",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """예탁원정보 (의무예치일정).
 
         예탁원정보(의무예치일정) API입니다.
@@ -15222,9 +17060,92 @@ class GenOpenKisClientOperationsMixin(
 
         ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
 
-        :return: None
-        :rtype: None
+        :keyword cts: CTS (공백). Required. Default value is "".
+        :paramtype cts: str
+        :keyword f_dt: 조회일자From (YYYYMMDD)
+
+         일자 ~. Required.
+        :paramtype f_dt: str
+        :keyword t_dt: 조회일자To (YYYYMMDD)
+
+         ~ 일자. Required.
+        :paramtype t_dt: str
+        :keyword sht_cd: 종목코드
+
+         공백: 전체, 특정종목 조회시 : 종목코드. Required.
+        :paramtype sht_cd: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         HHKDB669110C0 : 예탁원정보 (의무예치일정). "HHKDB669110C0" Default value is "HHKDB669110C0".
+        :paramtype tr_id: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output1": [
+                        {
+                            "depo_date": "str",  # Optional. "uc608"uce58"uc77c.
+                            "depo_reason": "str",  # Optional. "uc0ac"uc720.
+                            "isin_name": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "sht_cd": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "stk_qty": "str",  # Optional. "uc8fc"uc2dd"uc218.
+                            "tot_issue_qty_per_rate": "str"  # Optional.
+                              "ucd1d"ubc1c"ud589"uc8fc"uc2dd"uc218"ub300"ube44"ube44"uc728(%).
+                        }
+                    ],
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -15237,9 +17158,23 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_ksd_mandatory_deposit_request(
+            cts=cts,
+            f_dt=f_dt,
+            t_dt=t_dt,
+            sht_cd=sht_cd,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
             headers=_headers,
             params=_params,
         )
@@ -15262,13 +17197,52 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
     def get_ksd_right_issue(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+        self,
+        *,
+        cts: str = "",
+        f_dt: str,
+        t_dt: str,
+        sht_cd: str,
+        gb1: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "HHKDB669100C0",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """예탁원정보 (유상증자일정).
 
         예탁원정보(유상증자일정) API입니다.
@@ -15277,9 +17251,107 @@ class GenOpenKisClientOperationsMixin(
 
         ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
 
-        :return: None
-        :rtype: None
+        :keyword cts: CTS (공백). Required. Default value is "".
+        :paramtype cts: str
+        :keyword f_dt: 조회일자From (YYYYMMDD)
+
+         일자 ~. Required.
+        :paramtype f_dt: str
+        :keyword t_dt: 조회일자To (YYYYMMDD)
+
+         ~ 일자. Required.
+        :paramtype t_dt: str
+        :keyword sht_cd: 종목코드
+
+         공백: 전체, 특정종목 조회시 : 종목코드. Required.
+        :paramtype sht_cd: str
+        :keyword gb1: 조회구분
+
+         1: 청약일별, 2: 기준일별. Known values are: "1" and "2". Required.
+        :paramtype gb1: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         HHKDB669100C0 : 예탁원정보 (유상증자일정). "HHKDB669100C0" Default value is "HHKDB669100C0".
+        :paramtype tr_id: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output1": [
+                        {
+                            "disc_rate": "str",  # Optional. "ud560"uc778"uc728.
+                            "fix_price": "str",  # Optional.
+                              "ubc1c"ud589"uc608"uc815"uac00.
+                            "fix_rate": "str",  # Optional.
+                              "ud655"uc815"ubc30"uc815"uc728.
+                            "isin_name": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "issue_stk_qty": "str",  # Optional.
+                              "ubc1c"ud589"ud560"uc8fc"uc2dd.
+                            "list_date": "str",  # Optional.
+                              "uc0c1"uc7a5/"ub4f1"ub85d"uc77c.
+                            "record_date": "str",  # Optional. "uae30"uc900"uc77c.
+                            "right_dt": "str",  # Optional. "uad8c"ub9ac"ub77d"uc77c.
+                            "sht_cd": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "stk_kind": "str",  # Optional. "uc8fc"uc2dd"uc885"ub958.
+                            "sub_term": "str",  # Optional. "uccad"uc57d"uae30"uac04.
+                            "sub_term_ft": "str",  # Optional. "uccad"uc57d"uae30"uac04.
+                            "tot_issue_stk_qty": "str"  # Optional.
+                              "ubc1c"ud589"uc8fc"uc2dd.
+                        }
+                    ],
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -15292,9 +17364,24 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_ksd_right_issue_request(
+            cts=cts,
+            f_dt=f_dt,
+            t_dt=t_dt,
+            sht_cd=sht_cd,
+            gb1=gb1,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
             headers=_headers,
             params=_params,
         )
@@ -15317,13 +17404,51 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
     def get_ksd_bonus_issue(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+        self,
+        *,
+        cts: str = "",
+        f_dt: str,
+        t_dt: str,
+        sht_cd: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "HHKDB669101C0",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """예탁원정보 (무상증자일정).
 
         예탁원정보(무상증자일정) API입니다.
@@ -15332,9 +17457,95 @@ class GenOpenKisClientOperationsMixin(
 
         ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
 
-        :return: None
-        :rtype: None
+        :keyword cts: CTS (공백). Required. Default value is "".
+        :paramtype cts: str
+        :keyword f_dt: 조회일자From (YYYYMMDD)
+
+         일자 ~. Required.
+        :paramtype f_dt: str
+        :keyword t_dt: 조회일자To (YYYYMMDD)
+
+         ~ 일자. Required.
+        :paramtype t_dt: str
+        :keyword sht_cd: 종목코드
+
+         공백: 전체, 특정종목 조회시 : 종목코드. Required.
+        :paramtype sht_cd: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         HHKDB669101C0 : 예탁원정보 (무상증자일정). "HHKDB669101C0" Default value is "HHKDB669101C0".
+        :paramtype tr_id: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output1": {
+                        "fix_rate": "str",  # Optional. "ud655"uc815"ubc30"uc815"uc728.
+                        "isin_name": "str",  # Optional. "uc885"ubaa9"uba85.
+                        "issue_stk_qty": "str",  # Optional. "ubc1c"ud589"ud560"uc8fc"uc2dd.
+                        "list_date": "str",  # Optional. "uc0c1"uc7a5/"ub4f1"ub85d"uc77c.
+                        "odd_pay_dt": "str",  # Optional.
+                          "ub2e8"uc8fc"ub300"uae08"uc9c0"uae09"uc77c.
+                        "odd_rec_price": "str",  # Optional. "ub2e8"uc8fc"uae30"uc900"uac00.
+                        "record_date": "str",  # Optional. "uae30"uc900"uc77c.
+                        "right_dt": "str",  # Optional. "uad8c"ub9ac"ub77d"uc77c.
+                        "sht_cd": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                        "stk_kind": "str",  # Optional. "uc8fc"uc2dd"uc885"ub958.
+                        "tot_issue_stk_qty": "str"  # Optional. "ubc1c"ud589"uc8fc"uc2dd.
+                    },
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -15347,9 +17558,23 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_ksd_bonus_issue_request(
+            cts=cts,
+            f_dt=f_dt,
+            t_dt=t_dt,
+            sht_cd=sht_cd,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
             headers=_headers,
             params=_params,
         )
@@ -15372,13 +17597,51 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
     def get_ksd_shareholder_meeting(
-        self, **kwargs: Any
-    ) -> None:  # pylint: disable=inconsistent-return-statements
+        self,
+        *,
+        cts: str = "",
+        f_dt: str,
+        t_dt: str,
+        sht_cd: str,
+        personalseckey: Optional[str] = None,
+        tr_cont: str = "",
+        custtype: str = "P",
+        seq_no: Optional[str] = None,
+        mac_address: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        ip_address: Optional[str] = None,
+        hashkey: Optional[str] = None,
+        gt_uid: Optional[str] = None,
+        tr_id: str = "HHKDB669111C0",
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
         """예탁원정보 (주주총회일정).
 
         예탁원정보(주주총회일정) API입니다.
@@ -15387,9 +17650,94 @@ class GenOpenKisClientOperationsMixin(
 
         ※ 예탁원에서 제공한 자료이므로 정보용으로만 사용하시기 바랍니다.
 
-        :return: None
-        :rtype: None
+        :keyword cts: CTS (공백). Required. Default value is "".
+        :paramtype cts: str
+        :keyword f_dt: 조회일자From (YYYYMMDD)
+
+         일자 ~. Required.
+        :paramtype f_dt: str
+        :keyword t_dt: 조회일자To (YYYYMMDD)
+
+         ~ 일자. Required.
+        :paramtype t_dt: str
+        :keyword sht_cd: 종목코드
+
+         공백: 전체, 특정종목 조회시 : 종목코드. Required.
+        :paramtype sht_cd: str
+        :keyword personalseckey: 고객 식별키
+
+         [법인 필수] 제휴사 회원 관리를 위한 고객식별키. Default value is None.
+        :paramtype personalseckey: str
+        :keyword tr_cont: 연속 거래 여부
+
+         공백 : 초기 조회:code:`<br/>`
+         N: 다음 데이터 조회 (output header의 tr_cont가 M일 경우). Default value is "".
+        :paramtype tr_cont: str
+        :keyword custtype: 고객타입
+
+         B : 법인:code:`<br/>`
+         P : 개인. Known values are: "B" and "P". Default value is "P".
+        :paramtype custtype: str
+        :keyword seq_no: 일련번호
+
+         [법인 필수] 001. Default value is None.
+        :paramtype seq_no: str
+        :keyword mac_address: 맥주소
+
+         법인고객 혹은 개인고객의 Mac address 값. Default value is None.
+        :paramtype mac_address: str
+        :keyword phone_number: 핸드폰번호
+
+         [법인 필수] 제휴사APP을 사용하는 경우 사용자(회원) 핸드폰번호:code:`<br/>`
+         ex) 01011112222 (하이픈 등 구분값 제거). Default value is None.
+        :paramtype phone_number: str
+        :keyword ip_address: 접속 단말 공인 IP
+
+         [법인 필수] 사용자(회원)의 IP Address. Default value is None.
+        :paramtype ip_address: str
+        :keyword hashkey: 해쉬키
+
+         [POST API 대상] Client가 요청하는 Request Body를 hashkey api로 생성한 Hash값:code:`<br/>`
+
+
+         * API문서 > hashkey 참조. Default value is None.
+        :paramtype hashkey: str
+        :keyword gt_uid: Global UID
+
+         [법인 필수] 거래고유번호로 사용하므로 거래별로 UNIQUE해야 함. Default value is None.
+        :paramtype gt_uid: str
+        :keyword tr_id: 거래ID
+
+         모의투자 미지원:code:`<br/>`
+         HHKDB669111C0 : 예탁원정보 (주주총회일정). "HHKDB669111C0" Default value is "HHKDB669111C0".
+        :paramtype tr_id: str
+        :return: JSON object
+        :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "msg1": "str",  # Optional. "uc751"ub2f5"uba54"uc2dc"uc9c0.
+                    "msg_cd": "str",  # Optional. "uc751"ub2f5"ucf54"ub4dc.
+                    "output1": [
+                        {
+                            "agenda": "str",  # Optional. "uc8fc"ucd1d"uc758"uc548.
+                            "gen_meet_dt": "str",  # Optional. "uc8fc"ucd1d"uc77c"uc790.
+                            "gen_meet_type": "str",  # Optional.
+                              "uc8fc"ucd1d"uc0ac"uc720.
+                            "isin_name": "str",  # Optional. "uc885"ubaa9"uba85.
+                            "record_date": "str",  # Optional. "uae30"uc900"uc77c.
+                            "sht_cd": "str",  # Optional. "uc885"ubaa9"ucf54"ub4dc.
+                            "vote_tot_qty": "str"  # Optional.
+                              "uc758"uacb0"uad8c"uc8fc"uc2dd"ucd1d"uc218.
+                        }
+                    ],
+                    "rt_cd": "str"  # Optional. "uc131"uacf5 "uc2e4"ud328 "uc5ec"ubd80  0:
+                      "uc131"uacf5:code:`<br/>` 0 "uc774"uc678"uc758 "uac12: "uc2e4"ud328.
+                }
         """
         error_map: MutableMapping[int, Type[HttpResponseError]] = {
             401: ClientAuthenticationError,
@@ -15402,9 +17750,23 @@ class GenOpenKisClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _request = build_gen_open_kis_get_ksd_shareholder_meeting_request(
+            cts=cts,
+            f_dt=f_dt,
+            t_dt=t_dt,
+            sht_cd=sht_cd,
+            personalseckey=personalseckey,
+            tr_cont=tr_cont,
+            custtype=custtype,
+            seq_no=seq_no,
+            mac_address=mac_address,
+            phone_number=phone_number,
+            ip_address=ip_address,
+            hashkey=hashkey,
+            gt_uid=gt_uid,
+            tr_id=tr_id,
             headers=_headers,
             params=_params,
         )
@@ -15427,8 +17789,29 @@ class GenOpenKisClientOperationsMixin(
             )
             raise HttpResponseError(response=response)
 
+        response_headers = {}
+        response_headers["content-type"] = self._deserialize(
+            "str", response.headers.get("content-type")
+        )
+        response_headers["tr_id"] = self._deserialize(
+            "str", response.headers.get("tr_id")
+        )
+        response_headers["tr_cont"] = self._deserialize(
+            "str", response.headers.get("tr_cont")
+        )
+        response_headers["gt_uid"] = self._deserialize(
+            "str", response.headers.get("gt_uid")
+        )
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, cast(JSON, deserialized), response_headers)  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
     def get_technical_foreign_institution_total(  # pylint: disable=inconsistent-return-statements
