@@ -25,11 +25,11 @@ if TYPE_CHECKING:
 class GenOpenDartClient(
     GenOpenDartClientOperationsMixin
 ):  # pylint: disable=client-accepts-api-version-keyword
-    """Dart OpenAPI Service.
+    """국내 상장기업의 전자공시 정보를 제공하는 API 서비스입니다.
 
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :keyword endpoint: Service URL. Default value is "https://opendart.fss.or.kr/api".
+    :keyword endpoint: Service URL. Default value is "https://opendart.fss.or.kr".
     :paramtype endpoint: str
     """
 
@@ -37,7 +37,7 @@ class GenOpenDartClient(
         self,
         credential: "TokenCredential",
         *,
-        endpoint: str = "https://opendart.fss.or.kr/api",
+        endpoint: str = "https://opendart.fss.or.kr",
         **kwargs: Any,
     ) -> None:
         self._config = GenOpenDartClientConfiguration(credential=credential, **kwargs)

@@ -5,7 +5,6 @@ title: OpenDartClient
 namespace: opendart
 python: true
 black: true
-input-file: OpenDart-oas.yaml
 output-folder: finance_clue
 verbose: true
 version-tolerant: true
@@ -18,7 +17,7 @@ credential-scopes: https://opendart.fss.or.kr
 
 directive:
   - from: openapi-document
-    where: '$.components.parameters[*]'
+    where: "$.components.parameters[*]"
     transform: >
       $["x-ms-parameter-location"] = "method";
 

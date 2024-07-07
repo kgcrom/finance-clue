@@ -1,5 +1,6 @@
 LOCAL_KRX_SPEC_FILE=OpenKrx-public.yml
 LOCAL_KIS_SPEC_FILE=OpenKis-public.yml
+LOCAL_DART_SPEC_FILE=OpenDart-public.yml
 
 .PHONY: black
 black:
@@ -32,7 +33,6 @@ endif
 dev-dependencies:
 	npm install -D
 
-
 .PHONY: download-kis-spec
 download-kis-spec:
 	@echo Downloading KIS spec; \
@@ -49,14 +49,6 @@ generate-openkis: dev-dependencies download-kis-spec
 		--use:@autorest/modelerfour@4.27.0 \
 		--use:@autorest/python@6.13.15 \
 		--input-file=$(KIS_SPEC_FILE)
-	@poetry run black .
-	@poetry run isort .
-
-.PHONY: generate-opendart
-generate-opendart:
-	npm run autorest -- opendart_client_gen_config.md \
-		--use:@autorest/modelerfour@4.27.0 \
-		--use:@autorest/python@6.13.15
 	@poetry run black .
 	@poetry run isort .
 
@@ -78,3 +70,23 @@ generate-openkrx: dev-dependencies download-krx-spec
 		--input-file=$(KRX_SPEC_FILE)
 	@poetry run black .
 	@poetry run isort .
+
+.PHONY: download-dart-spec
+download-dart-spec:
+	@echo Downloading DART spec; \
+	touch OpenDart-public.yml && \
+	curl https://raw.githubusercontent.com/kgcrom/finance-openapi/main/docs/OpenDart-public.yml -o $(LOCAL_DART_SPEC_FILE)
+
+.PHONY: generate-opendart
+ifndef DART_SPEC_FILE
+generate-opendart: DART_SPEC_FILE = $(LOCAL_DART_SPEC_FILE)
+generate-opendart: install
+endif
+generate-opendart: dev-dependencies download-dart-spec
+	npm run autorest -- opendart_client_gen_config.md \
+		--use:@autorest/modelerfour@4.27.0 \
+		--use:@autorest/python@6.13.15 \
+		--input-file=$(DART_SPEC_FILE)
+	@poetry run black .
+	@poetry run isort .
+

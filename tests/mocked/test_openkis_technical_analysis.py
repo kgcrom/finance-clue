@@ -331,7 +331,7 @@ class OpenKisTechnicalAnalysisTestCase(unittest.TestCase):
         }
 
         responses.add(
-            responses.GET   ,
+            responses.GET,
             f"{self.openkis_client_url}/uapi/domestic-stock/v1/quotations/exp-price-trend",
             json=expected,
             status=200,
@@ -1082,7 +1082,32 @@ class OpenKisTechnicalAnalysisTestCase(unittest.TestCase):
 
     @responses.activate
     def test_volume_profile_indicator(self):
-        expected = {'output1': {'rprs_mrkt_kor_name': 'KOSPI200', 'stck_shrn_iscd': '005930', 'hts_kor_isnm': '삼성전자', 'stck_prpr': '87100', 'prdy_vrss_sign': '2', 'prdy_vrss': '2500', 'prdy_ctrt': '2.96', 'acml_vol': '45791193', 'prdy_vol': '43857228', 'wghn_avrg_stck_prc': '86280.34', 'lstn_stcn': '5969782550'}, 'output2': [{'data_rank': '1', 'stck_prpr': '86000', 'cntg_vol': '5120359', 'acml_vol_rlim': '11.18'}], 'rt_cd': '0', 'msg_cd': 'MCA00000', 'msg1': '정상처리 되었습니다.'}
+        expected = {
+            "output1": {
+                "rprs_mrkt_kor_name": "KOSPI200",
+                "stck_shrn_iscd": "005930",
+                "hts_kor_isnm": "삼성전자",
+                "stck_prpr": "87100",
+                "prdy_vrss_sign": "2",
+                "prdy_vrss": "2500",
+                "prdy_ctrt": "2.96",
+                "acml_vol": "45791193",
+                "prdy_vol": "43857228",
+                "wghn_avrg_stck_prc": "86280.34",
+                "lstn_stcn": "5969782550",
+            },
+            "output2": [
+                {
+                    "data_rank": "1",
+                    "stck_prpr": "86000",
+                    "cntg_vol": "5120359",
+                    "acml_vol_rlim": "11.18",
+                }
+            ],
+            "rt_cd": "0",
+            "msg_cd": "MCA00000",
+            "msg1": "정상처리 되었습니다.",
+        }
         responses.add(
             responses.GET,
             f"{self.openkis_client_url}/uapi/domestic-stock/v1/quotations/pbar-tratio",
@@ -1096,7 +1121,46 @@ class OpenKisTechnicalAnalysisTestCase(unittest.TestCase):
 
     @responses.activate
     def test_member_trend_daily(self):
-        expected = {'output': [{'stck_bsop_date': '20240628', 'total_seln_qty': '98986', 'total_shnu_qty': '55100', 'ntby_qty': '-43886', 'stck_prpr': '81500', 'prdy_vrss': '-100', 'prdy_vrss_sign': '5', 'prdy_ctrt': '-0.12', 'acml_vol': '9455929'}, {'stck_bsop_date': '20240627', 'total_seln_qty': '47368', 'total_shnu_qty': '29110', 'ntby_qty': '-18258', 'stck_prpr': '81600', 'prdy_vrss': '300', 'prdy_vrss_sign': '2', 'prdy_ctrt': '0.37', 'acml_vol': '11739720'}, {'stck_bsop_date': '20240626', 'total_seln_qty': '83795', 'total_shnu_qty': '34886', 'ntby_qty': '-48909', 'stck_prpr': '81300', 'prdy_vrss': '500', 'prdy_vrss_sign': '2', 'prdy_ctrt': '0.62', 'acml_vol': '17783242'}], 'rt_cd': '0', 'msg_cd': 'MCA00000', 'msg1': '정상처리 되었습니다.'}
+        expected = {
+            "output": [
+                {
+                    "stck_bsop_date": "20240628",
+                    "total_seln_qty": "98986",
+                    "total_shnu_qty": "55100",
+                    "ntby_qty": "-43886",
+                    "stck_prpr": "81500",
+                    "prdy_vrss": "-100",
+                    "prdy_vrss_sign": "5",
+                    "prdy_ctrt": "-0.12",
+                    "acml_vol": "9455929",
+                },
+                {
+                    "stck_bsop_date": "20240627",
+                    "total_seln_qty": "47368",
+                    "total_shnu_qty": "29110",
+                    "ntby_qty": "-18258",
+                    "stck_prpr": "81600",
+                    "prdy_vrss": "300",
+                    "prdy_vrss_sign": "2",
+                    "prdy_ctrt": "0.37",
+                    "acml_vol": "11739720",
+                },
+                {
+                    "stck_bsop_date": "20240626",
+                    "total_seln_qty": "83795",
+                    "total_shnu_qty": "34886",
+                    "ntby_qty": "-48909",
+                    "stck_prpr": "81300",
+                    "prdy_vrss": "500",
+                    "prdy_vrss_sign": "2",
+                    "prdy_ctrt": "0.62",
+                    "acml_vol": "17783242",
+                },
+            ],
+            "rt_cd": "0",
+            "msg_cd": "MCA00000",
+            "msg1": "정상처리 되었습니다.",
+        }
         responses.add(
             responses.GET,
             f"{self.openkis_client_url}/uapi/domestic-stock/v1/quotations/inquire-member-daily",

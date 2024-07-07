@@ -1,45 +1,89 @@
+import time
+import unittest
+
+import pytest
 import responses
 
 from finance_clue.opendart import OpenDartClient
 
 
-@responses.activate
-def test_list_disclosure(
-    mock_opendart_client: OpenDartClient, mock_opendart_client_url: str
-):
-    expected = {
-        "status": "000",
-        "message": "정상",
-        "page_no": 1,
-        "page_count": 10,
-        "total_count": 217,
-        "total_page": 22,
-        "list": [
-            {
-                "corp_code": "00120182",
-                "corp_name": "NH투자증권",
-                "stock_code": "005940",
-                "corp_cls": "Y",
-                "report_nm": "[첨부추가]일괄신고추가서류(파생결합증권-주가연계증권)",
-                "rcept_no": "20200117000559",
-                "flr_nm": "NH투자증권",
-                "rcept_dt": "20200117",
-                "rm": "",
-            }
-        ],
-    }
-    responses.add(
-        responses.GET,
-        f"{mock_opendart_client_url}/list.json",
-        json=expected,
-        status=200,
-    )
+class OpenDartDisclosureCase(unittest.TestCase):
 
-    resp = mock_opendart_client.list_disclosure_info(
-        bgn_de="20210101",
-        end_de="20210131",
-        page_no="1",
-        page_count="10",
-    )
+    @pytest.fixture(autouse=True)
+    def setup(
+        self, mock_opendart_client: OpenDartClient, mock_opendart_client_url: str
+    ):
+        self.opendart_client = mock_opendart_client
+        self.opendart_client_url = mock_opendart_client_url
 
-    assert resp == expected
+    @responses.activate
+    def test_list(self):
+        expected = {
+            "status": "000",
+            "message": "정상",
+            "page_no": 1,
+            "page_count": 10,
+            "total_count": 2302,
+            "total_page": 231,
+            "list": [
+                {
+                    "corp_code": "00989619",
+                    "corp_name": "알테오젠",
+                    "stock_code": "196170",
+                    "corp_cls": "K",
+                    "report_nm": "투자판단관련주요경영사항              (ALT-BB4(Tergase)테르가제주 품목 허가 승인)",
+                    "rcept_no": "20240705900656",
+                    "flr_nm": "알테오젠",
+                    "rcept_dt": "20240705",
+                    "rm": "코",
+                }
+            ],
+        }
+        responses.add(
+            responses.GET,
+            f"{self.opendart_client_url}/api/list.json",
+            json=expected,
+            status=200,
+        )
+        resp = self.opendart_client.get_corporate_list(
+            bgn_de="20240702",
+            end_de="20240705",
+        )
+        assert resp == expected
+
+    @responses.activate
+    def test_company(self):
+        expected = {
+            "status": "000",
+            "message": "정상",
+            "corp_code": "00258999",
+            "corp_name": "삼성전자 서비스주식회사",
+            "corp_name_eng": "SAMSUNNG ELECTRONICS SERVICE CO., LTD",
+            "stock_name": "삼성전자서비스",
+            "stock_code": "",
+            "ceo_nm": "송봉섭",
+            "corp_cls": "E",
+            "jurir_no": "1301110049139",
+            "bizr_no": "1248158485",
+            "adres": "경기도 수원시 영통구 삼성로 290 (원천동)",
+            "hm_url": "www.samsungsvc.co.kr",
+            "ir_url": "",
+            "phn_no": "031-270-2177",
+            "fax_no": "031-270-2106",
+            "induty_code": "95",
+            "est_dt": "19981027",
+            "acc_mt": "12",
+        }
+
+        responses.add(
+            responses.GET,
+            f"{self.opendart_client_url}/api/company.json",
+            json=expected,
+            status=200,
+        )
+        resp = self.opendart_client.get_corporate_company(corp_code="00258999")
+        assert resp == expected
+
+
+if __name__ == "__main__":
+    unittest.main()
