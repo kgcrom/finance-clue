@@ -160,7 +160,819 @@ def build_gen_open_dart_get_corporate_code_request(
     return HttpRequest(method="GET", url=_url, headers=_headers, **kwargs)
 
 
-class GenOpenDartClientOperationsMixin(GenOpenDartClientMixinABC):
+def build_gen_open_dart_get_regular_key_conditional_capital_not_reimbursed_balance_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/cndlCaplScritsNrdmpBlce.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_corporate_bond_not_reimbursed_balance_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/cprndNrdmpBlce.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_short_term_bond_not_reimbursed_balance_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/srtpdPsndbtNrdmpBlce.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_enterprises_bill_not_reimbursed_balance_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/entrprsBilScritsNrdmpBlce.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_debt_securities_issue_accomplishment_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/detScritsIsuAcmslt.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_private_equity_capital_use_details_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/prvsrpCptalUseDtls.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_public_equity_capital_use_details_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/pssrpCptalUseDtls.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_director_audit_all_mending_status_shareholders_general_meeting_confirm_amount_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/drctrAdtAllMendngSttusGmtsckConfmAmount.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_director_audit_all_mending_status_mending_payment_amount_type_classification_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/drctrAdtAllMendngSttusMendngPymntamtTyCl.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_stock_total_quantity_status_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/stockTotqySttus.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_account_auditor_name_and_opinion_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/accnutAdtorNmNdAdtOpinion.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_audit_service_conclusion_status_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/adtServcCnclsSttus.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_account_auditor_non_audit_service_conclusion_status_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/accnutAdtorNonAdtServcCnclsSttus.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_outside_director_change_status_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/outcmpnyDrctrNdChangeSttus.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_new_capital_securities_not_reimbursed_balance_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/newCaplScritsNrdmpBlce.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_increase_decrease_status_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/irdsSttus.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_allocation_matter_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/alotMatter.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_treasury_shares_acquisition_disposal_status_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/tesstkAcqsDspsSttus.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_largest_shareholder_status_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/hyslrSttus.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_largest_shareholder_change_status_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/hyslrChgSttus.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_minority_shareholders_status_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/mrhlSttus.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_executive_status_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/exctvSttus.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_employee_status_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/empSttus.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_director_auditor_individual_mending_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/hmvAuditIndvdlBySttus.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_director_audit_all_mending_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/hmvAuditAllSttus.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_individual_by_pay_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/indvdlByPay.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_regular_key_outer_corporate_investment_status_request(  # pylint: disable=name-too-long
+    *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/otrCprInvstmntSttus.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+    _params["bsns_year"] = _SERIALIZER.query(
+        "bsns_year", bsns_year, "str", max_length=4
+    )
+    _params["reprt_code"] = _SERIALIZER.query(
+        "reprt_code", reprt_code, "str", max_length=5
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+class GenOpenDartClientOperationsMixin(
+    GenOpenDartClientMixinABC
+):  # pylint: disable=too-many-public-methods
 
     @distributed_trace
     def get_corporate_list(
@@ -748,3 +1560,4104 @@ class GenOpenDartClientOperationsMixin(GenOpenDartClientMixinABC):
             return cls(pipeline_response, cast(Iterator[bytes], deserialized), {})  # type: ignore
 
         return cast(Iterator[bytes], deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_conditional_capital_not_reimbursed_balance(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """조건부 자본증권 미상환 잔액.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 조건부 자본증권 미상환 잔액을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "remndr_exprtn1": "str",  # Optional.
+                                  "uc794"uc5ec"ub9cc"uae30.
+                                "remndr_exprtn2": "str",  # Optional.
+                                  "uc794"uc5ec"ub9cc"uae30.
+                                "sm": "str",  # Optional. "ud569"uacc4.
+                                "yy10_excess_yy20_below": "str",  # Optional.
+                                  10"ub144"ucd08"uacfc 20"ub144"uc774"ud558.
+                                "yy1_below": "str",  # Optional. 1"ub144
+                                  "uc774"ud558.
+                                "yy1_excess_yy2_below": "str",  # Optional.
+                                  1"ub144"ucd08"uacfc 2"ub144"uc774"ud558.
+                                "yy20_excess_yy30_below": "str",  # Optional.
+                                  20"ub144"ucd08"uacfc 30"ub144"uc774"ud558.
+                                "yy2_excess_yy3_below": "str",  # Optional.
+                                  2"ub144"ucd08"uacfc 3"ub144"uc774"ud558.
+                                "yy30_excess": "str",  # Optional.
+                                  30"ub144"ucd08"uacfc.
+                                "yy3_excess_yy4_below": "str",  # Optional.
+                                  3"ub144"ucd08"uacfc 4"ub144"uc774"ud558.
+                                "yy4_excess_yy5_below": "str",  # Optional.
+                                  4"ub144"ucd08"uacfc 5"ub144"uc774"ud558.
+                                "yy5_excess_yy10_below": "str"  # Optional.
+                                  5"ub144"ucd08"uacfc 10"ub144"uc774"ud558.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_conditional_capital_not_reimbursed_balance_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_corporate_bond_not_reimbursed_balance(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """회사채 미상환 잔액.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 회사채 미상환 잔액을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "remndr_exprtn1": "str",  # Optional.
+                                  "uc794"uc5ec"ub9cc"uae30.
+                                "remndr_exprtn2": "str",  # Optional.
+                                  "uc794"uc5ec"ub9cc"uae30.
+                                "sm": "str",  # Optional. "ud569"uacc4.
+                                "yy10_excess": "str",  # Optional. 10"ub144
+                                  "ucd08"uacfc.
+                                "yy1_below": "str",  # Optional. 1"ub144
+                                  "uc774"ud558.
+                                "yy1_excess_yy2_below": "str",  # Optional. 1"ub144
+                                  "ucd08"uacfc 2"ub144 "uc774"ud558.
+                                "yy2_excess_yy3_below": "str",  # Optional. 2"ub144
+                                  "ucd08"uacfc 3"ub144 "uc774"ud558.
+                                "yy3_excess_yy4_below": "str",  # Optional. 3"ub144
+                                  "ucd08"uacfc 4"ub144 "uc774"ud558.
+                                "yy4_excess_yy5_below": "str",  # Optional. 4"ub144
+                                  "ucd08"uacfc 5"ub144 "uc774"ud558.
+                                "yy5_excess_yy10_below": "str"  # Optional. 5"ub144
+                                  "ucd08"uacfc 10"ub144 "uc774"ud558.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_corporate_bond_not_reimbursed_balance_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_short_term_bond_not_reimbursed_balance(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """단기사채 미상환 잔액.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 단기사채 미상환 잔액을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "de10_below": "str",  # Optional. 10"uc77c
+                                  "uc774"ud558.
+                                "de10_excess_de30_below": "str",  # Optional.
+                                  10"uc77c"ucd08"uacfc 30"uc77c"uc774"ud558.
+                                "de180_excess_yy1_below": "str",  # Optional.
+                                  180"uc77c"ucd08"uacfc 1"ub144"uc774"ud558.
+                                "de30_excess_de90_below": "str",  # Optional.
+                                  30"uc77c"ucd08"uacfc 90"uc77c"uc774"ud558.
+                                "de90_excess_de180_below": "str",  # Optional.
+                                  90"uc77c"ucd08"uacfc 180"uc77c"uc774"ud558.
+                                "isu_lmt": "str",  # Optional. "ubc1c"ud589
+                                  "ud55c"ub3c4.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "remndr_exprtn1": "str",  # Optional.
+                                  "uc794"uc5ec"ub9cc"uae30.
+                                "remndr_exprtn2": "str",  # Optional.
+                                  "uc794"uc5ec"ub9cc"uae30.
+                                "remndr_lmt": "str",  # Optional. "uc794"uc5ec
+                                  "ud55c"ub3c4.
+                                "sm": "str"  # Optional. "ud569"uacc4.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_short_term_bond_not_reimbursed_balance_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_enterprises_bill_not_reimbursed_balance(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """기업어음증권 미상환 잔액.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 기업어음증권 미상환 잔액을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "de10_below": "str",  # Optional. 10"uc77c
+                                  "uc774"ud558.
+                                "de10_excess_de30_below": "str",  # Optional.
+                                  10"uc77c"ucd08"uacfc 30"uc77c"uc774"ud558.
+                                "de180_excess_yy1_below": "str",  # Optional.
+                                  180"uc77c"ucd08"uacfc 1"ub144"uc774"ud558.
+                                "de30_excess_de90_below": "str",  # Optional.
+                                  30"uc77c"ucd08"uacfc 90"uc77c"uc774"ud558.
+                                "de90_excess_de180_below": "str",  # Optional.
+                                  90"uc77c"ucd08"uacfc 180"uc77c"uc774"ud558.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "remndr_exprtn1": "str",  # Optional.
+                                  "uc794"uc5ec"ub9cc"uae30.
+                                "remndr_exprtn2": "str",  # Optional.
+                                  "uc794"uc5ec"ub9cc"uae30.
+                                "sm": "str",  # Optional. "ud569"uacc4.
+                                "yy1_excess_yy2_below": "str",  # Optional.
+                                  1"ub144"ucd08"uacfc 2"ub144"uc774"ud558.
+                                "yy2_excess_yy3_below": "str",  # Optional.
+                                  2"ub144"ucd08"uacfc 3"ub144"uc774"ud558.
+                                "yy3_excess": "str"  # Optional. 3"ub144
+                                  "ucd08"uacfc.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_enterprises_bill_not_reimbursed_balance_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_debt_securities_issue_accomplishment(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """채무증권 발행실적.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 채무증권 발행실적을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "evl_grad_instt": "str",  # Optional.
+                                  "ud3c9"uac00"ub4f1"uae09("ud3c9"uac00"uae30"uad00).
+                                "facvalu_totamt": "str",  # Optional.
+                                  "uad8c"uba74("uc804"uc790"ub4f1"ub85d)"ucd1d"uc561.
+                                "intrt": "str",  # Optional. "uc774"uc790"uc728.
+                                "isu_cmpny": "str",  # Optional.
+                                  "ubc1c"ud589"ud68c"uc0ac.
+                                "isu_de": "str",  # Optional.
+                                  "ubc1c"ud589"uc77c"uc790.
+                                "isu_mth_nm": "str",  # Optional.
+                                  "ubc1c"ud589"ubc29"ubc95.
+                                "mngt_cmpny": "str",  # Optional.
+                                  "uc8fc"uad00"ud68c"uc0ac.
+                                "mtd": "str",  # Optional. "ub9cc"uae30"uc77c.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "repy_at": "str",  # Optional.
+                                  "uc0c1"ud658"uc5ec"ubd80.
+                                "scrits_knd_nm": "str"  # Optional.
+                                  "uc99d"uad8c"uc885"ub958.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_debt_securities_issue_accomplishment_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_private_equity_capital_use_details(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """사모자금의 사용내역.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 사모자금의 사용내역을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "cptal_use_plan": "str",  # Optional.
+                                  "uc790"uae08"uc0ac"uc6a9 "uacc4"ud68d  "u2460 2018"ub144 1"uc6d4
+                                  18"uc77c"uae4c"uc9c0 "uc0ac"uc6a9"ub428.
+                                "dffrnc_occrrnc_resn": "str",  # Optional.
+                                  "ucc28"uc774"ubc1c"uc0dd "uc0ac"uc720 "ub4f1.
+                                "mtrpt_cptal_use_plan_prcure_amount": "str",  #
+                                  Optional. "uc8fc"uc694"uc0ac"ud56d"ubcf4"uace0"uc11c"uc758
+                                  "uc790"uae08"uc0ac"uc6a9 "uacc4"ud68d("uc870"ub2ec"uae08"uc561)
+                                  "u2461 2018"ub144 1"uc6d4 19"uc77c"ubd80"ud130 "ucd94"uac00"ub428.
+                                "mtrpt_cptal_use_plan_useprps": "str",  # Optional.
+                                  "uc8fc"uc694"uc0ac"ud56d"ubcf4"uace0"uc11c"uc758
+                                  "uc790"uae08"uc0ac"uc6a9 "uacc4"ud68d("uc0ac"uc6a9"uc6a9"ub3c4)
+                                  "u2461 2018"ub144 1"uc6d4 19"uc77c"ubd80"ud130 "ucd94"uac00"ub428.
+                                "pay_amount": "str",  # Optional.
+                                  "ub0a9"uc785"uae08"uc561  "u2460 2018"ub144 1"uc6d4
+                                  18"uc77c"uae4c"uc9c0 "uc0ac"uc6a9"ub428.
+                                "pay_de": "str",  # Optional. "ub0a9"uc785"uc77c.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "real_cptal_use_dtls_amount": "str",  # Optional.
+                                  "uc2e4"uc81c "uc790"uae08"uc0ac"uc6a9 "ub0b4"uc5ed("uae08"uc561)
+                                  "u2461 2018"ub144 1"uc6d4 19"uc77c"ubd80"ud130 "ucd94"uac00"ub428.
+                                "real_cptal_use_dtls_cn": "str",  # Optional.
+                                  "uc2e4"uc81c "uc790"uae08"uc0ac"uc6a9 "ub0b4"uc5ed("ub0b4"uc6a9)
+                                  "u2461 2018"ub144 1"uc6d4 19"uc77c"ubd80"ud130 "ucd94"uac00"ub428.
+                                "real_cptal_use_sttus": "str",  # Optional.
+                                  "uc2e4"uc81c "uc790"uae08"uc0ac"uc6a9 "ud604"ud669  "u2460 2018"ub144
+                                  1"uc6d4 18"uc77c"uae4c"uc9c0 "uc0ac"uc6a9"ub428.
+                                "se_nm": "str",  # Optional. "uad6c"ubd84.
+                                "tm": "str"  # Optional. "ud68c"ucc28  "u2462
+                                  2019"ub144 12"uc6d4 9"uc77c"ubd80"ud130 "ucd94"uac00"ub428.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_private_equity_capital_use_details_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_public_equity_capital_use_details(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """공모자금의 사용내역.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 공모자금의 사용내역을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "dffrnc_occrrnc_resn": "str",  # Optional.
+                                  "ucc28"uc774"ubc1c"uc0dd "uc0ac"uc720 "ub4f1.
+                                "on_dclrt_cptal_use_plan": "str",  # Optional.
+                                  "uc2e0"uace0"uc11c"uc0c1 "uc790"uae08"uc0ac"uc6a9 "uacc4"ud68d
+                                  "u2460 2018"ub144 1"uc6d4 18"uc77c"uae4c"uc9c0 "uc0ac"uc6a9"ub428.
+                                "pay_amount": "str",  # Optional.
+                                  "ub0a9"uc785"uae08"uc561  "u2460 2018"ub144 1"uc6d4
+                                  18"uc77c"uae4c"uc9c0 "uc0ac"uc6a9"ub428.
+                                "pay_de": "str",  # Optional. "ub0a9"uc785"uc77c.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "real_cptal_use_dtls_amount": "str",  # Optional.
+                                  "uc2e4"uc81c "uc790"uae08"uc0ac"uc6a9 "ub0b4"uc5ed("uae08"uc561)
+                                  "u2461 2018"ub144 1"uc6d4 19"uc77c"ubd80"ud130 "ucd94"uac00"ub428.
+                                "real_cptal_use_dtls_cn": "str",  # Optional.
+                                  "uc2e4"uc81c "uc790"uae08"uc0ac"uc6a9 "ub0b4"uc5ed("ub0b4"uc6a9)
+                                  "u2461 2018"ub144 1"uc6d4 19"uc77c"ubd80"ud130 "ucd94"uac00"ub428.
+                                "real_cptal_use_sttus": "str",  # Optional.
+                                  "uc2e4"uc81c "uc790"uae08"uc0ac"uc6a9 "ud604"ud669  "u2460 2018"ub144
+                                  1"uc6d4 18"uc77c"uae4c"uc9c0 "uc0ac"uc6a9"ub428.
+                                "rs_cptal_use_plan_prcure_amount": "str",  #
+                                  Optional. "uc99d"uad8c"uc2e0"uace0"uc11c "ub4f1"uc758
+                                  "uc790"uae08"uc0ac"uc6a9 "uacc4"ud68d("uc870"ub2ec"uae08"uc561)
+                                  "u2461 2018"ub144 1"uc6d4 19"uc77c"ubd80"ud130 "ucd94"uac00"ub428.
+                                "rs_cptal_use_plan_useprps": "str",  # Optional.
+                                  "uc99d"uad8c"uc2e0"uace0"uc11c "ub4f1"uc758 "uc790"uae08"uc0ac"uc6a9
+                                  "uacc4"ud68d("uc0ac"uc6a9"uc6a9"ub3c4)  "u2461 2018"ub144 1"uc6d4
+                                  19"uc77c"ubd80"ud130 "ucd94"uac00"ub428.
+                                "se_nm": "str",  # Optional. "uad6c"ubd84.
+                                "tm": "str"  # Optional. "ud68c"ucc28  "u2462
+                                  2019"ub144 12"uc6d4 9"uc77c"ubd80"ud130 "ucd94"uac00"ub428.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_public_equity_capital_use_details_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_director_audit_all_mending_status_shareholders_general_meeting_confirm_amount(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """이사·감사 전체의 보수현황(주주총회 승인금액).
+
+        정기보고서(사업, 분기, 반기보고서) 내에 이사·감사 전체의 보수현황(주주총회 승인금액)을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "gmtsck_confm_amount": "str",  # Optional.
+                                  "uc8fc"uc8fc"ucd1d"ud68c "uc2b9"uc778"uae08"uc561.
+                                "nmpr": "str",  # Optional. "uc778"uc6d0"uc218.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "rm": "str",  # Optional. "ube44"uace0.
+                                "se": "str"  # Optional.
+                                  "uad6c"ubd84("ub4f1"uae30"uc774"uc0ac, "uac10"uc0ac"uc704"uc6d0"ud68c
+                                  "uc704"uc6d0 "ub610"ub294 "uac10"uc0ac, "uc0ac"uc678"uc774"uc0ac).
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_director_audit_all_mending_status_shareholders_general_meeting_confirm_amount_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_director_audit_all_mending_status_mending_payment_amount_type_classification(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """이사·감사 전체의 보수현황(보수지급금액 - 유형별).
+
+        정기보고서(사업, 분기, 반기보고서) 내에 이사·감사 전체의 보수현황(보수지급금액 - 유형별)을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "nmpr": "str",  # Optional. "uc778"uc6d0"uc218.
+                                "psn1_avrg_pymntamt": "str",  # Optional.
+                                  1"uc778"ub2f9 "ud3c9"uade0"ubcf4"uc218"uc561.
+                                "pymnt_totamt": "str",  # Optional.
+                                  "ubcf4"uc218"ucd1d"uc561.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "rm": "str",  # Optional. "ube44"uace0.
+                                "se": "str"  # Optional.
+                                  "uad6c"ubd84("ub4f1"uae30"uc774"uc0ac("uc0ac"uc678"uc774"uc0ac,
+                                  "uac10"uc0ac"uc704"uc6d0"ud68c "uc704"uc6d0 "uc81c"uc678),
+                                  "uc0ac"uc678"uc774"uc0ac("uac10"uc0ac"uc704"uc6d0"ud68c "uc704"uc6d0
+                                  "uc81c"uc678), "uac10"uc0ac"uc704"uc6d0"ud68c "uc704"uc6d0,
+                                  "uac10"uc0ac "ub4f1.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_director_audit_all_mending_status_mending_payment_amount_type_classification_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_stock_total_quantity_status(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """주식 총수 현황.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 주식의총수현황을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "distb_stock_co": "str",  # Optional. "u2165.
+                                  "uc720"ud1b5"uc8fc"uc2dd"uc218 ("u2163-"u2164).
+                                "etc": "str",  # Optional. "u2162.
+                                  "ud604"uc7ac"uae4c"uc9c0 "uac10"uc18c"ud55c "uc8fc"uc2dd"uc758
+                                  "ucd1d"uc218(4. "uae30"ud0c0).
+                                "istc_totqy": "str",  # Optional. "u2163.
+                                  "ubc1c"ud589"uc8fc"uc2dd"uc758 "ucd1d"uc218 ("u2161-"u2162).
+                                "isu_stock_totqy": "str",  # Optional. "u2160.
+                                  "ubc1c"ud589"ud560 "uc8fc"uc2dd"uc758 "ucd1d"uc218.
+                                "now_to_dcrs_stock_totqy": "str",  # Optional.
+                                  "u2162. "ud604"uc7ac"uae4c"uc9c0 "uac10"uc18c"ud55c
+                                  "uc8fc"uc2dd"uc758 "ucd1d"uc218.
+                                "now_to_isu_stock_totqy": "str",  # Optional. "u2161.
+                                  "ud604"uc7ac"uae4c"uc9c0 "ubc1c"ud589"ud55c "uc8fc"uc2dd"uc758
+                                  "ucd1d"uc218.
+                                "profit_incnr": "str",  # Optional. "u2162.
+                                  "ud604"uc7ac"uae4c"uc9c0 "uac10"uc18c"ud55c "uc8fc"uc2dd"uc758
+                                  "ucd1d"uc218(2. "uc774"uc775"uc18c"uac01).
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "rdmstk_repy": "str",  # Optional. "u2162.
+                                  "ud604"uc7ac"uae4c"uc9c0 "uac10"uc18c"ud55c "uc8fc"uc2dd"uc758
+                                  "ucd1d"uc218(3. "uc0c1"ud658"uc8fc"uc2dd"uc758 "uc0c1"ud658).
+                                "redc": "str",  # Optional. "u2162.
+                                  "ud604"uc7ac"uae4c"uc9c0 "uac10"uc18c"ud55c "uc8fc"uc2dd"uc758
+                                  "ucd1d"uc218(1. "uac10"uc790).
+                                "se": "str",  # Optional.
+                                  "uad6c"ubd84("ubcf4"ud1b5"uc8fc, "uc6b0"uc120"uc8fc, "ud569"uacc4,
+                                  "ube44"uace0).
+                                "tesstk_co": "str"  # Optional. "u2164.
+                                  "uc790"uae30"uc8fc"uc2dd"uc218.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = (
+            build_gen_open_dart_get_regular_key_stock_total_quantity_status_request(
+                corp_code=corp_code,
+                bsns_year=bsns_year,
+                reprt_code=reprt_code,
+                headers=_headers,
+                params=_params,
+            )
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_account_auditor_name_and_opinion(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """회계감사인의 명칭 및 감사의견.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 회계감사인의 명칭 및 감사의견을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "adt_opinion": "str",  # Optional.
+                                  "uac10"uc0ac"uc758"uacac.
+                                "adt_reprt_spcmnt_matter": "str",  # Optional.
+                                  "uac10"uc0ac"ubcf4"uace0"uc11c "ud2b9"uae30"uc0ac"ud56d  "u2460
+                                  2019"ub144 12"uc6d4 8"uc77c"uae4c"uc9c0 "uc0ac"uc6a9"ub428.
+                                "adtor": "str",  # Optional. "uac10"uc0ac"uc778.
+                                "bsns_year": "str",  # Optional.
+                                  "uc0ac"uc5c5"uc5f0"ub3c4("ub2f9"uae30, "uc804"uae30,
+                                  "uc804"uc804"uae30).
+                                "core_adt_matter": "str",  # Optional.
+                                  "ud575"uc2ec"uac10"uc0ac"uc0ac"ud56d  "u2461 2019"ub144 12"uc6d4
+                                  9"uc77c"ubd80"ud130 "ucd94"uac00"ub428.
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "emphs_matter": "str",  # Optional.
+                                  "uac15"uc870"uc0ac"ud56d "ub4f1  "u2461 2019"ub144 12"uc6d4
+                                  9"uc77c"ubd80"ud130 "ucd94"uac00"ub428.
+                                "rcept_no": "str"  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_account_auditor_name_and_opinion_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_audit_service_conclusion_status(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """감사용역체결현황.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 감사용역체결현황을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "adt_cntrct_dtls_mendng": "str",  # Optional.
+                                  "uac10"uc0ac"uacc4"uc57d"ub0b4"uc5ed("ubcf4"uc218)  "u2461 2020"ub144
+                                  7"uc6d4 6"uc77c"ubd80"ud130 "ucd94"uac00"ub428.
+                                "adt_cntrct_dtls_time": "str",  # Optional.
+                                  "uac10"uc0ac"uacc4"uc57d"ub0b4"uc5ed("uc2dc"uac04)  "u2461 2020"ub144
+                                  7"uc6d4 6"uc77c"ubd80"ud130 "ucd94"uac00"ub428.
+                                "adtor": "str",  # Optional. "uac10"uc0ac"uc778.
+                                "bsns_year": "str",  # Optional.
+                                  "uc0ac"uc5c5"uc5f0"ub3c4("ub2f9"uae30, "uc804"uae30,
+                                  "uc804"uc804"uae30).
+                                "cn": "str",  # Optional. "ub0b4"uc6a9.
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "mendng": "str",  # Optional. "ubcf4"uc218  "u2460
+                                  2020"ub144 7"uc6d4 5"uc77c"uae4c"uc9c0 "uc0ac"uc6a9"ub428.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "real_exc_dtls_mendng": "str",  # Optional.
+                                  "uc2e4"uc81c"uc218"ud589"ub0b4"uc5ed("ubcf4"uc218)  "u2461 2020"ub144
+                                  7"uc6d4 6"uc77c"ubd80"ud130 "ucd94"uac00"ub428.
+                                "real_exc_dtls_time": "str",  # Optional.
+                                  "uc2e4"uc81c"uc218"ud589"ub0b4"uc5ed("uc2dc"uac04)  "u2461 2020"ub144
+                                  7"uc6d4 6"uc77c"ubd80"ud130 "ucd94"uac00"ub428.
+                                "tot_reqre_time": "str"  # Optional.
+                                  "ucd1d"uc18c"uc694"uc2dc"uac04  "u2460 2020"ub144 7"uc6d4
+                                  5"uc77c"uae4c"uc9c0 "uc0ac"uc6a9"ub428.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = (
+            build_gen_open_dart_get_regular_key_audit_service_conclusion_status_request(
+                corp_code=corp_code,
+                bsns_year=bsns_year,
+                reprt_code=reprt_code,
+                headers=_headers,
+                params=_params,
+            )
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_account_auditor_non_audit_service_conclusion_status(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """회계감사인과의 비감사용역 계약체결 현황.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 회계감사인과의 비감사용역 계약체결 현황을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "bsns_year": "str",  # Optional.
+                                  "uc0ac"uc5c5"uc5f0"ub3c4("ub2f9"uae30, "uc804"uae30,
+                                  "uc804"uc804"uae30).
+                                "cntrct_cncls_de": "str",  # Optional.
+                                  "uacc4"uc57d"uccb4"uacb0"uc77c.
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "rm": "str",  # Optional. "ube44"uace0.
+                                "servc_cn": "str",  # Optional.
+                                  "uc6a9"uc5ed"ub0b4"uc6a9.
+                                "servc_exc_pd": "str",  # Optional.
+                                  "uc6a9"uc5ed"uc218"ud589"uae30"uac04.
+                                "servc_mendng": "str"  # Optional.
+                                  "uc6a9"uc5ed"ubcf4"uc218.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_account_auditor_non_audit_service_conclusion_status_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_outside_director_change_status(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """사외이사 및 그 변동현황.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 사외이사 및 그 변동현황을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "apnt": "str",  # Optional. "uc0ac"uc678"uc774"uc0ac
+                                  "ubcc0"ub3d9"ud604"ud669("uc120"uc784).
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "drctr_co": "str",  # Optional. "uc774"uc0ac"uc758
+                                  "uc218.
+                                "mdstrm_resig": "str",  # Optional.
+                                  "uc0ac"uc678"uc774"uc0ac
+                                  "ubcc0"ub3d9"ud604"ud669("uc911"ub3c4"ud1f4"uc784).
+                                "otcmp_drctr_co": "str",  # Optional.
+                                  "uc0ac"uc678"uc774"uc0ac "uc218.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "rlsofc": "str"  # Optional. "uc0ac"uc678"uc774"uc0ac
+                                  "ubcc0"ub3d9"ud604"ud669("ud574"uc784).
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = (
+            build_gen_open_dart_get_regular_key_outside_director_change_status_request(
+                corp_code=corp_code,
+                bsns_year=bsns_year,
+                reprt_code=reprt_code,
+                headers=_headers,
+                params=_params,
+            )
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_new_capital_securities_not_reimbursed_balance(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """신종자본증권 미상환 잔액.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 신종자본증권 미상환 잔액을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "remndr_exprtn1": "str",  # Optional.
+                                  "uc794"uc5ec"ub9cc"uae30.
+                                "remndr_exprtn2": "str",  # Optional.
+                                  "uc794"uc5ec"ub9cc"uae30.
+                                "sm": "str",  # Optional. "ud569"uacc4.
+                                "yy10_excess_yy15_below": "str",  # Optional.
+                                  10"ub144"ucd08"uacfc 15"ub144"uc774"ud558.
+                                "yy15_excess_yy20_below": "str",  # Optional.
+                                  15"ub144"ucd08"uacfc 20"ub144"uc774"ud558.
+                                "yy1_below": "str",  # Optional. 1"ub144
+                                  "uc774"ud558.
+                                "yy1_excess_yy5_below": "str",  # Optional.
+                                  1"ub144"ucd08"uacfc 5"ub144"uc774"ud558.
+                                "yy20_excess_yy30_below": "str",  # Optional.
+                                  20"ub144"ucd08"uacfc 30"ub144"uc774"ud558.
+                                "yy30_excess": "str",  # Optional.
+                                  30"ub144"ucd08"uacfc.
+                                "yy5_excess_yy10_below": "str"  # Optional.
+                                  5"ub144"ucd08"uacfc 10"ub144"uc774"ud558.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_new_capital_securities_not_reimbursed_balance_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_increase_decrease_status(
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """증자(감자) 현황.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 증자(감자) 현황을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "isu_dcrs_de": "str",  # Optional.
+                                  "uc8fc"uc2dd"ubc1c"ud589 "uac10"uc18c"uc77c"uc790.
+                                "isu_dcrs_mstvdv_amount": "str",  # Optional.
+                                  "ubc1c"ud589 "uac10"uc18c "uc8fc"ub2f9 "uac00"uc561.
+                                "isu_dcrs_mstvdv_fval_amount": "str",  # Optional.
+                                  "ubc1c"ud589 "uac10"uc18c "uc8fc"ub2f9 "uc561"uba74 "uac00"uc561.
+                                "isu_dcrs_qy": "str",  # Optional. "ubc1c"ud589
+                                  "uac10"uc18c "uc218"ub7c9.
+                                "isu_dcrs_stle": "str",  # Optional. "ubc1c"ud589
+                                  "uac10"uc18c "ud615"ud0dc.
+                                "isu_dcrs_stock_knd": "str",  # Optional.
+                                  "ubc1c"ud589 "uac10"uc18c "uc8fc"uc2dd "uc885"ub958.
+                                "rcept_no": "str"  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_increase_decrease_status_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_allocation_matter(
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """배당에 관한 사항.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 배당에 관한 사항을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "frmtrm": "str",  # Optional. "uc804"uae30.
+                                "lwfr": "str",  # Optional. "uc804"uc804"uae30.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "se": "str",  # Optional. "uad6c"ubd84.
+                                "stock_knd": "str",  # Optional. "uc8fc"uc2dd
+                                  "uc885"ub958.
+                                "thstrm": "str"  # Optional. "ub2f9"uae30.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_allocation_matter_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_treasury_shares_acquisition_disposal_status(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """자기주식 취득 및 처분 현황.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 자기주식 취득 및 처분 현황을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "acqs_mth1": "str",  # Optional.
+                                  "ucde8"ub4dd"ubc29"ubc95 "ub300"ubd84"ub958.
+                                "acqs_mth2": "str",  # Optional.
+                                  "ucde8"ub4dd"ubc29"ubc95 "uc911"ubd84"ub958.
+                                "acqs_mth3": "str",  # Optional.
+                                  "ucde8"ub4dd"ubc29"ubc95 "uc18c"ubd84"ub958.
+                                "bsis_qy": "str",  # Optional. "uae30"ucd08
+                                  "uc218"ub7c9.
+                                "change_qy_acqs": "str",  # Optional. "ubcc0"ub3d9
+                                  "uc218"ub7c9 "ucde8"ub4dd.
+                                "change_qy_dsps": "str",  # Optional. "ubcc0"ub3d9
+                                  "uc218"ub7c9 "ucc98"ubd84.
+                                "change_qy_incnr": "str",  # Optional. "ubcc0"ub3d9
+                                  "uc218"ub7c9 "uc18c"uac01.
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "rm": "str",  # Optional. "ube44"uace0.
+                                "stock_knd": "str",  # Optional. "uc8fc"uc2dd
+                                  "uc885"ub958.
+                                "trmend_qy": "str"  # Optional. "uae30"ub9d0
+                                  "uc218"ub7c9.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_treasury_shares_acquisition_disposal_status_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_largest_shareholder_status(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """최대주주 현황.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 최대주주 현황을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "bsis_posesn_stock_co": "str",  # Optional.
+                                  "uae30"ucd08 "uc18c"uc720 "uc8fc"uc2dd "uc218.
+                                "bsis_posesn_stock_qota_rt": "str",  # Optional.
+                                  "uae30"ucd08 "uc18c"uc720 "uc8fc"uc2dd "uc9c0"ubd84 "uc728.
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "nm": "str",  # Optional. "uc131"uba85.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "relate": "str",  # Optional. "uad00"uacc4.
+                                "rm": "str",  # Optional. "ube44"uace0.
+                                "stock_knd": "str",  # Optional. "uc8fc"uc2dd
+                                  "uc885"ub958.
+                                "trmend_posesn_stock_co": "str",  # Optional.
+                                  "uae30"ub9d0 "uc18c"uc720 "uc8fc"uc2dd "uc218.
+                                "trmend_posesn_stock_qota_rt": "str"  # Optional.
+                                  "uae30"ub9d0 "uc18c"uc720 "uc8fc"uc2dd "uc9c0"ubd84 "uc728.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = (
+            build_gen_open_dart_get_regular_key_largest_shareholder_status_request(
+                corp_code=corp_code,
+                bsns_year=bsns_year,
+                reprt_code=reprt_code,
+                headers=_headers,
+                params=_params,
+            )
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_largest_shareholder_change_status(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """최대주주 변동 현황.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 최대주주 변동 현황을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "change_cause": "str",  # Optional. "ubcc0"ub3d9
+                                  "uc6d0"uc778.
+                                "change_on": "str",  # Optional. "ubcc0"ub3d9 "uc77c
+                                  YYYY.MM.DD.
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "mxmm_shrholdr_nm": "str",  # Optional. "ucd5c"ub300
+                                  "uc8fc"uc8fc "uba85.
+                                "posesn_stock_co": "str",  # Optional. "uc18c"uc720
+                                  "uc8fc"uc2dd "uc218.
+                                "qota_rt": "str",  # Optional. "uc9c0"ubd84 "uc728.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "rm": "str"  # Optional. "ube44"uace0.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_largest_shareholder_change_status_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_minority_shareholders_status(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """소액주주 현황.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 소액주주 현황을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "hold_stock_co": "str",  # Optional. "ubcf4"uc720
+                                  "uc8fc"uc2dd"uc218.
+                                "hold_stock_rate": "str",  # Optional. "ubcf4"uc720
+                                  "uc8fc"uc2dd "ube44"uc728.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "se": "str",  # Optional. "uad6c"ubd84.
+                                "shrholdr_co": "str",  # Optional.
+                                  "uc8fc"uc8fc"uc218.
+                                "shrholdr_rate": "str",  # Optional. "uc8fc"uc8fc
+                                  "ube44"uc728.
+                                "shrholdr_tot_co": "str",  # Optional. "uc804"uccb4
+                                  "uc8fc"uc8fc"uc218.
+                                "stock_tot_co": "str"  # Optional. "ucd1d"ubc1c"ud589
+                                  "uc8fc"uc2dd"uc218.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = (
+            build_gen_open_dart_get_regular_key_minority_shareholders_status_request(
+                corp_code=corp_code,
+                bsns_year=bsns_year,
+                reprt_code=reprt_code,
+                headers=_headers,
+                params=_params,
+            )
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_executive_status(
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """임원 현황.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 임원 현황을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "birth_ym": "str",  # Optional. "ucd9c"uc0dd
+                                  "ub144"uc6d4 (YYYY"ub144 MM"uc6d4).
+                                "chrg_job": "str",  # Optional. "ub2f4"ub2f9
+                                  "uc5c5"ubb34.
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "fte_at": "str",  # Optional. "uc0c1"uadfc
+                                  "uc5ec"ubd80.
+                                "hffc_pd": "str",  # Optional. "uc7ac"uc9c1
+                                  "uae30"uac04.
+                                "main_career": "str",  # Optional. "uc8fc"uc694
+                                  "uacbd"ub825.
+                                "mxmm_shrholdr_relate": "str",  # Optional.
+                                  "ucd5c"ub300 "uc8fc"uc8fc "uad00"uacc4.
+                                "nm": "str",  # Optional. "uc131"uba85.
+                                "ofcps": "str",  # Optional. "uc9c1"uc704.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "rgist_exctv_at": "str",  # Optional. "ub4f1"uae30
+                                  "uc784"uc6d0 "uc5ec"ubd80.
+                                "sexdstn": "str",  # Optional. "uc131"ubcc4.
+                                "tenure_end_on": "str"  # Optional. "uc784"uae30
+                                  "ub9cc"ub8cc "uc77c.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_executive_status_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_employee_status(
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """직원 현황.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 직원 현황을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "avrg_cnwk_sdytrn": "str",  # Optional. "ud3c9"uade0
+                                  "uadfc"uc18d "uc5f0"uc218.
+                                "cnttk_abacpt_labrr_co": "str",  # Optional.
+                                  "uacc4"uc57d"uc9c1 "ub2e8"uc2dc"uac04 "uadfc"ub85c"uc790 "uc218.
+                                "cnttk_co": "str",  # Optional. "uacc4"uc57d"uc9c1
+                                  "uc218.
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "fo_bbm": "str",  # Optional.
+                                  "uc0ac"uc5c5"ubd80"ubb38.
+                                "fyer_salary_totamt": "str",  # Optional.
+                                  "uc5f0"uac04 "uae09"uc5ec "ucd1d"uc561.
+                                "jan_salary_am": "str",  # Optional.
+                                  1"uc778"ud3c9"uade0 "uae09"uc5ec "uc561.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "reform_bfe_emp_co_cnttk": "str",  # Optional.
+                                  "uac1c"uc815 "uc804 "uc9c1"uc6d0 "uc218 "uacc4"uc57d"uc9c1.
+                                "reform_bfe_emp_co_etc": "str",  # Optional.
+                                  "uac1c"uc815 "uc804 "uc9c1"uc6d0 "uc218 "uae30"ud0c0.
+                                "reform_bfe_emp_co_rgllbr": "str",  # Optional.
+                                  "uac1c"uc815 "uc804 "uc9c1"uc6d0 "uc218 "uc815"uaddc"uc9c1.
+                                "rgllbr_abacpt_labrr_co": "str",  # Optional.
+                                  "uc815"uaddc"uc9c1 "ub2e8"uc2dc"uac04 "uadfc"ub85c"uc790 "uc218.
+                                "rgllbr_co": "str",  # Optional. "uc815"uaddc"uc9c1
+                                  "uc218.
+                                "rm": "str",  # Optional. "ube44"uace0.
+                                "sexdstn": "str",  # Optional. "uc131"ubcc4.
+                                "sm": "str"  # Optional. "ud569"uacc4.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_employee_status_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_director_auditor_individual_mending(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """이사ㆍ감사의 개인별 보수현황.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 이사ㆍ감사의 개인별 보수현황을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "mendng_totamt": "str",  # Optional. "ubcf4"uc218
+                                  "ucd1d"uc561.
+                                "mendng_totamt_ct_incls_mendng": "str",  # Optional.
+                                  "ubcf4"uc218 "ucd1d"uc561 "ube44 "ud3ec"ud568 "ubcf4"uc218.
+                                "nm": "str",  # Optional. "uc774"ub984.
+                                "ofcps": "str",  # Optional. "uc9c1"uc704.
+                                "rcept_no": "str"  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_director_auditor_individual_mending_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_director_audit_all_mending(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """이사ㆍ감사의 전체 보수현황.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 이사ㆍ감사의 전체 보수현황을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "jan_avrg_mendng_am": "str",  # Optional. 1"uc778
+                                  "ud3c9"uade0 "ubcf4"uc218 "uc561.
+                                "mendng_totamt": "str",  # Optional. "ubcf4"uc218
+                                  "ucd1d"uc561.
+                                "nmpr": "str",  # Optional. "uc778"uc6d0"uc218.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "rm": "str"  # Optional. "ube44"uace0.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = (
+            build_gen_open_dart_get_regular_key_director_audit_all_mending_request(
+                corp_code=corp_code,
+                bsns_year=bsns_year,
+                reprt_code=reprt_code,
+                headers=_headers,
+                params=_params,
+            )
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_individual_by_pay(
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """개인별 보수지급 금액(5억이상 상위5인).
+
+        정기보고서(사업, 분기, 반기보고서) 내에 개인별 보수지급 금액(5억이상 상위5인)을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "mendng_totamt": "str",  # Optional. "ubcf4"uc218
+                                  "ucd1d"uc561.
+                                "mendng_totamt_ct_incls_mendng": "str",  # Optional.
+                                  "ubcf4"uc218 "ucd1d"uc561 "ube44 "ud3ec"ud568 "ubcf4"uc218.
+                                "nm": "str",  # Optional. "uc774"ub984.
+                                "ofcps": "str",  # Optional. "uc9c1"uc704.
+                                "rcept_no": "str"  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_individual_by_pay_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_regular_key_outer_corporate_investment_status(  # pylint: disable=name-too-long
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """타법인 출자현황.
+
+        정기보고서(사업, 분기, 반기보고서) 내에 타법인 출자현황을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "bsis_blce_acntbk_amount": "str",  # Optional.
+                                  "uae30"ucd08 "uc794"uc561 "uc7a5"ubd80 "uac00"uc561.
+                                "bsis_blce_qota_rt": "str",  # Optional. "uae30"ucd08
+                                  "uc794"uc561 "uc9c0"ubd84 "uc728.
+                                "bsis_blce_qy": "str",  # Optional. "uae30"ucd08
+                                  "uc794"uc561 "uc218"ub7c9.
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "frst_acqs_amount": "str",  # Optional. "ucd5c"ucd08
+                                  "ucde8"ub4dd "uae08"uc561.
+                                "frst_acqs_de": "str",  # Optional. "ucd5c"ucd08
+                                  "ucde8"ub4dd "uc77c"uc790.
+                                "incrs_dcrs_acqs_dsps_amount": "str",  # Optional.
+                                  "uc99d"uac00 "uac10"uc18c "ucde8"ub4dd "ucc98"ubd84 "uae08"uc561.
+                                "incrs_dcrs_acqs_dsps_qy": "str",  # Optional.
+                                  "uc99d"uac00 "uac10"uc18c "ucde8"ub4dd "ucc98"ubd84 "uc218"ub7c9.
+                                "incrs_dcrs_evl_lstmn": "str",  # Optional.
+                                  "uc99d"uac00 "uac10"uc18c "ud3c9"uac00 "uc190"uc561.
+                                "inv_prm": "str",  # Optional. "ubc95"uc778"uba85.
+                                "invstmnt_purps": "str",  # Optional. "ucd9c"uc790
+                                  "ubaa9"uc801.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "recent_bsns_year_fnnr_sttus_thstrm_ntpf": "str",  #
+                                  Optional. "ucd5c"uadfc "uc0ac"uc5c5 "uc5f0"ub3c4 "uc7ac"ubb34
+                                  "ud604"ud669 "ub2f9"uae30 "uc21c"uc774"uc775.
+                                "recent_bsns_year_fnnr_sttus_tot_assets": "str",  #
+                                  Optional. "ucd5c"uadfc "uc0ac"uc5c5 "uc5f0"ub3c4 "uc7ac"ubb34
+                                  "ud604"ud669 "ucd1d "uc790"uc0b0.
+                                "trmend_blce_acntbk_amount": "str",  # Optional.
+                                  "uae30"ub9d0 "uc794"uc561 "uc7a5"ubd80 "uac00"uc561.
+                                "trmend_blce_qota_rt": "str",  # Optional.
+                                  "uae30"ub9d0 "uc794"uc561 "uc9c0"ubd84 "uc728.
+                                "trmend_blce_qy": "str"  # Optional. "uae30"ub9d0
+                                  "uc794"uc561 "uc218"ub7c9.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
+                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
+                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
+                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
+                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
+                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
+                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
+                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
+                          "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
+                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
+                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
+                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_regular_key_outer_corporate_investment_status_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
