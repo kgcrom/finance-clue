@@ -970,6 +970,54 @@ def build_gen_open_dart_get_regular_key_outer_corporate_investment_status_reques
     )
 
 
+def build_gen_open_dart_get_share_largest_shareholder_stock_request(  # pylint: disable=name-too-long
+    *, corp_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/majorstock.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
+def build_gen_open_dart_get_share_executive_major_stock_request(  # pylint: disable=name-too-long
+    *, corp_code: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/api/elestock.json"
+
+    # Construct parameters
+    _params["corp_code"] = _SERIALIZER.query(
+        "corp_code", corp_code, "str", max_length=8
+    )
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(
+        method="GET", url=_url, params=_params, headers=_headers, **kwargs
+    )
+
+
 class GenOpenDartClientOperationsMixin(
     GenOpenDartClientMixinABC
 ):  # pylint: disable=too-many-public-methods
@@ -1236,31 +1284,34 @@ class GenOpenDartClientOperationsMixin(
                         "page_count": 0,  # Optional. "ud398"uc774"uc9c0 "ubcc4 "uac74"uc218.
                         "page_no": 0,  # Optional. "ud398"uc774"uc9c0 "ubc88"ud638.
                         "status": "str",  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -1367,33 +1418,34 @@ class GenOpenDartClientOperationsMixin(
                       "uba54"uc2dc"uc9c0.
                     "phn_no": "str",  # Optional. "uc804"ud654"ubc88"ud638.
                     "status": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4"ucf54"ub4dc
-                      000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740
-                      "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294
-                      "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
+                      000 :"uc815"uc0c1:code:`<br/>` 010 :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740
+                      "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>` 011 :"uc0ac"uc6a9"ud560 "uc218
+                      "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
                       "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9
                       "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294
-                      "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012 :"uc811"uadfc"ud560 "uc218
-                      "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013 :"uc870"ud68c"ub41c
-                      "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014 :"ud30c"uc77c"uc774
-                      "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020 :"uc694"uccad
-                      "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
-                      "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
-                      "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
-                      "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
-                      "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                      "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c "ud68c"uc0ac
-                      "uac1c"uc218"uac00 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
-                      100"uac74) 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
-                      "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
-                      "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                      "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                      "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c
-                      "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4. 900
-                      :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
-                      "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901 :"uc0ac"uc6a9"uc790
-                      "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4 "ubcf4"uc720"uae30"uac04"uc774
-                      "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294
-                      "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                      "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560
+                      "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                      "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                      :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                      "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                      "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` "uc801"uc73c"ub85c"ub294
+                      20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0 "ub300"ud558"uc5ec "uc774
+                      "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00 "ubc1c"uc0dd"ub418"ub098, "uc694"uccad
+                      "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294
+                      "uc774"uc5d0 "uc900"ud558"uc5ec "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021
+                      :"uc870"ud68c "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                      "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74):code:`<br/>`
+                      100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
+                      "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
+                      "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                      "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101 :"ubd80"uc801"uc808"ud55c
+                      "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800 :"uc2dc"uc2a4"ud15c
+                      "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
+                      "uc911"uc785"ub2c8"ub2e4.:code:`<br/>` 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
+                      "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
+                      :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                      "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560 "uc218
+                      "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
                       "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
                       "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012", "013",
                       "014", "020", "021", "100", "101", "800", "900", and "901".
@@ -1636,31 +1688,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -1787,31 +1842,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -1941,31 +1999,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -2097,31 +2158,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -2250,31 +2314,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -2412,31 +2479,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -2574,31 +2644,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -2716,31 +2789,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -2863,31 +2939,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -3027,31 +3106,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -3179,31 +3261,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -3336,31 +3421,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -3485,31 +3573,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -3631,31 +3722,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -3787,31 +3881,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -3934,31 +4031,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -4075,31 +4175,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -4229,31 +4332,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -4377,31 +4483,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -4524,31 +4633,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -4672,31 +4784,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -4828,31 +4943,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -4988,31 +5106,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -5129,31 +5250,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -5270,31 +5394,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -5413,31 +5540,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -5579,31 +5709,34 @@ class GenOpenDartClientOperationsMixin(
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
                           "uba54"uc2dc"uc9c0.
                         "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
-                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1 010 :"ub4f1"ub85d"ub418"uc9c0
-                          "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4. 011 :"uc0ac"uc6a9"ud560 "uc218
-                          "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uc624"ud508API"uc5d0
-                          "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098, "uc77c"uc2dc"uc801"uc73c"ub85c
-                          "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c "ud1b5"ud558"uc5ec
-                          "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0 "ubc1c"uc0dd"ud569"ub2c8"ub2e4. 012
-                          :"uc811"uadfc"ud560 "uc218 "uc5c6"ub294 IP"uc785"ub2c8"ub2e4. 013
-                          :"uc870"ud68c"ub41c "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4. 014
-                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0 "uc54a"uc2b5"ub2c8"ub2e4. 020
-                          :"uc694"uccad "uc81c"ud55c"uc744 "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
                           "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
                           "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
                           "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
                           "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
-                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4. 021 :"uc870"ud68c "uac00"ub2a5"ud55c
-                          "ud68c"uc0ac "uac1c"uc218"uac00
-                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300 100"uac74) 100
-                          :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c "uac12"uc785"ub2c8"ub2e4.
-                          "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294 "uac12"uc744 "uc0ac"uc6a9"ud55c
-                          "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
-                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4. 101 :"ubd80"uc801"uc808"ud55c
-                          "uc811"uadfc"uc785"ub2c8"ub2e4. 800 :"uc2dc"uc2a4"ud15c
-                          "uc810"uac80"uc73c"ub85c "uc778"ud55c "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0
-                          "uc911"uc785"ub2c8"ub2e4. 900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740
-                          "uc624"ub958"uac00 "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4. 901
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
                           :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
                           "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
                           "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
@@ -5630,6 +5763,290 @@ class GenOpenDartClientOperationsMixin(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_share_largest_shareholder_stock(
+        self, *, corp_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """대량보유 상황보고서.
+
+        주식등의 대량보유상황보고서 내에 대량보유 상황보고 정보를 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "ctr_stkqy": "str",  # Optional.
+                                  "uc8fc"uc694"uccb4"uacb0 "uc8fc"uc2dd"ub4f1"uc758 "uc218.
+                                "ctr_stkrt": "str",  # Optional.
+                                  "uc8fc"uc694"uccb4"uacb0 "ubcf4"uc720"ube44"uc728.
+                                "rcept_dt": "str",  # Optional.
+                                  "uc811"uc218"uc77c"uc790.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "report_resn": "str",  # Optional.
+                                  "ubcf4"uace0"uc0ac"uc720.
+                                "report_tp": "str",  # Optional.
+                                  "ubcf4"uace0"uad6c"ubd84.
+                                "repror": "str",  # Optional.
+                                  "ub300"ud45c"ubcf4"uace0"uc790.
+                                "stkqy": "str",  # Optional.
+                                  "ubcf4"uc720"uc8fc"uc2dd"ub4f1"uc758 "uc218.
+                                "stkqy_irds": "str",  # Optional.
+                                  "ubcf4"uc720"uc8fc"uc2dd"ub4f1"uc758 "uc99d"uac10.
+                                "stkrt": "str",  # Optional.
+                                  "ubcf4"uc720"ube44"uc728.
+                                "stkrt_irds": "str"  # Optional.
+                                  "ubcf4"uc720"ube44"uc728 "uc99d"uac10.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_share_largest_shareholder_stock_request(
+            corp_code=corp_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = (
+            self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace
+    def get_share_executive_major_stock(self, *, corp_code: str, **kwargs: Any) -> JSON:
+        # pylint: disable=line-too-long
+        """임원ㆍ주요주주 소유보고.
+
+        임원ㆍ주요주주특정증권등 소유상황보고서 내에 임원ㆍ주요주주 소유보고 정보를 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "corp_cls": "str",  # Optional.
+                                  "ubc95"uc778"uad6c"ubd84  "ubc95"uc778"uad6c"ubd84 : Y("uc720"uac00),
+                                  K("ucf54"uc2a4"ub2e5), N("ucf54"ub125"uc2a4), E("uae30"ud0c0). Known
+                                  values are: "Y", "K", "N", and "E".
+                                "corp_name": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uba85.
+                                "isu_exctv_ofcps": "str",  # Optional. "ubc1c"ud589
+                                  "ud68c"uc0ac "uad00"uacc4 "uc784"uc6d0 "uc9c1"uc704.
+                                "isu_exctv_rgist_at": "str",  # Optional.
+                                  "ubc1c"ud589 "ud68c"uc0ac "uad00"uacc4
+                                  "uc784"uc6d0("ub4f1"uae30"uc5ec"ubd80).
+                                "isu_main_shrholdr": "str",  # Optional. "ubc1c"ud589
+                                  "ud68c"uc0ac "uad00"uacc4 "uc8fc"uc694 "uc8fc"uc8fc.
+                                "rcept_dt": "str",  # Optional.
+                                  "uc811"uc218"uc77c"uc790.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "repror": "str",  # Optional.
+                                  "ubcf4"uace0"uc790"uba85.
+                                "sp_stock_lmp_cnt": "str",  # Optional. "ud2b9"uc815
+                                  "uc99d"uad8c "ub4f1 "uc18c"uc720 "uc218.
+                                "sp_stock_lmp_irds_cnt": "str",  # Optional.
+                                  "ud2b9"uc815 "uc99d"uad8c "ub4f1 "uc18c"uc720 "uc99d"uac10 "uc218.
+                                "sp_stock_lmp_irds_rate": "str",  # Optional.
+                                  "ud2b9"uc815 "uc99d"uad8c "ub4f1 "uc18c"uc720 "uc99d"uac10
+                                  "ube44"uc728.
+                                "sp_stock_lmp_rate": "str"  # Optional. "ud2b9"uc815
+                                  "uc99d"uad8c "ub4f1 "uc18c"uc720 "ube44"uc728.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_share_executive_major_stock_request(
+            corp_code=corp_code,
             headers=_headers,
             params=_params,
         )

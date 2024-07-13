@@ -763,6 +763,30 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/outer_corporate_investment_status'
+  /api/majorstock.json:
+    get:
+      operationId: getShareLargestShareholderStock
+      summary: 대량보유 상황보고서
+      description: 주식등의 대량보유상황보고서 내에 대량보유 상황보고 정보를 제공합니다.
+      tags:
+        - ShareDisclosure
+      parameters:
+        - $ref: '#/components/parameters/corp_code'
+      responses:
+        '200':
+          $ref: '#/components/responses/largest_shareholder_stock'
+  /api/elestock.json:
+    get:
+      operationId: getShareExecutiveMajorStock
+      summary: 임원ㆍ주요주주 소유보고
+      description: 임원ㆍ주요주주특정증권등 소유상황보고서 내에 임원ㆍ주요주주 소유보고 정보를 제공합니다.
+      tags:
+        - ShareDisclosure
+      parameters:
+        - $ref: '#/components/parameters/corp_code'
+      responses:
+        '200':
+          $ref: '#/components/responses/executive_major_stock'
 components:
   securitySchemes:
     authKey:
@@ -778,19 +802,19 @@ components:
       description: |
         에러 및 정보코드
 
-        000 :정상
-        010 :등록되지 않은 키입니다.
-        011 :사용할 수 없는 키입니다. 오픈API에 등록되었으나, 일시적으로 사용 중지된 키를 통하여 검색하는 경우 발생합니다.
-        012 :접근할 수 없는 IP입니다.
-        013 :조회된 데이타가 없습니다.
-        014 :파일이 존재하지 않습니다.
-        020 :요청 제한을 초과하였습니다.
-        적으로는 20,000건 이상의 요청에 대하여 이 에러 메시지가 발생되나, 요청 제한이 다르게 설정된 경우에는 이에 준하여 발생됩니다.
-        021 :조회 가능한 회사 개수가 초과하였습니다.(최대 100건)
-        100 :필드의 부적절한 값입니다. 필드 설명에 없는 값을 사용한 경우에 발생하는 메시지입니다.
-        101 :부적절한 접근입니다.
-        800 :시스템 점검으로 인한 서비스가 중지 중입니다.
-        900 :정의되지 않은 오류가 발생하였습니다.
+        000 :정상<br/>
+        010 :등록되지 않은 키입니다.<br/>
+        011 :사용할 수 없는 키입니다. 오픈API에 등록되었으나, 일시적으로 사용 중지된 키를 통하여 검색하는 경우 발생합니다.<br/>
+        012 :접근할 수 없는 IP입니다.<br/>
+        013 :조회된 데이타가 없습니다.<br/>
+        014 :파일이 존재하지 않습니다.<br/>
+        020 :요청 제한을 초과하였습니다.<br/>
+        적으로는 20,000건 이상의 요청에 대하여 이 에러 메시지가 발생되나, 요청 제한이 다르게 설정된 경우에는 이에 준하여 발생됩니다.<br/>
+        021 :조회 가능한 회사 개수가 초과하였습니다.(최대 100건)<br/>
+        100 :필드의 부적절한 값입니다. 필드 설명에 없는 값을 사용한 경우에 발생하는 메시지입니다.<br/>
+        101 :부적절한 접근입니다.<br/>
+        800 :시스템 점검으로 인한 서비스가 중지 중입니다.<br/>
+        900 :정의되지 않은 오류가 발생하였습니다.<br/>
         901 :사용자 계정의 개인정보 보유기간이 만료되어 사용할 수 없는 키입니다. 관리자 이메일(opendart@fss.or.kr)로 문의하시기 바랍니다.
       type: string
       enum:
@@ -2902,6 +2926,142 @@ components:
                           type: string
                           description: 최근 사업 연도 재무 현황 당기 순이익
                           example: 9,999,999,999
+    largest_shareholder_stock:
+      description: 대량보유 상황보고 조회 성공
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              result:
+                type: object
+                properties:
+                  status:
+                    $ref: '#/components/schemas/status'
+                  message:
+                    type: string
+                    description: 에러 및 정보 메시지
+                    example: 정상
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        rcept_no:
+                          $ref: '#/components/schemas/rcept_no'
+                        rcept_dt:
+                          type: string
+                          description: 접수일자
+                          example: '20210331'
+                          maxLength: 8
+                        corp_cls:
+                          $ref: '#/components/schemas/corp_cls'
+                        corp_name:
+                          type: string
+                          description: 공시대상회사명
+                          example: 삼성전자
+                        report_tp:
+                          type: string
+                          description: 보고구분
+                          example: 일반
+                        repror:
+                          type: string
+                          description: 대표보고자
+                          example: 삼성물산
+                        stkqy:
+                          type: string
+                          description: 보유주식등의 수
+                          example: 9,999,999,999
+                        stkqy_irds:
+                          type: string
+                          description: 보유주식등의 증감
+                          example: 9,999,999,999
+                        stkrt:
+                          type: string
+                          description: 보유비율
+                          example: '20.79'
+                        stkrt_irds:
+                          type: string
+                          description: 보유비율 증감
+                          example: '0.3'
+                        ctr_stkqy:
+                          type: string
+                          description: 주요체결 주식등의 수
+                          example: 9,999,999,999
+                        ctr_stkrt:
+                          type: string
+                          description: 주요체결 보유비율
+                          example: '20.79'
+                        report_resn:
+                          type: string
+                          description: 보고사유
+                          example: 보유주식 변동
+    executive_major_stock:
+      description: 임원ㆍ주요주주 소유보고 조회 성공
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              result:
+                type: object
+                properties:
+                  status:
+                    $ref: '#/components/schemas/status'
+                  message:
+                    type: string
+                    description: 에러 및 정보 메시지
+                    example: 정상
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        rcept_no:
+                          $ref: '#/components/schemas/rcept_no'
+                        rcept_dt:
+                          type: string
+                          description: 접수일자
+                          example: '20210331'
+                          maxLength: 8
+                        corp_cls:
+                          $ref: '#/components/schemas/corp_cls'
+                        corp_name:
+                          type: string
+                          description: 공시대상회사명
+                          example: 삼성전자
+                        repror:
+                          type: string
+                          description: 보고자명
+                          example: 박상훈
+                        isu_exctv_rgist_at:
+                          type: string
+                          description: 발행 회사 관계 임원(등기여부)
+                          example: 비등기임원
+                        isu_exctv_ofcps:
+                          type: string
+                          description: 발행 회사 관계 임원 직위
+                          example: 상무
+                        isu_main_shrholdr:
+                          type: string
+                          description: 발행 회사 관계 주요 주주
+                          example: 10%이상주주
+                        sp_stock_lmp_cnt:
+                          type: string
+                          description: 특정 증권 등 소유 수
+                          example: 9,999,999,999
+                        sp_stock_lmp_irds_cnt:
+                          type: string
+                          description: 특정 증권 등 소유 증감 수
+                          example: 9,999,999,999
+                        sp_stock_lmp_rate:
+                          type: string
+                          description: 특정 증권 등 소유 비율
+                          example: '0.00'
+                        sp_stock_lmp_irds_rate:
+                          type: string
+                          description: 특정 증권 등 소유 증감 비율
+                          example: '0.00'
   parameters:
     corp_code:
       name: corp_code
