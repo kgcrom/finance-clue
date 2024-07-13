@@ -48,7 +48,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_conditional_capital_not_reimbursed_balance(
+        resp = self.opendart_client.get_conditional_capital_not_reimbursed_balance(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -86,12 +86,10 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = (
-            self.opendart_client.get_regular_key_corporate_bond_not_reimbursed_balance(
-                bsns_year=2023,
-                corp_code="00126380",
-                reprt_code="11011",
-            )
+        resp = self.opendart_client.get_corporate_bond_not_reimbursed_balance(
+            bsns_year=2023,
+            corp_code="00126380",
+            reprt_code="11011",
         )
         assert resp == expected
 
@@ -125,12 +123,10 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = (
-            self.opendart_client.get_regular_key_short_term_bond_not_reimbursed_balance(
-                bsns_year=2023,
-                corp_code="00126380",
-                reprt_code="11011",
-            )
+        resp = self.opendart_client.get_short_term_bond_not_reimbursed_balance(
+            bsns_year=2023,
+            corp_code="00126380",
+            reprt_code="11011",
         )
         assert resp == expected
 
@@ -165,7 +161,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_enterprises_bill_not_reimbursed_balance(
+        resp = self.opendart_client.get_enterprises_bill_not_reimbursed_balance(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -202,12 +198,10 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = (
-            self.opendart_client.get_regular_key_debt_securities_issue_accomplishment(
-                bsns_year=2023,
-                corp_code="00126380",
-                reprt_code="11011",
-            )
+        resp = self.opendart_client.get_debt_securities_issue_accomplishment(
+            bsns_year=2023,
+            corp_code="00126380",
+            reprt_code="11011",
         )
         assert resp == expected
 
@@ -242,7 +236,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_private_equity_capital_use_details(
+        resp = self.opendart_client.get_private_equity_capital_use_details(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -280,7 +274,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_public_equity_capital_use_details(
+        resp = self.opendart_client.get_public_equity_capital_use_details(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -313,7 +307,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_director_audit_all_mending_status_shareholders_general_meeting_confirm_amount(
+        resp = self.opendart_client.get_director_audit_all_mending_status_shareholders_general_meeting_confirm_amount(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -347,7 +341,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_director_audit_all_mending_status_mending_payment_amount_type_classification(
+        resp = self.opendart_client.get_director_audit_all_mending_status_mending_payment_amount_type_classification(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -385,7 +379,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_stock_total_quantity_status(
+        resp = self.opendart_client.get_stock_total_quantity_status(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -418,7 +412,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_account_auditor_name_and_opinion(
+        resp = self.opendart_client.get_account_auditor_name_and_opinion(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -454,7 +448,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_audit_service_conclusion_status(
+        resp = self.opendart_client.get_audit_service_conclusion_status(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -487,7 +481,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_account_auditor_non_audit_service_conclusion_status(
+        resp = self.opendart_client.get_account_auditor_non_audit_service_conclusion_status(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -519,7 +513,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_outside_director_change_status(
+        resp = self.opendart_client.get_outside_director_change_status(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -556,7 +550,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_new_capital_securities_not_reimbursed_balance(
+        resp = self.opendart_client.get_new_capital_securities_not_reimbursed_balance(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -589,7 +583,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_increase_decrease_status(
+        resp = self.opendart_client.get_increase_decrease_status(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -620,7 +614,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_allocation_matter(
+        resp = self.opendart_client.get_allocation_matter(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -657,7 +651,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_treasury_shares_acquisition_disposal_status(
+        resp = self.opendart_client.get_treasury_shares_acquisition_disposal_status(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -692,7 +686,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_largest_shareholder_status(
+        resp = self.opendart_client.get_largest_shareholder_status(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -725,7 +719,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_largest_shareholder_change_status(
+        resp = self.opendart_client.get_largest_shareholder_change_status(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -759,7 +753,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_minority_shareholders_status(
+        resp = self.opendart_client.get_minority_shareholders_status(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -797,7 +791,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_executive_status(
+        resp = self.opendart_client.get_executive_status(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -838,7 +832,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_employee_status(
+        resp = self.opendart_client.get_employee_status(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -869,7 +863,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_director_auditor_individual_mending(
+        resp = self.opendart_client.get_director_auditor_individual_mending(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -900,7 +894,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_director_audit_all_mending(
+        resp = self.opendart_client.get_director_audit_all_mending(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -931,7 +925,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_individual_by_pay(
+        resp = self.opendart_client.get_individual_by_pay(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",
@@ -973,7 +967,7 @@ class RegularDisclosureKeyCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_regular_key_outer_corporate_investment_status(
+        resp = self.opendart_client.get_outer_corporate_investment_status(
             bsns_year=2023,
             corp_code="00126380",
             reprt_code="11011",

@@ -25,7 +25,52 @@ from ..._operations._operations import (
     build_gen_open_dart_download_xbrl_financial_account_request,
 )
 from ..._operations._operations import (
+    build_gen_open_dart_get_account_auditor_name_and_opinion_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_account_auditor_non_audit_service_conclusion_status_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_audit_service_conclusion_status_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_conditional_capital_not_reimbursed_balance_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_corporate_bond_not_reimbursed_balance_request,
+)
+from ..._operations._operations import (
     build_gen_open_dart_get_corporate_document_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_debt_securities_issue_accomplishment_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_director_audit_all_mending_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_director_audit_all_mending_status_mending_payment_amount_type_classification_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_director_audit_all_mending_status_shareholders_general_meeting_confirm_amount_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_director_auditor_individual_mending_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_enterprises_bill_not_reimbursed_balance_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_increase_decrease_status_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_largest_shareholder_change_status_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_largest_shareholder_status_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_minority_shareholders_status_request,
 )
 from ..._operations._operations import (
     build_gen_open_dart_get_multi_financial_account_request,
@@ -34,91 +79,28 @@ from ..._operations._operations import (
     build_gen_open_dart_get_multi_financial_index_request,
 )
 from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_account_auditor_name_and_opinion_request,
+    build_gen_open_dart_get_new_capital_securities_not_reimbursed_balance_request,
 )
 from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_account_auditor_non_audit_service_conclusion_status_request,
+    build_gen_open_dart_get_outer_corporate_investment_status_request,
 )
 from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_allocation_matter_request,
+    build_gen_open_dart_get_outside_director_change_status_request,
 )
 from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_audit_service_conclusion_status_request,
+    build_gen_open_dart_get_private_equity_capital_use_details_request,
 )
 from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_conditional_capital_not_reimbursed_balance_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_corporate_bond_not_reimbursed_balance_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_debt_securities_issue_accomplishment_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_director_audit_all_mending_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_director_audit_all_mending_status_mending_payment_amount_type_classification_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_director_audit_all_mending_status_shareholders_general_meeting_confirm_amount_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_director_auditor_individual_mending_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_employee_status_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_enterprises_bill_not_reimbursed_balance_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_executive_status_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_increase_decrease_status_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_individual_by_pay_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_largest_shareholder_change_status_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_largest_shareholder_status_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_minority_shareholders_status_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_new_capital_securities_not_reimbursed_balance_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_outer_corporate_investment_status_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_outside_director_change_status_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_private_equity_capital_use_details_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_public_equity_capital_use_details_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_short_term_bond_not_reimbursed_balance_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_stock_total_quantity_status_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_regular_key_treasury_shares_acquisition_disposal_status_request,
+    build_gen_open_dart_get_public_equity_capital_use_details_request,
 )
 from ..._operations._operations import (
     build_gen_open_dart_get_share_executive_major_stock_request,
 )
 from ..._operations._operations import (
     build_gen_open_dart_get_share_largest_shareholder_stock_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_short_term_bond_not_reimbursed_balance_request,
 )
 from ..._operations._operations import (
     build_gen_open_dart_get_single_financial_account_all_request,
@@ -129,8 +111,18 @@ from ..._operations._operations import (
 from ..._operations._operations import (
     build_gen_open_dart_get_single_financial_index_request,
 )
+from ..._operations._operations import (
+    build_gen_open_dart_get_stock_total_quantity_status_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_treasury_shares_acquisition_disposal_status_request,
+)
+from ..._operations._operations import build_gen_open_dart_get_allocation_matter_request
 from ..._operations._operations import build_gen_open_dart_get_corporate_company_request
 from ..._operations._operations import build_gen_open_dart_get_corporate_list_request
+from ..._operations._operations import build_gen_open_dart_get_employee_status_request
+from ..._operations._operations import build_gen_open_dart_get_executive_status_request
+from ..._operations._operations import build_gen_open_dart_get_individual_by_pay_request
 from ..._operations._operations import build_gen_open_dart_get_xbrl_taxonomy_request
 from .._vendor import GenOpenDartClientMixinABC
 
@@ -735,7 +727,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(AsyncIterator[bytes], deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_conditional_capital_not_reimbursed_balance(  # pylint: disable=name-too-long
+    async def get_conditional_capital_not_reimbursed_balance(  # pylint: disable=name-too-long
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -859,12 +851,14 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_conditional_capital_not_reimbursed_balance_request(
-            corp_code=corp_code,
-            bsns_year=bsns_year,
-            reprt_code=reprt_code,
-            headers=_headers,
-            params=_params,
+        _request = (
+            build_gen_open_dart_get_conditional_capital_not_reimbursed_balance_request(
+                corp_code=corp_code,
+                bsns_year=bsns_year,
+                reprt_code=reprt_code,
+                headers=_headers,
+                params=_params,
+            )
         )
         _request.url = self._client.format_url(_request.url)
 
@@ -894,7 +888,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_corporate_bond_not_reimbursed_balance(  # pylint: disable=name-too-long
+    async def get_corporate_bond_not_reimbursed_balance(  # pylint: disable=name-too-long
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -1011,12 +1005,14 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_corporate_bond_not_reimbursed_balance_request(
-            corp_code=corp_code,
-            bsns_year=bsns_year,
-            reprt_code=reprt_code,
-            headers=_headers,
-            params=_params,
+        _request = (
+            build_gen_open_dart_get_corporate_bond_not_reimbursed_balance_request(
+                corp_code=corp_code,
+                bsns_year=bsns_year,
+                reprt_code=reprt_code,
+                headers=_headers,
+                params=_params,
+            )
         )
         _request.url = self._client.format_url(_request.url)
 
@@ -1046,7 +1042,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_short_term_bond_not_reimbursed_balance(  # pylint: disable=name-too-long
+    async def get_short_term_bond_not_reimbursed_balance(  # pylint: disable=name-too-long
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -1166,12 +1162,14 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_short_term_bond_not_reimbursed_balance_request(
-            corp_code=corp_code,
-            bsns_year=bsns_year,
-            reprt_code=reprt_code,
-            headers=_headers,
-            params=_params,
+        _request = (
+            build_gen_open_dart_get_short_term_bond_not_reimbursed_balance_request(
+                corp_code=corp_code,
+                bsns_year=bsns_year,
+                reprt_code=reprt_code,
+                headers=_headers,
+                params=_params,
+            )
         )
         _request.url = self._client.format_url(_request.url)
 
@@ -1201,7 +1199,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_enterprises_bill_not_reimbursed_balance(  # pylint: disable=name-too-long
+    async def get_enterprises_bill_not_reimbursed_balance(  # pylint: disable=name-too-long
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -1323,12 +1321,14 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_enterprises_bill_not_reimbursed_balance_request(
-            corp_code=corp_code,
-            bsns_year=bsns_year,
-            reprt_code=reprt_code,
-            headers=_headers,
-            params=_params,
+        _request = (
+            build_gen_open_dart_get_enterprises_bill_not_reimbursed_balance_request(
+                corp_code=corp_code,
+                bsns_year=bsns_year,
+                reprt_code=reprt_code,
+                headers=_headers,
+                params=_params,
+            )
         )
         _request.url = self._client.format_url(_request.url)
 
@@ -1358,7 +1358,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_debt_securities_issue_accomplishment(  # pylint: disable=name-too-long
+    async def get_debt_securities_issue_accomplishment(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -1477,7 +1477,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_debt_securities_issue_accomplishment_request(
+        _request = build_gen_open_dart_get_debt_securities_issue_accomplishment_request(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
@@ -1512,7 +1512,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_private_equity_capital_use_details(  # pylint: disable=name-too-long
+    async def get_private_equity_capital_use_details(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -1640,7 +1640,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_private_equity_capital_use_details_request(
+        _request = build_gen_open_dart_get_private_equity_capital_use_details_request(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
@@ -1675,7 +1675,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_public_equity_capital_use_details(  # pylint: disable=name-too-long
+    async def get_public_equity_capital_use_details(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -1803,7 +1803,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_public_equity_capital_use_details_request(
+        _request = build_gen_open_dart_get_public_equity_capital_use_details_request(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
@@ -1838,7 +1838,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_director_audit_all_mending_status_shareholders_general_meeting_confirm_amount(  # pylint: disable=name-too-long
+    async def get_director_audit_all_mending_status_shareholders_general_meeting_confirm_amount(  # pylint: disable=name-too-long
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -1946,7 +1946,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_director_audit_all_mending_status_shareholders_general_meeting_confirm_amount_request(
+        _request = build_gen_open_dart_get_director_audit_all_mending_status_shareholders_general_meeting_confirm_amount_request(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
@@ -1981,7 +1981,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_director_audit_all_mending_status_mending_payment_amount_type_classification(  # pylint: disable=name-too-long
+    async def get_director_audit_all_mending_status_mending_payment_amount_type_classification(  # pylint: disable=name-too-long
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -2094,7 +2094,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_director_audit_all_mending_status_mending_payment_amount_type_classification_request(
+        _request = build_gen_open_dart_get_director_audit_all_mending_status_mending_payment_amount_type_classification_request(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
@@ -2129,7 +2129,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_stock_total_quantity_status(  # pylint: disable=name-too-long
+    async def get_stock_total_quantity_status(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -2259,14 +2259,12 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = (
-            build_gen_open_dart_get_regular_key_stock_total_quantity_status_request(
-                corp_code=corp_code,
-                bsns_year=bsns_year,
-                reprt_code=reprt_code,
-                headers=_headers,
-                params=_params,
-            )
+        _request = build_gen_open_dart_get_stock_total_quantity_status_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
         )
         _request.url = self._client.format_url(_request.url)
 
@@ -2296,7 +2294,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_account_auditor_name_and_opinion(  # pylint: disable=name-too-long
+    async def get_account_auditor_name_and_opinion(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -2412,7 +2410,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_account_auditor_name_and_opinion_request(
+        _request = build_gen_open_dart_get_account_auditor_name_and_opinion_request(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
@@ -2447,7 +2445,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_audit_service_conclusion_status(  # pylint: disable=name-too-long
+    async def get_audit_service_conclusion_status(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -2570,14 +2568,12 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = (
-            build_gen_open_dart_get_regular_key_audit_service_conclusion_status_request(
-                corp_code=corp_code,
-                bsns_year=bsns_year,
-                reprt_code=reprt_code,
-                headers=_headers,
-                params=_params,
-            )
+        _request = build_gen_open_dart_get_audit_service_conclusion_status_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
         )
         _request.url = self._client.format_url(_request.url)
 
@@ -2607,7 +2603,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_account_auditor_non_audit_service_conclusion_status(  # pylint: disable=name-too-long
+    async def get_account_auditor_non_audit_service_conclusion_status(  # pylint: disable=name-too-long
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -2720,7 +2716,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_account_auditor_non_audit_service_conclusion_status_request(
+        _request = build_gen_open_dart_get_account_auditor_non_audit_service_conclusion_status_request(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
@@ -2755,7 +2751,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_outside_director_change_status(  # pylint: disable=name-too-long
+    async def get_outside_director_change_status(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -2867,14 +2863,12 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = (
-            build_gen_open_dart_get_regular_key_outside_director_change_status_request(
-                corp_code=corp_code,
-                bsns_year=bsns_year,
-                reprt_code=reprt_code,
-                headers=_headers,
-                params=_params,
-            )
+        _request = build_gen_open_dart_get_outside_director_change_status_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
         )
         _request.url = self._client.format_url(_request.url)
 
@@ -2904,7 +2898,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_new_capital_securities_not_reimbursed_balance(  # pylint: disable=name-too-long
+    async def get_new_capital_securities_not_reimbursed_balance(  # pylint: disable=name-too-long
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -3024,7 +3018,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_new_capital_securities_not_reimbursed_balance_request(
+        _request = build_gen_open_dart_get_new_capital_securities_not_reimbursed_balance_request(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
@@ -3059,7 +3053,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_increase_decrease_status(
+    async def get_increase_decrease_status(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -3172,7 +3166,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_increase_decrease_status_request(
+        _request = build_gen_open_dart_get_increase_decrease_status_request(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
@@ -3207,7 +3201,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_allocation_matter(
+    async def get_allocation_matter(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -3314,7 +3308,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_allocation_matter_request(
+        _request = build_gen_open_dart_get_allocation_matter_request(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
@@ -3349,7 +3343,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_treasury_shares_acquisition_disposal_status(  # pylint: disable=name-too-long
+    async def get_treasury_shares_acquisition_disposal_status(  # pylint: disable=name-too-long
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -3469,12 +3463,14 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_treasury_shares_acquisition_disposal_status_request(
-            corp_code=corp_code,
-            bsns_year=bsns_year,
-            reprt_code=reprt_code,
-            headers=_headers,
-            params=_params,
+        _request = (
+            build_gen_open_dart_get_treasury_shares_acquisition_disposal_status_request(
+                corp_code=corp_code,
+                bsns_year=bsns_year,
+                reprt_code=reprt_code,
+                headers=_headers,
+                params=_params,
+            )
         )
         _request.url = self._client.format_url(_request.url)
 
@@ -3504,7 +3500,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_largest_shareholder_status(  # pylint: disable=name-too-long
+    async def get_largest_shareholder_status(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -3618,14 +3614,12 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = (
-            build_gen_open_dart_get_regular_key_largest_shareholder_status_request(
-                corp_code=corp_code,
-                bsns_year=bsns_year,
-                reprt_code=reprt_code,
-                headers=_headers,
-                params=_params,
-            )
+        _request = build_gen_open_dart_get_largest_shareholder_status_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
         )
         _request.url = self._client.format_url(_request.url)
 
@@ -3655,7 +3649,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_largest_shareholder_change_status(  # pylint: disable=name-too-long
+    async def get_largest_shareholder_change_status(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -3766,7 +3760,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_largest_shareholder_change_status_request(
+        _request = build_gen_open_dart_get_largest_shareholder_change_status_request(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
@@ -3801,7 +3795,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_minority_shareholders_status(  # pylint: disable=name-too-long
+    async def get_minority_shareholders_status(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -3915,14 +3909,12 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = (
-            build_gen_open_dart_get_regular_key_minority_shareholders_status_request(
-                corp_code=corp_code,
-                bsns_year=bsns_year,
-                reprt_code=reprt_code,
-                headers=_headers,
-                params=_params,
-            )
+        _request = build_gen_open_dart_get_minority_shareholders_status_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
         )
         _request.url = self._client.format_url(_request.url)
 
@@ -3952,7 +3944,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_executive_status(
+    async def get_executive_status(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -4072,7 +4064,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_executive_status_request(
+        _request = build_gen_open_dart_get_executive_status_request(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
@@ -4107,7 +4099,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_employee_status(
+    async def get_employee_status(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -4233,7 +4225,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_employee_status_request(
+        _request = build_gen_open_dart_get_employee_status_request(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
@@ -4268,7 +4260,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_director_auditor_individual_mending(  # pylint: disable=name-too-long
+    async def get_director_auditor_individual_mending(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -4375,7 +4367,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_director_auditor_individual_mending_request(
+        _request = build_gen_open_dart_get_director_auditor_individual_mending_request(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
@@ -4410,7 +4402,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_director_audit_all_mending(  # pylint: disable=name-too-long
+    async def get_director_audit_all_mending(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -4517,14 +4509,12 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = (
-            build_gen_open_dart_get_regular_key_director_audit_all_mending_request(
-                corp_code=corp_code,
-                bsns_year=bsns_year,
-                reprt_code=reprt_code,
-                headers=_headers,
-                params=_params,
-            )
+        _request = build_gen_open_dart_get_director_audit_all_mending_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
         )
         _request.url = self._client.format_url(_request.url)
 
@@ -4554,7 +4544,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_individual_by_pay(
+    async def get_individual_by_pay(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -4661,7 +4651,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_individual_by_pay_request(
+        _request = build_gen_open_dart_get_individual_by_pay_request(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
@@ -4696,7 +4686,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_regular_key_outer_corporate_investment_status(  # pylint: disable=name-too-long
+    async def get_outer_corporate_investment_status(
         self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -4828,7 +4818,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_regular_key_outer_corporate_investment_status_request(
+        _request = build_gen_open_dart_get_outer_corporate_investment_status_request(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
@@ -5495,11 +5485,6 @@ class GenOpenDartClientOperationsMixin(
               - 개별/연결
               - 표시방법
               - 세전 세후
-            * - BS
-              - 재무상태표
-              -
-              -
-              -
             * - BS1
               - 재무상태표
               - 연결
@@ -5520,11 +5505,6 @@ class GenOpenDartClientOperationsMixin(
               - 개별
               - 유동성배열법
               -
-            * - IS
-              - 손익계산서
-              -
-              -
-              -
             * - IS1
               - 별개의 손익계산서
               - 연결
@@ -5544,11 +5524,6 @@ class GenOpenDartClientOperationsMixin(
               - 별개의 손익계산서
               - 개별
               - 성격별분류
-              -
-            * - CIS
-              - 포괄손익계산서
-              -
-              -
               -
             * - CIS1
               - 포괄손익계산서
@@ -5610,11 +5585,6 @@ class GenOpenDartClientOperationsMixin(
               - 개별
               - 성격별분류
               - 세전
-            * - CF
-              - 현금흐름표
-              -
-              -
-              -
             * - CF1
               - 현금흐름표
               - 연결
@@ -5635,11 +5605,6 @@ class GenOpenDartClientOperationsMixin(
               - 개별
               - 간접법
               -
-            * - SCE
-              - 자본변동표
-              -
-              -
-              -
             * - SCE1
               - 자본변동표
               - 연결
@@ -5649,9 +5614,9 @@ class GenOpenDartClientOperationsMixin(
               - 자본변동표
               - 개별
               -
-              -. Known values are: "BS", "IS", "CIS", "CF", "SCE", "BS1", "BS2", "BS3", "BS4", "IS1",
-         "IS2", "IS3", "IS4", "CIS1", "CIS2", "CIS3", "CIS4", "DCIS1", "DCIS2", "DCIS3", "DCIS4",
-         "DCIS5", "DCIS6", "DCIS7", "DCIS8", "CF1", "CF2", "CF3", "CF4", "SCE1", and "SCE2". Required.
+              -. Known values are: "BS1", "BS2", "BS3", "BS4", "IS1", "IS2", "IS3", "IS4", "CIS1",
+         "CIS2", "CIS3", "CIS4", "DCIS1", "DCIS2", "DCIS3", "DCIS4", "DCIS5", "DCIS6", "DCIS7", "DCIS8",
+         "CF1", "CF2", "CF3", "CF4", "SCE1", and "SCE2". Required.
         :paramtype sj_div: str
         :return: JSON object
         :rtype: JSON
@@ -5683,74 +5648,13 @@ class GenOpenDartClientOperationsMixin(
                                 "label_kor": "str",  # Optional. "ud55c"uae00
                                   "ucd9c"ub825"uba85.
                                 "sj_div": "str"  # Optional.
-                                  "uc7ac"ubb34"uc81c"ud45c"uad6c"ubd84  .. list-table::
-                                  :header-rows: 1     * - "uc7ac"ubb34"uc81c"ud45c"uad6c"ubd84      -
-                                  "uc7ac"ubb34"uc81c"ud45c"uba85"uce6d      - "uac1c"ubcc4/"uc5f0"uacb0
-                                  - "ud45c"uc2dc"ubc29"ubc95      - "uc138"uc804 "uc138"ud6c4    * - BS
-                                  - "uc7ac"ubb34"uc0c1"ud0dc"ud45c      -       -       -     * - BS1
-                                  - "uc7ac"ubb34"uc0c1"ud0dc"ud45c      - "uc5f0"uacb0      -
-                                  "uc720"ub3d9/"ube44"uc720"ub3d9"ubc95      -     * - BS2      -
-                                  "uc7ac"ubb34"uc0c1"ud0dc"ud45c      - "uac1c"ubcc4      -
-                                  "uc720"ub3d9/"ube44"uc720"ub3d9"ubc95      -     * - BS3      -
-                                  "uc7ac"ubb34"uc0c1"ud0dc"ud45c      - "uc5f0"uacb0      -
-                                  "uc720"ub3d9"uc131"ubc30"uc5f4"ubc95      -     * - BS4      -
-                                  "uc7ac"ubb34"uc0c1"ud0dc"ud45c      - "uac1c"ubcc4      -
-                                  "uc720"ub3d9"uc131"ubc30"uc5f4"ubc95      -     * - IS      -
-                                  "uc190"uc775"uacc4"uc0b0"uc11c      -       -       -     * - IS1
-                                  - "ubcc4"uac1c"uc758 "uc190"uc775"uacc4"uc0b0"uc11c      -
-                                  "uc5f0"uacb0      - "uae30"ub2a5"ubcc4"ubd84"ub958      -     * - IS2
-                                  - "ubcc4"uac1c"uc758 "uc190"uc775"uacc4"uc0b0"uc11c      -
-                                  "uac1c"ubcc4      - "uae30"ub2a5"ubcc4"ubd84"ub958      -     * - IS3
-                                  - "ubcc4"uac1c"uc758 "uc190"uc775"uacc4"uc0b0"uc11c      -
-                                  "uc5f0"uacb0      - "uc131"uaca9"ubcc4"ubd84"ub958      -     * - IS4
-                                  - "ubcc4"uac1c"uc758 "uc190"uc775"uacc4"uc0b0"uc11c      -
-                                  "uac1c"ubcc4      - "uc131"uaca9"ubcc4"ubd84"ub958      -     * - CIS
-                                  - "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      -       -       -
-                                  * - CIS1      - "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      -
-                                  "uc5f0"uacb0      - "uc138"ud6c4      -     * - CIS2      -
-                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uac1c"ubcc4      -
-                                  "uc138"ud6c4      -     * - CIS3      -
-                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uc5f0"uacb0      -
-                                  "uc138"uc804      -     * - CIS4      -
-                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uac1c"ubcc4      -
-                                  "uc138"uc804      -     * - DCIS1      - "ub2e8"uc77c
-                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uc5f0"uacb0      -
-                                  "uae30"ub2a5"ubcc4"ubd84"ub958      -
-                                  "uc138"ud6c4"ud3ec"uad04"uc190"uc775    * - DCIS2      - "ub2e8"uc77c
-                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uac1c"ubcc4      -
-                                  "uae30"ub2a5"ubcc4"ubd84"ub958      -
-                                  "uc138"ud6c4"ud3ec"uad04"uc190"uc775    * - DCIS3      - "ub2e8"uc77c
-                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uc5f0"uacb0      -
-                                  "uae30"ub2a5"ubcc4"ubd84"ub958      - "uc138"uc804    * - DCIS4
-                                  - "ub2e8"uc77c "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      -
-                                  "uac1c"ubcc4      - "uae30"ub2a5"ubcc4"ubd84"ub958      -
-                                  "uc138"uc804    * - DCIS5      - "ub2e8"uc77c
-                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uc5f0"uacb0      -
-                                  "uc131"uaca9"ubcc4"ubd84"ub958      -
-                                  "uc138"ud6c4"ud3ec"uad04"uc190"uc775    * - DCIS6      - "ub2e8"uc77c
-                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uac1c"ubcc4      -
-                                  "uc131"uaca9"ubcc4"ubd84"ub958      -
-                                  "uc138"ud6c4"ud3ec"uad04"uc190"uc775    * - DCIS7      - "ub2e8"uc77c
-                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uc5f0"uacb0      -
-                                  "uc131"uaca9"ubcc4"ubd84"ub958      - "uc138"uc804    * - DCIS8
-                                  - "ub2e8"uc77c "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      -
-                                  "uac1c"ubcc4      - "uc131"uaca9"ubcc4"ubd84"ub958      -
-                                  "uc138"uc804    * - CF      - "ud604"uae08"ud750"ub984"ud45c      -
-                                  -       -     * - CF1      - "ud604"uae08"ud750"ub984"ud45c      -
-                                  "uc5f0"uacb0      - "uc9c1"uc811"ubc95      -     * - CF2      -
-                                  "ud604"uae08"ud750"ub984"ud45c      - "uac1c"ubcc4      -
-                                  "uc9c1"uc811"ubc95      -     * - CF3      -
-                                  "ud604"uae08"ud750"ub984"ud45c      - "uc5f0"uacb0      -
-                                  "uac04"uc811"ubc95      -     * - CF4      -
-                                  "ud604"uae08"ud750"ub984"ud45c      - "uac1c"ubcc4      -
-                                  "uac04"uc811"ubc95      -     * - SCE      -
-                                  "uc790"ubcf8"ubcc0"ub3d9"ud45c      -       -       -     * - SCE1
-                                  - "uc790"ubcf8"ubcc0"ub3d9"ud45c      - "uc5f0"uacb0      -       -
-                                  * - SCE2      - "uc790"ubcf8"ubcc0"ub3d9"ud45c      - "uac1c"ubcc4
-                                  -       -. Known values are: "BS", "IS", "CIS", "CF", "SCE", "BS1",
-                                  "BS2", "BS3", "BS4", "IS1", "IS2", "IS3", "IS4", "CIS1", "CIS2",
-                                  "CIS3", "CIS4", "DCIS1", "DCIS2", "DCIS3", "DCIS4", "DCIS5", "DCIS6",
-                                  "DCIS7", "DCIS8", "CF1", "CF2", "CF3", "CF4", "SCE1", and "SCE2".
+                                  "uc7ac"ubb34"uc81c"ud45c"uad6c"ubd84   * BS :
+                                  "uc7ac"ubb34"uc0c1"ud0dc"ud45c:code:`<br/>` * IS :
+                                  "uc190"uc775"uacc4"uc0b0"uc11c:code:`<br/>` * CIS :
+                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c:code:`<br/>` * CF :
+                                  "ud604"uae08"ud750"ub984"ud45c:code:`<br/>` * SCE :
+                                  "uc790"ubcf8"ubcc0"ub3d9"ud45c. Known values are: "BS", "IS", "CIS",
+                                  "CF", and "SCE".
                             }
                         ],
                         "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4

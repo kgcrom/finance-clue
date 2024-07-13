@@ -388,7 +388,7 @@ paths:
                 format: binary
   /api/cndlCaplScritsNrdmpBlce.json:
     get:
-      operationId: getRegularKeyConditionalCapitalNotReimbursedBalance
+      operationId: getConditionalCapitalNotReimbursedBalance
       summary: 조건부 자본증권 미상환 잔액
       description: |
         정기보고서(사업, 분기, 반기보고서) 내에 조건부 자본증권 미상환 잔액을 제공합니다.
@@ -403,7 +403,7 @@ paths:
           $ref: '#/components/responses/conditional_capital_not_reimbursed_balance'
   /api/cprndNrdmpBlce.json:
     get:
-      operationId: getRegularKeyCorporateBondNotReimbursedBalance
+      operationId: getCorporateBondNotReimbursedBalance
       summary: 회사채 미상환 잔액
       description: 정기보고서(사업, 분기, 반기보고서) 내에 회사채 미상환 잔액을 제공합니다.
       tags:
@@ -417,7 +417,7 @@ paths:
           $ref: '#/components/responses/corporate_bond_not_reimbursed_balance'
   /api/srtpdPsndbtNrdmpBlce.json:
     get:
-      operationId: getRegularKeyShortTermBondNotReimbursedBalance
+      operationId: getShortTermBondNotReimbursedBalance
       summary: 단기사채 미상환 잔액
       description: 정기보고서(사업, 분기, 반기보고서) 내에 단기사채 미상환 잔액을 제공합니다.
       tags:
@@ -431,7 +431,7 @@ paths:
           $ref: '#/components/responses/short_term_bond_not_reimbursed_balance'
   /api/entrprsBilScritsNrdmpBlce.json:
     get:
-      operationId: getRegularKeyEnterprisesBillNotReimbursedBalance
+      operationId: getEnterprisesBillNotReimbursedBalance
       summary: 기업어음증권 미상환 잔액
       description: 정기보고서(사업, 분기, 반기보고서) 내에 기업어음증권 미상환 잔액을 제공합니다.
       tags:
@@ -445,7 +445,7 @@ paths:
           $ref: '#/components/responses/enterprises_bill_not_reimbursed_balance'
   /api/detScritsIsuAcmslt.json:
     get:
-      operationId: getRegularKeyDebtSecuritiesIssueAccomplishment
+      operationId: getDebtSecuritiesIssueAccomplishment
       summary: 채무증권 발행실적
       description: 정기보고서(사업, 분기, 반기보고서) 내에 채무증권 발행실적을 제공합니다.
       tags:
@@ -459,7 +459,7 @@ paths:
           $ref: '#/components/responses/debt_securities_issue_accomplishment'
   /api/prvsrpCptalUseDtls.json:
     get:
-      operationId: getRegularKeyPrivateEquityCapitalUseDetails
+      operationId: getPrivateEquityCapitalUseDetails
       summary: 사모자금의 사용내역
       description: 정기보고서(사업, 분기, 반기보고서) 내에 사모자금의 사용내역을 제공합니다.
       tags:
@@ -473,7 +473,7 @@ paths:
           $ref: '#/components/responses/private_equity_capital_use_details'
   /api/pssrpCptalUseDtls.json:
     get:
-      operationId: getRegularKeyPublicEquityCapitalUseDetails
+      operationId: getPublicEquityCapitalUseDetails
       summary: 공모자금의 사용내역
       description: 정기보고서(사업, 분기, 반기보고서) 내에 공모자금의 사용내역을 제공합니다.
       tags:
@@ -487,7 +487,7 @@ paths:
           $ref: '#/components/responses/public_equity_capital_use_details'
   /api/drctrAdtAllMendngSttusGmtsckConfmAmount.json:
     get:
-      operationId: getRegularKeyDirectorAuditAllMendingStatusShareholdersGeneralMeetingConfirmAmount
+      operationId: getDirectorAuditAllMendingStatusShareholdersGeneralMeetingConfirmAmount
       summary: 이사·감사 전체의 보수현황(주주총회 승인금액)
       description: 정기보고서(사업, 분기, 반기보고서) 내에 이사·감사 전체의 보수현황(주주총회 승인금액)을 제공합니다.
       tags:
@@ -501,7 +501,7 @@ paths:
           $ref: '#/components/responses/director_audit_all_mending_status_shareholders_general_meeting_confirm_amount'
   /api/drctrAdtAllMendngSttusMendngPymntamtTyCl.json:
     get:
-      operationId: getRegularKeyDirectorAuditAllMendingStatusMendingPaymentAmountTypeClassification
+      operationId: getDirectorAuditAllMendingStatusMendingPaymentAmountTypeClassification
       summary: 이사·감사 전체의 보수현황(보수지급금액 - 유형별)
       description: 정기보고서(사업, 분기, 반기보고서) 내에 이사·감사 전체의 보수현황(보수지급금액 - 유형별)을 제공합니다.
       tags:
@@ -515,7 +515,7 @@ paths:
           $ref: '#/components/responses/director_audit_all_mending_status_mending_payment_amount_type_classification'
   /api/stockTotqySttus.json:
     get:
-      operationId: getRegularKeyStockTotalQuantityStatus
+      operationId: getStockTotalQuantityStatus
       summary: 주식 총수 현황
       description: 정기보고서(사업, 분기, 반기보고서) 내에 주식의총수현황을 제공합니다.
       parameters:
@@ -527,7 +527,7 @@ paths:
           $ref: '#/components/responses/stock_total_quantity_status'
   /api/accnutAdtorNmNdAdtOpinion.json:
     get:
-      operationId: getRegularKeyAccountAuditorNameAndOpinion
+      operationId: getAccountAuditorNameAndOpinion
       summary: 회계감사인의 명칭 및 감사의견
       description: 정기보고서(사업, 분기, 반기보고서) 내에 회계감사인의 명칭 및 감사의견을 제공합니다.
       tags:
@@ -541,7 +541,7 @@ paths:
           $ref: '#/components/responses/account_auditor_name_and_opinion'
   /api/adtServcCnclsSttus.json:
     get:
-      operationId: getRegularKeyAuditServiceConclusionStatus
+      operationId: getAuditServiceConclusionStatus
       summary: 감사용역체결현황
       description: 정기보고서(사업, 분기, 반기보고서) 내에 감사용역체결현황을 제공합니다.
       tags:
@@ -555,7 +555,7 @@ paths:
           $ref: '#/components/responses/audit_service_conclusion_status'
   /api/accnutAdtorNonAdtServcCnclsSttus.json:
     get:
-      operationId: getRegularKeyAccountAuditorNonAuditServiceConclusionStatus
+      operationId: getAccountAuditorNonAuditServiceConclusionStatus
       summary: 회계감사인과의 비감사용역 계약체결 현황
       description: 정기보고서(사업, 분기, 반기보고서) 내에 회계감사인과의 비감사용역 계약체결 현황을 제공합니다.
       tags:
@@ -569,7 +569,7 @@ paths:
           $ref: '#/components/responses/account_auditor_non_audit_service_conclusion_status'
   /api/outcmpnyDrctrNdChangeSttus.json:
     get:
-      operationId: getRegularKeyOutsideDirectorChangeStatus
+      operationId: getOutsideDirectorChangeStatus
       summary: 사외이사 및 그 변동현황
       description: 정기보고서(사업, 분기, 반기보고서) 내에 사외이사 및 그 변동현황을 제공합니다.
       tags:
@@ -583,7 +583,7 @@ paths:
           $ref: '#/components/responses/outside_director_change_status'
   /api/newCaplScritsNrdmpBlce.json:
     get:
-      operationId: getRegularKeyNewCapitalSecuritiesNotReimbursedBalance
+      operationId: getNewCapitalSecuritiesNotReimbursedBalance
       summary: 신종자본증권 미상환 잔액
       description: 정기보고서(사업, 분기, 반기보고서) 내에 신종자본증권 미상환 잔액을 제공합니다.
       tags:
@@ -597,7 +597,7 @@ paths:
           $ref: '#/components/responses/new_capital_securities_not_reimbursed_balance'
   /api/irdsSttus.json:
     get:
-      operationId: getRegularKeyIncreaseDecreaseStatus
+      operationId: getIncreaseDecreaseStatus
       summary: 증자(감자) 현황
       description: 정기보고서(사업, 분기, 반기보고서) 내에 증자(감자) 현황을 제공합니다.
       tags:
@@ -611,7 +611,7 @@ paths:
           $ref: '#/components/responses/increase_decrease_status'
   /api/alotMatter.json:
     get:
-      operationId: getRegularKeyAllocationMatter
+      operationId: getAllocationMatter
       summary: 배당에 관한 사항
       description: 정기보고서(사업, 분기, 반기보고서) 내에 배당에 관한 사항을 제공합니다.
       tags:
@@ -625,7 +625,7 @@ paths:
           $ref: '#/components/responses/allocation_matter'
   /api/tesstkAcqsDspsSttus.json:
     get:
-      operationId: getRegularKeyTreasurySharesAcquisitionDisposalStatus
+      operationId: getTreasurySharesAcquisitionDisposalStatus
       summary: 자기주식 취득 및 처분 현황
       description: 정기보고서(사업, 분기, 반기보고서) 내에 자기주식 취득 및 처분 현황을 제공합니다.
       tags:
@@ -639,7 +639,7 @@ paths:
           $ref: '#/components/responses/treasury_shares_acquisition_disposal_status'
   /api/hyslrSttus.json:
     get:
-      operationId: getRegularKeyLargestShareholderStatus
+      operationId: getLargestShareholderStatus
       summary: 최대주주 현황
       description: 정기보고서(사업, 분기, 반기보고서) 내에 최대주주 현황을 제공합니다.
       tags:
@@ -653,7 +653,7 @@ paths:
           $ref: '#/components/responses/largest_shareholder_status'
   /api/hyslrChgSttus.json:
     get:
-      operationId: getRegularKeyLargestShareholderChangeStatus
+      operationId: getLargestShareholderChangeStatus
       summary: 최대주주 변동 현황
       description: 정기보고서(사업, 분기, 반기보고서) 내에 최대주주 변동 현황을 제공합니다.
       tags:
@@ -667,7 +667,7 @@ paths:
           $ref: '#/components/responses/largest_shareholder_change_status'
   /api/mrhlSttus.json:
     get:
-      operationId: getRegularKeyMinorityShareholdersStatus
+      operationId: getMinorityShareholdersStatus
       summary: 소액주주 현황
       description: 정기보고서(사업, 분기, 반기보고서) 내에 소액주주 현황을 제공합니다.
       tags:
@@ -681,7 +681,7 @@ paths:
           $ref: '#/components/responses/minority_shareholders_status'
   /api/exctvSttus.json:
     get:
-      operationId: getRegularKeyExecutiveStatus
+      operationId: getExecutiveStatus
       summary: 임원 현황
       description: 정기보고서(사업, 분기, 반기보고서) 내에 임원 현황을 제공합니다.
       tags:
@@ -695,7 +695,7 @@ paths:
           $ref: '#/components/responses/executive_status'
   /api/empSttus.json:
     get:
-      operationId: getRegularKeyEmployeeStatus
+      operationId: getEmployeeStatus
       summary: 직원 현황
       description: 정기보고서(사업, 분기, 반기보고서) 내에 직원 현황을 제공합니다.
       tags:
@@ -709,7 +709,7 @@ paths:
           $ref: '#/components/responses/employee_status'
   /api/hmvAuditIndvdlBySttus.json:
     get:
-      operationId: getRegularKeyDirectorAuditorIndividualMending
+      operationId: getDirectorAuditorIndividualMending
       summary: 이사ㆍ감사의 개인별 보수현황
       description: 정기보고서(사업, 분기, 반기보고서) 내에 이사ㆍ감사의 개인별 보수현황을 제공합니다.
       tags:
@@ -723,7 +723,7 @@ paths:
           $ref: '#/components/responses/director_auditor_individual_mending'
   /api/hmvAuditAllSttus.json:
     get:
-      operationId: getRegularKeyDirectorAuditAllMending
+      operationId: getDirectorAuditAllMending
       summary: 이사ㆍ감사의 전체 보수현황
       description: 정기보고서(사업, 분기, 반기보고서) 내에 이사ㆍ감사의 전체 보수현황을 제공합니다.
       tags:
@@ -737,7 +737,7 @@ paths:
           $ref: '#/components/responses/director_audit_all_mending'
   /api/indvdlByPay.json:
     get:
-      operationId: getRegularKeyIndividualByPay
+      operationId: getIndividualByPay
       summary: 개인별 보수지급 금액(5억이상 상위5인)
       description: 정기보고서(사업, 분기, 반기보고서) 내에 개인별 보수지급 금액(5억이상 상위5인)을 제공합니다.
       tags:
@@ -751,7 +751,7 @@ paths:
           $ref: '#/components/responses/individual_by_pay'
   /api/otrCprInvstmntSttus.json:
     get:
-      operationId: getRegularKeyOuterCorporateInvestmentStatus
+      operationId: getOuterCorporateInvestmentStatus
       summary: 타법인 출자현황
       description: 정기보고서(사업, 분기, 반기보고서) 내에 타법인 출자현황을 제공합니다.
       tags:
@@ -1018,77 +1018,6 @@ components:
       type: string
       example: '11011'
       maxLength: 5
-    sj_div:
-      description: |
-        재무제표구분
-
-        | 재무제표구분 | 재무제표명칭 | 개별/연결 | 표시방법 | 세전 세후 |
-        |-----|-----|-------|
-        | BS  | 재무상태표 | | | |
-        | BS1 | 재무상태표 | 연결 | 유동/비유동법 | |
-        | BS2 | 재무상태표 | 개별 | 유동/비유동법 | |
-        | BS3 | 재무상태표 | 연결 | 유동성배열법 | |
-        | BS4 | 재무상태표 | 개별 | 유동성배열법 | |
-        | IS  | 손익계산서 | | | |
-        | IS1 | 별개의 손익계산서 | 연결 | 기능별분류 | |
-        | IS2 | 별개의 손익계산서 | 개별 | 기능별분류 | |
-        | IS3 | 별개의 손익계산서 | 연결 | 성격별분류 | |
-        | IS4 | 별개의 손익계산서 | 개별 | 성격별분류 | |
-        | CIS | 포괄손익계산서 | | | |
-        | CIS1 | 포괄손익계산서 | 연결 | 세후 | |
-        | CIS2 | 포괄손익계산서 | 개별 | 세후 | |
-        | CIS3 | 포괄손익계산서 | 연결 | 세전 | |
-        | CIS4 | 포괄손익계산서 | 개별 | 세전 | |
-        | DCIS1 | 단일 포괄손익계산서 | 연결 | 기능별분류 | 세후포괄손익 |
-        | DCIS2 | 단일 포괄손익계산서 | 개별 | 기능별분류 | 세후포괄손익 |
-        | DCIS3 | 단일 포괄손익계산서 | 연결 | 기능별분류 | 세전 |
-        | DCIS4 | 단일 포괄손익계산서 | 개별 | 기능별분류 | 세전 |
-        | DCIS5 | 단일 포괄손익계산서 | 연결 | 성격별분류 | 세후포괄손익 |
-        | DCIS6 | 단일 포괄손익계산서 | 개별 | 성격별분류 | 세후포괄손익 |
-        | DCIS7 | 단일 포괄손익계산서 | 연결 | 성격별분류 | 세전 |
-        | DCIS8 | 단일 포괄손익계산서 | 개별 | 성격별분류 | 세전 |
-        | CF  | 현금흐름표 | | | |
-        | CF1 | 현금흐름표 | 연결 | 직접법 | |
-        | CF2 | 현금흐름표 | 개별 | 직접법 | |
-        | CF3 | 현금흐름표 | 연결 | 간접법 | |
-        | CF4 | 현금흐름표 | 개별 | 간접법 | |
-        | SCE | 자본변동표 | | | |
-        | SCE1 | 자본변동표 | 연결 | | |
-        | SCE2 | 자본변동표 | 개별 | | |
-      type: string
-      enum:
-        - BS
-        - IS
-        - CIS
-        - CF
-        - SCE
-        - BS1
-        - BS2
-        - BS3
-        - BS4
-        - IS1
-        - IS2
-        - IS3
-        - IS4
-        - CIS1
-        - CIS2
-        - CIS3
-        - CIS4
-        - DCIS1
-        - DCIS2
-        - DCIS3
-        - DCIS4
-        - DCIS5
-        - DCIS6
-        - DCIS7
-        - DCIS8
-        - CF1
-        - CF2
-        - CF3
-        - CF4
-        - SCE1
-        - SCE2
-      example: BS
   responses:
     list:
       description: 공시검색 조회 성공
@@ -3561,7 +3490,22 @@ components:
                       type: object
                       properties:
                         sj_div:
-                          $ref: '#/components/schemas/sj_div'
+                          description: |
+                            재무제표구분
+
+                            - BS : 재무상태표<br/>
+                            - IS : 손익계산서<br/>
+                            - CIS : 포괄손익계산서<br/>
+                            - CF : 현금흐름표<br/>
+                            - SCE : 자본변동표
+                          type: string
+                          enum:
+                            - BS
+                            - IS
+                            - CIS
+                            - CF
+                            - SCE
+                          example: BS
                         account_id:
                           type: string
                           description: 계정ID
@@ -3934,17 +3878,14 @@ components:
 
         | 재무제표구분 | 재무제표명칭 | 개별/연결 | 표시방법 | 세전 세후 |
         |-----|-----|-------|
-        | BS  | 재무상태표 | | | |
         | BS1 | 재무상태표 | 연결 | 유동/비유동법 | |
         | BS2 | 재무상태표 | 개별 | 유동/비유동법 | |
         | BS3 | 재무상태표 | 연결 | 유동성배열법 | |
         | BS4 | 재무상태표 | 개별 | 유동성배열법 | |
-        | IS  | 손익계산서 | | | |
         | IS1 | 별개의 손익계산서 | 연결 | 기능별분류 | |
         | IS2 | 별개의 손익계산서 | 개별 | 기능별분류 | |
         | IS3 | 별개의 손익계산서 | 연결 | 성격별분류 | |
         | IS4 | 별개의 손익계산서 | 개별 | 성격별분류 | |
-        | CIS | 포괄손익계산서 | | | |
         | CIS1 | 포괄손익계산서 | 연결 | 세후 | |
         | CIS2 | 포괄손익계산서 | 개별 | 세후 | |
         | CIS3 | 포괄손익계산서 | 연결 | 세전 | |
@@ -3957,23 +3898,16 @@ components:
         | DCIS6 | 단일 포괄손익계산서 | 개별 | 성격별분류 | 세후포괄손익 |
         | DCIS7 | 단일 포괄손익계산서 | 연결 | 성격별분류 | 세전 |
         | DCIS8 | 단일 포괄손익계산서 | 개별 | 성격별분류 | 세전 |
-        | CF  | 현금흐름표 | | | |
         | CF1 | 현금흐름표 | 연결 | 직접법 | |
         | CF2 | 현금흐름표 | 개별 | 직접법 | |
         | CF3 | 현금흐름표 | 연결 | 간접법 | |
         | CF4 | 현금흐름표 | 개별 | 간접법 | |
-        | SCE | 자본변동표 | | | |
         | SCE1 | 자본변동표 | 연결 | | |
         | SCE2 | 자본변동표 | 개별 | | |
       required: true
       schema:
         type: string
         enum:
-          - BS
-          - IS
-          - CIS
-          - CF
-          - SCE
           - BS1
           - BS2
           - BS3
@@ -4000,4 +3934,4 @@ components:
           - CF4
           - SCE1
           - SCE2
-        example: BS
+        example: BS1
