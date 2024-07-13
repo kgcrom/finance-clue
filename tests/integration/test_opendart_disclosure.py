@@ -44,7 +44,7 @@ class OpenDartDisclosureCase(unittest.TestCase):
         assert resp is not None
 
     def test_company(self):
-        resp = self.opendart_client.get_corporate_company(corp_code="00258999")
+        resp = self.opendart_client.get_company(corp_code="00258999")
 
         example = {
             "status": "000",
@@ -70,7 +70,7 @@ class OpenDartDisclosureCase(unittest.TestCase):
         assert resp is not None
 
     def test_document(self):
-        resp = self.opendart_client.get_corporate_document(rcept_no="20240516001421")
+        resp = self.opendart_client.get_document(rcept_no="20240516001421")
         zip_file_path = "corp_code.zip"
 
         with open(zip_file_path, "wb") as zip_file:

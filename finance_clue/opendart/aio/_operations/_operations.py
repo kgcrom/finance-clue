@@ -40,9 +40,6 @@ from ..._operations._operations import (
     build_gen_open_dart_get_corporate_bond_not_reimbursed_balance_request,
 )
 from ..._operations._operations import (
-    build_gen_open_dart_get_corporate_document_request,
-)
-from ..._operations._operations import (
     build_gen_open_dart_get_debt_securities_issue_accomplishment_request,
 )
 from ..._operations._operations import (
@@ -61,6 +58,9 @@ from ..._operations._operations import (
     build_gen_open_dart_get_enterprises_bill_not_reimbursed_balance_request,
 )
 from ..._operations._operations import (
+    build_gen_open_dart_get_executive_major_stock_request,
+)
+from ..._operations._operations import (
     build_gen_open_dart_get_increase_decrease_status_request,
 )
 from ..._operations._operations import (
@@ -68,6 +68,9 @@ from ..._operations._operations import (
 )
 from ..._operations._operations import (
     build_gen_open_dart_get_largest_shareholder_status_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_largest_shareholder_stock_request,
 )
 from ..._operations._operations import (
     build_gen_open_dart_get_minority_shareholders_status_request,
@@ -94,12 +97,6 @@ from ..._operations._operations import (
     build_gen_open_dart_get_public_equity_capital_use_details_request,
 )
 from ..._operations._operations import (
-    build_gen_open_dart_get_share_executive_major_stock_request,
-)
-from ..._operations._operations import (
-    build_gen_open_dart_get_share_largest_shareholder_stock_request,
-)
-from ..._operations._operations import (
     build_gen_open_dart_get_short_term_bond_not_reimbursed_balance_request,
 )
 from ..._operations._operations import (
@@ -118,8 +115,9 @@ from ..._operations._operations import (
     build_gen_open_dart_get_treasury_shares_acquisition_disposal_status_request,
 )
 from ..._operations._operations import build_gen_open_dart_get_allocation_matter_request
-from ..._operations._operations import build_gen_open_dart_get_corporate_company_request
+from ..._operations._operations import build_gen_open_dart_get_company_request
 from ..._operations._operations import build_gen_open_dart_get_corporate_list_request
+from ..._operations._operations import build_gen_open_dart_get_document_request
 from ..._operations._operations import build_gen_open_dart_get_employee_status_request
 from ..._operations._operations import build_gen_open_dart_get_executive_status_request
 from ..._operations._operations import build_gen_open_dart_get_individual_by_pay_request
@@ -500,7 +498,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_corporate_company(self, *, corp_code: str, **kwargs: Any) -> JSON:
+    async def get_company(self, *, corp_code: str, **kwargs: Any) -> JSON:
         # pylint: disable=line-too-long
         """기업개황.
 
@@ -587,7 +585,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_corporate_company_request(
+        _request = build_gen_open_dart_get_company_request(
             corp_code=corp_code,
             headers=_headers,
             params=_params,
@@ -620,7 +618,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_corporate_document(
+    async def get_document(
         self, *, rcept_no: str, **kwargs: Any
     ) -> AsyncIterator[bytes]:
         """공시서류원본파일.
@@ -646,7 +644,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[AsyncIterator[bytes]] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_corporate_document_request(
+        _request = build_gen_open_dart_get_document_request(
             rcept_no=rcept_no,
             headers=_headers,
             params=_params,
@@ -6071,7 +6069,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_share_largest_shareholder_stock(
+    async def get_largest_shareholder_stock(
         self, *, corp_code: str, **kwargs: Any
     ) -> JSON:
         # pylint: disable=line-too-long
@@ -6179,7 +6177,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_share_largest_shareholder_stock_request(
+        _request = build_gen_open_dart_get_largest_shareholder_stock_request(
             corp_code=corp_code,
             headers=_headers,
             params=_params,
@@ -6212,9 +6210,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_share_executive_major_stock(
-        self, *, corp_code: str, **kwargs: Any
-    ) -> JSON:
+    async def get_executive_major_stock(self, *, corp_code: str, **kwargs: Any) -> JSON:
         # pylint: disable=line-too-long
         """임원ㆍ주요주주 소유보고.
 
@@ -6320,7 +6316,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_share_executive_major_stock_request(
+        _request = build_gen_open_dart_get_executive_major_stock_request(
             corp_code=corp_code,
             headers=_headers,
             params=_params,

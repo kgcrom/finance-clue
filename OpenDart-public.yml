@@ -324,7 +324,7 @@ paths:
           $ref: '#/components/responses/list'
   /api/company.json:
     get:
-      operationId: getCorporateCompany
+      operationId: getCompany
       summary: 기업개황
       description: |
         DART에 등록되어있는 기업의 개황정보를 제공합니다.
@@ -347,7 +347,7 @@ paths:
           $ref: '#/components/responses/company'
   /api/document.xml:
     get:
-      operationId: getCorporateDocument
+      operationId: getDocument
       summary: 공시서류원본파일
       description: |
         공시보고서 원본파일을 제공합니다.
@@ -919,7 +919,7 @@ paths:
           $ref: '#/components/responses/multi_financial_index'
   /api/majorstock.json:
     get:
-      operationId: getShareLargestShareholderStock
+      operationId: getLargestShareholderStock
       summary: 대량보유 상황보고서
       description: 주식등의 대량보유상황보고서 내에 대량보유 상황보고 정보를 제공합니다.
       tags:
@@ -931,7 +931,7 @@ paths:
           $ref: '#/components/responses/largest_shareholder_stock'
   /api/elestock.json:
     get:
-      operationId: getShareExecutiveMajorStock
+      operationId: getExecutiveMajorStock
       summary: 임원ㆍ주요주주 소유보고
       description: 임원ㆍ주요주주특정증권등 소유상황보고서 내에 임원ㆍ주요주주 소유보고 정보를 제공합니다.
       tags:

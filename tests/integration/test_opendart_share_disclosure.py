@@ -15,9 +15,7 @@ class OpenDartShareDisclosureCase(unittest.TestCase):
         time.sleep(1)
 
     def test_largest_shareholder_stock(self):
-        resp = self.opendart_client.get_share_largest_shareholder_stock(
-            corp_code="00126380"
-        )
+        resp = self.opendart_client.get_largest_shareholder_stock(corp_code="00126380")
 
         example = {
             "status": "000",
@@ -43,9 +41,7 @@ class OpenDartShareDisclosureCase(unittest.TestCase):
         assert resp is not None
 
     def test_executive_stock(self):
-        resp = self.opendart_client.get_share_executive_major_stock(
-            corp_code="00126380"
-        )
+        resp = self.opendart_client.get_executive_major_stock(corp_code="00126380")
 
         example = {
             "status": "000",

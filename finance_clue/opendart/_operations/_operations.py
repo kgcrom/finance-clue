@@ -98,7 +98,7 @@ def build_gen_open_dart_get_corporate_list_request(  # pylint: disable=name-too-
     )
 
 
-def build_gen_open_dart_get_corporate_company_request(  # pylint: disable=name-too-long
+def build_gen_open_dart_get_company_request(
     *, corp_code: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -122,7 +122,7 @@ def build_gen_open_dart_get_corporate_company_request(  # pylint: disable=name-t
     )
 
 
-def build_gen_open_dart_get_corporate_document_request(  # pylint: disable=name-too-long
+def build_gen_open_dart_get_document_request(
     *, rcept_no: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1170,7 +1170,7 @@ def build_gen_open_dart_get_multi_financial_index_request(  # pylint: disable=na
     )
 
 
-def build_gen_open_dart_get_share_largest_shareholder_stock_request(  # pylint: disable=name-too-long
+def build_gen_open_dart_get_largest_shareholder_stock_request(  # pylint: disable=name-too-long
     *, corp_code: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1194,7 +1194,7 @@ def build_gen_open_dart_get_share_largest_shareholder_stock_request(  # pylint: 
     )
 
 
-def build_gen_open_dart_get_share_executive_major_stock_request(  # pylint: disable=name-too-long
+def build_gen_open_dart_get_executive_major_stock_request(  # pylint: disable=name-too-long
     *, corp_code: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1581,7 +1581,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
-    def get_corporate_company(self, *, corp_code: str, **kwargs: Any) -> JSON:
+    def get_company(self, *, corp_code: str, **kwargs: Any) -> JSON:
         # pylint: disable=line-too-long
         """기업개황.
 
@@ -1668,7 +1668,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_corporate_company_request(
+        _request = build_gen_open_dart_get_company_request(
             corp_code=corp_code,
             headers=_headers,
             params=_params,
@@ -1703,9 +1703,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
-    def get_corporate_document(
-        self, *, rcept_no: str, **kwargs: Any
-    ) -> Iterator[bytes]:
+    def get_document(self, *, rcept_no: str, **kwargs: Any) -> Iterator[bytes]:
         """공시서류원본파일.
 
         공시보고서 원본파일을 제공합니다.
@@ -1729,7 +1727,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_corporate_document_request(
+        _request = build_gen_open_dart_get_document_request(
             rcept_no=rcept_no,
             headers=_headers,
             params=_params,
@@ -7226,9 +7224,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
-    def get_share_largest_shareholder_stock(
-        self, *, corp_code: str, **kwargs: Any
-    ) -> JSON:
+    def get_largest_shareholder_stock(self, *, corp_code: str, **kwargs: Any) -> JSON:
         # pylint: disable=line-too-long
         """대량보유 상황보고서.
 
@@ -7334,7 +7330,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_share_largest_shareholder_stock_request(
+        _request = build_gen_open_dart_get_largest_shareholder_stock_request(
             corp_code=corp_code,
             headers=_headers,
             params=_params,
@@ -7369,7 +7365,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(JSON, deserialized)  # type: ignore
 
     @distributed_trace
-    def get_share_executive_major_stock(self, *, corp_code: str, **kwargs: Any) -> JSON:
+    def get_executive_major_stock(self, *, corp_code: str, **kwargs: Any) -> JSON:
         # pylint: disable=line-too-long
         """임원ㆍ주요주주 소유보고.
 
@@ -7475,7 +7471,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_share_executive_major_stock_request(
+        _request = build_gen_open_dart_get_executive_major_stock_request(
             corp_code=corp_code,
             headers=_headers,
             params=_params,

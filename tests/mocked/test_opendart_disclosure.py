@@ -1,4 +1,3 @@
-import time
 import unittest
 
 import pytest
@@ -81,7 +80,7 @@ class OpenDartDisclosureCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_corporate_company(corp_code="00258999")
+        resp = self.opendart_client.get_company(corp_code="00258999")
         assert resp == expected
 
 

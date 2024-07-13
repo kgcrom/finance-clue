@@ -45,9 +45,7 @@ class OpenDartShareDisclosureCase(unittest.TestCase):
             json=expected,
             status=200,
         )
-        resp = self.opendart_client.get_share_largest_shareholder_stock(
-            corp_code="00126380"
-        )
+        resp = self.opendart_client.get_largest_shareholder_stock(corp_code="00126380")
 
         assert resp == expected
 
@@ -80,7 +78,5 @@ class OpenDartShareDisclosureCase(unittest.TestCase):
             json=example,
             status=200,
         )
-        resp = self.opendart_client.get_share_executive_major_stock(
-            corp_code="00126380"
-        )
+        resp = self.opendart_client.get_executive_major_stock(corp_code="00126380")
         assert resp is not None
