@@ -372,7 +372,7 @@ paths:
                 format: binary
   /api/corpCode.xml:
     get:
-      operationId: getCorporateCode
+      operationId: downloadCorporateCode
       summary: 고유번호
       description: |
         DART에 등록되어있는 공시대상회사의 고유번호,회사명,종목코드, 최근변경일자를 파일로 제공합니다.
@@ -380,7 +380,7 @@ paths:
         - CorporateDisclosure
       responses:
         '200':
-          description: 고유번호 조회 성공
+          description: 고유번호 다운로드 성공
           content:
             application/zip:
               schema:
@@ -763,6 +763,160 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/outer_corporate_investment_status'
+  /api/fnlttSinglAcnt.json:
+    get:
+      operationId: getSingleFinancialAccount
+      summary: 단일회사 주요계정
+      description: |
+        상장법인(유가증권, 코스닥) 및 주요 비상장법인(사업보고서 제출대상 & IFRS 적용)이<br/>
+        제출한 정기보고서 내에 XBRL재무제표의 주요계정과목(재무상태표, 손익계산서)을 제공합니다.
+      tags:
+        - RegularDisclosureFinancialStatement
+      parameters:
+        - $ref: '#/components/parameters/corp_code'
+        - $ref: '#/components/parameters/bsns_year'
+        - $ref: '#/components/parameters/reprt_code'
+      responses:
+        '200':
+          $ref: '#/components/responses/single_financial_account'
+  /api/fnlttMultiAcnt.json:
+    get:
+      operationId: getMultiFinancialAccount
+      summary: 다중회사 주요계정
+      description: |
+        상장법인(유가증권, 코스닥) 및 주요 비상장법인(사업보고서 제출대상 & IFRS 적용)이 제출한 정기보고서 내에<br/>
+        XBRL재무제표의 주요계정과목(재무상태표, 손익계산서)을 제공합니다. (대상법인 복수조회 복수조회 가능)
+      tags:
+        - RegularDisclosureFinancialStatement
+      parameters:
+        - $ref: '#/components/parameters/corp_code'
+        - $ref: '#/components/parameters/bsns_year'
+        - $ref: '#/components/parameters/reprt_code'
+      responses:
+        '200':
+          $ref: '#/components/responses/multi_financial_account'
+  /api/fnlttXbrl.xml:
+    get:
+      operationId: downloadXbrlFinancialAccount
+      summary: 재무제표 원본파일(XBRL)
+      description: |
+        상장법인(유가증권, 코스닥) 및 주요 비상장법인(사업보고서 제출대상 & IFRS 적용)이<br/>
+        제출한 정기보고서 내에 XBRL재무제표의 원본파일(XBRL)을 제공합니다.
+      parameters:
+        - $ref: '#/components/parameters/reprt_code'
+        - in: query
+          name: rcept_no
+          required: true
+          schema:
+            type: string
+            description: 접수번호
+            example: '20200330004590'
+            maxLength: 14
+      responses:
+        '200':
+          description: XBRL 다운로드 성공
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+  /api/fnlttSinglAcntAll.json:
+    get:
+      operationId: getSingleFinancialAccountAll
+      summary: 단일회사 전체 재무제표
+      description: |
+        상장법인(유가증권, 코스닥) 및 주요 비상장법인(사업보고서 제출대상 & IFRS 적용)이<br/>
+        제출한 정기보고서 내에 XBRL재무제표의 모든계정과목을 제공합니다.
+      tags:
+        - RegularDisclosureFinancialStatement
+      parameters:
+        - $ref: '#/components/parameters/corp_code'
+        - $ref: '#/components/parameters/bsns_year'
+        - $ref: '#/components/parameters/reprt_code'
+        - $ref: '#/components/parameters/fs_div'
+      responses:
+        '200':
+          $ref: '#/components/responses/single_financial_account_all'
+  /api/xbrlTaxonomy.json:
+    get:
+      operationId: getXbrlTaxonomy
+      summary: XBRL택사노미재무제표양식
+      description: 금융감독원 회계포탈에서 제공하는 IFRS 기반 XBRL 재무제표 공시용 표준계정과목체계(계정과목) 을 제공합니다.
+      tags:
+        - RegularDisclosureFinancialStatement
+      parameters:
+        - $ref: '#/components/parameters/sj_div'
+      responses:
+        '200':
+          $ref: '#/components/responses/xbrl_taxonomy'
+  /api/fnlttSinglIndx.json:
+    get:
+      operationId: getSingleFinancialIndex
+      summary: 단일회사 주요 재무지표
+      description: |
+        상장법인(유가증권, 코스닥) 및 주요 비상장법인(사업보고서 제출대상 & IFRS 적용)이<br/>
+        제출한 정기보고서 내에 XBRL재무제표의 주요 재무지표를 제공합니다.
+      tags:
+        - RegularDisclosureFinancialStatement
+      parameters:
+        - $ref: '#/components/parameters/corp_code'
+        - $ref: '#/components/parameters/bsns_year'
+        - $ref: '#/components/parameters/reprt_code'
+        - in: query
+          name: idx_cl_code
+          description: |
+            지표구분코드
+
+            - M210000 : 수익성지표<br/>
+            - M220000 : 안정성지표<br/>
+            - M230000 : 성장성지표<br/>
+            - M240000 : 활동성지표
+          required: true
+          schema:
+            type: string
+            enum:
+              - M210000
+              - M220000
+              - M230000
+              - M240000
+            example: M210000
+      responses:
+        '200':
+          $ref: '#/components/responses/single_financial_index'
+  /api/fnlttCmpnyIndx.json:
+    get:
+      operationId: getMultiFinancialIndex
+      summary: 다중회사 주요 재무지표
+      description: |
+        상장법인(유가증권, 코스닥) 및 주요 비상장법인(사업보고서 제출대상 & IFRS 적용)이<br/>
+        제출한 정기보고서 내에 XBRL재무제표의 주요 재무지표를 제공합니다.(대상법인 복수조회 가능)
+      tags:
+        - RegularDisclosureFinancialStatement
+      parameters:
+        - $ref: '#/components/parameters/corp_code'
+        - $ref: '#/components/parameters/bsns_year'
+        - $ref: '#/components/parameters/reprt_code'
+        - in: query
+          name: idx_cl_code
+          description: |
+            지표구분코드
+
+            - M210000 : 수익성지표<br/>
+            - M220000 : 안정성지표<br/>
+            - M230000 : 성장성지표<br/>
+            - M240000 : 활동성지표
+          required: true
+          schema:
+            type: string
+            enum:
+              - M210000
+              - M220000
+              - M230000
+              - M240000
+            example: M210000
+      responses:
+        '200':
+          $ref: '#/components/responses/multi_financial_index'
   /api/majorstock.json:
     get:
       operationId: getShareLargestShareholderStock
@@ -853,6 +1007,88 @@ components:
         - 'N'
         - E
       example: 'Y'
+    reprt_code:
+      description: |
+        보고서 코드
+
+        - 11011 : 사업보고서<br/>
+        - 11012 : 반기보고서<br/>
+        - 11013 : 1분기보고서<br/>
+        - 11014 : 3분기보고서
+      type: string
+      example: '11011'
+      maxLength: 5
+    sj_div:
+      description: |
+        재무제표구분
+
+        | 재무제표구분 | 재무제표명칭 | 개별/연결 | 표시방법 | 세전 세후 |
+        |-----|-----|-------|
+        | BS  | 재무상태표 | | | |
+        | BS1 | 재무상태표 | 연결 | 유동/비유동법 | |
+        | BS2 | 재무상태표 | 개별 | 유동/비유동법 | |
+        | BS3 | 재무상태표 | 연결 | 유동성배열법 | |
+        | BS4 | 재무상태표 | 개별 | 유동성배열법 | |
+        | IS  | 손익계산서 | | | |
+        | IS1 | 별개의 손익계산서 | 연결 | 기능별분류 | |
+        | IS2 | 별개의 손익계산서 | 개별 | 기능별분류 | |
+        | IS3 | 별개의 손익계산서 | 연결 | 성격별분류 | |
+        | IS4 | 별개의 손익계산서 | 개별 | 성격별분류 | |
+        | CIS | 포괄손익계산서 | | | |
+        | CIS1 | 포괄손익계산서 | 연결 | 세후 | |
+        | CIS2 | 포괄손익계산서 | 개별 | 세후 | |
+        | CIS3 | 포괄손익계산서 | 연결 | 세전 | |
+        | CIS4 | 포괄손익계산서 | 개별 | 세전 | |
+        | DCIS1 | 단일 포괄손익계산서 | 연결 | 기능별분류 | 세후포괄손익 |
+        | DCIS2 | 단일 포괄손익계산서 | 개별 | 기능별분류 | 세후포괄손익 |
+        | DCIS3 | 단일 포괄손익계산서 | 연결 | 기능별분류 | 세전 |
+        | DCIS4 | 단일 포괄손익계산서 | 개별 | 기능별분류 | 세전 |
+        | DCIS5 | 단일 포괄손익계산서 | 연결 | 성격별분류 | 세후포괄손익 |
+        | DCIS6 | 단일 포괄손익계산서 | 개별 | 성격별분류 | 세후포괄손익 |
+        | DCIS7 | 단일 포괄손익계산서 | 연결 | 성격별분류 | 세전 |
+        | DCIS8 | 단일 포괄손익계산서 | 개별 | 성격별분류 | 세전 |
+        | CF  | 현금흐름표 | | | |
+        | CF1 | 현금흐름표 | 연결 | 직접법 | |
+        | CF2 | 현금흐름표 | 개별 | 직접법 | |
+        | CF3 | 현금흐름표 | 연결 | 간접법 | |
+        | CF4 | 현금흐름표 | 개별 | 간접법 | |
+        | SCE | 자본변동표 | | | |
+        | SCE1 | 자본변동표 | 연결 | | |
+        | SCE2 | 자본변동표 | 개별 | | |
+      type: string
+      enum:
+        - BS
+        - IS
+        - CIS
+        - CF
+        - SCE
+        - BS1
+        - BS2
+        - BS3
+        - BS4
+        - IS1
+        - IS2
+        - IS3
+        - IS4
+        - CIS1
+        - CIS2
+        - CIS3
+        - CIS4
+        - DCIS1
+        - DCIS2
+        - DCIS3
+        - DCIS4
+        - DCIS5
+        - DCIS6
+        - DCIS7
+        - DCIS8
+        - CF1
+        - CF2
+        - CF3
+        - CF4
+        - SCE1
+        - SCE2
+      example: BS
   responses:
     list:
       description: 공시검색 조회 성공
@@ -2926,6 +3162,585 @@ components:
                           type: string
                           description: 최근 사업 연도 재무 현황 당기 순이익
                           example: 9,999,999,999
+    single_financial_account:
+      description: 단일회사 주요계정 조회 성공
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              result:
+                type: object
+                properties:
+                  status:
+                    $ref: '#/components/schemas/status'
+                  message:
+                    type: string
+                    description: 에러 및 정보 메시지
+                    example: 정상
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        rcept_no:
+                          $ref: '#/components/schemas/rcept_no'
+                        bsns_year:
+                          type: string
+                          description: 사업연도
+                          example: '2019'
+                        stock_code:
+                          type: string
+                          description: 종목코드
+                          example: '005930'
+                          maxLength: 6
+                        reprt_code:
+                          $ref: '#/components/schemas/reprt_code'
+                        account_nm:
+                          type: string
+                          description: 계정명
+                          example: 자본총계
+                        fs_div:
+                          type: string
+                          description: |
+                            개별/연결구분
+
+                            OFS:재무제표, CFS:연결재무제표
+                          enum:
+                            - OFS
+                            - CFS
+                          example: CFS
+                        fs_nm:
+                          type: string
+                          description: |
+                            개별/연결명
+
+                            연결재무제표 또는 재무제표 출력
+                          example: 연결재무제표
+                        sj_div:
+                          type: string
+                          description: |
+                            재무제표구분
+
+                            BS:재무상태표, IS:손익계산서
+                          enum:
+                            - BS
+                            - IS
+                          example: BS
+                        sj_nm:
+                          type: string
+                          description: |
+                            재무제표명
+
+                            재무상태표 또는 손익계산서 출력
+                          example: 재무상태표
+                        thstrm_nm:
+                          type: string
+                          description: 당기명
+                          example: 제 50 기
+                        thstrm_dt:
+                          type: string
+                          description: 당기일자
+                          example: 2018.12.31 현재
+                        thstrm_amount:
+                          type: string
+                          description: 당기금액
+                          example: 174,697,424,000,000
+                        thstrm_add_amount:
+                          type: string
+                          description: 당기누적금액
+                          example: 174,697,424,000,000
+                        frmtrm_nm:
+                          type: string
+                          description: 전기명
+                          example: 제 49 기
+                        frmtrm_dt:
+                          type: string
+                          description: 전기일자
+                          example: 2017.12.31 현재
+                        frmtrm_amount:
+                          type: string
+                          description: 전기금액
+                          example: 146,982,464,000,000
+                        frmtrm_add_amount:
+                          type: string
+                          description: 전기누적금액
+                          example: 146,982,464,000,000
+                        bfefrmtrm_nm:
+                          type: string
+                          description: 전전기명
+                          example: 제 48 기
+                        bfefrmtrm_dt:
+                          type: string
+                          description: 전전기일자
+                          example: 2016.12.31 현재
+                        bfefrmtrm_amount:
+                          type: string
+                          description: 전전기금액
+                          example: 141,429,704,000,000
+                        ord:
+                          type: string
+                          description: 계정과목 정렬순서
+                          example: '1'
+                        currency:
+                          type: string
+                          description: 통화 단위
+                          example: KRW
+    multi_financial_account:
+      description: 다중회사 주요계정 조회 성공
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              result:
+                type: object
+                properties:
+                  status:
+                    $ref: '#/components/schemas/status'
+                  message:
+                    type: string
+                    description: 에러 및 정보 메시지
+                    example: 정상
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        rcept_no:
+                          $ref: '#/components/schemas/rcept_no'
+                        bsns_year:
+                          type: string
+                          description: 사업연도
+                          example: '2019'
+                          maxLength: 4
+                        stock_code:
+                          type: string
+                          description: 종목코드
+                          example: '005930'
+                          maxLength: 6
+                        reprt_code:
+                          $ref: '#/components/schemas/reprt_code'
+                        account_nm:
+                          type: string
+                          description: 계정명
+                          example: 자본총계
+                        fs_div:
+                          type: string
+                          description: |
+                            개별/연결구분
+
+                            OFS:재무제표, CFS:연결재무제표
+                          enum:
+                            - OFS
+                            - CFS
+                          example: CFS
+                        fs_nm:
+                          type: string
+                          description: |
+                            개별/연결명
+
+                            연결재무제표 또는 재무제표 출력
+                          example: 연결재무제표
+                        sj_div:
+                          type: string
+                          description: |
+                            재무제표구분
+
+                            BS:재무상태표, IS:손익계산서
+                          enum:
+                            - BS
+                            - IS
+                          example: BS
+                        sj_nm:
+                          type: string
+                          description: |
+                            재무제표명
+
+                            재무상태표 또는 손익계산서 출력
+                          example: 재무상태표
+                        thstrm_nm:
+                          type: string
+                          description: 당기명
+                          example: 제 50 기
+                        thstrm_dt:
+                          type: string
+                          description: 당기일자
+                          example: 2018.12.31 현재
+                        thstrm_amount:
+                          type: string
+                          description: 당기금액
+                          example: 174,697,424,000,000
+                        thstrm_add_amount:
+                          type: string
+                          description: 당기누적금액
+                          example: 174,697,424,000,000
+                        frmtrm_nm:
+                          type: string
+                          description: 전기명
+                          example: 제 49 기
+                        frmtrm_dt:
+                          type: string
+                          description: 전기일자
+                          example: 2017.12.31 현재
+                        frmtrm_amount:
+                          type: string
+                          description: 전기금액
+                          example: 146,982,464,000,000
+                        frmtrm_add_amount:
+                          type: string
+                          description: 전기누적금액
+                          example: 146,982,464,000,000
+                        bfefrmtrm_nm:
+                          type: string
+                          description: 전전기명
+                          example: 제 48 기
+                        bfefrmtrm_dt:
+                          type: string
+                          description: 전전기일자
+                          example: 2016.12.31 현재
+                        bfefrmtrm_amount:
+                          type: string
+                          description: 전전기금액
+                          example: 141,429,704,000,000
+                        ord:
+                          type: string
+                          description: 계정과목 정렬순서
+                          example: '1'
+                        currency:
+                          type: string
+                          description: 통화 단위
+                          example: KRW
+    single_financial_account_all:
+      description: 단일회사 전체 재무제표 조회 성공
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              result:
+                type: object
+                properties:
+                  status:
+                    $ref: '#/components/schemas/status'
+                  message:
+                    type: string
+                    description: 에러 및 정보 메시지
+                    example: 정상
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        rcept_no:
+                          $ref: '#/components/schemas/rcept_no'
+                        reprt_code:
+                          $ref: '#/components/schemas/reprt_code'
+                        bsns_year:
+                          type: string
+                          description: 사업연도
+                          example: '2019'
+                        corp_code:
+                          type: string
+                          description: 공시대상회사의 고유번호(8자리)
+                          example: '00126380'
+                          maxLength: 8
+                        sj_div:
+                          type: string
+                          description: |
+                            재무제표구분
+
+                            - BS : 재무상태표<br/>
+                            - IS : 손익계산서<br/>
+                            - CIS : 포괄손익계산서<br/>
+                            - CF : 현금흐름표<br/>
+                            - SCE : 자본변동표
+                          enum:
+                            - BS
+                            - IS
+                            - CIS
+                            - CF
+                            - SCE
+                          example: BS
+                        sj_nm:
+                          type: string
+                          description: 재무제표명
+                          example: 재무상태표
+                        account_id:
+                          type: string
+                          description: |
+                            XBRL 표준계정ID
+
+                            ※ 표준계정ID가 아닐경우 ""-표준계정코드 미사용-""
+                          example: ifrs_Equity
+                        account_nm:
+                          type: string
+                          description: 계정명칭
+                          example: 자본총계
+                        account_detail:
+                          type: string
+                          description: |
+                            계정 상세명칭 예시
+
+                            - 자본 [member]|지배기업 소유주지분<br/>
+                            - 자본 [member]|지배기업 소유주지분|기타포괄손익누계액
+                          example: 계정 상세명칭 예시
+                        thstrm_nm:
+                          type: string
+                          description: 당기명
+                          example: 제 13 기
+                        thstrm_amount:
+                          type: string
+                          description: 당기금액
+                          example: 9,999,999,999
+                        thstrm_add_amount:
+                          type: string
+                          description: 당기누적금액
+                          example: 9,999,999,999
+                        frmtrm_nm:
+                          type: string
+                          description: 전기명
+                          example: 제 12 기말
+                        frmtrm_amount:
+                          type: string
+                          description: 전기금액
+                          example: 9,999,999,999
+                        frmtrm_q_nm:
+                          type: string
+                          description: 전기명(분/반기)
+                          example: 제 18 기 반기
+                        frmtrm_q_amount:
+                          type: string
+                          description: 전기금액(분/반기)
+                          example: 9,999,999,999
+                        frmtrm_add_amount:
+                          type: string
+                          description: 전기누적금액
+                          example: 9,999,999,999
+                        bfefrmtrm_nm:
+                          type: string
+                          description: |
+                            전전기명
+
+                            ※ 사업보고서의 경우에만 출력
+                          example: 제 11 기말
+                        bfefrmtrm_amount:
+                          type: string
+                          description: |
+                            전전기금액
+
+                            ※ 사업보고서의 경우에만 출력
+                          example: 9,999,999,999
+                        ord:
+                          type: string
+                          description: 계정과목 정렬순서
+                          example: '1'
+                        currency:
+                          type: string
+                          description: 통화 단위
+                          example: KRW
+    xbrl_taxonomy:
+      description: XBRL택사노미재무제표양식 조회 성공
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              result:
+                type: object
+                properties:
+                  status:
+                    $ref: '#/components/schemas/status'
+                  message:
+                    type: string
+                    description: 에러 및 정보 메시지
+                    example: 정상
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        sj_div:
+                          $ref: '#/components/schemas/sj_div'
+                        account_id:
+                          type: string
+                          description: 계정ID
+                          example: ifrs_StatementOfFinancialPositionAbstract
+                        account_nm:
+                          type: string
+                          description: 계정명
+                          example: StatementOfFinancialPositionAbstract
+                        bsns_de:
+                          type: string
+                          description: 기준일
+                          example: '20201231'
+                        label_kor:
+                          type: string
+                          description: 한글 출력명
+                          example: 재무상태표 요약
+                        label_eng:
+                          type: string
+                          description: 영문 출력명
+                          example: Statement of Financial Position Abstract
+                        data_tp:
+                          type: string
+                          description: |
+                            데이터 유형
+
+                            - text block : 제목<br/>
+                            - Text : Text<br/>
+                            - yyyy-mm-dd : Date<br/>
+                            - X : Monetary Value<br/>
+                            - (X): Monetary Value(Negative)<br/>
+                            - X.XX : Decimalized Value<br/>
+                            - Shares : Number of shares (주식 수)<br/>
+                            - For each : 공시된 항목이 전후로 반복적으로 공시될 경우 사용<br/>
+                            - 공란 : 입력 필요 없음
+                          example: X
+                        ifrf_ref:
+                          type: string
+                          description: IFRS Reference
+                          example: K-IFRS 1001 문단 60
+    single_financial_index:
+      description: 단일회사 주요 재무지표 조회 성공
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              result:
+                type: object
+                properties:
+                  status:
+                    $ref: '#/components/schemas/status'
+                  message:
+                    type: string
+                    description: 에러 및 정보 메시지
+                    example: 정상
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        bsns_year:
+                          type: string
+                          description: 사업연도
+                          example: '2019'
+                          maxLength: 4
+                        corp_code:
+                          type: string
+                          description: 공시대상회사의 고유번호(8자리)
+                          example: '00126380'
+                          maxLength: 8
+                        stock_code:
+                          type: string
+                          description: 상장회사의 종목코드(6자리)
+                          example: '005930'
+                          maxLength: 6
+                        reprt_code:
+                          $ref: '#/components/schemas/reprt_code'
+                        idx_cl_code:
+                          type: string
+                          description: |
+                            지표분류코드
+
+                            - M210000 : 수익성지표<br/>
+                            - M220000 : 안정성지표<br/>
+                            - M230000 : 성장성지표<br/>
+                            - M240000 : 활동성지표
+                          enum:
+                            - M210000
+                            - M220000
+                            - M230000
+                            - M240000
+                          example: M210000
+                        idx_cl_nm:
+                          type: string
+                          description: 지표분류명
+                          example: 수익성지표
+                        idx_code:
+                          type: string
+                          description: 지표코드
+                          example: M211000
+                          maxLength: 7
+                        idx_nm:
+                          type: string
+                          description: 지표명
+                          example: 영업이익율
+                        idx_val:
+                          type: string
+                          description: 지표값
+                          example: '0.256'
+    multi_financial_index:
+      description: 다중회사 주요 재무지표 조회 성공
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              result:
+                type: object
+                properties:
+                  status:
+                    $ref: '#/components/schemas/status'
+                  message:
+                    type: string
+                    description: 에러 및 정보 메시지
+                    example: 정상
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        bsns_year:
+                          type: string
+                          description: 사업연도
+                          example: '2019'
+                          maxLength: 4
+                        corp_code:
+                          type: string
+                          description: 공시대상회사의 고유번호(8자리)
+                          example: '00126380'
+                          maxLength: 8
+                        stock_code:
+                          type: string
+                          description: 상장회사의 종목코드(6자리)
+                          example: '005930'
+                          maxLength: 6
+                        reprt_code:
+                          $ref: '#/components/schemas/reprt_code'
+                        idx_cl_code:
+                          type: string
+                          description: |
+                            지표분류코드
+
+                            - M210000 : 수익성지표<br/>
+                            - M220000 : 안정성지표<br/>
+                            - M230000 : 성장성지표<br/>
+                            - M240000 : 활동성지표
+                          enum:
+                            - M210000
+                            - M220000
+                            - M230000
+                            - M240000
+                          example: M210000
+                        idx_cl_nm:
+                          type: string
+                          description: 지표분류명
+                          example: 수익성지표
+                        idx_code:
+                          type: string
+                          description: 지표코드
+                          example: M211000
+                          maxLength: 7
+                        idx_nm:
+                          type: string
+                          description: 지표명
+                          example: 영업이익율
+                        idx_val:
+                          type: string
+                          description: 지표값
+                          example: '0.256'
     largest_shareholder_stock:
       description: 대량보유 상황보고 조회 성공
       content:
@@ -3096,3 +3911,93 @@ components:
         type: string
         example: '11011'
         maxLength: 5
+    fs_div:
+      name: fs_div
+      in: query
+      description: |
+        개별/연결 구분
+
+        - CFS : 연결재무제표<br/>
+        - OFS : 재무제표
+      required: true
+      schema:
+        type: string
+        enum:
+          - CFS
+          - OFS
+        example: CFS
+    sj_div:
+      name: sj_div
+      in: query
+      description: |
+        재무제표구분
+
+        | 재무제표구분 | 재무제표명칭 | 개별/연결 | 표시방법 | 세전 세후 |
+        |-----|-----|-------|
+        | BS  | 재무상태표 | | | |
+        | BS1 | 재무상태표 | 연결 | 유동/비유동법 | |
+        | BS2 | 재무상태표 | 개별 | 유동/비유동법 | |
+        | BS3 | 재무상태표 | 연결 | 유동성배열법 | |
+        | BS4 | 재무상태표 | 개별 | 유동성배열법 | |
+        | IS  | 손익계산서 | | | |
+        | IS1 | 별개의 손익계산서 | 연결 | 기능별분류 | |
+        | IS2 | 별개의 손익계산서 | 개별 | 기능별분류 | |
+        | IS3 | 별개의 손익계산서 | 연결 | 성격별분류 | |
+        | IS4 | 별개의 손익계산서 | 개별 | 성격별분류 | |
+        | CIS | 포괄손익계산서 | | | |
+        | CIS1 | 포괄손익계산서 | 연결 | 세후 | |
+        | CIS2 | 포괄손익계산서 | 개별 | 세후 | |
+        | CIS3 | 포괄손익계산서 | 연결 | 세전 | |
+        | CIS4 | 포괄손익계산서 | 개별 | 세전 | |
+        | DCIS1 | 단일 포괄손익계산서 | 연결 | 기능별분류 | 세후포괄손익 |
+        | DCIS2 | 단일 포괄손익계산서 | 개별 | 기능별분류 | 세후포괄손익 |
+        | DCIS3 | 단일 포괄손익계산서 | 연결 | 기능별분류 | 세전 |
+        | DCIS4 | 단일 포괄손익계산서 | 개별 | 기능별분류 | 세전 |
+        | DCIS5 | 단일 포괄손익계산서 | 연결 | 성격별분류 | 세후포괄손익 |
+        | DCIS6 | 단일 포괄손익계산서 | 개별 | 성격별분류 | 세후포괄손익 |
+        | DCIS7 | 단일 포괄손익계산서 | 연결 | 성격별분류 | 세전 |
+        | DCIS8 | 단일 포괄손익계산서 | 개별 | 성격별분류 | 세전 |
+        | CF  | 현금흐름표 | | | |
+        | CF1 | 현금흐름표 | 연결 | 직접법 | |
+        | CF2 | 현금흐름표 | 개별 | 직접법 | |
+        | CF3 | 현금흐름표 | 연결 | 간접법 | |
+        | CF4 | 현금흐름표 | 개별 | 간접법 | |
+        | SCE | 자본변동표 | | | |
+        | SCE1 | 자본변동표 | 연결 | | |
+        | SCE2 | 자본변동표 | 개별 | | |
+      required: true
+      schema:
+        type: string
+        enum:
+          - BS
+          - IS
+          - CIS
+          - CF
+          - SCE
+          - BS1
+          - BS2
+          - BS3
+          - BS4
+          - IS1
+          - IS2
+          - IS3
+          - IS4
+          - CIS1
+          - CIS2
+          - CIS3
+          - CIS4
+          - DCIS1
+          - DCIS2
+          - DCIS3
+          - DCIS4
+          - DCIS5
+          - DCIS6
+          - DCIS7
+          - DCIS8
+          - CF1
+          - CF2
+          - CF3
+          - CF4
+          - SCE1
+          - SCE2
+        example: BS

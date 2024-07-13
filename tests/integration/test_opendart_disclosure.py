@@ -71,7 +71,7 @@ class OpenDartDisclosureCase(unittest.TestCase):
 
     def test_document(self):
         resp = self.opendart_client.get_corporate_document(rcept_no="20240516001421")
-        zip_file_path = "test.zip"
+        zip_file_path = "corp_code.zip"
 
         with open(zip_file_path, "wb") as zip_file:
             for chunk in resp:
@@ -80,7 +80,7 @@ class OpenDartDisclosureCase(unittest.TestCase):
         assert resp is not None
 
     def test_corp_code(self):
-        resp = self.opendart_client.get_corporate_code()
+        resp = self.opendart_client.download_corporate_code()
         zip_file_path = "corp_code.zip"
 
         with open(zip_file_path, "wb") as zip_file:

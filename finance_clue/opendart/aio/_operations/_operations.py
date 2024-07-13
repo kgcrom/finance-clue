@@ -19,7 +19,19 @@ from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator_async import distributed_trace_async
 
 from ..._operations._operations import (
+    build_gen_open_dart_download_corporate_code_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_download_xbrl_financial_account_request,
+)
+from ..._operations._operations import (
     build_gen_open_dart_get_corporate_document_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_multi_financial_account_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_multi_financial_index_request,
 )
 from ..._operations._operations import (
     build_gen_open_dart_get_regular_key_account_auditor_name_and_opinion_request,
@@ -108,9 +120,18 @@ from ..._operations._operations import (
 from ..._operations._operations import (
     build_gen_open_dart_get_share_largest_shareholder_stock_request,
 )
-from ..._operations._operations import build_gen_open_dart_get_corporate_code_request
+from ..._operations._operations import (
+    build_gen_open_dart_get_single_financial_account_all_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_single_financial_account_request,
+)
+from ..._operations._operations import (
+    build_gen_open_dart_get_single_financial_index_request,
+)
 from ..._operations._operations import build_gen_open_dart_get_corporate_company_request
 from ..._operations._operations import build_gen_open_dart_get_corporate_list_request
+from ..._operations._operations import build_gen_open_dart_get_xbrl_taxonomy_request
 from .._vendor import GenOpenDartClientMixinABC
 
 if sys.version_info >= (3, 9):
@@ -663,7 +684,7 @@ class GenOpenDartClientOperationsMixin(
         return cast(AsyncIterator[bytes], deserialized)  # type: ignore
 
     @distributed_trace_async
-    async def get_corporate_code(self, **kwargs: Any) -> AsyncIterator[bytes]:
+    async def download_corporate_code(self, **kwargs: Any) -> AsyncIterator[bytes]:
         """고유번호.
 
         DART에 등록되어있는 공시대상회사의 고유번호,회사명,종목코드, 최근변경일자를 파일로 제공합니다.
@@ -685,7 +706,7 @@ class GenOpenDartClientOperationsMixin(
 
         cls: ClsType[AsyncIterator[bytes]] = kwargs.pop("cls", None)
 
-        _request = build_gen_open_dart_get_corporate_code_request(
+        _request = build_gen_open_dart_download_corporate_code_request(
             headers=_headers,
             params=_params,
         )
@@ -4811,6 +4832,1310 @@ class GenOpenDartClientOperationsMixin(
             corp_code=corp_code,
             bsns_year=bsns_year,
             reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace_async
+    async def get_single_financial_account(
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """단일회사 주요계정.
+
+        상장법인(유가증권, 코스닥) 및 주요 비상장법인(사업보고서 제출대상 & IFRS 적용)이:code:`<br/>`
+        제출한 정기보고서 내에 XBRL재무제표의 주요계정과목(재무상태표, 손익계산서)을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "account_nm": "str",  # Optional. "uacc4"uc815"uba85.
+                                "bfefrmtrm_amount": "str",  # Optional.
+                                  "uc804"uc804"uae30"uae08"uc561.
+                                "bfefrmtrm_dt": "str",  # Optional.
+                                  "uc804"uc804"uae30"uc77c"uc790.
+                                "bfefrmtrm_nm": "str",  # Optional.
+                                  "uc804"uc804"uae30"uba85.
+                                "bsns_year": "str",  # Optional.
+                                  "uc0ac"uc5c5"uc5f0"ub3c4.
+                                "currency": "str",  # Optional. "ud1b5"ud654
+                                  "ub2e8"uc704.
+                                "frmtrm_add_amount": "str",  # Optional.
+                                  "uc804"uae30"ub204"uc801"uae08"uc561.
+                                "frmtrm_amount": "str",  # Optional.
+                                  "uc804"uae30"uae08"uc561.
+                                "frmtrm_dt": "str",  # Optional.
+                                  "uc804"uae30"uc77c"uc790.
+                                "frmtrm_nm": "str",  # Optional. "uc804"uae30"uba85.
+                                "fs_div": "str",  # Optional.
+                                  "uac1c"ubcc4/"uc5f0"uacb0"uad6c"ubd84  OFS:"uc7ac"ubb34"uc81c"ud45c,
+                                  CFS:"uc5f0"uacb0"uc7ac"ubb34"uc81c"ud45c. Known values are: "OFS" and
+                                  "CFS".
+                                "fs_nm": "str",  # Optional.
+                                  "uac1c"ubcc4/"uc5f0"uacb0"uba85  "uc5f0"uacb0"uc7ac"ubb34"uc81c"ud45c
+                                  "ub610"ub294 "uc7ac"ubb34"uc81c"ud45c "ucd9c"ub825.
+                                "ord": "str",  # Optional. "uacc4"uc815"uacfc"ubaa9
+                                  "uc815"ub82c"uc21c"uc11c.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "reprt_code": "str",  # Optional. "ubcf4"uace0"uc11c
+                                  "ucf54"ub4dc   * 11011 : "uc0ac"uc5c5"ubcf4"uace0"uc11c:code:`<br/>`
+                                  * 11012 : "ubc18"uae30"ubcf4"uace0"uc11c:code:`<br/>` * 11013 :
+                                  1"ubd84"uae30"ubcf4"uace0"uc11c:code:`<br/>` * 11014 :
+                                  3"ubd84"uae30"ubcf4"uace0"uc11c.
+                                "sj_div": "str",  # Optional.
+                                  "uc7ac"ubb34"uc81c"ud45c"uad6c"ubd84
+                                  BS:"uc7ac"ubb34"uc0c1"ud0dc"ud45c, IS:"uc190"uc775"uacc4"uc0b0"uc11c.
+                                  Known values are: "BS" and "IS".
+                                "sj_nm": "str",  # Optional.
+                                  "uc7ac"ubb34"uc81c"ud45c"uba85  "uc7ac"ubb34"uc0c1"ud0dc"ud45c
+                                  "ub610"ub294 "uc190"uc775"uacc4"uc0b0"uc11c "ucd9c"ub825.
+                                "stock_code": "str",  # Optional.
+                                  "uc885"ubaa9"ucf54"ub4dc.
+                                "thstrm_add_amount": "str",  # Optional.
+                                  "ub2f9"uae30"ub204"uc801"uae08"uc561.
+                                "thstrm_amount": "str",  # Optional.
+                                  "ub2f9"uae30"uae08"uc561.
+                                "thstrm_dt": "str",  # Optional.
+                                  "ub2f9"uae30"uc77c"uc790.
+                                "thstrm_nm": "str"  # Optional. "ub2f9"uae30"uba85.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_single_financial_account_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace_async
+    async def get_multi_financial_account(
+        self, *, corp_code: str, bsns_year: str, reprt_code: str, **kwargs: Any
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """다중회사 주요계정.
+
+        상장법인(유가증권, 코스닥) 및 주요 비상장법인(사업보고서 제출대상 & IFRS 적용)이 제출한 정기보고서 내에:code:`<br/>`
+        XBRL재무제표의 주요계정과목(재무상태표, 손익계산서)을 제공합니다. (대상법인 복수조회 복수조회 가능).
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "account_nm": "str",  # Optional. "uacc4"uc815"uba85.
+                                "bfefrmtrm_amount": "str",  # Optional.
+                                  "uc804"uc804"uae30"uae08"uc561.
+                                "bfefrmtrm_dt": "str",  # Optional.
+                                  "uc804"uc804"uae30"uc77c"uc790.
+                                "bfefrmtrm_nm": "str",  # Optional.
+                                  "uc804"uc804"uae30"uba85.
+                                "bsns_year": "str",  # Optional.
+                                  "uc0ac"uc5c5"uc5f0"ub3c4.
+                                "currency": "str",  # Optional. "ud1b5"ud654
+                                  "ub2e8"uc704.
+                                "frmtrm_add_amount": "str",  # Optional.
+                                  "uc804"uae30"ub204"uc801"uae08"uc561.
+                                "frmtrm_amount": "str",  # Optional.
+                                  "uc804"uae30"uae08"uc561.
+                                "frmtrm_dt": "str",  # Optional.
+                                  "uc804"uae30"uc77c"uc790.
+                                "frmtrm_nm": "str",  # Optional. "uc804"uae30"uba85.
+                                "fs_div": "str",  # Optional.
+                                  "uac1c"ubcc4/"uc5f0"uacb0"uad6c"ubd84  OFS:"uc7ac"ubb34"uc81c"ud45c,
+                                  CFS:"uc5f0"uacb0"uc7ac"ubb34"uc81c"ud45c. Known values are: "OFS" and
+                                  "CFS".
+                                "fs_nm": "str",  # Optional.
+                                  "uac1c"ubcc4/"uc5f0"uacb0"uba85  "uc5f0"uacb0"uc7ac"ubb34"uc81c"ud45c
+                                  "ub610"ub294 "uc7ac"ubb34"uc81c"ud45c "ucd9c"ub825.
+                                "ord": "str",  # Optional. "uacc4"uc815"uacfc"ubaa9
+                                  "uc815"ub82c"uc21c"uc11c.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "reprt_code": "str",  # Optional. "ubcf4"uace0"uc11c
+                                  "ucf54"ub4dc   * 11011 : "uc0ac"uc5c5"ubcf4"uace0"uc11c:code:`<br/>`
+                                  * 11012 : "ubc18"uae30"ubcf4"uace0"uc11c:code:`<br/>` * 11013 :
+                                  1"ubd84"uae30"ubcf4"uace0"uc11c:code:`<br/>` * 11014 :
+                                  3"ubd84"uae30"ubcf4"uace0"uc11c.
+                                "sj_div": "str",  # Optional.
+                                  "uc7ac"ubb34"uc81c"ud45c"uad6c"ubd84
+                                  BS:"uc7ac"ubb34"uc0c1"ud0dc"ud45c, IS:"uc190"uc775"uacc4"uc0b0"uc11c.
+                                  Known values are: "BS" and "IS".
+                                "sj_nm": "str",  # Optional.
+                                  "uc7ac"ubb34"uc81c"ud45c"uba85  "uc7ac"ubb34"uc0c1"ud0dc"ud45c
+                                  "ub610"ub294 "uc190"uc775"uacc4"uc0b0"uc11c "ucd9c"ub825.
+                                "stock_code": "str",  # Optional.
+                                  "uc885"ubaa9"ucf54"ub4dc.
+                                "thstrm_add_amount": "str",  # Optional.
+                                  "ub2f9"uae30"ub204"uc801"uae08"uc561.
+                                "thstrm_amount": "str",  # Optional.
+                                  "ub2f9"uae30"uae08"uc561.
+                                "thstrm_dt": "str",  # Optional.
+                                  "ub2f9"uae30"uc77c"uc790.
+                                "thstrm_nm": "str"  # Optional. "ub2f9"uae30"uba85.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_multi_financial_account_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace_async
+    async def download_xbrl_financial_account(
+        self, *, reprt_code: str, rcept_no: str, **kwargs: Any
+    ) -> AsyncIterator[bytes]:
+        """재무제표 원본파일(XBRL).
+
+        상장법인(유가증권, 코스닥) 및 주요 비상장법인(사업보고서 제출대상 & IFRS 적용)이:code:`<br/>`
+        제출한 정기보고서 내에 XBRL재무제표의 원본파일(XBRL)을 제공합니다.
+
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :keyword rcept_no: Required.
+        :paramtype rcept_no: str
+        :return: AsyncIterator[bytes]
+        :rtype: AsyncIterator[bytes]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[AsyncIterator[bytes]] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_download_xbrl_financial_account_request(
+            reprt_code=reprt_code,
+            rcept_no=rcept_no,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = True
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        deserialized = response.iter_bytes()
+
+        if cls:
+            return cls(pipeline_response, cast(AsyncIterator[bytes], deserialized), {})  # type: ignore
+
+        return cast(AsyncIterator[bytes], deserialized)  # type: ignore
+
+    @distributed_trace_async
+    async def get_single_financial_account_all(
+        self,
+        *,
+        corp_code: str,
+        bsns_year: str,
+        reprt_code: str,
+        fs_div: str,
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """단일회사 전체 재무제표.
+
+        상장법인(유가증권, 코스닥) 및 주요 비상장법인(사업보고서 제출대상 & IFRS 적용)이:code:`<br/>`
+        제출한 정기보고서 내에 XBRL재무제표의 모든계정과목을 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :keyword fs_div: 개별/연결 구분
+
+
+         * CFS : 연결재무제표:code:`<br/>`
+         * OFS : 재무제표. Known values are: "CFS" and "OFS". Required.
+        :paramtype fs_div: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "account_detail": "str",  # Optional. "uacc4"uc815
+                                  "uc0c1"uc138"uba85"uce6d "uc608"uc2dc   * "uc790"ubcf8
+                                  [member]|"uc9c0"ubc30"uae30"uc5c5
+                                  "uc18c"uc720"uc8fc"uc9c0"ubd84:code:`<br/>` * "uc790"ubcf8
+                                  [member]|"uc9c0"ubc30"uae30"uc5c5
+                                  "uc18c"uc720"uc8fc"uc9c0"ubd84|"uae30"ud0c0"ud3ec"uad04"uc190"uc775"ub204"uacc4"uc561.
+                                "account_id": "str",  # Optional. XBRL
+                                  "ud45c"uc900"uacc4"uc815ID  "u203b "ud45c"uc900"uacc4"uc815ID"uac00
+                                  "uc544"ub2d0"uacbd"uc6b0 ""-"ud45c"uc900"uacc4"uc815"ucf54"ub4dc
+                                  "ubbf8"uc0ac"uc6a9-"".
+                                "account_nm": "str",  # Optional.
+                                  "uacc4"uc815"uba85"uce6d.
+                                "bfefrmtrm_amount": "str",  # Optional.
+                                  "uc804"uc804"uae30"uae08"uc561  "u203b
+                                  "uc0ac"uc5c5"ubcf4"uace0"uc11c"uc758 "uacbd"uc6b0"uc5d0"ub9cc
+                                  "ucd9c"ub825.
+                                "bfefrmtrm_nm": "str",  # Optional.
+                                  "uc804"uc804"uae30"uba85  "u203b "uc0ac"uc5c5"ubcf4"uace0"uc11c"uc758
+                                  "uacbd"uc6b0"uc5d0"ub9cc "ucd9c"ub825.
+                                "bsns_year": "str",  # Optional.
+                                  "uc0ac"uc5c5"uc5f0"ub3c4.
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "currency": "str",  # Optional. "ud1b5"ud654
+                                  "ub2e8"uc704.
+                                "frmtrm_add_amount": "str",  # Optional.
+                                  "uc804"uae30"ub204"uc801"uae08"uc561.
+                                "frmtrm_amount": "str",  # Optional.
+                                  "uc804"uae30"uae08"uc561.
+                                "frmtrm_nm": "str",  # Optional. "uc804"uae30"uba85.
+                                "frmtrm_q_amount": "str",  # Optional.
+                                  "uc804"uae30"uae08"uc561("ubd84/"ubc18"uae30).
+                                "frmtrm_q_nm": "str",  # Optional.
+                                  "uc804"uae30"uba85("ubd84/"ubc18"uae30).
+                                "ord": "str",  # Optional. "uacc4"uc815"uacfc"ubaa9
+                                  "uc815"ub82c"uc21c"uc11c.
+                                "rcept_no": "str",  # Optional.
+                                  "uc811"uc218"ubc88"ud638(14"uc790"ub9ac)  "u203b
+                                  "uacf5"uc2dc"ubdf0"uc5b4 "uc5f0"uacb0"uc5d0
+                                  "uc774"uc6a9"uc608"uc2dc:code:`<br/>`   * PC"uc6a9 :
+                                  https://dart.fss.or.kr/dsaf001/main.do?rcpNo="uc811"uc218"ubc88"ud638.
+                                "reprt_code": "str",  # Optional. "ubcf4"uace0"uc11c
+                                  "ucf54"ub4dc   * 11011 : "uc0ac"uc5c5"ubcf4"uace0"uc11c:code:`<br/>`
+                                  * 11012 : "ubc18"uae30"ubcf4"uace0"uc11c:code:`<br/>` * 11013 :
+                                  1"ubd84"uae30"ubcf4"uace0"uc11c:code:`<br/>` * 11014 :
+                                  3"ubd84"uae30"ubcf4"uace0"uc11c.
+                                "sj_div": "str",  # Optional.
+                                  "uc7ac"ubb34"uc81c"ud45c"uad6c"ubd84   * BS :
+                                  "uc7ac"ubb34"uc0c1"ud0dc"ud45c:code:`<br/>` * IS :
+                                  "uc190"uc775"uacc4"uc0b0"uc11c:code:`<br/>` * CIS :
+                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c:code:`<br/>` * CF :
+                                  "ud604"uae08"ud750"ub984"ud45c:code:`<br/>` * SCE :
+                                  "uc790"ubcf8"ubcc0"ub3d9"ud45c. Known values are: "BS", "IS", "CIS",
+                                  "CF", and "SCE".
+                                "sj_nm": "str",  # Optional.
+                                  "uc7ac"ubb34"uc81c"ud45c"uba85.
+                                "thstrm_add_amount": "str",  # Optional.
+                                  "ub2f9"uae30"ub204"uc801"uae08"uc561.
+                                "thstrm_amount": "str",  # Optional.
+                                  "ub2f9"uae30"uae08"uc561.
+                                "thstrm_nm": "str"  # Optional. "ub2f9"uae30"uba85.
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_single_financial_account_all_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            fs_div=fs_div,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace_async
+    async def get_xbrl_taxonomy(self, *, sj_div: str, **kwargs: Any) -> JSON:
+        # pylint: disable=line-too-long
+        """XBRL택사노미재무제표양식.
+
+        금융감독원 회계포탈에서 제공하는 IFRS 기반 XBRL 재무제표 공시용 표준계정과목체계(계정과목) 을 제공합니다.
+
+        :keyword sj_div: 재무제표구분
+
+         .. list-table::
+            :header-rows: 1
+
+            * - 재무제표구분
+              - 재무제표명칭
+              - 개별/연결
+              - 표시방법
+              - 세전 세후
+            * - BS
+              - 재무상태표
+              -
+              -
+              -
+            * - BS1
+              - 재무상태표
+              - 연결
+              - 유동/비유동법
+              -
+            * - BS2
+              - 재무상태표
+              - 개별
+              - 유동/비유동법
+              -
+            * - BS3
+              - 재무상태표
+              - 연결
+              - 유동성배열법
+              -
+            * - BS4
+              - 재무상태표
+              - 개별
+              - 유동성배열법
+              -
+            * - IS
+              - 손익계산서
+              -
+              -
+              -
+            * - IS1
+              - 별개의 손익계산서
+              - 연결
+              - 기능별분류
+              -
+            * - IS2
+              - 별개의 손익계산서
+              - 개별
+              - 기능별분류
+              -
+            * - IS3
+              - 별개의 손익계산서
+              - 연결
+              - 성격별분류
+              -
+            * - IS4
+              - 별개의 손익계산서
+              - 개별
+              - 성격별분류
+              -
+            * - CIS
+              - 포괄손익계산서
+              -
+              -
+              -
+            * - CIS1
+              - 포괄손익계산서
+              - 연결
+              - 세후
+              -
+            * - CIS2
+              - 포괄손익계산서
+              - 개별
+              - 세후
+              -
+            * - CIS3
+              - 포괄손익계산서
+              - 연결
+              - 세전
+              -
+            * - CIS4
+              - 포괄손익계산서
+              - 개별
+              - 세전
+              -
+            * - DCIS1
+              - 단일 포괄손익계산서
+              - 연결
+              - 기능별분류
+              - 세후포괄손익
+            * - DCIS2
+              - 단일 포괄손익계산서
+              - 개별
+              - 기능별분류
+              - 세후포괄손익
+            * - DCIS3
+              - 단일 포괄손익계산서
+              - 연결
+              - 기능별분류
+              - 세전
+            * - DCIS4
+              - 단일 포괄손익계산서
+              - 개별
+              - 기능별분류
+              - 세전
+            * - DCIS5
+              - 단일 포괄손익계산서
+              - 연결
+              - 성격별분류
+              - 세후포괄손익
+            * - DCIS6
+              - 단일 포괄손익계산서
+              - 개별
+              - 성격별분류
+              - 세후포괄손익
+            * - DCIS7
+              - 단일 포괄손익계산서
+              - 연결
+              - 성격별분류
+              - 세전
+            * - DCIS8
+              - 단일 포괄손익계산서
+              - 개별
+              - 성격별분류
+              - 세전
+            * - CF
+              - 현금흐름표
+              -
+              -
+              -
+            * - CF1
+              - 현금흐름표
+              - 연결
+              - 직접법
+              -
+            * - CF2
+              - 현금흐름표
+              - 개별
+              - 직접법
+              -
+            * - CF3
+              - 현금흐름표
+              - 연결
+              - 간접법
+              -
+            * - CF4
+              - 현금흐름표
+              - 개별
+              - 간접법
+              -
+            * - SCE
+              - 자본변동표
+              -
+              -
+              -
+            * - SCE1
+              - 자본변동표
+              - 연결
+              -
+              -
+            * - SCE2
+              - 자본변동표
+              - 개별
+              -
+              -. Known values are: "BS", "IS", "CIS", "CF", "SCE", "BS1", "BS2", "BS3", "BS4", "IS1",
+         "IS2", "IS3", "IS4", "CIS1", "CIS2", "CIS3", "CIS4", "DCIS1", "DCIS2", "DCIS3", "DCIS4",
+         "DCIS5", "DCIS6", "DCIS7", "DCIS8", "CF1", "CF2", "CF3", "CF4", "SCE1", and "SCE2". Required.
+        :paramtype sj_div: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "account_id": "str",  # Optional. "uacc4"uc815ID.
+                                "account_nm": "str",  # Optional. "uacc4"uc815"uba85.
+                                "bsns_de": "str",  # Optional. "uae30"uc900"uc77c.
+                                "data_tp": "str",  # Optional. "ub370"uc774"ud130
+                                  "uc720"ud615   * text block : "uc81c"ubaa9:code:`<br/>` * Text :
+                                  Text:code:`<br/>` * yyyy-mm-dd : Date:code:`<br/>` * X : Monetary
+                                  Value:code:`<br/>` * (X): Monetary Value(Negative):code:`<br/>` *
+                                  X.XX : Decimalized Value:code:`<br/>` * Shares : Number of shares
+                                  ("uc8fc"uc2dd "uc218):code:`<br/>` * For each : "uacf5"uc2dc"ub41c
+                                  "ud56d"ubaa9"uc774 "uc804"ud6c4"ub85c "ubc18"ubcf5"uc801"uc73c"ub85c
+                                  "uacf5"uc2dc"ub420 "uacbd"uc6b0 "uc0ac"uc6a9:code:`<br/>` *
+                                  "uacf5"ub780 : "uc785"ub825 "ud544"uc694 "uc5c6"uc74c.
+                                "ifrf_ref": "str",  # Optional. IFRS Reference.
+                                "label_eng": "str",  # Optional. "uc601"ubb38
+                                  "ucd9c"ub825"uba85.
+                                "label_kor": "str",  # Optional. "ud55c"uae00
+                                  "ucd9c"ub825"uba85.
+                                "sj_div": "str"  # Optional.
+                                  "uc7ac"ubb34"uc81c"ud45c"uad6c"ubd84  .. list-table::
+                                  :header-rows: 1     * - "uc7ac"ubb34"uc81c"ud45c"uad6c"ubd84      -
+                                  "uc7ac"ubb34"uc81c"ud45c"uba85"uce6d      - "uac1c"ubcc4/"uc5f0"uacb0
+                                  - "ud45c"uc2dc"ubc29"ubc95      - "uc138"uc804 "uc138"ud6c4    * - BS
+                                  - "uc7ac"ubb34"uc0c1"ud0dc"ud45c      -       -       -     * - BS1
+                                  - "uc7ac"ubb34"uc0c1"ud0dc"ud45c      - "uc5f0"uacb0      -
+                                  "uc720"ub3d9/"ube44"uc720"ub3d9"ubc95      -     * - BS2      -
+                                  "uc7ac"ubb34"uc0c1"ud0dc"ud45c      - "uac1c"ubcc4      -
+                                  "uc720"ub3d9/"ube44"uc720"ub3d9"ubc95      -     * - BS3      -
+                                  "uc7ac"ubb34"uc0c1"ud0dc"ud45c      - "uc5f0"uacb0      -
+                                  "uc720"ub3d9"uc131"ubc30"uc5f4"ubc95      -     * - BS4      -
+                                  "uc7ac"ubb34"uc0c1"ud0dc"ud45c      - "uac1c"ubcc4      -
+                                  "uc720"ub3d9"uc131"ubc30"uc5f4"ubc95      -     * - IS      -
+                                  "uc190"uc775"uacc4"uc0b0"uc11c      -       -       -     * - IS1
+                                  - "ubcc4"uac1c"uc758 "uc190"uc775"uacc4"uc0b0"uc11c      -
+                                  "uc5f0"uacb0      - "uae30"ub2a5"ubcc4"ubd84"ub958      -     * - IS2
+                                  - "ubcc4"uac1c"uc758 "uc190"uc775"uacc4"uc0b0"uc11c      -
+                                  "uac1c"ubcc4      - "uae30"ub2a5"ubcc4"ubd84"ub958      -     * - IS3
+                                  - "ubcc4"uac1c"uc758 "uc190"uc775"uacc4"uc0b0"uc11c      -
+                                  "uc5f0"uacb0      - "uc131"uaca9"ubcc4"ubd84"ub958      -     * - IS4
+                                  - "ubcc4"uac1c"uc758 "uc190"uc775"uacc4"uc0b0"uc11c      -
+                                  "uac1c"ubcc4      - "uc131"uaca9"ubcc4"ubd84"ub958      -     * - CIS
+                                  - "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      -       -       -
+                                  * - CIS1      - "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      -
+                                  "uc5f0"uacb0      - "uc138"ud6c4      -     * - CIS2      -
+                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uac1c"ubcc4      -
+                                  "uc138"ud6c4      -     * - CIS3      -
+                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uc5f0"uacb0      -
+                                  "uc138"uc804      -     * - CIS4      -
+                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uac1c"ubcc4      -
+                                  "uc138"uc804      -     * - DCIS1      - "ub2e8"uc77c
+                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uc5f0"uacb0      -
+                                  "uae30"ub2a5"ubcc4"ubd84"ub958      -
+                                  "uc138"ud6c4"ud3ec"uad04"uc190"uc775    * - DCIS2      - "ub2e8"uc77c
+                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uac1c"ubcc4      -
+                                  "uae30"ub2a5"ubcc4"ubd84"ub958      -
+                                  "uc138"ud6c4"ud3ec"uad04"uc190"uc775    * - DCIS3      - "ub2e8"uc77c
+                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uc5f0"uacb0      -
+                                  "uae30"ub2a5"ubcc4"ubd84"ub958      - "uc138"uc804    * - DCIS4
+                                  - "ub2e8"uc77c "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      -
+                                  "uac1c"ubcc4      - "uae30"ub2a5"ubcc4"ubd84"ub958      -
+                                  "uc138"uc804    * - DCIS5      - "ub2e8"uc77c
+                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uc5f0"uacb0      -
+                                  "uc131"uaca9"ubcc4"ubd84"ub958      -
+                                  "uc138"ud6c4"ud3ec"uad04"uc190"uc775    * - DCIS6      - "ub2e8"uc77c
+                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uac1c"ubcc4      -
+                                  "uc131"uaca9"ubcc4"ubd84"ub958      -
+                                  "uc138"ud6c4"ud3ec"uad04"uc190"uc775    * - DCIS7      - "ub2e8"uc77c
+                                  "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      - "uc5f0"uacb0      -
+                                  "uc131"uaca9"ubcc4"ubd84"ub958      - "uc138"uc804    * - DCIS8
+                                  - "ub2e8"uc77c "ud3ec"uad04"uc190"uc775"uacc4"uc0b0"uc11c      -
+                                  "uac1c"ubcc4      - "uc131"uaca9"ubcc4"ubd84"ub958      -
+                                  "uc138"uc804    * - CF      - "ud604"uae08"ud750"ub984"ud45c      -
+                                  -       -     * - CF1      - "ud604"uae08"ud750"ub984"ud45c      -
+                                  "uc5f0"uacb0      - "uc9c1"uc811"ubc95      -     * - CF2      -
+                                  "ud604"uae08"ud750"ub984"ud45c      - "uac1c"ubcc4      -
+                                  "uc9c1"uc811"ubc95      -     * - CF3      -
+                                  "ud604"uae08"ud750"ub984"ud45c      - "uc5f0"uacb0      -
+                                  "uac04"uc811"ubc95      -     * - CF4      -
+                                  "ud604"uae08"ud750"ub984"ud45c      - "uac1c"ubcc4      -
+                                  "uac04"uc811"ubc95      -     * - SCE      -
+                                  "uc790"ubcf8"ubcc0"ub3d9"ud45c      -       -       -     * - SCE1
+                                  - "uc790"ubcf8"ubcc0"ub3d9"ud45c      - "uc5f0"uacb0      -       -
+                                  * - SCE2      - "uc790"ubcf8"ubcc0"ub3d9"ud45c      - "uac1c"ubcc4
+                                  -       -. Known values are: "BS", "IS", "CIS", "CF", "SCE", "BS1",
+                                  "BS2", "BS3", "BS4", "IS1", "IS2", "IS3", "IS4", "CIS1", "CIS2",
+                                  "CIS3", "CIS4", "DCIS1", "DCIS2", "DCIS3", "DCIS4", "DCIS5", "DCIS6",
+                                  "DCIS7", "DCIS8", "CF1", "CF2", "CF3", "CF4", "SCE1", and "SCE2".
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_xbrl_taxonomy_request(
+            sj_div=sj_div,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace_async
+    async def get_single_financial_index(
+        self,
+        *,
+        corp_code: str,
+        bsns_year: str,
+        reprt_code: str,
+        idx_cl_code: str,
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """단일회사 주요 재무지표.
+
+        상장법인(유가증권, 코스닥) 및 주요 비상장법인(사업보고서 제출대상 & IFRS 적용)이:code:`<br/>`
+        제출한 정기보고서 내에 XBRL재무제표의 주요 재무지표를 제공합니다.
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :keyword idx_cl_code: 지표구분코드
+
+
+         * M210000 : 수익성지표:code:`<br/>`
+         * M220000 : 안정성지표:code:`<br/>`
+         * M230000 : 성장성지표:code:`<br/>`
+         * M240000 : 활동성지표. Known values are: "M210000", "M220000", "M230000", and "M240000". Required.
+        :paramtype idx_cl_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "bsns_year": "str",  # Optional.
+                                  "uc0ac"uc5c5"uc5f0"ub3c4.
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "idx_cl_code": "str",  # Optional.
+                                  "uc9c0"ud45c"ubd84"ub958"ucf54"ub4dc   * M210000 :
+                                  "uc218"uc775"uc131"uc9c0"ud45c:code:`<br/>` * M220000 :
+                                  "uc548"uc815"uc131"uc9c0"ud45c:code:`<br/>` * M230000 :
+                                  "uc131"uc7a5"uc131"uc9c0"ud45c:code:`<br/>` * M240000 :
+                                  "ud65c"ub3d9"uc131"uc9c0"ud45c. Known values are: "M210000",
+                                  "M220000", "M230000", and "M240000".
+                                "idx_cl_nm": "str",  # Optional.
+                                  "uc9c0"ud45c"ubd84"ub958"uba85.
+                                "idx_code": "str",  # Optional.
+                                  "uc9c0"ud45c"ucf54"ub4dc.
+                                "idx_nm": "str",  # Optional. "uc9c0"ud45c"uba85.
+                                "idx_val": "str",  # Optional. "uc9c0"ud45c"uac12.
+                                "reprt_code": "str",  # Optional. "ubcf4"uace0"uc11c
+                                  "ucf54"ub4dc   * 11011 : "uc0ac"uc5c5"ubcf4"uace0"uc11c:code:`<br/>`
+                                  * 11012 : "ubc18"uae30"ubcf4"uace0"uc11c:code:`<br/>` * 11013 :
+                                  1"ubd84"uae30"ubcf4"uace0"uc11c:code:`<br/>` * 11014 :
+                                  3"ubd84"uae30"ubcf4"uace0"uc11c.
+                                "stock_code": "str"  # Optional.
+                                  "uc0c1"uc7a5"ud68c"uc0ac"uc758
+                                  "uc885"ubaa9"ucf54"ub4dc(6"uc790"ub9ac).
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_single_financial_index_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            idx_cl_code=idx_cl_code,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                await response.read()  # Load the body in memory and close the socket
+            map_error(
+                status_code=response.status_code, response=response, error_map=error_map
+            )
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})  # type: ignore
+
+        return cast(JSON, deserialized)  # type: ignore
+
+    @distributed_trace_async
+    async def get_multi_financial_index(
+        self,
+        *,
+        corp_code: str,
+        bsns_year: str,
+        reprt_code: str,
+        idx_cl_code: str,
+        **kwargs: Any,
+    ) -> JSON:
+        # pylint: disable=line-too-long
+        """다중회사 주요 재무지표.
+
+        상장법인(유가증권, 코스닥) 및 주요 비상장법인(사업보고서 제출대상 & IFRS 적용)이:code:`<br/>`
+        제출한 정기보고서 내에 XBRL재무제표의 주요 재무지표를 제공합니다.(대상법인 복수조회 가능).
+
+        :keyword corp_code: 공시대상회사의 고유번호(8자리). Required.
+        :paramtype corp_code: str
+        :keyword bsns_year: 사업연도(4자리) ※ 2015년 이후 부터 정보제공. Required.
+        :paramtype bsns_year: str
+        :keyword reprt_code: 보고서 코드
+
+
+         * 11011 : 사업보고서:code:`<br/>`
+         * 11012 : 반기보고서:code:`<br/>`
+         * 11013 : 1분기보고서:code:`<br/>`
+         * 11014 : 3분기보고서. Required.
+        :paramtype reprt_code: str
+        :keyword idx_cl_code: 지표구분코드
+
+
+         * M210000 : 수익성지표:code:`<br/>`
+         * M220000 : 안정성지표:code:`<br/>`
+         * M230000 : 성장성지표:code:`<br/>`
+         * M240000 : 활동성지표. Known values are: "M210000", "M220000", "M230000", and "M240000". Required.
+        :paramtype idx_cl_code: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "result": {
+                        "list": [
+                            {
+                                "bsns_year": "str",  # Optional.
+                                  "uc0ac"uc5c5"uc5f0"ub3c4.
+                                "corp_code": "str",  # Optional.
+                                  "uacf5"uc2dc"ub300"uc0c1"ud68c"uc0ac"uc758
+                                  "uace0"uc720"ubc88"ud638(8"uc790"ub9ac).
+                                "idx_cl_code": "str",  # Optional.
+                                  "uc9c0"ud45c"ubd84"ub958"ucf54"ub4dc   * M210000 :
+                                  "uc218"uc775"uc131"uc9c0"ud45c:code:`<br/>` * M220000 :
+                                  "uc548"uc815"uc131"uc9c0"ud45c:code:`<br/>` * M230000 :
+                                  "uc131"uc7a5"uc131"uc9c0"ud45c:code:`<br/>` * M240000 :
+                                  "ud65c"ub3d9"uc131"uc9c0"ud45c. Known values are: "M210000",
+                                  "M220000", "M230000", and "M240000".
+                                "idx_cl_nm": "str",  # Optional.
+                                  "uc9c0"ud45c"ubd84"ub958"uba85.
+                                "idx_code": "str",  # Optional.
+                                  "uc9c0"ud45c"ucf54"ub4dc.
+                                "idx_nm": "str",  # Optional. "uc9c0"ud45c"uba85.
+                                "idx_val": "str",  # Optional. "uc9c0"ud45c"uac12.
+                                "reprt_code": "str",  # Optional. "ubcf4"uace0"uc11c
+                                  "ucf54"ub4dc   * 11011 : "uc0ac"uc5c5"ubcf4"uace0"uc11c:code:`<br/>`
+                                  * 11012 : "ubc18"uae30"ubcf4"uace0"uc11c:code:`<br/>` * 11013 :
+                                  1"ubd84"uae30"ubcf4"uace0"uc11c:code:`<br/>` * 11014 :
+                                  3"ubd84"uae30"ubcf4"uace0"uc11c.
+                                "stock_code": "str"  # Optional.
+                                  "uc0c1"uc7a5"ud68c"uc0ac"uc758
+                                  "uc885"ubaa9"ucf54"ub4dc(6"uc790"ub9ac).
+                            }
+                        ],
+                        "message": "str",  # Optional. "uc5d0"ub7ec "ubc0f "uc815"ubcf4
+                          "uba54"uc2dc"uc9c0.
+                        "status": "str"  # Optional. "uc5d0"ub7ec "ubc0f
+                          "uc815"ubcf4"ucf54"ub4dc  000 :"uc815"uc0c1:code:`<br/>` 010
+                          :"ub4f1"ub85d"ub418"uc9c0 "uc54a"uc740 "ud0a4"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          011 :"uc0ac"uc6a9"ud560 "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4.
+                          "uc624"ud508API"uc5d0 "ub4f1"ub85d"ub418"uc5c8"uc73c"ub098,
+                          "uc77c"uc2dc"uc801"uc73c"ub85c "uc0ac"uc6a9 "uc911"uc9c0"ub41c "ud0a4"ub97c
+                          "ud1b5"ud558"uc5ec "uac80"uc0c9"ud558"ub294 "uacbd"uc6b0
+                          "ubc1c"uc0dd"ud569"ub2c8"ub2e4.:code:`<br/>` 012 :"uc811"uadfc"ud560 "uc218
+                          "uc5c6"ub294 IP"uc785"ub2c8"ub2e4.:code:`<br/>` 013 :"uc870"ud68c"ub41c
+                          "ub370"uc774"ud0c0"uac00 "uc5c6"uc2b5"ub2c8"ub2e4.:code:`<br/>` 014
+                          :"ud30c"uc77c"uc774 "uc874"uc7ac"ud558"uc9c0
+                          "uc54a"uc2b5"ub2c8"ub2e4.:code:`<br/>` 020 :"uc694"uccad "uc81c"ud55c"uc744
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>`
+                          "uc801"uc73c"ub85c"ub294 20,000"uac74 "uc774"uc0c1"uc758 "uc694"uccad"uc5d0
+                          "ub300"ud558"uc5ec "uc774 "uc5d0"ub7ec "uba54"uc2dc"uc9c0"uac00
+                          "ubc1c"uc0dd"ub418"ub098, "uc694"uccad "uc81c"ud55c"uc774 "ub2e4"ub974"uac8c
+                          "uc124"uc815"ub41c "uacbd"uc6b0"uc5d0"ub294 "uc774"uc5d0 "uc900"ud558"uc5ec
+                          "ubc1c"uc0dd"ub429"ub2c8"ub2e4.:code:`<br/>` 021 :"uc870"ud68c
+                          "uac00"ub2a5"ud55c "ud68c"uc0ac "uac1c"uc218"uac00
+                          "ucd08"uacfc"ud558"uc600"uc2b5"ub2c8"ub2e4.("ucd5c"ub300
+                          100"uac74):code:`<br/>` 100 :"ud544"ub4dc"uc758 "ubd80"uc801"uc808"ud55c
+                          "uac12"uc785"ub2c8"ub2e4. "ud544"ub4dc "uc124"uba85"uc5d0 "uc5c6"ub294
+                          "uac12"uc744 "uc0ac"uc6a9"ud55c "uacbd"uc6b0"uc5d0 "ubc1c"uc0dd"ud558"ub294
+                          "uba54"uc2dc"uc9c0"uc785"ub2c8"ub2e4.:code:`<br/>` 101
+                          :"ubd80"uc801"uc808"ud55c "uc811"uadfc"uc785"ub2c8"ub2e4.:code:`<br/>` 800
+                          :"uc2dc"uc2a4"ud15c "uc810"uac80"uc73c"ub85c "uc778"ud55c
+                          "uc11c"ube44"uc2a4"uac00 "uc911"uc9c0 "uc911"uc785"ub2c8"ub2e4.:code:`<br/>`
+                          900 :"uc815"uc758"ub418"uc9c0 "uc54a"uc740 "uc624"ub958"uac00
+                          "ubc1c"uc0dd"ud558"uc600"uc2b5"ub2c8"ub2e4.:code:`<br/>` 901
+                          :"uc0ac"uc6a9"uc790 "uacc4"uc815"uc758 "uac1c"uc778"uc815"ubcf4
+                          "ubcf4"uc720"uae30"uac04"uc774 "ub9cc"ub8cc"ub418"uc5b4 "uc0ac"uc6a9"ud560
+                          "uc218 "uc5c6"ub294 "ud0a4"uc785"ub2c8"ub2e4. "uad00"ub9ac"uc790
+                          "uc774"uba54"uc77c(opendart@fss.or.kr)"ub85c "ubb38"uc758"ud558"uc2dc"uae30
+                          "ubc14"ub78d"ub2c8"ub2e4. Known values are: "000", "010", "011", "012",
+                          "013", "014", "020", "021", "100", "101", "800", "900", and "901".
+                    }
+                }
+        """
+        error_map: MutableMapping[int, Type[HttpResponseError]] = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
+
+        _request = build_gen_open_dart_get_multi_financial_index_request(
+            corp_code=corp_code,
+            bsns_year=bsns_year,
+            reprt_code=reprt_code,
+            idx_cl_code=idx_cl_code,
             headers=_headers,
             params=_params,
         )
