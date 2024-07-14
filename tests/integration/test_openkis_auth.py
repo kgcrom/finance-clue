@@ -5,11 +5,9 @@ import time
 
 from finance_clue.openkis import OpenKisClient
 
-# token 재생성은 1분에 1회 호출만 가능하다.
 
-
-# OpenKis 인스턴스 만들 때 내부적으로 토큰 생성
-# TODO integration_openkis_client 호출 했을 때 어떻게 관리할지 고민
+# OpenKIS token 재생성은 1분에 1회 호출만 가능하다.
+# OpenKis 인스턴스 만들면 내부적으로 토큰 생성
 def test_get_access_and_revoke_token(integration_openkis_client: OpenKisClient):
     app_key = environ.get("OPENKIS_APP_KEY", None)
     app_secret = environ.get("OPENKIS_APP_SECRET", None)

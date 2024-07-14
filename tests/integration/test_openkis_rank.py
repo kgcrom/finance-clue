@@ -7,7 +7,7 @@ from finance_clue.openkis import OpenKisClient
 
 
 @pytest.mark.usefixtures("integration_openkis_client")
-class OpenKisRankTestCase(unittest.TestCase):
+class RankTestCase(unittest.TestCase):
 
     @pytest.fixture(autouse=True)
     def setup(self, integration_openkis_client: OpenKisClient):

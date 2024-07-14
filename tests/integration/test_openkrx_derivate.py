@@ -1,39 +1,45 @@
-"""test openkrx 파생상품 API"""
+import time
+import unittest
+
+import pytest
 
 from finance_clue.openkrx import OpenKrxClient
 
 
-def test_exclude_stock_futures(integration_openkrx_client: OpenKrxClient):
-    resp = integration_openkrx_client.get_exclude_stock_futures(bas_dd="20240514")
+@pytest.mark.usefixtures("integration_openkrx_client")
+class OpenKrxDerivateTestCase(unittest.TestCase):
 
-    assert resp is not None
+    @pytest.fixture(autouse=True)
+    def setup(self, integration_openkrx_client: OpenKrxClient):
+        self.openkrx_client = integration_openkrx_client
+        time.sleep(1)
 
+    def test_exclude_stock_futures(self):
+        resp = self.openkrx_client.get_exclude_stock_futures(bas_dd="20240514")
 
-def test_kospi_futures(integration_openkrx_client: OpenKrxClient):
-    resp = integration_openkrx_client.get_kospi_futures(bas_dd="20240514")
+        assert resp is not None
 
-    assert resp is not None
+    def test_kospi_futures(self):
+        resp = self.openkrx_client.get_kospi_futures(bas_dd="20240514")
 
+        assert resp is not None
 
-def test_kosdaq_futures(integration_openkrx_client: OpenKrxClient):
-    resp = integration_openkrx_client.get_kosdaq_futures(bas_dd="20240514")
+    def test_kosdaq_futures(self):
+        resp = self.openkrx_client.get_kosdaq_futures(bas_dd="20240514")
 
-    assert resp is not None
+        assert resp is not None
 
+    def test_exclude_stock_option(self):
+        resp = self.openkrx_client.get_exclude_stock_option(bas_dd="20240514")
 
-def test_exclude_stock_option(integration_openkrx_client: OpenKrxClient):
-    resp = integration_openkrx_client.get_exclude_stock_option(bas_dd="20240514")
+        assert resp is not None
 
-    assert resp is not None
+    def test_kospi_option(self):
+        resp = self.openkrx_client.get_kospi_option(bas_dd="20240514")
 
+        assert resp is not None
 
-def test_kospi_option(integration_openkrx_client: OpenKrxClient):
-    resp = integration_openkrx_client.get_kospi_option(bas_dd="20240514")
+    def test_kosdaq_option(self):
+        resp = self.openkrx_client.get_kosdaq_option(bas_dd="20240514")
 
-    assert resp is not None
-
-
-def test_kosdaq_option(integration_openkrx_client: OpenKrxClient):
-    resp = integration_openkrx_client.get_kosdaq_option(bas_dd="20240514")
-
-    assert resp is not None
+        assert resp is not None

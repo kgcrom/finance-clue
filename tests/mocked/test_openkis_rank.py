@@ -6,7 +6,7 @@ import responses
 from finance_clue.openkis import OpenKisClient
 
 
-class OpenKisRankTestCase(unittest.TestCase):
+class RankTestCase(unittest.TestCase):
 
     @pytest.fixture(autouse=True)
     def setup(self, mock_openkis_client: OpenKisClient, mock_openkis_client_url: str):

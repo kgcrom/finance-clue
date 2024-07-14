@@ -4,11 +4,10 @@ import unittest
 import pytest
 
 from finance_clue.openkis import OpenKisClient
-from finance_clue.openkis import attach_headers
 
 
 @pytest.mark.usefixtures("integration_openkis_client")
-class OpenKisTechnicalAnalysisTestCase(unittest.TestCase):
+class TechnicalAnalysisTestCase(unittest.TestCase):
 
     @pytest.fixture(autouse=True)
     def setup(self, integration_openkis_client: OpenKisClient):

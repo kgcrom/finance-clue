@@ -4,10 +4,9 @@ import pytest
 import responses
 
 from finance_clue.openkis import OpenKisClient
-from finance_clue.openkis import attach_headers
 
 
-class MyTestCase(unittest.TestCase):
+class IndexTestCase(unittest.TestCase):
 
     @pytest.fixture(autouse=True)
     def setup(self, mock_openkis_client: OpenKisClient, mock_openkis_client_url: str):
